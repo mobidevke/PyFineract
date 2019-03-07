@@ -3,7 +3,6 @@
 
 function publish {
     bump
-    readme
     push
 }
 
