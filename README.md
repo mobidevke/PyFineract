@@ -1,2 +1,2 @@
-# py-fineract
+# PyFineract
 ### WIP
