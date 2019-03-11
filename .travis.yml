@@ -7,6 +7,9 @@ python:
 sudo: false
 script:
   - python setup.py test
+after_success:
+  - pip install coveralls
+  - coveralls
 notifications:
   email: false
   webhooks: https://www.travisbuddy.com/

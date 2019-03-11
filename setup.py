@@ -1,6 +1,6 @@
 import setuptools
 
-version = "0.0.8"
+version = "0.0.9"
 
 with open('README.md', 'r') as fh:
     long_description = fh.read()
@@ -34,5 +34,5 @@ setuptools.setup(
         'six==1.12.0'
     ],
     setup_requires=['pytest-runner'],
-    tests_require=['pytest', 'pytest-cov', 'pytest-mock', 'coveralls']
+    tests_require=['pytest', 'pytest-cov', 'pytest-mock']
 )
