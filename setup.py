@@ -30,8 +30,9 @@ setuptools.setup(
         'Operating System :: OS Independent'
     ],
     install_requires=[
-        'requests>=2.21.0'
+        'requests>=2.21.0',
+        'six==1.12.0'
     ],
     setup_requires=['pytest-runner'],
-    tests_require=['pytest']
+    tests_require=['pytest', 'pytest-cov', 'pytest-mock']
 )

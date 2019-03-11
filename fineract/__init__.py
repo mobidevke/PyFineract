@@ -1,5 +1,8 @@
 import logging
 
+from fineract.exceptions import FineractException, BadCredentialsException, BadArgsException, ResourceNotFoundException
+from fineract.main import Fineract
+
 
 def enable_console_debug_logging():  # pragma no cover (Function useful only outside test environment)
     """
