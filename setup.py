@@ -34,5 +34,5 @@ setuptools.setup(
         'six==1.12.0'
     ],
     setup_requires=['pytest-runner'],
-    tests_require=['pytest', 'pytest-cov', 'pytest-mock']
+    tests_require=['pytest', 'pytest-cov', 'pytest-mock', 'python-coveralls']
 )
