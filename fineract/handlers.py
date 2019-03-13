@@ -11,7 +11,7 @@ at_least_python3 = sys.hexversion >= 0x03000000
 
 class RequestHandler:
 
-    def __init__(self, username, password, base_url, tenant, timeout):
+    def __init__(self, username, password, base_url, tenant, timeout, per_page):
         self.__headers = {
             'Content-Type': 'application/json',
             'Fineract-Platform-TenantId': tenant
@@ -25,6 +25,7 @@ class RequestHandler:
             assert False, 'A https scheme is required'
 
         self.__base_url = base_url if base_url[-1] == '/' else base_url + '/'
+        self.per_page = per_page
 
     def make_request(self, method, url, **kwargs):
         res = requests.request(method, url, **kwargs)
