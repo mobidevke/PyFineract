@@ -51,9 +51,9 @@ def test_request_handler__error_raised_on_none_https():
         RequestHandler('a', 'b', 'http://localhost', 'default', 10, 30)
 
 
-def test_request_handler__base_url_ending_slash_added():
-    request_handler = RequestHandler('a', 'b', 'https://localhost', 'default', 10, 30)
-    assert request_handler.base_url == 'https://localhost/'
+def test_request_handler__base_url_ending_slash_removed():
+    request_handler = RequestHandler('a', 'b', 'https://localhost/', 'default', 10, 30)
+    assert request_handler.base_url == 'https://localhost'
 
 
 def test_request_handler__make_request_BadArgsException_raised(mocker):

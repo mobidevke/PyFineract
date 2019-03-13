@@ -44,11 +44,11 @@ class FineractObject(object):
         Converts the object to a nicely printable string.
         """
 
-        def format_params(params):
+        def format_params(params1):
             if at_least_python3:
-                items = params.items()
+                items = params1.items()
             else:
-                items = list(params.items())
+                items = list(params1.items())
             for k, v in sorted(items, key=itemgetter(0), reverse=True):
                 is_text = isinstance(v, str)
                 if is_text and not at_least_python3:
