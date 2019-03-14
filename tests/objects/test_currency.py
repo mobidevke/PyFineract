@@ -14,4 +14,3 @@ def test_currency_creation():
         assert curr.display_label == 'US Dollar ($)'
         assert curr.display_symbol == '$'
         assert curr.name_code == 'currency.USD'
-        assert repr(curr) == 'Currency(name="USD")'

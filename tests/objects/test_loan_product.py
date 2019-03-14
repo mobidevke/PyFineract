@@ -28,7 +28,6 @@ def test_loan_product_object_creation():
     with open('tests/files/loan_product.json', 'r') as in_file:
         data = json.load(in_file)
         product = LoanProduct(None, data, False)
-        assert repr(product) == 'LoanProduct(short_name="pe1")'
         assert isinstance(product.interest_recalculation_data, InterestRecalculationData)
 
 
