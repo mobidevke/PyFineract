@@ -1,3 +1,4 @@
+import datetime
 import sys
 from operator import itemgetter
 
@@ -38,6 +39,17 @@ class FineractObject(object):
         data = self._request_handler.make_request('GET', self.__url)
         self._store_and_use_attributes(data)
         self.__completed = True
+
+    @staticmethod
+    def __make_date_object(date_list: list):
+        return datetime.datetime(
+            date_list[0],
+            date_list[1],
+            date_list[2]
+        ) if date_list else date_list
+
+    def __make_fineract_object(self, klass, attributes):
+        return klass(self._request_handler, attributes, False)
 
     def get__repr__(self, params):
         """
