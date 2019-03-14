@@ -79,3 +79,10 @@ class FineractObject(object):
         """
         self._complete_if_needed()
         return self._raw_data
+
+
+class DataFineractObject(FineractObject):
+    """
+    Base class for all classes representing objects which can be associated with a datatable
+    """
+    pass

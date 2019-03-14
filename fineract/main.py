@@ -38,6 +38,18 @@ class Fineract(object):
             dict()
         )
 
+    def get_clients(self):
+        """
+        :calls `GET /roles <https://demo.openmf.org/api-docs/apiLive.htm#roles>`_
+        :rtype: :class:`fineract.pagination.PaginatedList` of :class:`fineract.objects.role.Role`
+        """
+        return PaginatedList(
+            Role,
+            self.__request_handler,
+            '/clients',
+            dict()
+        )
+
     def get_loan_products(self):
         """
         :calls `GET /roles <https://demo.openmf.org/api-docs/apiLive.htm#roles>`_

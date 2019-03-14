@@ -3,8 +3,7 @@ import json
 from requests import Response
 
 from fineract.handlers import RequestHandler
-from fineract.objects.interest import InterestRecalculationData
-from fineract.objects.loan_product import LoanProduct
+from fineract.objects.client import Client, ClientType
 from fineract.pagination import PaginatedList
 
 
@@ -16,7 +15,7 @@ def fake_handler1(method, url, **kwargs):
             return True
 
         def json(self, **kwargs):
-            with open('tests/files/loan_product.json', 'r') as in_file:
+            with open('tests/files/client.json', 'r') as in_file:
                 data = json.load(in_file)
 
             return [data]
@@ -24,22 +23,16 @@ def fake_handler1(method, url, **kwargs):
     return FakeResponse()
 
 
-def test_loan_product_object_creation__interest_recalculation_data():
-    with open('tests/files/loan_product.json', 'r') as in_file:
-        data = json.load(in_file)
-        product = LoanProduct(None, data, False)
-        assert isinstance(product.interest_recalculation_data, InterestRecalculationData)
-
-
-def test_get_loan_products(mocker):
+def test_get_clients(mocker):
     mocker.patch('requests.request', new=fake_handler1)
     request_handler = RequestHandler('a', 'b', 'https://localhost', 'default', 10, 30)
 
     mocker.patch('requests.request', new=fake_handler1)
-    paginated_list = PaginatedList(LoanProduct, request_handler, '/', {})
+    paginated_list = PaginatedList(Client, request_handler, '/', {})
     count = 0
     for item in paginated_list:
         count += 1
 
     assert count == 1
-    assert isinstance(paginated_list[0], LoanProduct)
+    assert isinstance(paginated_list[0], Client)
+    assert isinstance(paginated_list[0].type, ClientType)
