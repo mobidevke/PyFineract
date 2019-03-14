@@ -41,14 +41,14 @@ class FineractObject(object):
         self.__completed = True
 
     @staticmethod
-    def __make_date_object(date_list: list):
+    def make_date_object(date_list: list):
         return datetime.datetime(
             date_list[0],
             date_list[1],
             date_list[2]
         ) if date_list else date_list
 
-    def __make_fineract_object(self, klass, attributes):
+    def make_fineract_object(self, klass, attributes):
         return klass(self._request_handler, attributes, False)
 
     def get__repr__(self, params):
