@@ -1,0 +1,113 @@
+{
+  "id": 1,
+  "name": "personal loan product",
+  "shortName": "pe1",
+  "includeInBorrowerCycle": false,
+  "useBorrowerCycle": false,
+  "startDate": [
+    2013,
+    9,
+    2
+  ],
+  "closeDate": [
+    2014,
+    2,
+    7
+  ],
+  "status": "loanProduct.active",
+  "currency": {
+    "code": "USD",
+    "name": "US Dollar",
+    "decimalPlaces": 2,
+    "inMultiplesOf": 0,
+    "displaySymbol": "$",
+    "nameCode": "currency.USD",
+    "displayLabel": "US Dollar ($)"
+  },
+  "principal": 10000.000000,
+  "minPrincipal": 5000.000000,
+  "maxPrincipal": 15000.000000,
+  "numberOfRepayments": 10,
+  "minNumberOfRepayments": 5,
+  "maxNumberOfRepayments": 15,
+  "repaymentEvery": 7,
+  "repaymentFrequencyType": {
+    "id": 0,
+    "code": "repaymentFrequency.periodFrequencyType.days",
+    "value": "Days"
+  },
+  "interestRatePerPeriod": 15.000000,
+  "interestRateFrequencyType": {
+    "id": 3,
+    "code": "interestRateFrequency.periodFrequencyType.years",
+    "value": "Per year"
+  },
+  "annualInterestRate": 15.000000,
+  "amortizationType": {
+    "id": 1,
+    "code": "amortizationType.equal.installments",
+    "value": "Equal installments"
+  },
+  "interestType": {
+    "id": 1,
+    "code": "interestType.flat",
+    "value": "Flat"
+  },
+  "interestCalculationPeriodType": {
+    "id": 1,
+    "code": "interestCalculationPeriodType.same.as.repayment.period",
+    "value": "Same as repayment period"
+  },
+  "transactionProcessingStrategyId": 1,
+  "transactionProcessingStrategyName": "Mifos style",
+  "principalVariationsForBorrowerCycle": [],
+  "interestRateVariationsForBorrowerCycle": [],
+  "numberOfRepaymentVariationsForBorrowerCycle": [],
+  "daysInMonthType": {
+    "id": 30,
+    "code": "DaysInMonthType.days360",
+    "value": "30 Days"
+  },
+  "daysInYearType": {
+    "id": 360,
+    "code": "DaysInYearType.days360",
+    "value": "360 Days"
+  },
+  "isInterestRecalculationEnabled": true,
+  "interestRecalculationData": {
+    "id": 3,
+    "productId": 1,
+    "interestRecalculationCompoundingType": {
+      "id": 2,
+      "code": "interestRecalculationCompoundingMethod.fee",
+      "value": "Fee"
+    },
+    "recalculationCompoundingFrequencyType": {
+      "id": 1,
+      "code": "interestRecalculationFrequencyType.same.as.repayment.period",
+      "value": "Same as repayment period"
+    },
+    "rescheduleStrategyType": {
+      "id": 2,
+      "code": "loanRescheduleStrategyMethod.reduce.number.of.installments",
+      "value": "Reduce number of installments"
+    },
+    "recalculationRestFrequencyType": {
+      "id": 1,
+      "code": "interestRecalculationFrequencyType.same.as.repayment.period",
+      "value": "Same as repayment period"
+    },
+    "preClosureInterestCalculationStrategy": {
+      "id": 1,
+      "code": "loanPreClosureInterestCalculationStrategy.tillPreClosureDate",
+      "value": "Till preclose Date"
+    },
+    "isArrearsBasedOnOriginalSchedule": true
+  },
+  "accountingRule": {
+    "id": 2,
+    "code": "accountingRuleType.cash",
+    "value": "CASH BASED"
+  },
+  "principalThresholdForLastInstalment": 0
+}

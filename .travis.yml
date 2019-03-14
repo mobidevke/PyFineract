@@ -15,7 +15,7 @@ notifications:
   webhooks: https://www.travisbuddy.com/
   on_success: never
 deploy:
-  if: tag !~ /.*dev$/
+  #  if: tag !~ /.*dev$/
   provider: pypi
   skip_existing: true
   user: mobidev
