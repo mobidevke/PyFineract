@@ -1,6 +1,3 @@
-from fineract.handlers import RequestHandler
-
-
 class PaginatedListBase:
 
     def __init__(self):
@@ -23,17 +20,17 @@ class PaginatedListBase:
             for element in new_elements:
                 yield element
 
-    def _is_bigger_than(self, index) -> bool:
+    def _is_bigger_than(self, index):
         return len(self.__elements) > index or self._could_grow()
 
     def __fetch_to_index(self, index):
         while len(self.__elements) <= index and self._could_grow():
             self._grow()
 
-    def _could_grow(self) -> bool:
+    def _could_grow(self):
         pass
 
-    def _fetch_next_page(self) -> list:
+    def _fetch_next_page(self):
         pass
 
     def _grow(self):
@@ -44,7 +41,7 @@ class PaginatedListBase:
 
 class Slice:
 
-    def __init__(self, the_list: PaginatedListBase, the_slice: slice):
+    def __init__(self, the_list, the_slice):
         self.__list = the_list
         self.__start = the_slice.start or 0
         self.__stop = the_slice.stop
@@ -65,7 +62,7 @@ class Slice:
 
 class PaginatedList(PaginatedListBase):
 
-    def __init__(self, klass, request_handler: RequestHandler, url, params, list_item='pageItems'):
+    def __init__(self, klass, request_handler, url, params, list_item='pageItems'):
         PaginatedListBase.__init__(self)
         self.__request_handler = request_handler
         self.__klass = klass
