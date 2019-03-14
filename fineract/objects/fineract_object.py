@@ -1,6 +1,7 @@
 import datetime
 import sys
 from operator import itemgetter
+from typing import List
 
 at_least_python3 = sys.hexversion >= 0x03000000
 
@@ -41,7 +42,7 @@ class FineractObject(object):
         self.__completed = True
 
     @staticmethod
-    def make_date_object(date_list: list):
+    def make_date_object(date_list: List[int]):
         return datetime.datetime(
             date_list[0],
             date_list[1],
