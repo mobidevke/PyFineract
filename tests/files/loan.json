@@ -1,0 +1,225 @@
+{
+  "id": 1,
+  "accountNo": "000000001",
+  "status": {
+    "id": 300,
+    "code": "loanStatusType.active",
+    "value": "Active",
+    "pendingApproval": false,
+    "waitingForDisbursal": false,
+    "active": true,
+    "closedObligationsMet": false,
+    "closedWrittenOff": false,
+    "closedRescheduled": false,
+    "closed": false,
+    "overpaid": false
+  },
+  "clientId": 1,
+  "clientName": "Kampala first Client",
+  "clientOfficeId": 2,
+  "loanProductId": 1,
+  "loanProductName": "Kampala Product (with cash accounting)",
+  "loanProductDescription": "Typical Kampala loan product with cash accounting enabled for testing.",
+  "loanPurposeId": 22,
+  "loanPurposeName": "option.HousingImprovement",
+  "loanOfficerId": 2,
+  "loanOfficerName": "LoanOfficer, Kampala",
+  "loanType": {
+    "id": 1,
+    "code": "loanType.individual",
+    "value": "Individual"
+  },
+  "currency": {
+    "code": "UGX",
+    "name": "Uganda Shilling",
+    "decimalPlaces": 2,
+    "displaySymbol": "USh",
+    "nameCode": "currency.UGX",
+    "displayLabel": "Uganda Shilling (USh)"
+  },
+  "principal": 1000000,
+  "termFrequency": 12,
+  "termPeriodFrequencyType": {
+    "id": 2,
+    "code": "termFrequency.periodFrequencyType.months",
+    "value": "Months"
+  },
+  "numberOfRepayments": 12,
+  "repaymentEvery": 1,
+  "repaymentFrequencyType": {
+    "id": 2,
+    "code": "repaymentFrequency.periodFrequencyType.months",
+    "value": "Months"
+  },
+  "interestRatePerPeriod": 24,
+  "interestRateFrequencyType": {
+    "id": 3,
+    "code": "interestRateFrequency.periodFrequencyType.years",
+    "value": "Per year"
+  },
+  "annualInterestRate": 24,
+  "amortizationType": {
+    "id": 1,
+    "code": "amortizationType.equal.installments",
+    "value": "Equal installments"
+  },
+  "interestType": {
+    "id": 1,
+    "code": "interestType.flat",
+    "value": "Flat"
+  },
+  "interestCalculationPeriodType": {
+    "id": 1,
+    "code": "interestCalculationPeriodType.same.as.repayment.period",
+    "value": "Same as repayment period"
+  },
+  "transactionProcessingStrategyId": 2,
+  "timeline": {
+    "submittedOnDate": [
+      2012,
+      4,
+      3
+    ],
+    "submittedByUsername": "admin",
+    "submittedByFirstname": "App",
+    "submittedByLastname": "Administrator",
+    "approvedOnDate": [
+      2012,
+      4,
+      3
+    ],
+    "approvedByUsername": "admin",
+    "approvedByFirstname": "App",
+    "approvedByLastname": "Administrator",
+    "expectedDisbursementDate": [
+      2012,
+      4,
+      10
+    ],
+    "actualDisbursementDate": [
+      2012,
+      4,
+      10
+    ],
+    "disbursedByUsername": "admin",
+    "disbursedByFirstname": "App",
+    "disbursedByLastname": "Administrator",
+    "expectedMaturityDate": [
+      2013,
+      4,
+      10
+    ]
+  },
+  "summary": {
+    "currency": {
+      "code": "UGX",
+      "name": "Uganda Shilling",
+      "decimalPlaces": 2,
+      "displaySymbol": "USh",
+      "nameCode": "currency.UGX",
+      "displayLabel": "Uganda Shilling (USh)"
+    },
+    "principalDisbursed": 1000000,
+    "principalPaid": 0,
+    "principalWrittenOff": 0,
+    "principalOutstanding": 1000000,
+    "principalOverdue": 833333.3,
+    "interestCharged": 240000,
+    "interestPaid": 0,
+    "interestWaived": 0,
+    "interestWrittenOff": 0,
+    "interestOutstanding": 240000,
+    "interestOverdue": 200000,
+    "feeChargesCharged": 18000,
+    "feeChargesDueAtDisbursementCharged": 0,
+    "feeChargesPaid": 0,
+    "feeChargesWaived": 0,
+    "feeChargesWrittenOff": 0,
+    "feeChargesOutstanding": 18000,
+    "feeChargesOverdue": 15000,
+    "penaltyChargesCharged": 0,
+    "penaltyChargesPaid": 0,
+    "penaltyChargesWaived": 0,
+    "penaltyChargesWrittenOff": 0,
+    "penaltyChargesOutstanding": 0,
+    "penaltyChargesOverdue": 0,
+    "totalExpectedRepayment": 1258000,
+    "totalRepayment": 0,
+    "totalExpectedCostOfLoan": 258000,
+    "totalCostOfLoan": 0,
+    "totalWaived": 0,
+    "totalWrittenOff": 0,
+    "totalOutstanding": 1258000,
+    "totalOverdue": 1048333.3,
+    "overdueSinceDate": [
+      2012,
+      5,
+      10
+    ],
+    "linkedAccount": {
+      "id": 1,
+      "accountNo": "000000001"
+    },
+    "disbursementDetails": [
+      {
+        "id": 71,
+        "expectedDisbursementDate": [
+          2013,
+          11,
+          1
+        ],
+        "principal": 22000.000000,
+        "approvedPrincipal": 22000.000000
+      }
+    ],
+    "fixedEmiAmount": 1100.000000,
+    "maxOutstandingLoanBalance": 35000,
+    "canDisburse": false,
+    "emiAmountVariations": [],
+    "inArrears": true,
+    "isNPA": false,
+    "overdueCharges": [
+      {
+        "id": 20,
+        "name": "overdraft penality",
+        "active": true,
+        "penalty": true,
+        "currency": {
+          "code": "USD",
+          "name": "US Dollar",
+          "decimalPlaces": 2,
+          "displaySymbol": "$",
+          "nameCode": "currency.USD",
+          "displayLabel": "US Dollar ($)"
+        },
+        "amount": 3.000000,
+        "chargeTimeType": {
+          "id": 9,
+          "code": "chargeTimeType.overdueInstallment",
+          "value": "overdue fees"
+        },
+        "chargeAppliesTo": {
+          "id": 1,
+          "code": "chargeAppliesTo.loan",
+          "value": "Loan"
+        },
+        "chargeCalculationType": {
+          "id": 2,
+          "code": "chargeCalculationType.percent.of.amount",
+          "value": "% Amount"
+        },
+        "chargePaymentMode": {
+          "id": 0,
+          "code": "chargepaymentmode.regular",
+          "value": "Regular"
+        },
+        "feeInterval": 2,
+        "feeFrequency": {
+          "id": 1,
+          "code": "feeFrequencyperiodFrequencyType.weeks",
+          "value": "Weeks"
+        }
+      }
+    ]
+  }
+}

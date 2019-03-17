@@ -4,29 +4,17 @@ from fineract.objects.fineract_object import FineractObject
 class Type(FineractObject):
 
     def __repr__(self):
-        return self.get__repr__({'value': self._value})
-
-    @property
-    def id(self):
-        return self._id
-
-    @property
-    def code(self):
-        return self._code
-
-    @property
-    def value(self):
-        return self._value
+        return self.get__repr__({'value': self.value})
 
     def _init_attributes(self):
-        self._id = None
-        self._code = None
-        self._value = None
+        self.id = None
+        self.code = None
+        self.value = None
 
     def _use_attributes(self, attributes):
-        self._id = attributes.get('id', None)
-        self._code = attributes.get('code', None)
-        self._value = attributes.get('value', None)
+        self.id = attributes.get('id', None)
+        self.code = attributes.get('code', None)
+        self.value = attributes.get('value', None)
 
 
 class RepaymentFrequencyType(Type):
@@ -78,4 +66,12 @@ class RecalculationRestFrequencyType(Type):
 
 
 class PreClosureInterestCalculationStrategy(Type):
+    pass
+
+
+class LoanType(Type):
+    pass
+
+
+class TermPeriodFrequencyType(Type):
     pass

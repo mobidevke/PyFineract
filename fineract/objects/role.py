@@ -7,35 +7,14 @@ class Role(FineractObject):
     """
 
     def __repr__(self):
-        return self.get__repr__({'name': self._name})
-
-    @property
-    def id(self):
-        """
-        :type: int
-        """
-        return self.id
-
-    @property
-    def name(self):
-        """
-        :type: str
-        """
-        return self._name
-
-    @property
-    def description(self):
-        """
-        :type: str
-        """
-        return self._description
+        return self.get__repr__({'name': self.name})
 
     def _init_attributes(self):
-        self._id = None
-        self._name = None
-        self._description = None
+        self.id = None
+        self.name = None
+        self.description = None
 
     def _use_attributes(self, attributes):
-        self._id = attributes.get('id', None)
-        self._name = attributes.get('name', None)
-        self._description = attributes.get('description', None)
+        self.id = attributes.get('id', None)
+        self.name = attributes.get('name', None)
+        self.description = attributes.get('description', None)

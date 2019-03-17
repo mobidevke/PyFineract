@@ -40,8 +40,8 @@ class Fineract(object):
 
     def get_clients(self):
         """
-        :calls `GET /roles <https://demo.openmf.org/api-docs/apiLive.htm#roles>`_
-        :rtype: :class:`fineract.pagination.PaginatedList` of :class:`fineract.objects.role.Role`
+        :calls `GET /roles <https://demo.openmf.org/api-docs/apiLive.htm#clients>`_
+        :rtype: :class:`fineract.pagination.PaginatedList` of :class:`fineract.objects.client.Client`
         """
         return PaginatedList(
             Role,
@@ -52,12 +52,24 @@ class Fineract(object):
 
     def get_loan_products(self):
         """
-        :calls `GET /roles <https://demo.openmf.org/api-docs/apiLive.htm#roles>`_
-        :rtype: :class:`fineract.pagination.PaginatedList` of :class:`fineract.objects.role.Role`
+        :calls `GET /roles <https://demo.openmf.org/api-docs/apiLive.htm#loanproducts>`_
+        :rtype: :class:`fineract.pagination.PaginatedList` of :class:`fineract.objects.loan_product.LoanProduct`
         """
         return PaginatedList(
             Role,
             self.__request_handler,
             '/loanproducts',
+            dict()
+        )
+
+    def get_loans(self):
+        """
+        :calls `GET /roles <https://demo.openmf.org/api-docs/apiLive.htm#loans>`_
+        :rtype: :class:`fineract.pagination.PaginatedList` of :class:`fineract.objects.loan.Loan`
+        """
+        return PaginatedList(
+            Role,
+            self.__request_handler,
+            '/loans',
             dict()
         )
