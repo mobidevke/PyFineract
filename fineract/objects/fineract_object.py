@@ -21,6 +21,9 @@ class FineractObject(object):
         self._raw_data = attributes
         self._use_attributes(attributes)
 
+        if attributes:
+            self.__completed = True
+
     def _init_attributes(self):
         pass
 
