@@ -29,7 +29,7 @@ class Fineract(object):
         assert base_url is None or isinstance(base_url, str), base_url
         self.__request_handler = RequestHandler(username, password, base_url, tenant, timeout, per_page, debug)
 
-    def get_roles(self):
+    def get_roles(self, **kwargs):
         """
         :calls `GET /roles <https://demo.openmf.org/api-docs/apiLive.htm#roles>`_
         :rtype: :class:`fineract.pagination.PaginatedList` of :class:`fineract.objects.role.Role`
@@ -38,10 +38,10 @@ class Fineract(object):
             Role,
             self.__request_handler,
             '/roles',
-            dict()
+            kwargs
         )
 
-    def get_clients(self):
+    def get_clients(self, **kwargs):
         """
         :calls `GET /clients <https://demo.openmf.org/api-docs/apiLive.htm#clients>`_
         :rtype: :class:`fineract.pagination.PaginatedList` of :class:`fineract.objects.client.Client`
@@ -50,7 +50,7 @@ class Fineract(object):
             Client,
             self.__request_handler,
             '/clients',
-            dict()
+            kwargs
         )
 
     def get_client(self, id):
@@ -64,7 +64,7 @@ class Fineract(object):
                           dict()
                       ), False)
 
-    def get_loan_products(self):
+    def get_loan_products(self, **kwargs):
         """
         :calls `GET /loanproducts <https://demo.openmf.org/api-docs/apiLive.htm#loanproducts>`_
         :rtype: :class:`fineract.pagination.PaginatedList` of :class:`fineract.objects.loan_product.LoanProduct`
@@ -73,7 +73,7 @@ class Fineract(object):
             LoanProduct,
             self.__request_handler,
             '/loanproducts',
-            dict()
+            kwargs
         )
 
     def get_loan_product(self, id):
@@ -87,7 +87,7 @@ class Fineract(object):
                                dict()
                            ), False)
 
-    def get_loans(self):
+    def get_loans(self, **kwargs):
         """
         :calls `GET /loans <https://demo.openmf.org/api-docs/apiLive.htm#loans>`_
         :rtype: :class:`fineract.pagination.PaginatedList` of :class:`fineract.objects.loan.Loan`
@@ -96,7 +96,7 @@ class Fineract(object):
             Loan,
             self.__request_handler,
             '/loans',
-            dict()
+            kwargs
         )
 
     def get_loan(self, id):

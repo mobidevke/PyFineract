@@ -1,5 +1,7 @@
 from fineract.objects.fineract_object import FineractObject, DataFineractObject
+from fineract.objects.loan import Loan
 from fineract.objects.types import Type
+from fineract.pagination import PaginatedList
 
 
 class Client(DataFineractObject):
@@ -54,11 +56,12 @@ class Client(DataFineractObject):
         """
         _id = getattr(self, 'id', None)
         if _id:
-            return self._request_handler.make_request(
+            return PaginatedList(
+                Loan,
+                self._request_handler,
                 '/loans',
                 dict(sqlSearch='l.client_id={}'.format(self.id))
             )
-
         raise AttributeError('id not set')
 
 

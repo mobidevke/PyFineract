@@ -52,7 +52,7 @@ class FineractObject(object):
         ) if date_list else date_list
 
     def _make_fineract_object(self, klass, attributes):
-        return klass(self._request_handler, attributes, False)
+        return klass(self._request_handler, attributes, False) if attributes else attributes
 
     def get__repr__(self, params):
         """
@@ -89,15 +89,12 @@ class DataFineractObject(FineractObject):
     Base class for all classes representing objects which can be associated with a datatable
     """
 
-    def __init__(self, request_handler, attributes, completed):
-        FineractObject.__init__(self, request_handler, attributes, completed)
-
     def get_datatable_data(self, datatable):
         _id = getattr(self, 'id', None)
         if _id:
             return self._request_handler.make_request(
-                '/datatables/{}/{}'.format(datatable, _id),
-                dict()
+                'GET',
+                '/datatables/{}/{}'.format(datatable, _id)
             )
 
         raise AttributeError('id not set')

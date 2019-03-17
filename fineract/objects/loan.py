@@ -26,6 +26,13 @@ class Loan(DataFineractObject):
         self.term_frequency_type = None
         self.timeline = None
         self.summary = None
+        self.multi_disburse_loan = None
+        self.can_define_installment_amount = None
+        self.can_disburse = None
+        self.can_use_for_topup = None
+        self.is_topup = None
+        self.in_arrears = None
+        self.is_npa = None
 
     def _use_attributes(self, attributes):
         self.id = attributes.get('id', None)
@@ -43,6 +50,13 @@ class Loan(DataFineractObject):
                                                               attributes.get('termPeriodFrequencyType', None))
         self.timeline = self._make_fineract_object(LoanTimeline, attributes.get('timeline', None))
         self.summary = self._make_fineract_object(LoanSummary, attributes.get('summary', None))
+        self.multi_disburse_loan = attributes.get('multiDisburseLoan', None)
+        self.can_define_installment_amount = attributes.get('canDefineInstallmentAmount', None)
+        self.can_disburse = attributes.get('canDisburse', None)
+        self.can_use_for_topup = attributes.get('canUseForTopup', None)
+        self.is_topup = attributes.get('isTopup', None)
+        self.in_arrears = attributes.get('inArrears', None)
+        self.is_npa = attributes.get('isNPA', None)
 
 
 class LoanStatus(FineractObject):

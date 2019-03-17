@@ -2,62 +2,68 @@
   "id": 1,
   "accountNo": "000000001",
   "status": {
-    "id": 300,
-    "code": "loanStatusType.active",
-    "value": "Active",
+    "id": 600,
+    "code": "loanStatusType.closed.obligations.met",
+    "value": "Closed (obligations met)",
     "pendingApproval": false,
     "waitingForDisbursal": false,
-    "active": true,
-    "closedObligationsMet": false,
+    "active": false,
+    "closedObligationsMet": true,
     "closedWrittenOff": false,
     "closedRescheduled": false,
-    "closed": false,
+    "closed": true,
     "overpaid": false
   },
-  "clientId": 1,
-  "clientName": "Kampala first Client",
+  "clientId": 8,
+  "clientAccountNo": "000000008",
+  "clientName": "Robinson R",
   "clientOfficeId": 2,
   "loanProductId": 1,
-  "loanProductName": "Kampala Product (with cash accounting)",
-  "loanProductDescription": "Typical Kampala loan product with cash accounting enabled for testing.",
-  "loanPurposeId": 22,
-  "loanPurposeName": "option.HousingImprovement",
-  "loanOfficerId": 2,
-  "loanOfficerName": "LoanOfficer, Kampala",
+  "loanProductName": "Income Generating Loan",
+  "isLoanProductLinkedToFloatingRate": false,
+  "fundId": 1,
+  "fundName": "Loan from Central Bank",
+  "loanOfficerId": 337,
+  "loanOfficerName": "Bronze, Ramini",
   "loanType": {
     "id": 1,
-    "code": "loanType.individual",
+    "code": "accountType.individual",
     "value": "Individual"
   },
   "currency": {
-    "code": "UGX",
-    "name": "Uganda Shilling",
+    "code": "USD",
+    "name": "US Dollar",
     "decimalPlaces": 2,
-    "displaySymbol": "USh",
-    "nameCode": "currency.UGX",
-    "displayLabel": "Uganda Shilling (USh)"
+    "inMultiplesOf": 0,
+    "displaySymbol": "$",
+    "nameCode": "currency.USD",
+    "displayLabel": "US Dollar ($)"
   },
-  "principal": 1000000,
-  "termFrequency": 12,
+  "principal": 10000.000000,
+  "approvedPrincipal": 10000.000000,
+  "proposedPrincipal": 10000.000000,
+  "termFrequency": 25,
   "termPeriodFrequencyType": {
-    "id": 2,
-    "code": "termFrequency.periodFrequencyType.months",
-    "value": "Months"
+    "id": 1,
+    "code": "termFrequency.periodFrequencyType.weeks",
+    "value": "Weeks"
   },
-  "numberOfRepayments": 12,
+  "numberOfRepayments": 25,
   "repaymentEvery": 1,
   "repaymentFrequencyType": {
-    "id": 2,
-    "code": "repaymentFrequency.periodFrequencyType.months",
-    "value": "Months"
+    "id": 1,
+    "code": "repaymentFrequency.periodFrequencyType.weeks",
+    "value": "Weeks"
   },
-  "interestRatePerPeriod": 24,
+  "interestRatePerPeriod": 26.000000,
   "interestRateFrequencyType": {
     "id": 3,
     "code": "interestRateFrequency.periodFrequencyType.years",
     "value": "Per year"
   },
-  "annualInterestRate": 24,
+  "annualInterestRate": 26.000000,
+  "isFloatingInterestRate": false,
+  "interestRateDifferential": 0.000000,
   "amortizationType": {
     "id": 1,
     "code": "amortizationType.equal.installments",
@@ -73,153 +79,158 @@
     "code": "interestCalculationPeriodType.same.as.repayment.period",
     "value": "Same as repayment period"
   },
-  "transactionProcessingStrategyId": 2,
+  "allowPartialPeriodInterestCalcualtion": false,
+  "transactionProcessingStrategyId": 1,
+  "transactionProcessingStrategyName": "Penalties, Fees, Interest, Principal order",
+  "syncDisbursementWithMeeting": false,
   "timeline": {
     "submittedOnDate": [
-      2012,
-      4,
-      3
+      2014,
+      6,
+      2
     ],
-    "submittedByUsername": "admin",
+    "submittedByUsername": "mifos",
     "submittedByFirstname": "App",
     "submittedByLastname": "Administrator",
     "approvedOnDate": [
-      2012,
-      4,
-      3
+      2014,
+      6,
+      11
     ],
-    "approvedByUsername": "admin",
+    "approvedByUsername": "mifos",
     "approvedByFirstname": "App",
     "approvedByLastname": "Administrator",
     "expectedDisbursementDate": [
-      2012,
-      4,
-      10
+      2014,
+      6,
+      16
     ],
     "actualDisbursementDate": [
-      2012,
-      4,
-      10
+      2016,
+      9,
+      28
     ],
-    "disbursedByUsername": "admin",
+    "disbursedByUsername": "mifos",
     "disbursedByFirstname": "App",
     "disbursedByLastname": "Administrator",
+    "closedOnDate": [
+      2017,
+      6,
+      8
+    ],
     "expectedMaturityDate": [
-      2013,
-      4,
-      10
+      2017,
+      3,
+      22
     ]
   },
   "summary": {
     "currency": {
-      "code": "UGX",
-      "name": "Uganda Shilling",
+      "code": "USD",
+      "name": "US Dollar",
       "decimalPlaces": 2,
-      "displaySymbol": "USh",
-      "nameCode": "currency.UGX",
-      "displayLabel": "Uganda Shilling (USh)"
+      "inMultiplesOf": 0,
+      "displaySymbol": "$",
+      "nameCode": "currency.USD",
+      "displayLabel": "US Dollar ($)"
     },
-    "principalDisbursed": 1000000,
-    "principalPaid": 0,
-    "principalWrittenOff": 0,
-    "principalOutstanding": 1000000,
-    "principalOverdue": 833333.3,
-    "interestCharged": 240000,
-    "interestPaid": 0,
-    "interestWaived": 0,
-    "interestWrittenOff": 0,
-    "interestOutstanding": 240000,
-    "interestOverdue": 200000,
-    "feeChargesCharged": 18000,
-    "feeChargesDueAtDisbursementCharged": 0,
-    "feeChargesPaid": 0,
-    "feeChargesWaived": 0,
-    "feeChargesWrittenOff": 0,
-    "feeChargesOutstanding": 18000,
-    "feeChargesOverdue": 15000,
-    "penaltyChargesCharged": 0,
-    "penaltyChargesPaid": 0,
-    "penaltyChargesWaived": 0,
-    "penaltyChargesWrittenOff": 0,
-    "penaltyChargesOutstanding": 0,
+    "principalDisbursed": 10000.000000,
+    "principalPaid": 10000.000000,
+    "principalWrittenOff": 0.000000,
+    "principalOutstanding": 0.000000,
+    "principalOverdue": 0,
+    "interestCharged": 1250.000000,
+    "interestPaid": 1250.000000,
+    "interestWaived": 0.000000,
+    "interestWrittenOff": 0.000000,
+    "interestOutstanding": 0.000000,
+    "interestOverdue": 0,
+    "feeChargesCharged": 500.000000,
+    "feeChargesDueAtDisbursementCharged": 500.000000,
+    "feeChargesPaid": 500.000000,
+    "feeChargesWaived": 0.000000,
+    "feeChargesWrittenOff": 0.000000,
+    "feeChargesOutstanding": 0.000000,
+    "feeChargesOverdue": 0,
+    "penaltyChargesCharged": 0.000000,
+    "penaltyChargesPaid": 0.000000,
+    "penaltyChargesWaived": 0.000000,
+    "penaltyChargesWrittenOff": 0.000000,
+    "penaltyChargesOutstanding": 0.000000,
     "penaltyChargesOverdue": 0,
-    "totalExpectedRepayment": 1258000,
-    "totalRepayment": 0,
-    "totalExpectedCostOfLoan": 258000,
-    "totalCostOfLoan": 0,
-    "totalWaived": 0,
-    "totalWrittenOff": 0,
-    "totalOutstanding": 1258000,
-    "totalOverdue": 1048333.3,
-    "overdueSinceDate": [
-      2012,
-      5,
-      10
-    ],
-    "linkedAccount": {
-      "id": 1,
-      "accountNo": "000000001"
-    },
-    "disbursementDetails": [
-      {
-        "id": 71,
-        "expectedDisbursementDate": [
-          2013,
-          11,
-          1
-        ],
-        "principal": 22000.000000,
-        "approvedPrincipal": 22000.000000
+    "totalExpectedRepayment": 11750.000000,
+    "totalRepayment": 11750.000000,
+    "totalExpectedCostOfLoan": 1750.000000,
+    "totalCostOfLoan": 1750.000000,
+    "totalWaived": 0.000000,
+    "totalWrittenOff": 0.000000,
+    "totalOutstanding": 0.000000,
+    "totalOverdue": 0
+  },
+  "feeChargesAtDisbursementCharged": 500.000000,
+  "loanProductCounter": 1,
+  "multiDisburseLoan": false,
+  "canDefineInstallmentAmount": false,
+  "canDisburse": false,
+  "canUseForTopup": false,
+  "isTopup": false,
+  "closureLoanId": 0,
+  "inArrears": false,
+  "isNPA": false,
+  "overdueCharges": [
+    {
+      "id": 315,
+      "name": "overdue",
+      "active": true,
+      "penalty": true,
+      "currency": {
+        "code": "INR",
+        "name": "Indian Rupee",
+        "decimalPlaces": 2,
+        "displaySymbol": "?",
+        "nameCode": "currency.INR",
+        "displayLabel": "Indian Rupee (?)"
+      },
+      "amount": 1.000000,
+      "chargeTimeType": {
+        "id": 9,
+        "code": "chargeTimeType.overdueInstallment",
+        "value": "Overdue Fees"
+      },
+      "chargeAppliesTo": {
+        "id": 1,
+        "code": "chargeAppliesTo.loan",
+        "value": "Loan"
+      },
+      "chargeCalculationType": {
+        "id": 2,
+        "code": "chargeCalculationType.percent.of.amount",
+        "value": "% Amount"
+      },
+      "chargePaymentMode": {
+        "id": 0,
+        "code": "chargepaymentmode.regular",
+        "value": "Regular"
       }
-    ],
-    "fixedEmiAmount": 1100.000000,
-    "maxOutstandingLoanBalance": 35000,
-    "canDisburse": false,
-    "emiAmountVariations": [],
-    "inArrears": true,
-    "isNPA": false,
-    "overdueCharges": [
-      {
-        "id": 20,
-        "name": "overdraft penality",
-        "active": true,
-        "penalty": true,
-        "currency": {
-          "code": "USD",
-          "name": "US Dollar",
-          "decimalPlaces": 2,
-          "displaySymbol": "$",
-          "nameCode": "currency.USD",
-          "displayLabel": "US Dollar ($)"
-        },
-        "amount": 3.000000,
-        "chargeTimeType": {
-          "id": 9,
-          "code": "chargeTimeType.overdueInstallment",
-          "value": "overdue fees"
-        },
-        "chargeAppliesTo": {
-          "id": 1,
-          "code": "chargeAppliesTo.loan",
-          "value": "Loan"
-        },
-        "chargeCalculationType": {
-          "id": 2,
-          "code": "chargeCalculationType.percent.of.amount",
-          "value": "% Amount"
-        },
-        "chargePaymentMode": {
-          "id": 0,
-          "code": "chargepaymentmode.regular",
-          "value": "Regular"
-        },
-        "feeInterval": 2,
-        "feeFrequency": {
-          "id": 1,
-          "code": "feeFrequencyperiodFrequencyType.weeks",
-          "value": "Weeks"
-        }
-      }
-    ]
-  }
+    }
+  ],
+  "daysInMonthType": {
+    "id": 1,
+    "code": "DaysInMonthType.actual",
+    "value": "Actual"
+  },
+  "daysInYearType": {
+    "id": 1,
+    "code": "DaysInYearType.actual",
+    "value": "Actual"
+  },
+  "isInterestRecalculationEnabled": false,
+  "createStandingInstructionAtDisbursement": false,
+  "paidInAdvance": {
+    "paidInAdvance": 0
+  },
+  "isVariableInstallmentsAllowed": false,
+  "minimumGap": 0,
+  "maximumGap": 0,
+  "isEqualAmortization": false
 }
