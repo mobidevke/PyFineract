@@ -15,7 +15,7 @@ setuptools.setup(
     long_description_content_type='text/markdown',
     url='https://github.com/mobidevke/PyFineract',
     packages=[
-        'fineract'
+        'fineract', 'fineract.objects'
     ],
     classifiers=[
         'Development Status :: 2 - Pre-Alpha',
