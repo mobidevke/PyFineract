@@ -3,4 +3,32 @@
 [![PyPI](https://img.shields.io/pypi/v/PyFineract.svg)](https://pypi.python.org/pypi/PyFineract)
 [![Build Status](https://travis-ci.org/mobidevke/PyFineract.svg?branch=master)](https://travis-ci.org/mobidevke/PyFineract)
 [![Coverage Status](https://coveralls.io/repos/github/mobidevke/PyFineract/badge.svg?branch=master)](https://coveralls.io/github/mobidevke/PyFineract?branch=master)
-### WIP
+
+PyFineract is Python (2 and 3) library to access an 
+[Apache Fineract Api](https://demo.openmf.org/api-docs/apiLive.htm#top). This library enables you to manage resources 
+such as clients, loans, loan products etc in your python applications.
+
+
+### Install
+
+```
+$ pip install PyFineract
+```
+
+### Demo
+
+```
+from fineract import Fineract
+
+# First create a Fineract instance
+
+# using username, password, tenant and base url
+f = Fineract("mifos", "password", "default, "https://localhost/fineract-provider/api/v1")
+
+# Then play with Fineract objects:
+for client in f.get_clients():
+    print(client.full_name)
+    
+```
+
+### Documentation (Coming Soon)
