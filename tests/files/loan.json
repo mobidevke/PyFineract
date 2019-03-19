@@ -1,6 +1,7 @@
 {
-  "id": 1,
-  "accountNo": "000000001",
+  "id": 556,
+  "accountNo": "FDAB000000556",
+  "externalId": "1349879354",
   "status": {
     "id": 600,
     "code": "loanStatusType.closed.obligations.met",
@@ -14,56 +15,54 @@
     "closed": true,
     "overpaid": false
   },
-  "clientId": 8,
-  "clientAccountNo": "000000008",
-  "clientName": "Robinson R",
-  "clientOfficeId": 2,
-  "loanProductId": 1,
-  "loanProductName": "Income Generating Loan",
+  "clientId": 30,
+  "clientAccountNo": "000000030",
+  "clientName": "Nathan Mkaya",
+  "clientOfficeId": 1,
+  "loanProductId": 9,
+  "loanProductName": "FarmDrive Agro Loan - Bronze",
+  "loanProductDescription": "This product targets agro dealers who for some reason are unable to stock their shops.",
   "isLoanProductLinkedToFloatingRate": false,
   "fundId": 1,
-  "fundName": "Loan from Central Bank",
-  "loanOfficerId": 337,
-  "loanOfficerName": "Bronze, Ramini",
+  "fundName": "DigiFarm",
   "loanType": {
     "id": 1,
     "code": "accountType.individual",
     "value": "Individual"
   },
   "currency": {
-    "code": "USD",
-    "name": "US Dollar",
-    "decimalPlaces": 2,
-    "inMultiplesOf": 0,
-    "displaySymbol": "$",
-    "nameCode": "currency.USD",
-    "displayLabel": "US Dollar ($)"
+    "code": "KES",
+    "name": "Kenyan Shilling",
+    "decimalPlaces": 0,
+    "inMultiplesOf": 1,
+    "displaySymbol": "KSh",
+    "nameCode": "currency.KES",
+    "displayLabel": "Kenyan Shilling (KSh)"
   },
-  "principal": 10000.000000,
-  "approvedPrincipal": 10000.000000,
-  "proposedPrincipal": 10000.000000,
-  "termFrequency": 25,
+  "principal": 500,
+  "approvedPrincipal": 500,
+  "proposedPrincipal": 500,
+  "termFrequency": 6,
   "termPeriodFrequencyType": {
-    "id": 1,
-    "code": "termFrequency.periodFrequencyType.weeks",
-    "value": "Weeks"
+    "id": 0,
+    "code": "termFrequency.periodFrequencyType.days",
+    "value": "Days"
   },
-  "numberOfRepayments": 25,
-  "repaymentEvery": 1,
+  "numberOfRepayments": 1,
+  "repaymentEvery": 6,
   "repaymentFrequencyType": {
-    "id": 1,
-    "code": "repaymentFrequency.periodFrequencyType.weeks",
-    "value": "Weeks"
+    "id": 0,
+    "code": "repaymentFrequency.periodFrequencyType.days",
+    "value": "Days"
   },
-  "interestRatePerPeriod": 26.000000,
+  "interestRatePerPeriod": 0,
   "interestRateFrequencyType": {
-    "id": 3,
-    "code": "interestRateFrequency.periodFrequencyType.years",
-    "value": "Per year"
+    "id": 2,
+    "code": "interestRateFrequency.periodFrequencyType.months",
+    "value": "Per month"
   },
-  "annualInterestRate": 26.000000,
+  "annualInterestRate": 0,
   "isFloatingInterestRate": false,
-  "interestRateDifferential": 0.000000,
   "amortizationType": {
     "id": 1,
     "code": "amortizationType.equal.installments",
@@ -79,96 +78,97 @@
     "code": "interestCalculationPeriodType.same.as.repayment.period",
     "value": "Same as repayment period"
   },
-  "allowPartialPeriodInterestCalcualtion": false,
+  "allowPartialPeriodInterestCalcualtion": true,
   "transactionProcessingStrategyId": 1,
   "transactionProcessingStrategyName": "Penalties, Fees, Interest, Principal order",
   "syncDisbursementWithMeeting": false,
   "timeline": {
     "submittedOnDate": [
-      2014,
-      6,
-      2
+      2019,
+      3,
+      14
     ],
-    "submittedByUsername": "mifos",
-    "submittedByFirstname": "App",
-    "submittedByLastname": "Administrator",
+    "submittedByUsername": "nathan",
+    "submittedByFirstname": "Nathan",
+    "submittedByLastname": "Mkaya",
     "approvedOnDate": [
-      2014,
-      6,
-      11
+      2019,
+      3,
+      14
     ],
-    "approvedByUsername": "mifos",
-    "approvedByFirstname": "App",
-    "approvedByLastname": "Administrator",
+    "approvedByUsername": "nathan",
+    "approvedByFirstname": "Nathan",
+    "approvedByLastname": "Mkaya",
     "expectedDisbursementDate": [
-      2014,
-      6,
-      16
+      2019,
+      3,
+      14
     ],
     "actualDisbursementDate": [
-      2016,
-      9,
-      28
+      2019,
+      3,
+      14
     ],
-    "disbursedByUsername": "mifos",
-    "disbursedByFirstname": "App",
-    "disbursedByLastname": "Administrator",
+    "disbursedByUsername": "nathan",
+    "disbursedByFirstname": "Nathan",
+    "disbursedByLastname": "Mkaya",
     "closedOnDate": [
-      2017,
-      6,
-      8
+      2019,
+      3,
+      14
     ],
     "expectedMaturityDate": [
-      2017,
+      2019,
       3,
-      22
+      20
     ]
   },
   "summary": {
     "currency": {
-      "code": "USD",
-      "name": "US Dollar",
-      "decimalPlaces": 2,
-      "inMultiplesOf": 0,
-      "displaySymbol": "$",
-      "nameCode": "currency.USD",
-      "displayLabel": "US Dollar ($)"
+      "code": "KES",
+      "name": "Kenyan Shilling",
+      "decimalPlaces": 0,
+      "inMultiplesOf": 1,
+      "displaySymbol": "KSh",
+      "nameCode": "currency.KES",
+      "displayLabel": "Kenyan Shilling (KSh)"
     },
-    "principalDisbursed": 10000.000000,
-    "principalPaid": 10000.000000,
-    "principalWrittenOff": 0.000000,
-    "principalOutstanding": 0.000000,
+    "principalDisbursed": 500,
+    "principalPaid": 500,
+    "principalWrittenOff": 0,
+    "principalOutstanding": 0,
     "principalOverdue": 0,
-    "interestCharged": 1250.000000,
-    "interestPaid": 1250.000000,
-    "interestWaived": 0.000000,
-    "interestWrittenOff": 0.000000,
-    "interestOutstanding": 0.000000,
+    "interestCharged": 0,
+    "interestPaid": 0,
+    "interestWaived": 0,
+    "interestWrittenOff": 0,
+    "interestOutstanding": 0,
     "interestOverdue": 0,
-    "feeChargesCharged": 500.000000,
-    "feeChargesDueAtDisbursementCharged": 500.000000,
-    "feeChargesPaid": 500.000000,
-    "feeChargesWaived": 0.000000,
-    "feeChargesWrittenOff": 0.000000,
-    "feeChargesOutstanding": 0.000000,
+    "feeChargesCharged": 23,
+    "feeChargesDueAtDisbursementCharged": 10,
+    "feeChargesPaid": 23,
+    "feeChargesWaived": 0,
+    "feeChargesWrittenOff": 0,
+    "feeChargesOutstanding": 0,
     "feeChargesOverdue": 0,
-    "penaltyChargesCharged": 0.000000,
-    "penaltyChargesPaid": 0.000000,
-    "penaltyChargesWaived": 0.000000,
-    "penaltyChargesWrittenOff": 0.000000,
-    "penaltyChargesOutstanding": 0.000000,
+    "penaltyChargesCharged": 0,
+    "penaltyChargesPaid": 0,
+    "penaltyChargesWaived": 0,
+    "penaltyChargesWrittenOff": 0,
+    "penaltyChargesOutstanding": 0,
     "penaltyChargesOverdue": 0,
-    "totalExpectedRepayment": 11750.000000,
-    "totalRepayment": 11750.000000,
-    "totalExpectedCostOfLoan": 1750.000000,
-    "totalCostOfLoan": 1750.000000,
-    "totalWaived": 0.000000,
-    "totalWrittenOff": 0.000000,
-    "totalOutstanding": 0.000000,
+    "totalExpectedRepayment": 523,
+    "totalRepayment": 523,
+    "totalExpectedCostOfLoan": 23,
+    "totalCostOfLoan": 23,
+    "totalWaived": 0,
+    "totalWrittenOff": 0,
+    "totalOutstanding": 0,
     "totalOverdue": 0
   },
-  "feeChargesAtDisbursementCharged": 500.000000,
-  "loanProductCounter": 1,
+  "feeChargesAtDisbursementCharged": 10,
+  "loanCounter": 17,
+  "loanProductCounter": 12,
   "multiDisburseLoan": false,
   "canDefineInstallmentAmount": false,
   "canDisburse": false,
@@ -179,19 +179,19 @@
   "isNPA": false,
   "overdueCharges": [
     {
-      "id": 315,
-      "name": "overdue",
+      "id": 18,
+      "name": "Rollover fees - FDA1",
       "active": true,
       "penalty": true,
       "currency": {
-        "code": "INR",
-        "name": "Indian Rupee",
+        "code": "KES",
+        "name": "Kenyan Shilling",
         "decimalPlaces": 2,
-        "displaySymbol": "?",
-        "nameCode": "currency.INR",
-        "displayLabel": "Indian Rupee (?)"
+        "displaySymbol": "KSh",
+        "nameCode": "currency.KES",
+        "displayLabel": "Kenyan Shilling (KSh)"
       },
-      "amount": 1.000000,
+      "amount": 2.5,
       "chargeTimeType": {
         "id": 9,
         "code": "chargeTimeType.overdueInstallment",
@@ -203,9 +203,9 @@
         "value": "Loan"
       },
       "chargeCalculationType": {
-        "id": 2,
-        "code": "chargeCalculationType.percent.of.amount",
-        "value": "% Amount"
+        "id": 3,
+        "code": "chargeCalculationType.percent.of.amount.and.interest",
+        "value": "% Loan Amount + Interest"
       },
       "chargePaymentMode": {
         "id": 0,
@@ -215,22 +215,21 @@
     }
   ],
   "daysInMonthType": {
-    "id": 1,
-    "code": "DaysInMonthType.actual",
-    "value": "Actual"
+    "id": 30,
+    "code": "DaysInMonthType.days360",
+    "value": "30 Days"
   },
   "daysInYearType": {
-    "id": 1,
-    "code": "DaysInYearType.actual",
-    "value": "Actual"
+    "id": 360,
+    "code": "DaysInYearType.days360",
+    "value": "360 Days"
   },
   "isInterestRecalculationEnabled": false,
   "createStandingInstructionAtDisbursement": false,
   "paidInAdvance": {
-    "paidInAdvance": 0
+    "paidInAdvance": 513
   },
   "isVariableInstallmentsAllowed": false,
   "minimumGap": 0,
-  "maximumGap": 0,
-  "isEqualAmortization": false
+  "maximumGap": 0
 }

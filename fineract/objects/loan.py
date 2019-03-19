@@ -102,6 +102,7 @@ class LoanTimeline(FineractObject):
         self.expected_disbursement_date = None
         self.actual_disbursement_date = None
         self.disbursed_by = None
+        self.closed_on_date = None
         self.expected_maturity_date = None
 
     def _use_attributes(self, attributes):
@@ -112,6 +113,7 @@ class LoanTimeline(FineractObject):
         self.expected_disbursement_date = self._make_date_object(attributes.get('expectedDisbursementDate', None))
         self.actual_disbursement_date = self._make_date_object(attributes.get('actualDisbursementDate', None))
         self.disbursed_by = attributes.get('disbursedByUsername', None)
+        self.closed_on_date = self._make_date_object(attributes.get('closedOnDate', None))
         self.expected_maturity_date = self._make_date_object(attributes.get('expectedMaturityDate', None))
 
 
