@@ -1,0 +1,16 @@
+{
+  "id": 1,
+  "firstname": "John",
+  "lastname": "Doe",
+  "displayName": "Doe, John",
+  "officeId": 1,
+  "officeName": "Head Office",
+  "isLoanOfficer": true,
+  "externalId": "17H",
+  "isActive": "true",
+  "joiningDate": [
+    2009,
+    8,
+    1
+  ]
+}
