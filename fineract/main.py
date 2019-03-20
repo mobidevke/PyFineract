@@ -4,6 +4,7 @@ from fineract.objects.client import Client
 from fineract.objects.loan import Loan
 from fineract.objects.loan_product import LoanProduct
 from fineract.objects.role import Role
+from fineract.objects.staff import Staff
 from fineract.pagination import PaginatedList
 
 DEFAULT_BASE_URL = 'https://localhost/fineract-provider/api/v1'
@@ -29,7 +30,7 @@ class Fineract(object):
         assert base_url is None or isinstance(base_url, str), base_url
         self.__request_handler = RequestHandler(username, password, base_url, tenant, timeout, per_page, debug)
 
-    def get_roles(self, **kwargs):
+    def get_roles(self):
         """
         :calls `GET /roles <https://demo.openmf.org/api-docs/apiLive.htm#roles>`_
         :rtype: :class:`fineract.pagination.PaginatedList` of :class:`fineract.objects.role.Role`
@@ -38,7 +39,7 @@ class Fineract(object):
             Role,
             self.__request_handler,
             '/roles',
-            kwargs
+            dict()
         )
 
     def get_clients(self, **kwargs):
@@ -109,3 +110,23 @@ class Fineract(object):
                         '/loans/{}'.format(id),
                         dict()
                     ), False)
+
+    def get_staff(self, id=None):
+        """
+        :calls `GET /staff/<id> <https://demo.openmf.org/api-docs/apiLive.htm#staff_retrieve>`_
+        :rtype: :class:`fineract.objects.staff.Staff` or  :class:`fineract.pagination.PaginatedList` of
+        :class:`fineract.objects.staff.Staff`
+        """
+        if id:
+            return Staff(self.__request_handler,
+                         self.__request_handler.make_request(
+                             '/staff/{}'.format(id),
+                             dict()
+                         ), False)
+        else:
+            return PaginatedList(
+                Staff,
+                self.__request_handler,
+                '/staff',
+                dict()
+            )
