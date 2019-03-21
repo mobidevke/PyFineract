@@ -3,8 +3,8 @@ from fineract.handlers import RequestHandler
 from fineract.objects.client import Client
 from fineract.objects.loan import Loan
 from fineract.objects.loan_product import LoanProduct
+from fineract.objects.org import Staff
 from fineract.objects.role import Role
-from fineract.objects.staff import Staff
 from fineract.pagination import PaginatedList
 
 DEFAULT_BASE_URL = 'https://localhost/fineract-provider/api/v1'
@@ -115,7 +115,7 @@ class Fineract(object):
         """
         :calls `GET /staff/<id> <https://demo.openmf.org/api-docs/apiLive.htm#staff_retrieve>`_
         :rtype: :class:`fineract.objects.staff.Staff` or  :class:`fineract.pagination.PaginatedList` of
-        :class:`fineract.objects.staff.Staff`
+        :class:`fineract.objects.org.Staff`
         """
         if id:
             return Staff(self.__request_handler,
