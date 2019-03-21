@@ -2,12 +2,13 @@ import json
 
 import pytest
 
-from fineract.objects.org import Staff, Fund
+from fineract.objects.org import Staff, Fund, Charge
 
 
 @pytest.mark.parametrize('filename, klass', [
     ('staff', Staff),
-    ('fund', Fund)
+    ('fund', Fund),
+    ('charge', Charge),
 ])
 def test_org_object(filename, klass):
     with open('tests/files/{}.json'.format(filename), 'r') as in_file:

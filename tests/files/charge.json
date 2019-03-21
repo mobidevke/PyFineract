@@ -1,0 +1,35 @@
+{
+  "id": 1,
+  "name": "Loan service fee",
+  "active": true,
+  "penalty": false,
+  "currency": {
+    "code": "USD",
+    "name": "US Dollar",
+    "decimalPlaces": 2,
+    "displaySymbol": "$",
+    "nameCode": "currency.USD",
+    "displayLabel": "US Dollar ($)"
+  },
+  "amount": 230.56,
+  "chargeTimeType": {
+    "id": 1,
+    "code": "chargeTimeType.disbursement",
+    "value": "Disbursement"
+  },
+  "chargeAppliesTo": {
+    "id": 1,
+    "code": "chargeAppliesTo.loan",
+    "value": "Loan"
+  },
+  "chargeCalculationType": {
+    "id": 1,
+    "code": "chargeCalculationType.flat",
+    "value": "Flat"
+  },
+  "chargePaymentMode": {
+    "id": 1,
+    "code": "chargepaymentmode.accounttransfer",
+    "value": "Account transfer"
+  }
+}

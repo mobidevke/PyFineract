@@ -3,7 +3,7 @@ from fineract.handlers import RequestHandler
 from fineract.objects.client import Client
 from fineract.objects.loan import Loan
 from fineract.objects.loan_product import LoanProduct
-from fineract.objects.org import Staff
+from fineract.objects.org import Staff, Fund, Charge
 from fineract.objects.role import Role
 from fineract.pagination import PaginatedList
 
@@ -128,5 +128,45 @@ class Fineract(object):
                 Staff,
                 self.__request_handler,
                 '/staff',
+                dict()
+            )
+
+    def get_funds(self, id=None):
+        """
+        :calls `GET /staff/<id> <https://demo.openmf.org/api-docs/apiLive.htm#staff_retrieve>`_
+        :rtype: :class:`fineract.objects.org.Fund` or  :class:`fineract.pagination.PaginatedList` of
+        :class:`fineract.objects.org.Fund`
+        """
+        if id:
+            return Fund(self.__request_handler,
+                        self.__request_handler.make_request(
+                            '/funds/{}'.format(id),
+                            dict()
+                        ), False)
+        else:
+            return PaginatedList(
+                Fund,
+                self.__request_handler,
+                '/funds',
+                dict()
+            )
+
+    def get_charges(self, id=None):
+        """
+        :calls `GET /staff/<id> <https://demo.openmf.org/api-docs/apiLive.htm#staff_retrieve>`_
+        :rtype: :class:`fineract.objects.org.Charge` or  :class:`fineract.pagination.PaginatedList` of
+        :class:`fineract.objects.org.Charge`
+        """
+        if id:
+            return Charge(self.__request_handler,
+                          self.__request_handler.make_request(
+                              '/charges/{}'.format(id),
+                              dict()
+                          ), False)
+        else:
+            return PaginatedList(
+                Charge,
+                self.__request_handler,
+                '/charges',
                 dict()
             )

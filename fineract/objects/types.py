@@ -75,3 +75,19 @@ class LoanType(Type):
 
 class TermPeriodFrequencyType(Type):
     pass
+
+
+class ChargeTimeType(Type):
+    pass
+
+
+class ChargeAppliesTo(Type):
+    pass
+
+
+class ChargeCalculationType(Type):
+    pass
+
+
+class ChargePaymentMode(Type):
+    pass
