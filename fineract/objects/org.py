@@ -3,6 +3,28 @@ from fineract.objects.fineract_object import FineractObject
 from fineract.objects.types import ChargeTimeType, ChargeAppliesTo, ChargeCalculationType, ChargePaymentMode
 
 
+class Office(FineractObject):
+    """
+    This class represent an Office
+    """
+
+    def _init_attributes(self):
+        self.id = None
+        self.name = None
+        self.name_decorated = None
+        self.external_id = None
+        self.opening_date = None
+        self.hierarchy = None
+
+    def _use_attributes(self, attributes):
+        self.id = attributes.get('id', None)
+        self.name = attributes.get('name', None)
+        self.name_decorated = attributes.get('nameDecorated', None)
+        self.external_id = attributes.get('externalId', None)
+        self.opening_date = self._make_date_object(attributes.get('openingDate', None))
+        self.hierarchy = attributes.get('hierarchy', None)
+
+
 class Staff(FineractObject):
     """
     This class represents a Staff

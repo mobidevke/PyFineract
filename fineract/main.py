@@ -3,7 +3,7 @@ from fineract.handlers import RequestHandler
 from fineract.objects.client import Client
 from fineract.objects.loan import Loan
 from fineract.objects.loan_product import LoanProduct
-from fineract.objects.org import Staff, Fund, Charge
+from fineract.objects.org import Staff, Fund, Charge, Office
 from fineract.objects.role import Role
 from fineract.pagination import PaginatedList
 
@@ -133,7 +133,7 @@ class Fineract(object):
 
     def get_funds(self, id=None):
         """
-        :calls `GET /staff/<id> <https://demo.openmf.org/api-docs/apiLive.htm#staff_retrieve>`_
+        :calls `GET /funds/<id> <https://demo.openmf.org/api-docs/apiLive.htm#funds_retrieve>`_
         :rtype: :class:`fineract.objects.org.Fund` or  :class:`fineract.pagination.PaginatedList` of
         :class:`fineract.objects.org.Fund`
         """
@@ -153,7 +153,7 @@ class Fineract(object):
 
     def get_charges(self, id=None):
         """
-        :calls `GET /staff/<id> <https://demo.openmf.org/api-docs/apiLive.htm#staff_retrieve>`_
+        :calls `GET /charges/<id> <https://demo.openmf.org/api-docs/apiLive.htm#charges_retrieve>`_
         :rtype: :class:`fineract.objects.org.Charge` or  :class:`fineract.pagination.PaginatedList` of
         :class:`fineract.objects.org.Charge`
         """
@@ -168,5 +168,25 @@ class Fineract(object):
                 Charge,
                 self.__request_handler,
                 '/charges',
+                dict()
+            )
+
+    def get_offices(self, id=None):
+        """
+        :calls `GET /offices/<id> <https://demo.openmf.org/api-docs/apiLive.htm#offices_retrieve>`_
+        :rtype: :class:`fineract.objects.org.Office` or  :class:`fineract.pagination.PaginatedList` of
+        :class:`fineract.objects.org.Office`
+        """
+        if id:
+            return Office(self.__request_handler,
+                          self.__request_handler.make_request(
+                              '/offices/{}'.format(id),
+                              dict()
+                          ), False)
+        else:
+            return PaginatedList(
+                Office,
+                self.__request_handler,
+                '/offices',
                 dict()
             )
