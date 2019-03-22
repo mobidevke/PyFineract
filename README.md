@@ -31,4 +31,11 @@ for client in f.get_clients():
     
 ```
 
+### Raw Requests
+Since this project is still in it's early stages of development, we have provided a method that can be used 
+to make raw requests.
+```
+clients = f.raw_request('GET', '/clients' params={'limit': 10})
+print(clients)
+```
 ### Documentation (Coming Soon)

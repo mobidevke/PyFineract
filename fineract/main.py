@@ -190,3 +190,13 @@ class Fineract(object):
                 '/offices',
                 dict()
             )
+
+    def raw_request(self, method, url, **kwargs):
+        """
+        Make a raw request to the Fineract API
+        :param method:
+        :param url:
+        :param kwargs:
+        :return: Returns dict/list object
+        """
+        return self.__request_handler.make_request(method, url, **kwargs)
