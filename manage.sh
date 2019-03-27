@@ -3,6 +3,7 @@
 
 function publish {
     bump
+    readme
     push
 }
 
@@ -15,10 +16,10 @@ function bump {
 
 function readme {
     # creates a changelog based on the commits from the previous version until now
-    changelog=$(tail -n +6 doc/changes.rst)
+    changelog=$(tail -n +6 docs/changes.rst)
     gitlog=$(git log v$previousVersion.. --oneline --pretty=format:'* %s (%h)' | grep -v "Merge")
     today=$(date "+(%B %d, %Y)")
-    echo -e "Change log\n==========\n\nStable versions\n~~~~~~~~~~~~~~~\n\nVersion $version $today\n-----------------------------------\n\n$gitlog\n$changelog" > doc/changes.rst
+    echo -e "Change log\n==========\n\nStable versions\n~~~~~~~~~~~~~~~\n\nVersion $version $today\n-----------------------------------\n\n$gitlog\n$changelog" > docs/changes.rst
 }
 
 function push {
