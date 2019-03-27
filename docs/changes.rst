@@ -4,6 +4,11 @@ Change log
 Stable versions
 ~~~~~~~~~~~~~~~
 
+Version 0.0.19-dev6 (March 27, 2019)
+-----------------------------------
+
+* fix: Correct setup.py (31c9369)
+
 Version 0.0.19-dev5 (March 27, 2019)
 -----------------------------------
 

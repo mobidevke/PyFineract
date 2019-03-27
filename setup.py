@@ -2,7 +2,7 @@ import textwrap
 
 import setuptools
 
-version = "0.0.19-dev5"
+version = "0.0.19-dev6"
 
 setuptools.setup(
     name='PyFineract',
