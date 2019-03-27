@@ -4,6 +4,11 @@ Change log
 Stable versions
 ~~~~~~~~~~~~~~~
 
+Version 0.0.19-dev5 (March 27, 2019)
+-----------------------------------
+
+* docs: Configure documentation file (3599c9b)
+
 Version 0.0.19-dev4 (March 27, 2019)
 -----------------------------------
 
