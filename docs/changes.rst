@@ -4,6 +4,11 @@ Change log
 Stable versions
 ~~~~~~~~~~~~~~~
 
+Version 0.0.19-dev2 (March 27, 2019)
+-----------------------------------
+
+* Update README.md (4870ede)
+
 Version 0.0.19-dev1 (March 27, 2019)
 -----------------------------------
 
