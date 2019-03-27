@@ -1,9 +1,8 @@
+import textwrap
+
 import setuptools
 
 version = "0.0.19-dev5"
-
-with open('README.md', 'r') as fh:
-    long_description = fh.read()
 
 setuptools.setup(
     name='PyFineract',
@@ -11,7 +10,25 @@ setuptools.setup(
     author='Mobidev Kenya',
     author_email='projects@devs.mobi',
     description='A fineract API wrapper',
-    long_description=long_description,
+    long_description=textwrap.dedent("""
+        Tutorial (Short)
+        ----------------
+        
+        First create a Fineract instance::
+        
+            from fineract import Fineract
+        
+            # First create a Fineract instance
+        
+            # using username, password, tenant and base url
+            f = Fineract("mifos", "password", "default, "https://localhost/fineract-provider/api/v1")
+        
+        Then work with your Fineract objects::
+        
+            for client in f.get_clients():
+                print(client.full_name)
+
+    """),
     long_description_content_type='text/markdown',
     url='https://github.com/mobidevke/PyFineract',
     packages=[

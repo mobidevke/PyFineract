@@ -45,6 +45,6 @@ PyFineract is distributed under the Apache Foundation License.
 What next?
 ----------
 
-You need to use a Github API and wonder which class implements it? `Reference of APIs <https://pyfineract.readthedocs.io/en/latest/apis.html>`__.
+You need to use a Fineract API and wonder which class implements it? `Reference of APIs <https://pyfineract.readthedocs.io/en/latest/apis.html>`__.
 
-You want all the details about PyGithub classes? `Reference of Classes <https://pyfineract.readthedocs.io/en/latest/github_objects.html>`__.
+You want all the details about PyFineract classes? `Reference of Classes <https://pyfineract.readthedocs.io/en/latest/fineract_objects.html>`__.
