@@ -4,6 +4,11 @@ Change log
 Stable versions
 ~~~~~~~~~~~~~~~
 
+Version 0.0.19-dev8 (March 28, 2019)
+-----------------------------------
+
+* doc: Add changes to documenations (ce4de68)
+
 Version 0.0.19-dev7 (March 27, 2019)
 -----------------------------------
 
