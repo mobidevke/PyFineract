@@ -7,4 +7,5 @@ Welcome to PyFineract's documentation!
    introduction
    examples
    reference
+   changes
 
