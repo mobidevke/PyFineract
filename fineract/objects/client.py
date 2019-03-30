@@ -50,6 +50,99 @@ class Client(DataFineractObject):
         self.type = self._make_fineract_object(ClientType, attributes.get('clientType', None))
         self.timeline = self._make_fineract_object(ClientTimeline, attributes.get('timeline', None))
 
+    def activate(self, date=None):
+        if date is None:
+            date = self._get_current_date()
+
+        _id = getattr(self, 'id', None)
+        res = self._request_handler.make_request(
+            'POST',
+            '/clients/{}?command=activate'.format(_id),
+            {'activationDate': date}
+        )
+        return res.get('clientId', None) == _id
+
+    def close(self, closure_reason_id, date=None):
+        if date is None:
+            date = self._get_current_date()
+
+        _id = getattr(self, 'id', None)
+        res = self._request_handler.make_request(
+            'POST',
+            '/clients/{}?command=close'.format(_id),
+            {
+                'closureDate': date,
+                'closureReasonId': closure_reason_id
+            }
+        )
+        return res.get('clientId', None) == _id
+
+    def reject(self, rejection_reason_id, date=None):
+        if date is None:
+            date = self._get_current_date()
+
+        _id = getattr(self, 'id', None)
+        res = self._request_handler.make_request(
+            'POST',
+            '/clients/{}?command=reject'.format(_id),
+            {
+                'rejectionDate': date,
+                'rejectionReasonId': rejection_reason_id
+            }
+        )
+        return res.get('clientId', None) == _id
+
+    def withdraw(self, withdrawal_reason_id, date=None):
+        if date is None:
+            date = self._get_current_date()
+
+        _id = getattr(self, 'id', None)
+        res = self._request_handler.make_request(
+            'POST',
+            '/clients/{}?command=withdraw'.format(_id),
+            {
+                'withdrawalDate': date,
+                'withdrawalReasonId': withdrawal_reason_id
+            }
+        )
+        return res.get('clientId', None) == _id
+
+    def reactivate(self, date=None):
+        if date is None:
+            date = self._get_current_date()
+
+        _id = getattr(self, 'id', None)
+        res = self._request_handler.make_request(
+            'POST',
+            '/clients/{}?command=reactivate'.format(_id),
+            {'reactivationDate': date}
+        )
+        return res.get('clientId', None) == _id
+
+    def undo_reject(self, date=None):
+        if date is None:
+            date = self._get_current_date()
+
+        _id = getattr(self, 'id', None)
+        res = self._request_handler.make_request(
+            'POST',
+            '/clients/{}?command=UndoRejection'.format(_id),
+            {'reopenedDate': date}
+        )
+        return res.get('clientId', None) == _id
+
+    def undo_wtihdrawal(self, date=None):
+        if date is None:
+            date = self._get_current_date()
+
+        _id = getattr(self, 'id', None)
+        res = self._request_handler.make_request(
+            'POST',
+            '/clients/{}?command=UndoWithdrawal'.format(_id),
+            {'reopenedDate': date}
+        )
+        return res.get('clientId', None) == _id
+
     def get_loans(self):
         """
         Get the loans of a client

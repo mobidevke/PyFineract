@@ -83,6 +83,10 @@ class FineractObject(object):
         self._complete_if_needed()
         return self._raw_data
 
+    @staticmethod
+    def _get_current_date():
+        return datetime.datetime.today()
+
 
 class DataFineractObject(FineractObject):
     """

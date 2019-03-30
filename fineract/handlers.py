@@ -1,3 +1,4 @@
+import datetime
 import sys
 
 import requests
@@ -32,6 +33,7 @@ class RequestHandler:
         url = self.__base_url + url
         kwargs['auth'] = self.__auth
         kwargs['headers'] = self.__headers
+        kwargs = self.__inject_extras(kwargs)
         res = requests.request(method, url, **kwargs)
         if not res.ok:
             err_data = res.json()
@@ -42,8 +44,34 @@ class RequestHandler:
         else:
             return res.json()
 
+    def __inject_extras(self, kwargs):
+        payload = None
+        if 'data' in kwargs:
+            payload = kwargs['data']
+
+        if 'json' in kwargs:
+            payload = kwargs['json']
+
+        if payload:
+            for key in payload.keys():
+                if 'date' in key.lower() and isinstance(payload[key], datetime.datetime):
+                    payload['locale'] = self.__locale
+                    payload['dateFormat'] = self.__date_format
+                    payload[key] = self.__date_string(payload[key])
+
+        if 'data' in kwargs:
+            kwargs['data'] = payload
+
+        if 'json' in kwargs:
+            kwargs['json'] = payload
+
+        return kwargs
+
+    @staticmethod
+    def __date_string(date):
+        return date.strftime('%Y-%m-%d')
+
     def __create_err_message(self, data):
-        message = ''
         if 'defaultUserMessage' in data:
             message = data['defaultUserMessage']
             if 'errors' in message:
