@@ -4,6 +4,11 @@ Change log
 Stable versions
 ~~~~~~~~~~~~~~~
 
+Version 0.0.20 (March 30, 2019)
+-----------------------------------
+
+* feat: Added convenience methods for a client (e125b92)
+
 Version 0.0.19-dev8 (March 28, 2019)
 -----------------------------------
 
