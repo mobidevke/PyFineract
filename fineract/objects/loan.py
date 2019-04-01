@@ -194,3 +194,91 @@ class LoanSummary(FineractObject):
         self.principal_disbursed = self._make_date_object(attributes.get('overdueSinceDate', None))
         self.in_arrears = attributes.get('inArrears', None)
         self.is_npa = attributes.get('isNPA', None)
+
+
+class LoanRepaymentSchedule(FineractObject):
+    """
+    This class represents a loan repayment schedule
+    """
+
+    def _init_attributes(self):
+        self.currency = None
+        self.loan_term_in_days = None
+        self.total_principal_disbursed = None
+        self.total_principal_expected = None
+        self.total_principal_paid = None
+        self.total_interest_charged = None
+        self.total_fee_charges_charged = None
+        self.total_penalty_charges_charged = None
+        self.total_waived = None
+        self.total_written_off = None
+        self.total_repayment_expected = None
+        self.total_repayment = None
+        self.total_outstanding = None
+        self.periods = None
+
+    def _use_attributes(self, attributes):
+        self.currency = self._make_fineract_object(Currency, attributes.get('currency', None))
+        self.loan_term_in_days = attributes.get('loanTermInDays', None)
+        self.total_principal_disbursed = attributes.get('totalPrincipalDisbursed', None)
+        self.total_principal_expected = attributes.get('totalPrincipalExpected', None)
+        self.total_principal_paid = attributes.get('totalPrincipalPaid', None)
+        self.total_interest_charged = attributes.get('totalInterestCharged', None)
+        self.total_fee_charges_charged = attributes.get('totalFeeChargesCharged', None)
+        self.total_penalty_charges_charged = attributes.get('totalPenaltyChargesCharged', None)
+        self.total_waived = attributes.get('totalWaived', None)
+        self.total_written_off = attributes.get('totalWrittenOff', None)
+        self.total_repayment_expected = attributes.get('totalRepaymentExpected', None)
+        self.total_repayment = attributes.get('totalRepayment', None)
+        self.total_outstanding = attributes.get('totalOutstanding', None)
+        self.periods = self._make_fineract_objects_list(LoanRepaymentPeriod, attributes.get('periods', None))
+
+
+class LoanRepaymentPeriod(FineractObject):
+
+    def _init_attributes(self):
+        self.period = None
+        self.from_date = None
+        self.due_date = None
+        self.days_in_period = None
+        self.principal_original_due = None
+        self.principal_due = None
+        self.principal_outstanding = None
+        self.principal_disbursed = None
+        self.principal_loan_balance = None
+        self.principal_loan_balance_outstanding = None
+        self.interest_original_due = None
+        self.interest_dues = None
+        self.interest_outstanding = None
+        self.fee_charges_due = None
+        self.fee_charges_outstanding = None
+        self.penalty_charges_due = None
+        self.total_original_due_for_period = None
+        self.total_due_for_period = None
+        self.total_paid_for_period = None
+        self.total_outstanding_for_period = None
+        self.total_overdue = None
+        self.total_actual_cost_of_loan_for_period = None
+
+    def _use_attributes(self, attributes):
+        self.period = attributes.get('period', None)
+        self.due_date = self._make_date_object(attributes.get('dueDate', None))
+        self.from_date = self._make_date_object(attributes.get('fromDate', None))
+        self.days_in_period = attributes.get('daysInPeriod', None)
+        self.principal_original_due = attributes.get('principalOriginalDue', None)
+        self.principal_due = attributes.get('principalDue', None)
+        self.principal_outstanding = attributes.get('principalOutstanding', None)
+        self.principal_disbursed = attributes.get('principalDisbursed', None)
+        self.principal_loan_balance_outstanding = attributes.get('principalLoanBalanceOutstanding', None)
+        self.interest_original_due = attributes.get('interestOriginalDue', None)
+        self.interest_due = attributes.get('interestDue', None)
+        self.interest_outstanding = attributes.get('interestOutstanding', None)
+        self.fee_charges_due = attributes.get('feeChargesDue', None)
+        self.fee_charges_outstanding = attributes.get('feeChargesOutstanding', None)
+        self.penalty_charges_due = attributes.get('penaltyChargesDue', None)
+        self.total_original_due_for_period = attributes.get('totalOriginalDueForPeriod', None)
+        self.total_due_for_period = attributes.get('totalDueForPeriod', None)
+        self.total_paid_for_period = attributes.get('totalPaidForPeriod', None)
+        self.total_outstanding_for_period = attributes.get('totalOutstandingForPeriod', None)
+        self.total_overdue = attributes.get('totalOverdue', None)
+        self.total_actual_cost_of_loan_for_period = attributes.get('totalActualCostOfLoanForPeriod', None)

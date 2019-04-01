@@ -54,6 +54,16 @@ class FineractObject(object):
     def _make_fineract_object(self, klass, attributes):
         return klass(self._request_handler, attributes, False) if attributes else attributes
 
+    def _make_fineract_objects_list(self, klass, attributes):
+        if isinstance(attributes, list):
+            objects = []
+            for attr in attributes:
+                objects.append(
+                    self._make_fineract_object(klass, attr)
+                )
+            return objects
+        return attributes
+
     def get__repr__(self, params):
         """
         Converts the object to a nicely printable string.
