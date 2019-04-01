@@ -4,6 +4,12 @@ Change log
 Stable versions
 ~~~~~~~~~~~~~~~
 
+Version 0.0.21 (April 01, 2019)
+-----------------------------------
+
+* feat: Add LoanRepaymentSchedule object (e584f4c)
+* style: Correct undo_withdrawal typo in method name. (1303301)
+
 Version 0.0.20 (March 30, 2019)
 -----------------------------------
 
