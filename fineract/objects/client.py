@@ -131,7 +131,7 @@ class Client(DataFineractObject):
         )
         return res.get('clientId', None) == _id
 
-    def undo_wtihdrawal(self, date=None):
+    def undo_withdrawal(self, date=None):
         if date is None:
             date = self._get_current_date()
 
