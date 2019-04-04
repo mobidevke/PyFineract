@@ -157,6 +157,17 @@ class Client(DataFineractObject):
             )
         raise AttributeError('id not set')
 
+    @classmethod
+    def get_client_by_phone_no(cls, request_handler, phone_no):
+        data = request_handler.make_request(
+            '/clients',
+            dict(sqlSearch='c.mobile_no={}'.format(phone_no))
+        )
+        if dict:
+            return cls(None, data[0], False)
+
+        return None
+
 
 class ClientStatus(Type):
     """

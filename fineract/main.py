@@ -30,6 +30,10 @@ class Fineract(object):
         assert base_url is None or isinstance(base_url, str), base_url
         self.__request_handler = RequestHandler(username, password, base_url, tenant, timeout, per_page, debug)
 
+    @property
+    def request_handler(self):
+        return self.__request_handler
+
     def get_roles(self):
         """
         :calls `GET /roles <https://demo.openmf.org/api-docs/apiLive.htm#roles>`_
