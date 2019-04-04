@@ -4,6 +4,11 @@ Change log
 Stable versions
 ~~~~~~~~~~~~~~~
 
+Version 0.0.22 (April 04, 2019)
+-----------------------------------
+
+* feat: Add classmethod to Client object to get a client by phone no (aa3665d)
+
 Version 0.0.21 (April 01, 2019)
 -----------------------------------
 
