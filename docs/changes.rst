@@ -4,6 +4,11 @@ Change log
 Stable versions
 ~~~~~~~~~~~~~~~
 
+Version 0.0.23 (April 04, 2019)
+-----------------------------------
+
+* fix: Correct issue when getting single client by phone no (ff170f4)
+
 Version 0.0.22 (April 04, 2019)
 -----------------------------------
 
