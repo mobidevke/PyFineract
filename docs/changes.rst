@@ -4,6 +4,11 @@ Change log
 Stable versions
 ~~~~~~~~~~~~~~~
 
+Version 0.0.24 (April 05, 2019)
+-----------------------------------
+
+* fix: Add exception handling in make_requests (26d590c)
+
 Version 0.0.23 (April 04, 2019)
 -----------------------------------
 
