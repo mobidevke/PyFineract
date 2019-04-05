@@ -159,11 +159,13 @@ class Client(DataFineractObject):
 
     @classmethod
     def get_client_by_phone_no(cls, request_handler, phone_no):
-        params = dict(sqlSearch='c.mobile_no={}'.format(phone_no))
+        params = {
+            'sqlSearch': 'c.mobile_no={}'.format(phone_no)
+        }
         data = request_handler.make_request(
             'GET'
             '/clients',
-            dict(data=params)
+            data=params
         )
         if dict:
             return cls(None, data[0], False)
