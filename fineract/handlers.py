@@ -34,7 +34,11 @@ class RequestHandler:
         kwargs['auth'] = self.__auth
         kwargs['headers'] = self.__headers
         kwargs = self.__inject_extras(kwargs)
-        res = requests.request(method, url, **kwargs)
+        try:
+            res = requests.request(method, url, **kwargs)
+        except Exception as e:
+            raise self.__create_exception(500, str(e))
+
         if not res.ok:
             err_data = res.json()
             if self._debug:
