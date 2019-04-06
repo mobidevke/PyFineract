@@ -6,7 +6,6 @@ from requests.exceptions import SSLError
 timeout = 75
 
 
-
 def wait_for_fineract():
     seconds = 0
     while seconds < timeout:
