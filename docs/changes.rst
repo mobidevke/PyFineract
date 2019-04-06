@@ -4,6 +4,11 @@ Change log
 Stable versions
 ~~~~~~~~~~~~~~~
 
+Version 0.0.24-dev3 (April 06, 2019)
+-----------------------------------
+
+* build: Add wait for endpoint script (f8bb335)
+
 Version 0.0.24-dev2 (April 06, 2019)
 -----------------------------------
 
