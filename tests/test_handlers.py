@@ -1,4 +1,5 @@
 import pytest
+import requests
 from requests import Response
 
 from fineract import BadArgsException, ResourceNotFoundException, BadCredentialsException, FineractException
@@ -97,8 +98,8 @@ def test_request_handler__make_request_FineractException_raised(mocker):
 
 
 @pytest.mark.parametrize('error_class', [
-    ConnectionError,
-    ConnectionRefusedError,
+    requests.ConnectionError,
+    requests.ConnectTimeout,
     AttributeError
 ])
 def test_request_handler__make_request_FineractException_raised__when_other_exceptions_thrown(mocker, error_class):
