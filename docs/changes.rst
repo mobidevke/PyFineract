@@ -4,6 +4,11 @@ Change log
 Stable versions
 ~~~~~~~~~~~~~~~
 
+Version 0.0.24-dev10 (April 06, 2019)
+-----------------------------------
+
+* fix: Correct ssl issues when making requests to the fineract instance (fc25ba1)
+
 Version 0.0.24-dev9 (April 06, 2019)
 -----------------------------------
 
