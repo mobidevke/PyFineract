@@ -4,6 +4,7 @@ import requests
 
 timeout = 75
 
+
 def wait_for_fineract():
     seconds = 0
     while seconds < timeout:
@@ -15,3 +16,6 @@ def wait_for_fineract():
         print('Waiting for fineract instance...')
         time.sleep(5)
         seconds += 5
+
+
+wait_for_fineract()
