@@ -9,7 +9,6 @@ services:
   - docker
 before_script:
   - cd fineract-instance && docker-compose up -d && cd ..
-  - sleep 75
   - pip install requests
   - python wait.py
 script:
