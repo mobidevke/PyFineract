@@ -10,7 +10,7 @@ services:
 before_script:
   - chmod +x wait-for-it.sh
   - cd fineract-instance && docker-compose up -d && cd ..
-  - ./wait-for-it.sh localhost p 8443 -t 75
+  - ./wait-for-it.sh localhost -p 8443 -t 75
 script:
   - python setup.py test
 after_success:
