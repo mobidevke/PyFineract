@@ -37,8 +37,6 @@ def fake_handler2(method, url, **kwargs):
             offset = params.get('offset', 0)
             limit = params.get('limit', 30)
 
-            if limit == 2:
-                print('sfsd')
             return {
                 'totalFilteredRecords': len(data),
                 'pageItems': data[offset:limit]

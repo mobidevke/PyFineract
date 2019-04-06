@@ -163,12 +163,12 @@ class Client(DataFineractObject):
             'sqlSearch': 'c.mobile_no={}'.format(phone_no)
         }
         data = request_handler.make_request(
-            'GET'
+            'GET',
             '/clients',
-            data=params
+            params=params
         )
-        if dict:
-            return cls(None, data[0], False)
+        if data and data['pageItems']:
+            return cls(None, data['pageItems'][0], False)
 
         return None
 

@@ -12,7 +12,7 @@ at_least_python3 = sys.hexversion >= 0x03000000
 
 class RequestHandler:
 
-    def __init__(self, username, password, base_url, tenant, timeout, per_page, debug=False):
+    def __init__(self, username, password, base_url, tenant, timeout, per_page, debug=False, ssl_check=True):
         self.__headers = {
             'Content-Type': 'application/json',
             'Fineract-Platform-TenantId': tenant
@@ -28,11 +28,13 @@ class RequestHandler:
         self.__base_url = base_url[:-1] if base_url[-1] == '/' else base_url
         self.per_page = per_page
         self._debug = debug
+        self.__ssl_check = ssl_check
 
     def make_request(self, method, url, **kwargs):
         url = self.__base_url + url
         kwargs['auth'] = self.__auth
         kwargs['headers'] = self.__headers
+        kwargs['verify'] = self.__ssl_check
         kwargs = self.__inject_extras(kwargs)
         try:
             res = requests.request(method, url, **kwargs)

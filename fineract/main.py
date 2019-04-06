@@ -16,7 +16,7 @@ DEFAULT_PER_PAGE = 30
 class Fineract(object):
 
     def __init__(self, username=None, password=None, tenant=DEFAULT_TENANT, base_url=DEFAULT_BASE_URL,
-                 timeout=DEFAULT_TIMEOUT, per_page=DEFAULT_PER_PAGE, debug=False):
+                 timeout=DEFAULT_TIMEOUT, per_page=DEFAULT_PER_PAGE, debug=False, ssl_check=True):
         """
         :param username: string
         :param password: string
@@ -28,7 +28,8 @@ class Fineract(object):
         assert password is None or isinstance(password, str), password
         assert tenant is None or isinstance(tenant, str), tenant
         assert base_url is None or isinstance(base_url, str), base_url
-        self.__request_handler = RequestHandler(username, password, base_url, tenant, timeout, per_page, debug)
+        self.__request_handler = RequestHandler(username, password, base_url, tenant, timeout, per_page, debug,
+                                                ssl_check)
 
     @property
     def request_handler(self):
@@ -65,8 +66,8 @@ class Fineract(object):
         """
         return Client(self.__request_handler,
                       self.__request_handler.make_request(
-                          '/clients/{}'.format(id),
-                          dict()
+                          'GET',
+                          '/clients/{}'.format(id)
                       ), False)
 
     def get_loan_products(self, **kwargs):
@@ -88,8 +89,8 @@ class Fineract(object):
         """
         return LoanProduct(self.__request_handler,
                            self.__request_handler.make_request(
-                               '/loanproducts/{}'.format(id),
-                               dict()
+                               'GET',
+                               '/loanproducts/{}'.format(id)
                            ), False)
 
     def get_loans(self, **kwargs):
@@ -111,8 +112,8 @@ class Fineract(object):
         """
         return Loan(self.__request_handler,
                     self.__request_handler.make_request(
-                        '/loans/{}'.format(id),
-                        dict()
+                        'GET',
+                        '/loans/{}'.format(id)
                     ), False)
 
     def get_staff(self, id=None):
@@ -124,8 +125,8 @@ class Fineract(object):
         if id:
             return Staff(self.__request_handler,
                          self.__request_handler.make_request(
+                             'GET',
                              '/staff/{}'.format(id),
-                             dict()
                          ), False)
         else:
             return PaginatedList(
@@ -144,8 +145,8 @@ class Fineract(object):
         if id:
             return Fund(self.__request_handler,
                         self.__request_handler.make_request(
+                            'GET',
                             '/funds/{}'.format(id),
-                            dict()
                         ), False)
         else:
             return PaginatedList(
@@ -164,8 +165,8 @@ class Fineract(object):
         if id:
             return Charge(self.__request_handler,
                           self.__request_handler.make_request(
+                              'GET',
                               '/charges/{}'.format(id),
-                              dict()
                           ), False)
         else:
             return PaginatedList(
@@ -184,8 +185,8 @@ class Fineract(object):
         if id:
             return Office(self.__request_handler,
                           self.__request_handler.make_request(
+                              'GET',
                               '/offices/{}'.format(id),
-                              dict()
                           ), False)
         else:
             return PaginatedList(
