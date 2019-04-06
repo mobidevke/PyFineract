@@ -4,6 +4,13 @@ Change log
 Stable versions
 ~~~~~~~~~~~~~~~
 
+Version 0.0.24-dev0 (April 06, 2019)
+-----------------------------------
+
+* build: Add fineract integration tests (71ff2cc)
+* fix: Correct issues with Client operations (7ef0a40)
+* fix: Correct issue when fetching client by phone (cbb8442)
+
 Version 0.0.24 (April 05, 2019)
 -----------------------------------
 
