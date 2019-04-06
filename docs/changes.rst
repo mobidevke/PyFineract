@@ -4,6 +4,11 @@ Change log
 Stable versions
 ~~~~~~~~~~~~~~~
 
+Version 0.0.24-dev6 (April 06, 2019)
+-----------------------------------
+
+* build: Add wait for endpoint script (fbcf50d)
+
 Version 0.0.24-dev5 (April 06, 2019)
 -----------------------------------
 
