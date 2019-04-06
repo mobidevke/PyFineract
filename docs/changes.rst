@@ -4,6 +4,11 @@ Change log
 Stable versions
 ~~~~~~~~~~~~~~~
 
+Version 0.0.24-dev2 (April 06, 2019)
+-----------------------------------
+
+* build: Add fineract integration tests (56be07e)
+
 Version 0.0.24-dev1 (April 06, 2019)
 -----------------------------------
 
