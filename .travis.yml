@@ -8,7 +8,6 @@ sudo: false
 services:
   - docker
 before_script:
-  - apt-get install coreutils
   - chmod +x wait-for-http-200.sh
   - cd fineract-instance && docker-compose up -d && cd ..
   - ./wait-for-http-200.sh
