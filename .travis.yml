@@ -8,9 +8,10 @@ sudo: false
 services:
   - docker
 before_script:
-  - chmod +x wait-for-it.sh
+  - apt-get install coreutils
+  - chmod +x wait-for-http-200.sh
   - cd fineract-instance && docker-compose up -d && cd ..
-  - ./wait-for-it.sh -h localhost -p 8443 -t 75
+  - ./wait-for-http-200.sh
 script:
   - python setup.py test
 after_success:
