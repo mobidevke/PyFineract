@@ -1,0 +1,288 @@
+<form class="content-container form-horizontal" name="editclientform" ng-controller="EditClientController" novalidate=""
+      rc-submit="submit()">
+        <ul class="breadcrumb">
+            <li><a href="#/clients">{{'label.anchor.clients' | translate}}</a></li>
+            <li><a href="#/viewclient/{{clientId}}">{{'label.anchor.viewclient' | translate}}</a></li>
+            <li class="active">{{'label.anchor.editclient' | translate}}</li>
+        </ul>
+    <api-validate></api-validate>
+    <div class="card well">
+	    <fieldset>
+	        <legend>{{'label.heading.editclient' | translate}}</legend>
+
+	        <div class="form-group">
+	            <label class="control-label col-sm-2">{{ 'label.heading.office' | translate }}:<span
+	                    class="required">*</span></label>
+	
+	            <div class="col-sm-3">
+	                <select chosen="offices" class="form-control" disabled="disabled"  id="officeId"
+	                        ng-model="officeId" ng-options="office.id as office.name for office in offices"
+	                        value="{{office.id}}">
+	                </select>
+	            </div>
+
+				<label class="control-label col-sm-2">{{ 'label.heading.staff' | translate }}:</label>
+
+				<div class="col-sm-3">
+					<select chosen="staffs" class="form-control" id="staffId"  ng-model="formData.staffId"
+							ng-options="staff.id as staff.displayName for staff in staffs" value="{{staff.id}}">
+						<option value="">{{'label.menu.selectloanofficer' | translate}}</option>
+					</select>
+				</div>
+	        </div>
+
+			<div class="form-group">
+				<label class="control-label col-sm-2">{{'label.input.legalForm' | translate}}</label>
+
+				<div class="col-sm-3">
+					<select class="form-control" id="legalFormId"  ng-change="displayPersonOrNonPersonOptions(formData.legalFormId)"
+							ng-model="formData.legalFormId" ng-options="legalForm.id as legalForm.value for legalForm in clientLegalFormOptions"
+							value="{{legalForm.id}}">
+						<option value="">--{{'label.menu.legalForm' | translate}}--</option>
+					</select>
+				</div>
+			</div>
+
+			<div data-ng-switch on="showNonPersonOptions">
+				<div data-ng-switch-when="false">
+					<div class="form-group">
+						<label class="control-label col-sm-2">{{ 'label.input.firstname' | translate }}:<span
+								class="required">*</span></label>
+
+						<div class="col-sm-3">
+							<input class="form-control" id="firstname" late-Validate name="firstname"  ng-model="formData.firstname" required
+								   type="text"/>
+						</div>
+						<div class="col-sm-3">
+							<form-validate valattribute="firstname" valattributeform="editclientform"/>
+						</div>
+					</div>
+				</div>
+	        </div>
+
+			<div data-ng-switch on="showNonPersonOptions">
+				<div data-ng-switch-when="false">
+					<div class="form-group">
+						<label class="control-label col-sm-2">{{ 'label.input.middlename' | translate }}:</label>
+
+						<div class="col-sm-3">
+							<input class="form-control" id="middlename" ng-model="formData.middlename" type="text">
+						</div>
+						<label class="control-label col-sm-2" for="isStaff">{{ 'label.input.isStaff' | translate }}</label>
+						<div class="col-sm-3">
+							<label class="checkbox">
+								<input id="isStaff" ng-model="formData.isStaff" type="checkbox">
+							</label>
+						</div>
+					</div>
+				</div>
+	        </div>
+
+			<div data-ng-switch on="showNonPersonOptions">
+				<div data-ng-switch-when="false">
+					<div class="form-group">
+						<label class="control-label col-sm-2">{{ 'label.input.lastname' | translate }}:<span
+								class="required">*</span></label>
+
+						<div class="col-sm-3">
+							<input class="form-control" id="lastname" late-Validate name="lastname"  ng-model="formData.lastname" required
+								   type="text"/>
+						</div>
+						<div class="col-sm-3">
+							<form-validate valattribute="lastname" valattributeform="editclientform"/>
+						</div>
+					</div>
+				</div>
+	        </div>
+			<div data-ng-switch on="showNonPersonOptions">
+				<div data-ng-switch-when="true">
+					<div class="form-group">
+						<label class="control-label col-sm-2">{{'label.input.fullname' | translate}}<span
+								class="required">*</span></label>
+
+						<div class="col-sm-3">
+							<input class="form-control" id="fullname" late-Validate name="fullname" ng-model="formData.fullname"
+								   required type="text"/>
+						</div>
+						<div class="col-sm-3">
+							<form-validate valattribute="fullname" valattributeform="editclientform"/>
+						</div>
+					</div>
+				</div>
+			</div>
+	        <div class="form-group">
+	            <label class="control-label col-sm-2">{{ 'label.input.accno' | translate }}:</label>
+	
+	            <div class="col-sm-3">
+	                <input class="form-control" disabled="disabled" id="accountNo" ng-model="formData.accountNo" type="text">
+	            </div>
+	        </div>
+			<div class="form-group">
+			    <label class="control-label col-sm-2">{{ 'label.input.externalid' | translate }}:</label>
+			
+			    <div class="col-sm-3">
+			        <input class="form-control" id="externalId" ng-model="formData.externalId" type="text">
+			    </div>
+			</div>
+	        <div class="form-group">
+	            <label class="control-label col-sm-2" for="mobileNo">{{'label.input.mobilenumber' | translate}}</label>
+	
+	            <div class="col-sm-3">
+	                <input class="form-control" id="mobileNo" name="mobileNo" ng-model="formData.mobileNo" ng-pattern="/^[0-9]+$/"/>
+	            </div>
+	            <div class="col-sm-2">
+	                    <span ng-show="editclientform.mobileNo.$invalid && editclientform.mobileNo.$dirty">
+	                      <small class="required" ng-show="editclientform.mobileNo.$error.pattern">
+	                          {{'label.mustbenumeric' | translate}}
+	                      </small>
+	                    </span>
+	            </div>
+	        </div>
+			<div class="form-group">
+				<label class="control-label col-sm-2" ng-hide="showNonPersonOptions">{{'label.input.dateofbirth' | translate}}</label>
+				<label class="control-label col-sm-2" ng-show="showNonPersonOptions">{{'label.input.incorporationdate' | translate}}</label>
+			
+			    <div class="col-sm-3">
+			        <input class="form-control" datepicker-pop="dd MMMM yyyy" id="dateofbirth" is-open="opened1"
+			               max="restrictDate" name="dateofbirth" ng-model="date.dateOfBirth"  type="text"/>
+			    </div>
+
+				<div data-ng-switch on="showNonPersonOptions">
+					<div data-ng-switch-when="false">
+						<label class="control-label col-sm-2">{{'label.input.gender' | translate}}</label>
+
+						<div class="col-sm-3">
+							<select class="form-control" id="genderId"  ng-model="formData.genderId"
+									ng-options="gender.id as gender.name for gender in genderOptions" value="{{gender.id}}">
+								<option value="">--{{'label.menu.gender' | translate}}--</option>
+							</select>
+						</div>
+					</div>
+				</div>
+
+				<div data-ng-switch on="showNonPersonOptions">
+					<div data-ng-switch-when="true">
+						<label class="control-label col-sm-2">{{'label.input.incorpValidityTillDate' | translate}}</label>
+
+						<div class="col-sm-3">
+							<input class="form-control" datepicker-pop="dd MMMM yyyy" id="incorpValidityTillDate" is-open="opened1"
+								   max="'2020-06-22'" name="incorpValidityTillDate" ng-model="date.incorpValidityTillDate"  type="text"/>
+						</div>
+					</div>
+				</div>
+			</div>
+
+			<div class="form-group">
+				<label class="control-label col-sm-2">{{'label.input.clienttype' | translate}}</label>
+
+				<div class="col-sm-3">
+					<select class="form-control" id="clientTypeId"  ng-model="formData.clientTypeId"
+							ng-options="clienttype.id as clienttype.name for clienttype in clienttypeOptions" value="{{clienttype.id}}">
+						<option value="">--{{'label.menu.clienttype' | translate}}--</option>
+					</select>
+				</div>
+				<label class="control-label col-sm-2">{{'label.input.clientclassification' | translate}}</label>
+
+				<div class="col-sm-3">
+					<select class="form-control" id="clientClassificationId"  ng-model="formData.clientClassificationId"
+							ng-options="clientClassification.id as clientClassification.name for clientClassification in clientClassificationOptions" value="{{clientClassification.id}}">
+						<option value="">--{{'label.menu.clientclassification' | translate}}--</option>
+					</select>
+				</div>
+			</div>
+
+			<div data-ng-switch on="showNonPersonOptions">
+				<div data-ng-switch-when="true">
+					<div class="form-group">
+						<label class="control-label col-sm-2" for="incorpNumber">{{'label.input.incorpNumber' | translate}}</label>
+
+						<div class="col-sm-3">
+							<input class="form-control" id="incorpNumber" ng-model="formData.clientNonPersonDetails.incorpNumber"  type="text"/>
+						</div>
+
+						<label class="control-label col-sm-2">{{'label.input.mainBusinessLine' | translate}}</label>
+
+						<div class="col-sm-3">
+							<select class="form-control" id="mainBusinessLineId"  ng-model="formData.clientNonPersonDetails.mainBusinessLineId"
+									ng-options="mainBusinessLine.id as mainBusinessLine.name for mainBusinessLine in clientNonPersonMainBusinessLineOptions" value="{{mainBusinessLine.id}}">
+								<option value="">--{{'label.menu.mainBusinessLine' | translate}}--</option>
+							</select>
+						</div>
+					</div>
+				</div>
+			</div>
+
+			<div data-ng-switch on="showNonPersonOptions">
+				<div data-ng-switch-when="true">
+					<div class="form-group">
+						<label class="control-label col-sm-2">{{'label.input.constitution' | translate}}<span
+								class="required"></span></label>
+
+						<div class="col-sm-3">
+							<select class="form-control" id="constitutionId" name="constitution"  ng-model="formData.clientNonPersonDetails.constitutionId"
+									ng-options="constitution.id as constitution.name for constitution in clientNonPersonConstitutionOptions"
+									value="{{constitution.id}}">
+								<option value="">--{{'label.menu.constitution' | translate}}--</option>
+							</select>
+						</div>
+						<div class="col-sm-2">
+						</div>
+					</div>
+				</div>
+			</div>
+
+			<div data-ng-switch on="showNonPersonOptions">
+				<div data-ng-switch-when="true">
+					<div class="form-group">
+						<label class="control-label col-sm-2" for="remarks">{{'label.input.remarks' | translate}}</label>
+
+						<div class="col-sm-3">
+							<textarea class="form-control" id="remarks" ng-model="formData.clientNonPersonDetails.remarks" rows="4" type="text"/>
+						</div>
+					</div>
+				</div>
+			</div>
+
+            <div class="form-group">
+                <label class="control-label col-sm-2">{{'label.input.submittedon' | translate}}:</label>
+
+                <div class="col-sm-3">
+                    <input class="form-control" datepicker-pop="dd MMMM yyyy" id="submittedOnDate" is-open="opened1"
+                           max="restrictDate" name="submittedOnDate" ng-model="date.submittedOnDate"  type="text"/>
+                </div>
+            </div>
+
+	        <div data-ng-switch on="choice">
+	            <div class="form-group" data-ng-switch-when="1">
+	                <label class="control-label col-sm-2">{{'label.input.activationdate' | translate}}:<span
+	                        class="required">*</span></label>
+	
+	                <div class="col-sm-3">
+	                    <input class="form-control" datepicker-pop="dd MMMM yyyy" id="activationDate"
+	                           is-open="opened" max="restrictDate" min="'2000-01-01'"
+	                           ng-model="date.activationDate"  type="text"/>
+	                </div>
+
+	            </div>
+	        </div>
+	        <div class="form-group" ng-show="opensavingsproduct">
+	            <label class="control-label col-sm-2">{{ 'label.input.savingproduct' | translate }}:</label>
+	
+	            <div class="col-sm-3">
+	                <select class="form-control" id="savingsProductId"
+	                        ng-model="formData.savingsProductId"
+	                        ng-options="savingProduct.id as savingProduct.name for savingProduct in savingproducts"  value="{{savingProduct.id}}">
+	                    <option value="">{{'label.menu.selectsavingproduct' | translate}}</option>
+	                </select>
+	            </div>
+	        </div>
+	        <div class="col-md-offset-3">
+	            <a href="#/viewclient/{{clientId}}" id="cancel">
+	                <button class="btn btn-default" type="reset">{{'label.button.cancel' | translate}}</button>
+	            </a>
+	            <button class="btn btn-primary" has-permission='UPDATE_CLIENT' id="save" type="submit">{{'label.button.save' | translate}}</button>
+	        </div>
+	
+	    </fieldset>
+	</div>
+</form>

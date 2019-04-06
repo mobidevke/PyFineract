@@ -1,0 +1,55 @@
+<div class="content-container">
+    <ul class="breadcrumb">
+        <li><a href="#/organization">{{'label.anchor.organization' | translate}}</a></li>
+        <li class="active">{{'label.anchor.managefunds' | translate}}</li>
+    </ul>
+    <div class="card">
+    	<div class="content">
+    	<form class="" name="managefundform" ng-controller="ManageFundsController" novalidate>
+    		<legend>{{'label.heading.managefunds' | translate}}</legend>
+    		<div class="row">
+    		    <div class="form-group">
+    		        <div class="col-md-7">
+    		            <input class="form-control" name="fund" ng-autofocus="true"
+    		                   ng-model="newfund"
+    		                   placeholder="{{'label.input.newfund' | translate}}"
+    		                   type="text"
+    		                    />
+    		        </div>
+    		        <div class="col-md-1">
+    		            <a class="btn bg-primary" has-permission='CREATE_FUND' ng-click='addFund()'><i class="fa fa-plus"></i></a>
+    		        </div>
+    		        <div class="col-md-4">
+    		            <span ng-show="managefundform.fund.$invalid || funderror">
+    		                <small class="error" ng-show="managefundform.fund.$error.req || funderror">
+    		                    {{ 'label.requiredfield' | translate }}
+    		                </small>
+    		            </span>
+    		        </div>
+    				<div class="clear"><br></div>
+    		        <div ng-repeat="fund in funds">
+    		            <div class="col-md-3">
+    		                <input class="form-control" data-ng-hide="fund.edit" disabled=""
+    		                       placeholder={{fund.name}} type="text"/>
+    		                <input class="form-control" data-ng-model="formData[fund.id]" data-ng-show="fund.edit"
+    		                       type="text"/>
+    		                &nbsp;&nbsp;
+    		            </div>
+    		            <div class="col-sm-1">
+    		                <a class="btn btn-primary" data-ng-click="editFund(fund,fund.name,fund.id)"
+    		                        data-ng-hide="fund.edit"
+    		                        has-permission='UPDATE_FUND'><i
+    		                        class="fa fa-edit "></i></a>
+    		                <a class="btn btn-primary" data-ng-click="saveFund(fund.id)"
+    		                        data-ng-show="fund.edit"
+    		                        has-permission='UPDATE_FUND'>{{'label.anchor.save' |
+    		                    translate}}
+    		                </a>
+    		            </div>
+    		        </div>
+    		    </div>
+    		</div>
+    	</form>	
+    	</div>
+    </div>
+</div>

@@ -1,0 +1,55 @@
+<form class="content-container" data-ng-controller="MakerCheckerController" ng-submit="submit()">
+    <div ng-hide="isDisabled">
+        <ul class="breadcrumb">
+            <li><a href="#/system">{{'label.anchor.system' | translate}}</a></li>
+            <li><a href="#/admin/viewmctasks">{{'label.anchor.viewmakercheckersettings' | translate}}</a></li>
+            <li class="active">{{'label.anchor.editmakerchecker' | translate}}</li>
+        </ul>
+    </div>
+    <div ng-show="isDisabled">
+        <ul class="breadcrumb">
+            <li><a href="#/system">{{'label.anchor.system' | translate}}</a></li>
+            <li class="active">{{'label.anchor.viewmakercheckersettings' | translate}}</li>
+        </ul>
+    </div>
+    <div class="card">
+        <div class="container">
+            <div class="toolbar">
+                <h3>{{'label.heading.makercheckertasks' | translate}}</h3>
+            </div>
+            <br>
+            <div class="pull-corner" ng-show="isDisabled">
+                <div class="btn-group">
+                    <a class="btn btn-primary" has-permission='UPDATE_PERMISSION' ng-click="editMCTasks();"><i class="fa fa-edit "></i>{{'label.button.edit' | translate }}</a>
+                </div>
+            </div>
+            <table width="100%">
+                <tr>
+                    <td valign="top" width="25%">
+                        <table width="100%">
+                            <tr ng-class="{graybg: grouping == previousGrouping}" ng-repeat="grouping in groupings">
+                                <td><a ng-click="showPermissions(grouping);"><span>{{formatName(grouping)}}</span></a></td>
+                            </tr>
+                        </table>
+                    </td>
+                    <td class="left-border" valign="top">
+                        <table width="100%">
+                            <tr ng-repeat="permission in permissions.permissions">
+                                <td><input id="{{permission.code}}" ng-disabled="isDisabled" ng-model="formData[permission.code]"
+                                           type="checkbox">
+                                &nbsp;&nbsp;<label for="{{permission.code}}">{{permissionName(permission.code)}}</label>
+                                </td>
+                            </tr>
+                        </table>
+                    </td>
+                </tr>
+            </table>
+
+            <div class="col-md-offset-3" ng-hide="isDisabled">
+                <a class="btn btn-default" id="cancel" ng-click="cancel()">{{ 'label.button.cancel' | translate}}</a>
+                <button class="btn btn-primary" has-permission='UPDATE_PERMISSION' id="save" type="submit">{{ 'label.button.save' | translate}}</button>
+            </div>
+        </div>
+    </div>
+
+</form>

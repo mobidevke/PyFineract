@@ -1,0 +1,62 @@
+<div class="content-container" data-ng-controller="ViewAccountNumberPreferencesController">
+    <ul class="breadcrumb">
+        <li><a href="#/accountnumberpreferences">{{'label.anchor.accountNumberPreferences' | translate}}</a></li>
+        <li class="active">{{'label.anchor.viewAccountNumberPreferences' | translate}}</li>
+    </ul>
+    <script id="deletepreferences.html" type="text/ng-template">
+        <div class="modal-header silver">
+            <h3 class="bolder">{{'label.heading.deletePreferences' | translate}}</h3>
+        </div>
+        <div class="modal-body">
+            <api-validate></api-validate>
+            <br>
+            <button class="btn btn-warning" ng-click="cancel()">{{'label.button.cancel' | translate}}</button>
+            <button class="btn btn-primary" ng-click="delete()">{{'label.button.confirm' | translate}}</button>
+        </div>
+    </script>
+    <div class="card">
+        <div class="content">
+            <div class="toolbar">
+                <h4>{{'label.heading.viewAccountNumberPreferences' | translate}}</h4>
+            </div>
+            <br/>
+            <form class="form-horizontal" name="viewprefform" novalidate="" rc-submit="submit()">
+                <api-validate></api-validate>
+                <fieldset>
+                    <div class="pull-right">
+                        <div class="btn-group ">
+                            <button class="btn btn-primary" has-permission="UPDATE_ACCOUNTNUMBERFORMAT" id="approve" ng-click="editPreferences()" type="button">
+                                <i class="fa fa-edit "></i>
+                                {{ 'label.button.edit' | translate }}</button>
+                            <button class="btn btn-warning" data-ng-click="deletePreferences()" has-permission="DELETE_ACCOUNTNUMBERFORMAT" type="button">
+                                <i class="fa fa-trash "></i>
+                                {{'label.button.delete' | translate}}</button>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-2">{{'label.input.accountType' | translate}}<span class="required">*</span></label>
+                        <div class="col-sm-3">
+                            {{accountType}}
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-2">{{'label.input.addPrefix' | translate}}</label>
+
+                        <div class="col-sm-3">
+                            <input id="activeCheckbox" ng-disabled="true" ng-model="addPrefix"  type="checkbox">
+                        </div>
+                    </div>
+                    <div class="form-group" ng-show="addPrefix">
+                        <label class="col-sm-2">{{'label.input.prefixField' | translate}}</label>
+                        <div class="col-sm-3">
+                            {{prefixType}}
+                        </div>
+                    </div>
+                    <div class="col-md-offset-5">
+                        <button class="btn btn-default" id="cancel" ng-click="cancel()" type="reset">{{'label.button.back' | translate}}</button>
+                    </div>
+                </fieldset>
+            </form>
+        </div>
+    </div>
+</div>

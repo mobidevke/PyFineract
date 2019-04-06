@@ -1,0 +1,206 @@
+<div class="content-container" ng-controller="EditSmsCampaignController">
+    <ul class="breadcrumb">
+        <li><a href="#/organization">{{'label.anchor.organization' | translate}}</a></li>
+        <li><a href="#/smscampaigns">{{'label.anchor.smscampaings' | translate}}</a></li>
+        <li><a href="#/viewsmscampaign/{{campaignData.id}}">{{campaignData.campaignName}}</a></li>
+        <li class="active">{{'label.anchor.editcampaign' | translate}}</li>
+    </ul>
+    <div class="card">
+        <div class="content">
+            <div class="toolbar">
+                <h3>Edit SMS Campain</h3>
+            </div>
+            <br>
+            <form class="form-horizontal " name="editsmsform" novalidate="" rc-submit="submit()">
+                <api-validate></api-validate>
+                <fieldset>
+                    <h3>{{'label.heading.messagedetails' | translate}}</h3>
+                    <div class="form-group">
+                        <label class="control-label col-sm-2">{{'label.input.campaignName' |
+                            translate}}<span class="required">*</span></label>
+                        <div class="col-sm-3">
+                            <input class="form-control" id="campaignName" name="campaignName"
+                                   ng-disabled="true" ng-model="campaignData.campaignName"
+                                   type="text"/>
+                        </div>
+                        <div class="col-sm-3">
+                            <form-validate valattribute="campaignName" valattributeform="editsmsform"/>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="control-label col-sm-2">{{'label.input.campaignType' |
+                            translate}} <span class="required">*</span> </label>
+
+                        <div class="col-sm-3">
+                            <select chosen="campaignTypeOptions"
+                                    class="form-control"
+                                    data-placeholder="{{'label.menu.campaignType' | translate}}"
+                                    id="campaigntype"
+                                    name="campaigntype"
+                                    ng-disabled="true"
+                                    ng-model="campaignData.campaignType"
+                                    ng-options="campaignTypeOption.id as campaignTypeOption.value for campaignTypeOption in campaignTypeOptions" value="{{campaignTypeOption.id}}">
+                                <option value=""></option>
+                            </select>
+                        </div>
+                        <div class="col-sm-3">
+                            <form-validate valattribute="campaigntype" valattributeform="editsmsform"/>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="control-label col-sm-2">{{'label.input.smsprovider' |
+                            translate}} <span class="required">*</span> </label>
+
+                        <div class="col-sm-3">
+                            <select chosen="providerOptions"
+                                    class="form-control"
+                                    data-placeholder="{{'label.menu.smsProvider' | translate}}"
+                                    id="smsProvider"
+                                    name="smsProvider"
+                                    ng-disabled="true"
+                                    ng-model="campaignData.smsProvider"
+                                    ng-options="smsProviderOption.id as smsProviderOption.providerName for smsProviderOption in providerOptions" value="{{smsProviderOption.id}}">
+                                <option value=""></option>
+                            </select>
+                        </div>
+                        <div class="col-sm-3">
+                            <form-validate valattribute="smsProvider" valattributeform="editsmsform"/>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="control-label col-sm-2">{{'label.input.triggerType' |
+                            translate}} <span class="required">*</span> </label>
+                        <div class="col-sm-3">
+                            <select chosen="triggerTypeOptions"
+                                    class="form-control"
+                                    data-placeholder="{{'label.menu.triggerType' | translate}}"
+                                    id="triggerType"
+                                    name="triggerType"
+                                    ng-disabled="true"
+                                    ng-model="campaignData.triggerType"
+                                    ng-options="triggerTypeOption.id as triggerTypeOption.value for triggerTypeOption in triggerTypeOptions" value="{{triggerTypeOption.id}}">
+                                <option value=""></option>
+                            </select>
+                        </div>
+                        <div class="col-sm-3">
+                            <form-validate valattribute="triggerType" valattributeform="editsmsform"/>
+                        </div>
+                    </div>
+
+                    <div class="form-group" ng-if="campaignData.triggerType === 2">
+                        <label class="control-label col-sm-2">{{'label.input.scheduledate' | translate}}<span
+                                class="required">*</span></label>
+                        <div class="col-sm-3">
+                            <input class="form-control" datepicker-pop="dd MMMM yyyy" id="scheduleDate" is-open="opened" max="'2050-01-01'"
+                                   min="'2000-01-01'" name="scheduleDate" ng-disabled="true" ng-model="campaignData.recurrenceStartDate" type="text"/>
+                        </div>
+                        <div class="col-sm-3">
+                            <form-validate valattribute="scheduleDate" valattributeform="editsmsform"/>
+                        </div>
+                    </div>
+                    <div class="form-group" ng-if="campaignData.triggerType  === 2">
+                        <label class="control-label col-sm-2">{{'label.input.scheduletime' | translate}}<span
+                                class="required">*</span></label>
+                        <div class="col-sm-3">
+                            <timepicker id="scheduleTime" name="scheduleTime" ng-disabled="true" ng-model="campaignData.time"></timepicker>
+                        </div>
+                    </div>
+
+
+                    <div class="form-group">
+                        <label class="control-label col-sm-2">{{'label.input.businessRule' |
+                            translate}} <span class="required">*</span> </label>
+                        <div class="col-sm-3">
+                            <select chosen="businessRuleOptions"
+                                    class="form-control"
+                                    data-placeholder="{{'label.menu.businessRule' | translate}}"
+                                    id="businessRule"
+                                    name="businessRule"
+                                    ng-disabled="true"
+                                    ng-model="campaignData.report" ng-options="businessRuleOption.reportId as businessRuleOption.reportName for businessRuleOption in businessRuleOptions" value="{{businessRuleOption}}">
+                                <option value=""></option>
+                            </select>
+                        </div>
+                        <div class="col-sm-3">
+                            <form-validate valattribute="businessRule" valattributeform="editsmsform"/>
+                        </div>
+                    </div>
+
+                    <!--<h3>{{'label.heading.businessRuleParameters' | translate}}</h3>-->
+
+                    <div class="alert-block form-horizontal">
+                        <br>
+
+                        <div class="form-group info" ng-repeat="reportParam in reportParams">
+                            <label class="control-label col-sm-2" for="{{reportParam.variable}}">{{ reportParam.label | translate}}
+                                <span class="required">*</span></label>
+
+                            <div class="col-sm-3">
+                                <select chosen="reportParam.selectOptions" class="form-control input-xlarge" disabled
+                                        id="{{reportParam.inputName}}"
+                                        ng-init="getDependencies(reportParam)"
+                                        ng-model="formData[reportParam.inputName]" ng-options="selectOption.id as selectOption.name for selectOption in reportParam.selectOptions" value="{{selectOption.id}}">
+                                    <option value="">--{{"label.menu.selectone" | translate}}--</option>
+                                </select>
+                            </div>
+                            <form-validate valattribute="{{reportParam.inputName}}"
+                                           valattributeform="editsmsform"/>
+                        </div>
+                        <div class="form-group info" ng-repeat="reportTextParam in reportTextParams">
+                            <label class="control-label col-sm-2" for="{{reportTextParam.variable}}">{{ reportTextParam.label |
+                                translate}} <span class="required">*</span></label>
+                            <div class="col-sm-3">
+                                <input class="form-control" id="{{reportTextParam.inputName}}" ng-disabled="true"  ng-model="formData[reportTextParam.inputName]" type="text"/>
+                            </div>
+                            <form-validate valattribute="{{reportParam.inputName}}"
+                                           valattributeform="editsmsform"/>
+                        </div>
+                        <div class="form-group info" ng-repeat="reportDateParam in reportDateParams">
+                            <label class="control-label col-sm-2" for="{{reportDateParam.variable}}">{{ reportDateParam.label |
+                                translate}} <span class="required">*</span></label>
+
+                            <div class="col-sm-3">
+                                <input class="form-control" date-disabled="disabled(date, mode)" datepicker-pop="yyyy-MM-dd"
+                                       id="{{reportDateParam.inputName}}" is-open="'opened'+$index" max="'2020-06-22'"
+                                       min="minDate" ng-disabled="true"  ng-model="formData[reportDateParam.inputName]" type="text"/>
+                            </div>
+                            <form-validate valattribute="{{reportParam.inputName}}"
+                                           valattributeform="editsmsform"/>
+                        </div>
+                        <hr>
+                    </div>
+                    <div class="form-group">
+                        <label class="control-label col-sm-2">{{'label.input.campaignMessage' |
+                            translate}} <span class="required">*</span> </label>
+                        <div class="col-sm-8">
+                        <textarea class="form-control"
+                                  id="campaignMessage" maxLength="480"
+                                  name="campaignMessage" ng-model="campaignData.campaignMessage"
+                                  placeholder="Type message here maximum length is 480"
+                                  rows="5"> </textarea>
+                                                    <span class="error"
+                                                          ng-show="editsmsform.campaignName.$error.pattern">Must be alphabetic</span>
+                            <form-validate valattribute="campaignMessage"
+                                           valattributeform="editsmsform"/>
+                        </div>
+                    </div>
+                    <h3>{{'label.heading.templateparameters' | translate}}</h3>
+                <span ng-repeat="columnHeader in reportData.columnHeaders">
+                <strong>
+                    <a class="reportColumns" ng-click="buildMessageTemplate(columnHeader.columnName)" style="cursor:pointer">{{columnHeader.columnName}}</a>
+                    <a class="reportColumns" ng-if="!$last">, </a>
+                </strong>
+                </span>
+                    <br/>
+                    <hr>
+                    <div class="">
+                        <button class="btn btn-primary" id="save2" type="submit">{{'label.button.proceed' |
+                            translate}}
+                        </button>
+                    </div>
+                </fieldset>
+            </form>
+        </div>
+    </div>
+</div>

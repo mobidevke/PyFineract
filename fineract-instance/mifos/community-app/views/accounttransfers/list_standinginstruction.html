@@ -1,0 +1,117 @@
+<div class="content-container" ng-controller="ListStandingInstructionController">
+    <ul class="breadcrumb" >
+        <li><a href="#/viewclient/{{standinginstruction.fromClient.id}}" ng-show="fromClient">{{standinginstruction.fromClient.displayName}}</a></li>
+        <li class="active">{{'label.anchor.standinginstruction' | translate}}</li>
+    </ul>
+    <div class="card">
+        <div class="content">
+                <api-validate></api-validate>
+                <form class="form-horizontal" name="standinginstructionform" novalidate="" rc-submit="submit()">
+                    <fieldset>
+                        <legend>{{ 'label.heading.liststandinginstruction' | translate }}</legend>
+                         <div ng-hide="isCollapsed" width="100%" >
+                        <div class="form-group">
+                            <label class="control-label col-sm-2" for="transferType">{{'label.heading.type' | translate}}</label>
+
+                            <div class="col-sm-3">
+                                <select class="form-control" id="transferType" name="transferType" ng-model="formData.transferType"
+                                    ng-options="transferType.id as transferType.value for transferType in standinginstruction.transferTypeOptions" value="{{transferType.id}}" >
+                                    <option value="">{{'label.selectone' | translate}}</option>
+                                </select>
+                                <form-validate valattribute="transferType" valattributeform="standinginstructionform"/>
+                            </div>
+                        </div>
+                        <div class="form-group" ng-hide="fromClient">
+                            <label class="control-label col-sm-2" for="clientname">{{ 'label.heading.clientname' | translate }}</label>
+                            <div class="col-sm-3">
+                                <input class="form-control" id="clientname" name="clientname" ng-model="formData.clientName" type="text"/>
+                            </div>
+                            <label class="control-label col-sm-2" >{{ 'label.heading.or' | translate }}</label>
+                            <label class="control-label col-sm-2" for="clientid">{{ 'label.heading.clientid' | translate }}</label>
+                            <div class="col-sm-3">
+                                <input class="form-control" id="clientid" name="clientid" ng-model="formData.fromClientId" type="text"/>
+                            </div>
+                        </div>
+                        <div class="form-group" ng-show="fromClient">
+                            <label class="control-label col-sm-2" for="clientname1">{{ 'label.heading.clientname' | translate }}</label>
+                            <div class="col-sm-3">
+                                {{formData.clientName}}
+                            </div>
+
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label col-sm-2" for="fromAccountId">{{ 'label.heading.fromaccountid' | translate }}</label>
+                            <div class="col-sm-3">
+                                <input class="form-control" id="fromAccountId" name="fromAccountId" ng-model="formData.fromAccountId" type="text"/>
+                            </div>
+                        </div>
+                        <div class="col-md-offset-3">
+                              <a class="btn btn-primary control" data-ng-click="searchTransaction()" has-permission='READ_STANDINGINSTRUCTION'>{{'label.button.filter' | translate}}</a>
+                        </div>
+                    </div>
+                    <div class="marginbuttontop25px" ng-show="displayResults">
+                        <table class="table">
+                            <thead>
+                            <tr class="graybg">
+                                <th>{{'label.heading.client' | translate}}</th>
+                                <th>{{'label.heading.fromaccount' | translate}}</th>
+                                <th>{{'label.heading.toclient' | translate}}</th>
+                                <th>{{'label.heading.toaccount' | translate}}</th>
+                                <th>{{'label.heading.amount' | translate}}</th>
+                                <th>{{'label.heading.validity' | translate}}</th>
+                                <th>&nbsp;</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr ng-repeat="instruction in instructions.currentPageItems">
+                                <td>{{instruction.fromClient.displayName}}-{{instruction.fromClient.id}}</td>
+                                <td>{{instruction.fromAccount.accountNo}}({{instruction.fromAccountType.value}})</td>
+                                <td>
+                                    <div ng-show="instruction.fromClient.id != instruction.toClient.id">{{instruction.toClient.displayName}}</div>
+                                    <div ng-show="instruction.fromClient.id == instruction.toClient.id">{{'label.heading.ownaccount' | translate}}</div>
+
+                                </td>
+                                <td>{{instruction.toAccount.accountNo}}({{instruction.toAccountType.value}})</td>
+                                <td>{{instruction.instructionType.value}}/{{instruction.amount | number}}</td>
+                                <td>{{instruction.validFrom | DateFormat}} to {{instruction.validTill | DateFormat}}</td>
+                                <td class="select-row:selection">
+                                    <a class="btn btn-primary"  data-ng-show="instruction.status.value!='Deleted'" has-permission='UPDATE_STANDINGINSTRUCTION' href="#/editstandinginstruction/{{instruction.id}}/list"  type="button">
+                                        <i class="fa fa-edit"></i>
+                                    </a>
+                                    <a class="btn btn-danger" data-ng-click="deletestandinginstruction(instruction.id)" data-ng-show="instruction.status.value!='Deleted'" has-permission='DELETE_STANDINGINSTRUCTION'  type="button">
+                                        <i class="fa fa-times"></i>
+                                    </a>
+                                    <a class="btn btn-warning" has-permission='READ_STANDINGINSTRUCTION' href="#/viewstandinginstruction/{{instruction.id}}"
+                                       type="button">
+                                        <i class="fa fa-eye-slash"></i>
+                                    </a>
+
+                                </td>
+                            </tr>
+                            </tbody>
+
+                        </table>
+                        <ul class="pager">
+                            <li class="previous"><a href="" id="prev" ng-click="instructions.previous()"
+                                                    ng-show="instructions.hasPrevious()">&larr; {{'label.button.previous' |
+                                translate}}</a></li>
+                            <li class="next"><a href="" id="next" ng-click="instructions.next()" ng-show="instructions.hasNext()">{{'label.button.next'
+                                | translate}} &rarr;</a></li>
+                        </ul>
+                    </div>
+                    </fieldset>
+                    <script id="delInstruction.html" type="text/ng-template">
+                        <div class="modal-header silver">
+                            <h3 class="bolder">{{'label.areyousure' | translate}}</h3>
+                        </div>
+                        <div class="modal-body">
+                            <api-validate></api-validate>
+                            <br>
+                            <button class="btn btn-warning" ng-click="cancel()">{{'label.button.cancel' | translate}}</button>
+                            <button class="btn btn-primary" ng-click="delete()">{{'label.button.confirm' | translate}}</button>
+                        </div>
+                    </script>
+                </form>
+        </div>
+    </div>
+</div>

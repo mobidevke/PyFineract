@@ -1,0 +1,101 @@
+<div class="content-container">
+    <ul class="breadcrumb">
+        <li><a href="#/templates">{{'label.anchor.templates' | translate}}</a></li>
+        <li class="active">{{'label.anchor.createtemplate' | translate}}</li>
+    </ul>
+    <div class="card">
+    	<div class="content">
+    		<div class="toolbar"></div>
+    		<br>
+    		<form class="" ng-controller="CreateTemplateController">
+    		    <api-validate></api-validate>
+    		    <fieldset>
+    		        <div class="row">
+    		            <div class="col-sm-9 col-md-9">
+    		                <div class="row">
+    		                    <div class="col-sm-4 col-md-4">
+    		                        <div class="form-group">
+    		                            <label class="control-label">{{ 'label.input.entity' | translate }}&nbsp;</label>
+    		
+    		                            <select class="form-control" id="entity" ng-change="entityChange(formData.entity)"
+    		                                    ng-model="formData.entity"
+    		                                    ng-options="entity.id as entity.name for entity in template.entities" value="{{entity.id}}"> </select>
+    		                        </div>
+    		                    </div>
+    		                    <div class="col-sm-4 col-md-4">
+    		                        <div class="form-group">
+    		                            <label class="control-label">{{ 'label.input.type' | translate }}&nbsp;</label>
+    		                            <select class="form-control" id="type" ng-model="formData.type"
+    		                                    ng-options="type.id as type.name for type in template.types"
+    		                                    value="{{type.id}}"> </select>
+    		                        </div>
+    		                    </div>
+    			        	</div>
+    		                <div class="row">
+    		                    <div class="col-sm-4 col-md-4">
+    		                        <div class="form-group">
+    		                            <label class="control-label">{{ 'label.input.templatename' | translate }}&nbsp;</label>
+    		                            <input class="form-control" id="name" ng-model="formData.name" type="text">
+    		                        </div>
+    		                    </div>
+    		                </div>
+    		                <div class="form-group">
+    		                    <button class="btn input-large" ng-click="advanceOptionClick()">{{'label.button.advancedoptions' |
+    		                        translate}}
+    		                    </button>
+    		                    <table class="width100" ng-repeat="mapper in mappers" ng-show="advanceOption=='true'">
+    		                        <tr ng-show="mapper.defaultAddIcon == 'true'">
+    		                            <td class="width8">
+    		                                <label class="control-label col-sm-12">{{ 'label.input.mapperkey' | translate }}&nbsp;</label>
+    		                                <input class="input-sm form-control" ng-model="mapper.mapperskey" type="text">
+    		                            </td>
+    		                            <td class="width20">
+    		                                <label class="control-label col-sm-12">{{ 'label.input.mappervalue' | translate }}&nbsp;</label>
+    		                                <input class="input-sm form-control" ng-model="mapper.mappersvalue" type="text">
+    		                            </td>
+    		                            <td class="width8">
+    		                                <button class="btn marginbuttontop25px" ng-click="addMapperKeyValue()">
+    		                                    <i class="fa fa-plus "></i>
+    		                                </button>
+    		                            </td>
+    		                        </tr>
+    		                        <tr ng-hide="mapper.defaultAddIcon == 'true'">
+    		                            <td class="width8">
+    		                                <label class="control-label col-sm-12">{{ 'label.input.mapperkey' | translate }}&nbsp;</label>
+    		                                <input class="input-sm form-control" ng-model="mapper.mapperskey" type="text">
+    		                            </td>
+    		                            <td class="width20">
+    		                                <label class="control-label col-sm-12">{{ 'label.input.mappervalue' | translate }}&nbsp;</label>
+    		                                <input ` class="input-sm form-control" ng-model="mapper.mappersvalue"type="text">
+    		                            </td>
+    		                            <td class="width8">
+    		                                <button class="btn marginbuttontop25px" ng-click="deleteMapperKeyValue($index)">
+    		                                    <i class="fa fa-minus "></i>
+    		                                </button>
+    		                            </td>
+    		                        </tr>
+    		                    </table>
+    		                </div>
+    		                <div class="form-group">
+    		                    <textarea ck-Editor id="templateeditor" ng-model="formData.text"></textarea>
+    		                </div>
+    		                <div>
+    		                    <button class="btn btn-primary" has-permission='CREATE_TEMPLATE' id="save" ng-click="submit()">{{'label.button.save'| translate}}
+    		                    </button>
+    		                </div>
+    		            </div>
+    		            <div class="col-sm-3 col-md-3 paddedleft">
+    		                <accordion close-others="true" ng-repeat="entity in templateEntity">
+    		                    <accordion-group heading="{{entity.entityName}}">
+    		                        <div class="templatekeys" ng-click="templateKeySelected(templateKey)"
+    		                             ng-repeat="templateKey in entity.templateKeys">{{templateKey}}
+    		                        </div>
+    		                    </accordion-group>
+    		                </accordion>
+    		            </div>
+    		        </div>
+    		    </fieldset>
+    		</form>
+    	</div>
+    </div>
+</div>

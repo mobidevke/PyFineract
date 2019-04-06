@@ -1,0 +1,754 @@
+<div class="content-container" ng-controller="ViewSavingDetailsController">
+    <div>
+        <ul class="breadcrumb">
+            <li ng-show="groupLevel == 1"><a href="#/viewcenter/{{savingaccountdetails.groupId}}">{{savingaccountdetails.groupName}}</a>
+            <li ng-show="groupLevel == 2"><a href="#/viewgroup/{{savingaccountdetails.groupId}}">{{savingaccountdetails.groupName}}</a>
+            <li ng-show="savingaccountdetails.clientName"><a href="#/viewclient/{{savingaccountdetails.clientId}}">{{savingaccountdetails.clientName}}</a>
+            <li class="active">{{savingaccountdetails.savingsProductName}}({{savingaccountdetails.accountNo}})</li>
+        </ul>
+    </div>
+    <script id="savingsunassignstaff.html" type="text/ng-template">
+        <div class="modal-header silver">
+            <h3 class="bolder">{{'label.heading.unassignstaff' | translate}}</h3>
+        </div>
+        <div class="modal-body">
+            <api-validate></api-validate>
+            <br>
+            <button class="btn btn-warning" ng-click="cancel()">{{'label.button.cancel' | translate}}</button>
+            <button class="btn btn-primary" ng-click="unassign()">{{'label.button.confirm' | translate}}</button>
+        </div>
+    </script>
+    <script id="savingsassignstaff.html" type="text/ng-template">
+        <div class="modal-header silver">
+            <h3 class="bolder">{{'label.heading.assignstaff' | translate}}</h3>
+        </div>
+        <div class="modal-body">
+            <select chosen="fieldOfficers" id="fieldOfficerId" ng-model="formData.fieldOfficerId" class="form-control"
+                    ng-options="fieldOfficer.id as fieldOfficer.displayName for fieldOfficer in fieldOfficers"
+                    value="{{fieldOfficer.id}}">
+                <option value=""></option>
+            </select>
+            <api-validate></api-validate>
+            <br>
+            <br>
+            <br>
+            <button class="btn btn-warning" ng-click="cancel()">{{'label.button.cancel' | translate}}</button>
+            <button class="btn btn-primary" ng-click="unassign()">{{'label.button.confirm' | translate}}</button>
+            <br>
+        </div>
+    </script>
+    <div class="card">
+        <br>
+        <div class="form-horizontal" ng-show="report">
+            <div class="form-group" ng-show="viewSavingReport">
+                <label class="control-label col-sm-2">{{'label.input.fromdate' | translate}}<span
+                        class="required">*</span></label>
+
+                <div class="col-sm-3">
+                    <input class="date-disable form-control" datepicker-pop="{{df}}" id="fromDate" is-open="opened"
+                           max="restrictDate" min="minDate" ng-model="date.fromDate" readonly
+                           type="text"/>
+                </div>
+                <label class="control-label col-sm-2">{{'label.input.todate' | translate}}<span
+                        class="required">*</span></label>
+
+                <div class="col-sm-3">
+                    <input class="date-disable form-control" datepicker-pop="{{df}}" id="toDate" is-open="opened"
+                           max="restrictDate" min="minDate" ng-model="date.toDate" readonly
+                           type="text"/>
+                </div>
+            </div>
+
+
+            <div class="center" ng-show="viewSavingReport">
+                <button class="btn btn-default ng-binding" ng-click="viewSavingDetails()">{{'label.button.back' |
+                    translate}}
+                </button>
+                <button class="btn btn-primary ng-binding" ng-click="viewPrintDetails()">
+                    {{'label.button.viewprint' | translate}}
+                </button>
+            </div>
+        </div>
+        <div class="alert-block span tab-content" ng-hide="hidePentahoReport" ng-show="report">
+            <button class="btn btn-primary" ng-click="printReport()" ng-show="printbtn">{{'label.button.print' |
+                translate}}
+            </button>
+            <div id="printcontent">
+                <iframe frameborder="0" height="600px" id="rptLoadingFrame" ng-show="viewReport"
+                        ng-src="{{viewReportDetails}}" width="100%"></iframe>
+            </div>
+            <div class="col-md-13 center" ng-show="viewTransactionReport">
+                <button class="btn btn-default ng-binding" ng-click="viewSavingDetails()">{{'label.button.back' |
+                    translate}}
+                </button>
+            </div>
+        </div>
+        <div ng-hide="report">
+            <div class="span gray-head" style="margin-left:0%;">
+                  <span style="margin-left: 10px;font-size:24px">
+                        <strong><i class="fa fa-stop {{savingaccountdetails.status.code | StatusLookup}}"
+                                   ng-show="savingaccountdetails.subStatus.id==0"></i><i
+                                class="fa fa-stop {{savingaccountdetails.status.code+savingaccountdetails.subStatus.value | StatusLookup}}"
+                                ng-hide="savingaccountdetails.subStatus.id==0"></i>&nbsp;{{savingaccountdetails.savingsProductName}}(#{{savingaccountdetails.accountNo}})</strong>
+                  </span>
+            </div>
+            <br>
+            <div class="col-sm-12 col-md-12 primarydiv">
+                <div class="pull-right btn-group">
+
+                          <a class="btn btn-primary" has-permission='{{button.taskPermissionName}}' ng-click="clickEvent(button.name.replace('button.',''), savingaccountdetails.id)"
+                             ng-repeat="button in buttons.singlebuttons"
+                             ng-show="button.name"><i class="{{button.icon}} "></i>{{'label.'+button.name |
+                              translate}}</a>
+                    <button class="btn btn-primary" data-ng-hide="savingaccountdetails.fieldOfficerId"
+                            has-permission='ASSIGNFIELDOFFICER_SAVINGSACCOUNT'
+                            ng-click="clickEvent('assignSavingsOfficer',savingaccountdetails.id)"
+                            type="button">
+                        <i class="fa fa-user "></i>{{"label.button.assignstaff"
+                        |
+                        translate}}
+                    </button>
+                    <button class="btn btn-primary " data-ng-show="savingaccountdetails.fieldOfficerId"
+                            has-permission='UNASSIGNFIELDOFFICER_SAVINGSACCOUNT'
+                            ng-click="clickEvent('unAssignSavingsOfficer',savingaccountdetails.id)"
+                            type="button"><i class="fa fa-user "></i>{{"label.button.unassignstaff"
+                        | translate}}
+                    </button>
+
+                    <span class="btn-group dropdown" ng-show="buttons.options" on-toggle="toggled(open)"
+                          uib-dropdown>
+                          <a class="btn btn-primary" uib-dropdown-toggle>
+                              {{'label.button.more' | translate}}
+                              <span class="caret"></span>
+                          </a>
+                          <ul class="dropdown dropdown-menu dropdown-menu-right">
+                              <li class="{{button.icon}}" ng-repeat="button in buttons.options">
+                                  <a has-permission='{{button.taskPermissionName}}'
+                                     ng-click="clickEvent(button.name.replace('button.',''), savingaccountdetails.id)">{{'label.'+button.name | translate}}</a>
+                              </li>
+                          </ul>
+                      </span>
+                </div>
+            </div>
+            <br>
+            <div class="col-md-12" ng-show="!savingaccountdetails.status.rejected && !savingaccountdetails.status.submittedAndPendingApproval">
+                <h3>{{'label.heading.currentBalance' | translate}}: {{savingaccountdetails.currency.displaySymbol}} {{savingaccountdetails.summary.accountBalance | number}}</h3>
+                <h3>{{'label.heading.availableBalance' | translate}}: {{savingaccountdetails.currency.displaySymbol}} {{savingaccountdetails.availableBalance | number}}</h3>
+            </div>
+            <div class="row" style="margin-left:-1px;margin-right: 1px;">
+                <div class="col-sm-7 col-md-7">
+
+                    <table class="table table-striped table-bordered" ng-hide="!savingaccountdetails.status.rejected && !savingaccountdetails.status.submittedAndPendingApproval">
+                        <tr>
+                            <th>{{'label.heading.activatedon' | translate}}</th>
+                            <td>{{savingaccountdetails.timeline.activatedOnDate | DateFormat}}<span
+                                    data-ng-hide="savingaccountdetails.timeline.activatedOnDate">{{ 'label.notactivated' | translate }}</span>
+                            </td>
+
+                        </tr>
+                        <tr>
+                            <th>{{'label.heading.currency' | translate}}</th>
+                            <td>{{savingaccountdetails.currency.name}}</td>
+                        </tr>
+                        <tr>
+                            <th>{{'label.heading.externalid' | translate}}</th>
+                            <td>{{savingaccountdetails.externalId}}</td>
+                        </tr>
+                    </table>
+                            <table class="table table-bordered view-table" ng-show="!savingaccountdetails.status.rejected && !savingaccountdetails.status.submittedAndPendingApproval">
+                                <tr ng-show="savingaccountdetails.summary.totalWithdrawals">
+                                    <th class="table-bold-acc fontnormal">{{'label.totalwithdarawals' |
+                                        translate}}
+                                    </th>
+                                    <td><span class="padded-td">{{savingaccountdetails.currency.displaySymbol}}&nbsp;{{savingaccountdetails.summary.totalWithdrawals| number}}</span>
+                                    </td>
+                                </tr>
+                                <tr ng-show="savingaccountdetails.summary.totalWithdrawalFees">
+                                    <th class="table-bold-acc fontnormal">{{'label.totalwithdrawalsfees' |
+                                        translate}}
+                                    </th>
+                                    <td><span class="padded-td">{{savingaccountdetails.currency.displaySymbol}}&nbsp;{{savingaccountdetails.summary.totalWithdrawalFees| number}}</span>
+                                    </td>
+                                </tr>
+                                <tr ng-show="savingaccountdetails.summary.totalAnnualFees">
+                                    <th class="table-bold-acc fontnormal">{{'label.totalannualfees' | translate}}
+                                    </th>
+                                    <td><span class="padded-td">{{savingaccountdetails.currency.displaySymbol}}&nbsp;{{savingaccountdetails.summary.totalAnnualFees| number}}</span>
+                                    </td>
+                                </tr>
+                                <tr ng-show="savingaccountdetails.summary.totalInterestEarned >= 0">
+                                    <th class="table-bold-acc fontnormal">{{'label.totalinterestearned' |
+                                        translate}}
+                                    </th>
+                                    <td><span class="padded-td"
+                                              ng-class="{statusactiveoverdue : savingaccountdetails.summary.totalInterestEarned < 0}">{{savingaccountdetails.currency.displaySymbol}}&nbsp;{{savingaccountdetails.summary.totalInterestEarned| number}}</span>
+                                    </td>
+                                </tr>
+                                <tr ng-show="savingaccountdetails.summary.totalInterestPosted">
+                                    <th class="table-bold-acc fontnormal">{{'label.totalinterestposted' |
+                                        translate}}
+                                    </th>
+                                    <td><span class="padded-td">{{savingaccountdetails.currency.displaySymbol}}&nbsp;{{savingaccountdetails.summary.totalInterestPosted| number}}</span>
+                                    </td>
+                                </tr>
+                                <tr ng-show="savingaccountdetails.summary.interestNotPosted >= 0">
+                                    {{savingaccountdetails.summary.earnedInterestNotPosted | number}}
+                                    <th class="table-bold-acc fontnormal">{{'label.interestEarnedNotPosted' |
+                                        translate}}
+                                    </th>
+                                    <td><span class="padded-td">
+                                    {{savingaccountdetails.currency.displaySymbol }}&nbsp;{{savingaccountdetails.summary.interestNotPosted | number}}</span>
+                                    </td>
+                                </tr>
+                                <tr ng-show="savingaccountdetails.summary.totalOverdraftInterestDerived">
+                                    <th class="table-bold-acc fontnormal">{{'label.totaloverdraftinterestderived' |
+                                        translate}}
+                                    </th>
+                                    <td><span class="padded-td">{{savingaccountdetails.currency.displaySymbol}}&nbsp;{{savingaccountdetails.summary.totalOverdraftInterestDerived| number}}</span>
+                                    </td>
+                                </tr>
+
+                                <tr ng-show="savingaccountdetails.summary.interestNotPosted < 0">
+                                    <th class="table-bold-acc fontnormal">{{'label.overdraftInterestNotPosted' |
+                                        translate}}
+                                    </th>
+                                    <td><span class="padded-td">{{savingaccountdetails.currency.displaySymbol}}&nbsp;{{savingaccountdetails.summary.interestNotPosted| number}}</span>
+                                    </td>
+                                </tr>
+
+                                <tr>
+                                    <th class="table-bold-acc fontnormal">{{'label.interestrate' | translate}}</th>
+                                    <td><span
+                                            class="padded-td">{{savingaccountdetails.nominalAnnualInterestRate}}%</span>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <th class="table-bold-acc fontnormal">{{'label.interestcompoundingperiod' |
+                                        translate}}
+                                    </td>
+                                    <td><span class="padded-td">{{savingaccountdetails.interestCompoundingPeriodType.value}}</span>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <th class="table-bold-acc fontnormal">{{'label.interestpostingperiod' |
+                                        translate}}
+                                    </th>
+                                    <td><span
+                                            class="padded-td">{{savingaccountdetails.interestPostingPeriodType.value}}</span>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <th class="table-bold-acc fontnormal">{{'label.interestcalculatedusing' |
+                                        translate}}
+                                    </th>
+                                    <td><span
+                                            class="padded-td">{{savingaccountdetails.interestCalculationType.value}}</span>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <th class="table-bold-acc fontnormal">{{'label.noofdaysinyear' | translate}}
+                                    </th>
+                                    <td><span
+                                            class="padded-td">{{savingaccountdetails.interestCalculationDaysInYearType.value}}</span>
+                                    </td>
+                                </tr>
+                                <tr data-ng-show="savingaccountdetails.withdrawalFee">
+                                    <th class="table-bold-acc fontnormal">{{'label.withdrawalfee' | translate}}
+                                    </th>
+                                    <td><span class="padded-td">{{savingaccountdetails.withdrawalFee.currency.displaySymbol}}&nbsp;&nbsp;{{savingaccountdetails.withdrawalFee.amount| number}}</span>
+                                    </td>
+                                </tr>
+                                <tr data-ng-show="savingaccountdetails.lastActiveTransactionDate">
+                                    <th class="table-bold-acc fontnormal">{{'label.lastActiveTransactionDate' |
+                                        translate}}
+                                    </th>
+                                    <td><span class="padded-td">{{savingaccountdetails.lastActiveTransactionDate | DateFormat}}</span>
+                                    </td>
+                                </tr>
+                                <tr ng-hide="savingaccountdetails.subStatus.id==0">
+                                    <th class="table-bold-acc fontnormal">{{'label.subStatus' | translate}}
+                                    </th>
+                                    <td><span class="padded-td">{{savingaccountdetails.subStatus.value}}</span>
+                                    </td>
+                                </tr>
+                                <tr data-ng-show="savingaccountdetails.daysToInactive">
+                                    <th class="table-bold-acc fontnormal">{{'label.daysToInactive' | translate}}
+                                    </th>
+                                    <td><span
+                                            class="padded-td">{{savingaccountdetails.daysToInactive| number}}</span>
+                                    </td>
+                                </tr>
+                                <tr data-ng-show="savingaccountdetails.daysToDormancy">
+                                    <th class="table-bold-acc fontnormal">{{'label.daysToDormancy' | translate}}
+                                    </th>
+                                    <td><span
+                                            class="padded-td">{{savingaccountdetails.daysToDormancy| number}}</span>
+                                    </td>
+                                </tr>
+                                <tr data-ng-show="savingaccountdetails.daysToEscheat">
+                                    <th class="table-bold-acc fontnormal">{{'label.daysToEscheat' | translate}}
+                                    </th>
+                                    <td><span
+                                            class="padded-td">{{savingaccountdetails.daysToEscheat| number}}</span>
+                                    </td>
+                                </tr>
+                                <tr data-ng-show="savingaccountdetails.annualFee">
+                                    <th class="table-bold-acc fontnormal">{{'label.annualfee' | translate}}</th>
+                                    <td><span class="padded-td">{{savingaccountdetails.annualFee.currency.displaySymbol}}&nbsp;{{savingaccountdetails.annualFee.amount| number}}&nbsp;{{'label.on' | translate}}&nbsp;{{annualdueDate | date:'d MMMM'}}</span>
+                                    </td>
+                                </tr>
+                                <tr data-ng-show="savingaccountdetails.allowOverdraft">
+                                    <th class="table-bold-acc fontnormal">{{'label.heading.overdraftlimit' |
+                                        translate}}
+                                    </th>
+                                    <td><span
+                                            class="padded-td">{{savingaccountdetails.overdraftLimit| number}}</span>
+                                    </td>
+                                </tr>
+                                <tr data-ng-show="savingaccountdetails.allowOverdraft">
+                                    <th class="table-bold-acc fontnormal">
+                                        {{'label.heading.minoverdraftforinterestcalculation' | translate}}
+                                    </th>
+                                    <td><span class="padded-td">{{savingaccountdetails.minOverdraftForInterestCalculation| number}}</span>
+                                    </td>
+                                </tr>
+                                <tr data-ng-show="savingaccountdetails.minBalanceForInterestCalculation">
+                                    <th class="table-bold-acc fontnormal">
+                                        {{'label.heading.minbalanceforinterestcalculation' | translate}}
+                                    </th>
+                                    <td><span class="padded-td">{{savingaccountdetails.minBalanceForInterestCalculation| number}}</span>
+                                    </td>
+                                </tr>
+                                <tr data-ng-show="savingaccountdetails.enforceMinRequiredBalance">
+                                    <th class="table-bold-acc fontnormal">
+                                        {{'label.heading.enforceMinRequiredBalance' |
+                                        translate}}
+                                    </th>
+                                    <td><span class="padded-td">{{savingaccountdetails.enforceMinRequiredBalance| number}}</span>
+                                    </td>
+                                </tr>
+                                <tr data-ng-show="savingaccountdetails.enforceMinRequiredBalance">
+                                    <th class="table-bold-acc fontnormal"> {{'label.heading.minRequiredBalance' |
+                                        translate}}
+                                    </th>
+                                    <td><span
+                                            class="padded-td">{{savingaccountdetails.minRequiredBalance| number}}</span>
+                                    </td>
+                                </tr>
+                                <tr data-ng-show="savingaccountdetails.summary.lastInterestCalculationDate">
+                                    <th class="table-bold-acc fontnormal">
+                                        {{'label.heading.interest.calculation.date' |
+                                        translate}}
+                                    </th>
+                                    <td><span class="padded-td">{{savingaccountdetails.summary.lastInterestCalculationDate | DateFormat}}</span>
+                                    </td>
+                                </tr>
+                                <tr ng-show="showonhold">
+                                    <th class="table-bold-acc fontnormal"> {{'label.heading.onholdfunds' |
+                                        translate}}
+                                    </th>
+                                    <td><span class="padded-td">
+                                     <a class="btn-link"
+                                        has-permission='READ_SAVINGSACCOUNT'
+                                        href="#/viewonholdtransactions/{{savingaccountdetails.id}}/viewsavingaccount/{{savingaccountdetails.id}}">
+                                         {{savingaccountdetails.onHoldFunds| number}}
+                                     </a>
+                                    </span></td>
+                                </tr>
+                                <tr data-ng-show="savingaccountdetails.withHoldTax">
+                                    <th class="table-bold-acc fontnormal"> {{'label.heading.withholdtaxgroup' |
+                                        translate}}
+                                    </th>
+                                    <td><span class="padded-td">{{savingaccountdetails.taxGroup.name}}</span></td>
+                                </tr>
+                            </table>
+                </div>
+                <div class="col-sm-5 col-md-5">
+                    <table class="table table-bordered table-striped" ng-hide="!savingaccountdetails.status.rejected && !savingaccountdetails.status.submittedAndPendingApproval">
+                        <tr>
+                            <th>{{'label.heading.fieldofficer' | translate}}</th>
+                            <td>{{savingaccountdetails.fieldOfficerName}}<span data-ng-hide="savingaccountdetails.fieldOfficerName">{{'label.unassigned' | translate}}</span>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th>{{'label.heading.balance' | translate}}</th>
+                            <td  ng-class="{statusactiveoverdue : savingaccountdetails.summary.accountBalance < 0}">{{savingaccountdetails.summary.accountBalance | number}}</td>
+                        </tr>
+                    </table>
+                    <table class="table table-bordered table-striped" ng-show="!savingaccountdetails.status.rejected && !savingaccountdetails.status.submittedAndPendingApproval">
+                        <tr>
+                            <th colspan="2"><center>{{'label.heading.savingsDetails' | translate}}</center></th>
+                        </tr>
+                        <tr>
+                            <th>{{'label.heading.activationdate' | translate}}</th>
+                            <td>{{savingaccountdetails.timeline.activatedOnDate | DateFormat}}</td>
+                        </tr>
+                        <tr>
+                            <th>{{'label.heading.fieldofficer' | translate}}</th>
+                            <td>{{savingaccountdetails.fieldOfficerName}}<span
+                                    data-ng-hide="savingaccountdetails.fieldOfficerName">{{'label.unassigned' | translate}}</span>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th>{{'label.heading.externalid' | translate}}</th>
+                            <td><span>{{savingaccountdetails.externalId}}</span><span ng-hide="loandetails.externalId">{{'label.heading.notprovided' | translate}}</span></td></td>
+                        </tr>
+                        <tr>
+                            <th class="table-bold-loan">{{'label.heading.currency' | translate}}</th>
+                            <td><span class="padded-td">{{savingaccountdetails.currency.name}}({{savingaccountdetails.currency.code}})</span></td>
+                        </tr>
+                        <tr>
+                            <th class="table-bold-acc fontnormal">{{'label.interestrate' | translate}}</th>
+                            <td><span
+                                    class="padded-td">{{savingaccountdetails.nominalAnnualInterestRate}}%</span>
+                            </td>
+                        </tr>
+                    </table>
+                    <br>
+                    <table class="table table-bordered table-striped" ng-show="!savingaccountdetails.status.rejected && !savingaccountdetails.status.submittedAndPendingApproval">
+                        <tr>
+                            <th colspan="2"><center>{{'label.heading.performancehistory' | translate}}</center></th>
+                        </tr>
+                        <tr ng-show="savingaccountdetails.summary.totalDeposits">
+                            <th class="table-bold-acc fontnormal">{{'label.totaldeposits' | translate}}
+                            </th>
+                            <td><span class="padded-td">{{savingaccountdetails.currency.displaySymbol}}&nbsp;{{savingaccountdetails.summary.totalDeposits| number}}</span>
+                            </td>
+                        </tr>
+                        <tr ng-show="savingaccountdetails.summary.totalInterestEarned >= 0">
+                            <th class="table-bold-acc fontnormal">{{'label.totalinterestearned' |
+                                translate}}
+                            </th>
+                            <td><span class="padded-td"
+                                      ng-class="{statusactiveoverdue : savingaccountdetails.summary.totalInterestEarned < 0}">{{savingaccountdetails.currency.displaySymbol}}&nbsp;{{savingaccountdetails.summary.totalInterestEarned| number}}</span>
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+            <div class="paddedleft" style="margin-left:-1px;margin-top: -20px; margin-right: 1px; padding: 10px;">
+                <hr class="marginbottom"/>
+                <uib-tabset class="scrollable" scrollable tabset-name="savingsAccountDetails">
+                    <uib-tab heading="{{'label.heading.transactions' | translate}}"
+                             ng-show="savingaccountdetails.transactions" select="convertDateArrayToObject('date')">
+                        <br>
+                        <button class="btn btn-primary pull-right" ng-click="export()" ng-show="checkStatus()">
+                            {{'label.button.export' | translate}}
+                        </button>
+                        <button class="btn btn-primary pull-right" ng-click="viewJournalEntries()"
+                                ng-show="checkStatus()" style="margin-right: 8px;">
+                            {{'label.button.viewjournalentries' | translate}}
+                        </button>
+                        <br>
+                        <table class="table table-bordered">
+                            <colgroup span="4"></colgroup>
+                            <thead>
+                            <tr>
+                                <th class="pointer" ng-click="changeTransactionSort('id')">{{'label.heading.id' |
+                                    translate}}
+                                </th>
+                                <th class="pointer" ng-click="changeTransactionSort('date')">
+                                    {{'label.heading.transactiondate' | translate}}
+                                </th>
+                                <th class="pointer" ng-click="changeTransactionSort('transactionType.value')">
+                                    {{'label.heading.transactiontype' | translate}}
+                                </th>
+                                <th class="pointer" ng-click="changeTransactionSort('amount')">{{'label.heading.debit' |
+                                    translate}}
+                                </th>
+                                <th class="pointer" ng-click="changeTransactionSort('amount')">{{'label.heading.credit'
+                                    | translate}}
+                                </th>
+                                <th class="pointer" ng-click="changeTransactionSort('runningBalance')">
+                                    {{'label.heading.balance' | translate}}
+                                </th>
+                                <th class="pointer" ng-click="changeTransactionSort('runningBalance')">
+                                    {{'label.heading.viewreceipts' | translate}}
+                                </th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr class="pointer-main" ng-hide="transaction.reversed"
+                                ng-repeat="transaction in savingaccountdetails.transactions | orderBy:transactionSort.column:transactionSort.descending">
+                                <td class="pointer"
+                                    data-ng-click="routeTo(transaction.accountId,transaction.id,transaction.transfer,transaction.transfer.id)">
+                                    {{transaction.id}}
+                                </td>
+                                <td class="pointer"
+                                    data-ng-click="routeTo(transaction.accountId,transaction.id,transaction.transfer,transaction.transfer.id)">
+                                    {{transaction.date | DateFormat}}
+                                </td>
+                                <td class="pointer"
+                                    data-ng-click="routeTo(transaction.accountId,transaction.id,transaction.transfer,transaction.transfer.id)">
+                                    {{transaction.transactionType.value}}
+                                </td>
+                                <td class="pointer"
+                                    data-ng-click="routeTo(transaction.accountId,transaction.id,transaction.transfer,transaction.transfer.id)">
+                                    <div ng-show="isDebit(transaction.transactionType)">
+                                        {{transaction.amount| number}}
+                                    </div>
+                                </td>
+                                <td class="pointer"
+                                    data-ng-click="routeTo(transaction.accountId,transaction.id,transaction.transfer,transaction.transfer.id)">
+                                    <div ng-show="!isDebit(transaction.transactionType)">
+                                        {{transaction.amount| number}}
+                                    </div>
+                                </td>
+                                <td class="pointer"
+                                    data-ng-click="routeTo(transaction.accountId,transaction.id,transaction.transfer,transaction.transfer.id)">
+                                    {{transaction.runningBalance| number}}
+                                </td>
+                                <td><span ng-click="viewSavingsTransactionReceipts(transaction.id)"
+                                       ng-if=" transaction.reversed!=true">
+                                    <i class="fa fa-file-text fa fa-large"></i>
+                                </span>
+                                </td>
+                            </tr>
+                            </tbody>
+                        </table>
+                        <div>
+                            <button class="btn btn-primary" ng-click="printReport()" ng-show="printbtn"><i
+                                    class="fa fa-print ">{{'label.button.print' |
+                                translate}}
+                            </i></button>
+                            <div id="printreceiptcontent">
+                                <iframe frameborder="0" height="800px" id="rptLoadingreceiptFrame"
+                                        ng-show="viewReport" ng-src="{{viewReportDetails}}" width="100%"></iframe>
+                            </div>
+
+                        </div>
+                    </uib-tab>
+                    <uib-tab heading="{{'label.anchor.standinginstruction' | translate}}" ng-show="instructions.currentPageItems.length > 0">
+                        <br>
+                        <table class="table">
+                            <thead>
+                            <tr class="graybg">
+                                <th>{{'label.heading.client' | translate}}</th>
+                                <th>{{'label.heading.fromaccount' | translate}}</th>
+                                <th>{{'label.heading.toclient' | translate}}</th>
+                                <th>{{'label.heading.toaccount' | translate}}</th>
+                                <th>{{'label.heading.amount' | translate}}</th>
+                                <th>{{'label.heading.validity' | translate}}</th>
+                                <th>&nbsp;</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr ng-repeat="instruction in instructions.currentPageItems">
+                                <td>{{instruction.fromClient.displayName}}-{{instruction.fromClient.id}}</td>
+                                <td>{{instruction.fromAccount.accountNo}}({{instruction.fromAccountType.value}})</td>
+                                <td>
+                                    <div ng-show="instruction.fromClient.id != instruction.toClient.id">{{instruction.toClient.displayName}}</div>
+                                    <div ng-show="instruction.fromClient.id == instruction.toClient.id">{{'label.heading.ownaccount' | translate}}</div>
+
+                                </td>
+                                <td>{{instruction.toAccount.accountNo}}({{instruction.toAccountType.value}})</td>
+                                <td>{{instruction.instructionType.value}}/{{instruction.amount | number}}</td>
+                                <td>{{instruction.validFrom | DateFormat}} to {{instruction.validTill | DateFormat}}</td>
+                                <td class="select-row:selection">
+                                    <a class="btn btn-primary"  data-ng-show="instruction.status.value!='Deleted'" has-permission='UPDATE_STANDINGINSTRUCTION' href="#/editstandinginstruction/{{instruction.id}}/list" type="button"  uib-tooltip="{{'label.tooltip.editInstruction' | translate}}">
+                                        <i class="fa fa-edit"></i>
+                                    </a>
+                                    <a class="btn btn-danger" data-ng-click="deletestandinginstruction(instruction.id)" data-ng-show="instruction.status.value!='Deleted'" has-permission='DELETE_STANDINGINSTRUCTION' type="button"  uib-tooltip="{{'label.tooltip.deleteInstruction' | translate}}">
+                                        <i class="fa fa-times"></i>
+                                    </a>
+                                    <a class="btn btn-warning" has-permission='READ_STANDINGINSTRUCTION' href="#/viewstandinginstruction/{{instruction.id}}" type="button"
+                                       uib-tooltip="{{'label.tooltip.viewInstruction' | translate}}">
+                                        <i class="fa fa-eye-slash"></i>
+                                    </a>
+
+                                </td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </uib-tab>
+                    <uib-tab has-permission='READ_{{savingdatatable.registeredTableName}}'
+                             heading="{{savingdatatable.registeredTableName}}"
+                             ng-repeat="savingdatatable in savingdatatables"
+                             select="dataTableChange(savingdatatable)">
+                        <br>
+                        <api-validate></api-validate>
+                        <div class="btn-group pull-right" data-ng-show="choice">
+                            <a class="btn btn-danger pull-right" has-permission='DELETE_{{savingdatatable.registeredTableName}}'
+                               ng-click="deleteAll(savingdatatable.registeredTableName, savingaccountdetails.id)"
+                               ng-show="datatabledetails.isData"><i
+                                    class="fa fa-trash "></i>{{'label.button.deleteall' | translate}}</a>
+                            <a class="btn btn-primary"
+                               data-ng-show="showDataTableAddButton"
+                               has-permission='CREATE_{{savingdatatable.registeredTableName}}'
+                               href="#/makedatatableentry/{{savingdatatable.registeredTableName}}/{{savingaccountdetails.id}}?fromEntity=savings"><i
+                                    class="fa fa-plus "></i>{{'label.button.add' | translate}}</a>
+                            <a class="btn btn-primary"
+                               data-ng-show="showDataTableEditButton"
+                               has-permission='UPDATE_{{savingdatatable.registeredTableName}}'
+                               ng-href="#/viewsingledatatableentry/{{savingdatatable.registeredTableName}}/{{savingaccountdetails.id}}?mode=edit"><i
+                                    class="fa fa-edit "></i>{{'label.button.edit' | translate}}</a>
+                        </div>
+                        <br>
+                        <br>
+                        <div data-ng-show="datatabledetails.isData">
+                            <table class="table" ng-show="datatabledetails.isMultirow">
+                                <thead>
+                                <th ng-repeat="column in datatabledetails.columnHeaders">{{column.columnName |
+                                    prettifyDataTableColumn}}
+                                </th>
+                                </thead>
+                                <tbody>
+                                <tr class="pointer-main" ng-repeat="data in datatabledetails.data">
+                                    <td class="pointer" ng-click="viewDataTable(savingdatatable.registeredTableName,data)"
+                                        ng-repeat="row in data.row track by $index">{{row}}
+                                    </td>
+                                </tr>
+                                </tbody>
+                            </table>
+                            <table class="table table-bordered width450px" data-ng-hide="datatabledetails.isMultirow">
+                                <tr ng-repeat="value in singleRow">
+                                    <td class="graybg table-font-nav">{{value.key | prettifyDataTableColumn}}</td>
+                                    <td><span class="padded-td">{{value.value}}</span></td>
+                                </tr>
+                            </table>
+                        </div>
+                    </uib-tab>
+                    <uib-tab has-permission="READ_SAVINGSACCOUNTCHARGE" heading="{{'label.heading.charges' | translate}}"
+                             ng-show="chargeTableShow">
+                        <br>
+                        <a class="btn btn-primary pull-right" ng-click="showActiveCharges=!showActiveCharges"
+                           ng-show="showActiveCharges">{{'label.button.showInactiveCharges' |
+                            translate}}</a>
+                        <a class="btn btn-primary pull-right" ng-click="showActiveCharges=!showActiveCharges"
+                           ng-hide="showActiveCharges">{{'label.button.showActiveCharges' |
+                            translate}}</a><br>
+                        <table class="table width100">
+                            <tr class="graybg">
+                                <th>{{'label.heading.name' | translate}}</th>
+                                <th>{{'label.heading.feeorpenalty' | translate}}</th>
+                                <th></th>
+                                <th>{{'label.heading.paymentdueat' | translate}}</th>
+                                <th></th>
+                                <th>{{'label.heading.dueasof' | translate}}</th>
+                                <th>{{'label.heading.repeatson' | translate}}</th>
+                                <th>{{'label.heading.calculationtype' | translate}}</th>
+                                <th></th>
+                                <th>{{'label.heading.due' | translate}}</th>
+                                <th>{{'label.heading.paid' | translate}}</th>
+                                <th>{{'label.heading.waived' | translate}}</th>
+                                <th>{{'label.heading.outstanding' | translate}}</th>
+                                <th></th>
+                                <th>{{'label.heading.actions' | translate}}</th>
+                                <th></th>
+                            </tr>
+                            <tr class="pointer-main"
+                                ng-repeat="charge in charges | filter:{isActive:showActiveCharges}">
+                                <td class="pointer" data-ng-click="viewCharge(charge.id)">{{charge.name}}</td>
+                                <td class="pointer" data-ng-click="viewCharge(charge.id)"
+                                    ng-show="'charge.penalty'==true">{{"penalty"}}
+                                </td>
+                                <td class="pointer" data-ng-click="viewCharge(charge.id)"
+                                    ng-hide="'charge.penalty'==true">{{"fee"}}
+                                </td>
+                                <td class="pointer" data-ng-click="viewCharge(charge.id)"></td>
+                                <td class="pointer" data-ng-click="viewCharge(charge.id)">
+                                    {{charge.chargeTimeType.value}}
+                                </td>
+                                <td class="pointer" data-ng-click="viewCharge(charge.id)"></td>
+                                <td class="pointer" data-ng-click="viewCharge(charge.id)">{{charge.dueDate |
+                                    DateFormat}}
+                                </td>
+                                <td class="pointer" data-ng-click="viewCharge(charge.id)">{{charge.feeOnMonthDay |
+                                    DayMonthFormat}}
+                                </td>
+                                <td class="pointer" data-ng-click="viewCharge(charge.id)">
+                                    {{charge.chargeCalculationType.value}}
+                                </td>
+                                <td class="pointer" data-ng-click="viewCharge(charge.id)"></td>
+                                <td class="pointer" data-ng-click="viewCharge(charge.id)">
+                                    {{charge.currency.displaySymbol}}{{charge.amount| number}}
+                                </td>
+                                <td class="pointer" data-ng-click="viewCharge(charge.id)">
+                                    {{charge.currency.displaySymbol}}{{charge.amountPaid| number}}
+                                </td>
+                                <td class="pointer" data-ng-click="viewCharge(charge.id)">
+                                    {{charge.currency.displaySymbol}}{{charge.amountWaived| number}}
+                                </td>
+                                <td class="pointer" data-ng-click="viewCharge(charge.id)">
+                                    {{charge.currency.displaySymbol}}{{charge.amountOutstanding| number}}
+                                </td>
+                                <td class="pointer" data-ng-click="viewCharge(charge.id)"></td>
+                                <td>
+                                <span ng-show="chargeAction">
+                                    <a has-permission="UPDATE_SAVINGSACCOUNTCHARGE" href="#/savingaccountcharge/{{savingaccountdetails.id}}/editsavingcharge/{{charge.id}}"
+                                       title="{{'label.edit' | translate}}"><i
+                                            class="fa fa-pencil "></i></a>
+                                    <a has-permission="DELETE_SAVINGSACCOUNTCHARGE"
+                                       href="#/savingaccountcharge/{{savingaccountdetails.id}}/deletesavingcharge/{{charge.id}}"
+                                       title="{{'label.delete' | translate}}"><i
+                                            class="fa fa-times "></i></a>
+                                </span>
+                                    <span ng-show="chargePayAction">
+                                    <span ng-hide="charge.amountOutstanding == 0">
+                                        <a has-permission="PAY_SAVINGSACCOUNTCHARGE"
+                                           href="#/savingaccountcharge/{{savingaccountdetails.id}}/paycharge/{{charge.id}}"
+                                           title="{{'label.button.paycharge' | translate}}"><i
+                                                class="fa fa-check "></i></a>
+                                        <a has-permission="WAIVE_SAVINGSACCOUNTCHARGE"
+                                           href="#/savingaccountcharge/{{savingaccountdetails.id}}/waive/{{charge.id}}"
+                                           title="{{'label.button.waivecharge' | translate}}"><i
+                                                class="fa fa-flag "></i></a>
+                                        <span ng-show="isRecurringCharge(charge)">
+                                            <a has-permission="INACTIVATE_SAVINGSACCOUNTCHARGE"
+                                               href="#/savingaccountcharge/{{savingaccountdetails.id}}/inactivate/{{charge.id}}"
+                                               title="{{'label.button.inactivatecharge' | translate}}"><i
+                                                    class="fa fa-ban-circle "></i></a>
+                                        </span>
+                                    </span>
+                                </span>
+                                </td>
+                                <td></td>
+                            </tr>
+                        </table>
+                    </uib-tab>
+                    <!-- <tab heading="{{ 'label.heading.notes' | translate }}" has-permission='READ_SAVINGNOTE'>
+                        <br/>
+
+                        <form>
+                            <div class="form-group">
+                                <div class="col-sm-12 col-md-12">
+                                    <textarea rows="1" class="form-control marginbottom0px" id="textarea"
+                                              placeholder="{{'label.input.enternote' | translate}}" ng-model="formData.note"></textarea>
+
+                                    <div class="notewrapper col-sm-12 col-md-12">
+                                            <span class="pull-right noteaddbuttonwrapper">
+                                                <button class="btn btn-primary" type="submit" ng-click="saveNote()" has-permission='CREATE_SAVINGNOTE'>{{'label.button.add' | translate}}
+                                                </button>
+                                            </span>
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+                        <div class="col-md-12">
+                            <br/>
+                            <div ng-repeat="savingNote in savingNotes | orderBy:predicate:reverse">
+                                <blockquote>
+                                  <p>{{savingNote.note}}</p>
+                                  {{savingNote.id}}
+                                  <small>{{'label.createdby' | translate}} :&nbsp;{{savingNote.createdByUsername}}</small>
+                                  <small>{{'label.createdon' | translate}} :&nbsp;{{savingNote.createdOn  | DateFormat}}</small>
+                                </blockquote>
+                            </div>
+                        </div>
+                    </tab> -->
+                </uib-tabset>
+            </div>
+        </div>
+    </div>
+</div>
+<script id="delInstruction.html" type="text/ng-template">
+    <div class="modal-header silver">
+        <h3 class="bolder">{{'label.areyousure' | translate}}</h3>
+    </div>
+    <div class="modal-body">
+        <api-validate></api-validate>
+        <br>
+        <button class="btn btn-warning" ng-click="cancel()">{{'label.button.cancel' | translate}}</button>
+        <button class="btn btn-primary" ng-click="delete()">{{'label.button.confirm' | translate}}</button>
+    </div>
+</script>

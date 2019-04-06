@@ -1,0 +1,98 @@
+<div class="content-container" ng-controller="StandingInstructionsHistoryController">
+    <ul class="breadcrumb">
+        <li><a href="#/organization">{{'label.anchor.organization' | translate}}</a></li>
+        <li class="active">{{'label.anchor.standinginstruction.history' | translate}}</li>
+    </ul>
+    <api-validate></api-validate>
+    <div class="card">
+        <div class="content">
+            <div class="form-inline" ng-show="isCollapsed">
+                <div class="form-group">
+                    <input class="form-control width155px" ng-model="formData.clientName" placeholder="{{'label.input.clientName' | translate }}" type="text"/>
+                </div>
+                <div class="form-group">
+                    <input class="form-control width155px" ng-model="formData.clientId" placeholder="{{'label.input.clientId' | translate }}" type="text"/>
+                </div>
+                <div class="form-group">
+                    <select class="form-control" id="transferType" name="transferType"
+                            ng-model="formData.transferType"
+                            ng-options="transferType.id as transferType.value for transferType in template.transferTypeOptions" value="{{transferType.id}}">
+                        <option value="">{{'label.input.transfertype' | translate}}</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <select class="form-control" id="fromAccountType" name="fromAccountType"
+                            ng-model="formData.fromAccountType"
+                            ng-options="fromAccountType.id as fromAccountType.value for fromAccountType in template.fromAccountTypeOptions" value="{{fromAccountType.id}}">
+                        <option value="">{{'label.input.accounttype' | translate}}</option>
+                    </select>
+                </div>
+                <div class="form-group" data-ng-show="formData.fromAccountType">
+                    <input class="form-control width155px" ng-model="formData.fromAccountId" placeholder="{{ 'label.input.fromAccountId' | translate }}" type="text"/>
+                </div>
+                <div class="form-group">
+                    <input class="form-control width155px" datepicker-pop="dd MMMM yyyy" is-open="opened" max="'2020-06-22'" min="minDate" ng-model="date.first" placeholder="{{ 'label.input.fromdate' | translate }}" type="text"/>
+                </div>
+                <div class="form-group">
+                    <input class="form-control width155px" datepicker-pop="dd MMMM yyyy" is-open="opened1" max="'2020-06-22'" min="minDate" ng-model="date.second" placeholder="{{ 'label.input.todate' | translate }}" type="text"/>
+                </div>
+                <div class="form-group clear">
+                    <a class="btn btn-primary control" has-permission='READ_STANDINGINSTRUCTION ' ng-click="getTransactions()"><i class="fa fa-search "></i></a></center>
+                </div>
+            </div>
+            <div class="pull-right" ng-show="!isCollapsed">
+                <button class="btn btn-primary control" ng-click="isCollapsed = !isCollapsed"><i class="fa fa-chevron-down "></i>{{
+                    'label.button.parameters' | translate }}
+                </button>
+            </div>
+            <div ng-show="displayResults">
+                <br>
+                <table class="table">
+                    <thead>
+                    <tr class="graybg">
+                        <th>{{'label.heading.fromClient' | translate}}</th>
+                        <th>{{'label.heading.fromaccount' | translate}}</th>
+                        <th>{{'label.heading.toClient' | translate}}</th>
+                        <th>{{'label.heading.toaccount' | translate}}</th>
+                        <th>{{'label.heading.executionTime' | translate}}</th>
+                        <th>{{'label.heading.amount' | translate}}</th>
+                        <th>{{'label.heading.status' | translate}}</th>
+                        <th>{{'label.heading.errorlog' | translate}}</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr class="pointer-main" ng-repeat="transaction in transactions.currentPageItems">
+                        <td>{{transaction.fromClient.displayName}}({{transaction.fromClient.id}})</td>
+                        <td>{{transaction.fromAccount.productName}}({{transaction.fromAccount.id}})</td>
+                        <td>{{transaction.toClient.displayName}}({{transaction.toClient.id}})</td>
+                        <td>{{transaction.toAccount.productName}}({{transaction.toAccount.id}})</td>
+                        <td>{{transaction.executionTime | DateFormat}}</td>
+                        <td>{{transaction.amount}}</td>
+                        <td>{{transaction.status}}</td>
+                        <td>
+                            <button class="btn-warning" data-ng-show="isFailed(transaction)" ng-click="errorLog(transaction)"><i class="fa fa-exclamation"></i></button>
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+                <ul class="pager">
+                    <li class="previous"><a href="" id="prev" ng-click="transactions.previous()" ng-disabled="!transactions.hasPrevious()">&larr; {{'label.button.previous' |
+                        translate}}</a></li>
+                    <li class="next"><a href="" id="next" ng-click="transactions.next()" ng-disabled="!transactions.hasNext()">{{'label.button.next'
+                        | translate}} &rarr; </a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <script id="errorlog.html" type="text/ng-template">
+        <div class="modal-header silver">
+            <h3 class="bolder">{{'label.heading.errorlog' | translate}}</h3>
+        </div>
+        <div class="modal-body">
+            <p>{{error}}</p>
+        </div>
+        <div class="modal-footer">
+            <button class="btn btn-warning" ng-click="cancel()">{{'label.button.close' | translate}}</button>
+        </div>
+    </script>
+</div>

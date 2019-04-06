@@ -1,0 +1,180 @@
+<div class="content-container" ng-controller="SavingAccountActionsController">
+    <ul class="breadcrumb">
+        <li><a href="#/viewsavingaccount/{{accountId}}">{{'label.anchor.viewsavingaccount' | translate}}</a></li>
+        <li class="active">{{action}}</li>
+    </ul>
+    <form class="form-horizontal well card" name="savingccountactionform" ng-submit="submit()" novalidate="">
+        <fieldset>
+            <api-validate></api-validate>
+            <legend>{{ title | translate}}</legend>
+
+            <div class="form-group" ng-show="showDateField">
+                <label class="control-label col-sm-2" for="modelName">{{labelName | translate}}<span
+                        class="required">*</span></label>
+
+                <div class="col-sm-3">
+                    <input class="form-control" datepicker-pop="dd MMMM yyyy" id="{{modelName}}" is-open="opened"
+                           max="restrictDate" min="minDate" ng-model="formData[modelName]" sort type="text"/>
+                </div>
+            </div>
+
+            <div class="form-group" data-ng-show="withdrawBalance">
+                <label class="control-label col-sm-2" for="withdrawBalance">{{ 'label.input.withdrawBalance' |
+                    translate}}<span class="required">*</span></label>
+
+                <div class="col-sm-3">
+                    <input id="withdrawBalance" name="withdrawBalance" ng-change="isTransaction=formData.withdrawBalance"
+                           ng-model="formData.withdrawBalance" type="checkbox"/>
+                </div>
+            </div>
+
+            <div class="form-group" data-ng-show="postInterestValidationOnClosure">
+                <label class="control-label col-sm-2" for="checkValidate">{{ 'label.input.postInterestValidationOnClosure' |
+                    translate}}<span class="required">*</span></label>
+
+                <div class="col-sm-3">
+                    <input id="checkValidate" name="Validation" ng-checked="true"
+                           ng-model="formData.postInterestValidationOnClosure" type="checkbox"/>
+                </div>
+            </div>
+
+            <div class="form-group" data-ng-show="formData.withdrawBalance">
+                <label class="control-label col-sm-2" >{{ 'label.input.transactionamount' |
+                    translate}}<span class="required">*</span></label>
+
+                <div class="col-sm-3">
+                    <input class="form-control" ng-model="accountBalance" readonly type="text"/>
+                </div>
+
+
+            </div>
+            <div ng-show="isTransaction">
+                <div class="form-group" data-ng-show="transactionAmountField">
+                    <label class="control-label col-sm-2" for="transactionAmount">{{ 'label.input.transactionamount' |
+                        translate}}<span class="required">*</span></label>
+
+                    <div class="col-sm-3">
+                        <input class="form-control" id="transactionAmount" late-Validate
+                               name="transactionAmount" ng-model="formData.transactionAmount" number-format required type="text"/>
+                    </div>
+                    <div class="col-sm-3">
+                        <form-validate valattribute="transactionAmount" valattributeform="savingccountactionform"/>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="control-label col-sm-2" for="paymentTypeId">{{ 'label.input.paymenttype' | translate}}</label>
+
+                    <div class="col-sm-3">
+                        <select class="form-control" id="paymentTypeId"
+                                ng-model="formData.paymentTypeId"
+                                ng-options="paymentType.id as paymentType.name for paymentType in paymentTypes" value="{{paymentType.id}}">
+                            <option value="">{{'label.selectone' | translate}}</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="control-label col-sm-2">{{ 'label.input.showpaymentdetails' | translate}}</label>
+
+                    <div class="col-sm-3">
+                        <a class="btn btn-primary" ng-click="showPaymentDetails=!showPaymentDetails">
+                            <i class="fa fa-minus " ng-show="showPaymentDetails"></i>
+                            <i class="fa fa-plus " ng-show="!showPaymentDetails"></i>
+                        </a>
+                    </div>
+                </div>
+                <div uib-collapse="!showPaymentDetails">
+                    <div class="form-group">
+                        <label class="control-label col-sm-2" for="accountNumber">{{ 'label.input.accnum' | translate}}</label>
+
+                        <div class="col-sm-3">
+                            <input class="form-control" id="accountNumber" ng-model="formData.accountNumber" type="text"/>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="control-label col-sm-2" for="checkNumber">{{ 'label.input.checknumber' |
+                            translate}}</label>
+
+                        <div class="col-sm-3">
+                            <input class="form-control" id="checkNumber" ng-model="formData.checkNumber" type="text"/>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="control-label col-sm-2" for="routingCode">{{ 'label.input.routingcode' |
+                            translate}}</label>
+
+                        <div class="col-sm-3">
+                            <input class="form-control" id="routingCode" ng-model="formData.routingCode" type="text"/>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="control-label col-sm-2" for="receiptNumber">{{ 'label.input.receiptnumber' |
+                            translate}}</label>
+
+                        <div class="col-sm-3">
+                            <input class="form-control" id="receiptNumber" ng-model="formData.receiptNumber" type="text"/>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="control-label col-sm-2" for="bankNumber">{{ 'label.input.banknumber' | translate}}</label>
+
+                        <div class="col-sm-3">
+                            <input class="form-control" id="bankNumber" ng-model="formData.bankNumber" type="text"/>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="form-group" ng-show="showAnnualAmountField">
+                <label class="control-label col-sm-2">{{ 'label.input.amount' | translate}}<span
+                        class="required">*</span></label>
+
+                <div class="col-sm-3">
+                    <input id="amoun" late-Validate name="amount" ng-model="formData.amount" required type="text"/>
+          <span ng-show="savingccountactionform.amoun.$invalid">
+            <small class="error">
+                {{ 'label.requiredfield' | translate}}
+            </small>
+          </span>
+                </div>
+            </div>
+            <div class="form-group" ng-show="showNoteField">
+                <label class="control-label col-sm-2" for="note">{{ 'label.input.note' | translate}}</label>
+
+                <div class="col-sm-3">
+                    <textarea class="form-control" id="note" ng-model="formData.note" rows="2"></textarea>
+                </div>
+            </div>
+
+            <div class="form-group" ng-show="showAmountField">
+                <label class="control-label col-sm-2">{{ labelName | translate}}<span class="required">*</span></label>
+
+                <div class="col-sm-3">
+                    <input class="form-control" id="amount" ng-model="formData.amount" type="text"/>
+                </div>
+            </div>
+
+            <div class="form-group" ng-show="paymentDatefield">
+                <label class="control-label col-sm-2" for="modelName">{{'label.input.paymentdate' | translate}}<span
+                        class="required">*</span></label>
+
+                <div class="col-sm-3">
+                    <input class="form-control" datepicker-pop="dd MMMM yyyy" id="{{modelName}}" is-open="opened"
+                           ng-model="formData[modelName]" sort type="text"/>
+                </div>
+            </div>
+
+            <div class="form-group" ng-show="showDelete || waiveCharge || inactivateCharge">
+                <label class="control-label col-sm-2">{{ 'label.areyousure' | translate }}</label>
+            </div>
+            <div class="col-md-offset-3" ng-show="showDelete">
+                <button class="btn btn-default" has-permission='{{taskPermissionName}}' ng-click="submit()" type="reset">{{ 'label.button.confirm' | translate }}</button>
+                <button class="btn btn-primary" ng-click="cancel()" type="submit">{{ 'label.button.cancel' | translate }}</button>
+            </div>
+
+            <div class="col-md-offset-3" ng-hide="showDelete">
+                <button class="btn btn-default" id="cancel" ng-click="cancel()">{{ 'label.button.cancel' | translate }}</button>
+                <button class="btn btn-primary" has-permission='{{taskPermissionName}}' id="save" type="submit">{{ 'label.button.save' | translate }}</button>
+            </div>
+
+        </fieldset>
+    </form>
+</div>

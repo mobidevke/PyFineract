@@ -1,0 +1,54 @@
+<div class="content-container">
+    <form class="card well" data-ng-controller="UserFormController" name="userForm">
+    <div data-ng-show="formInError">
+        <div class="errorTitle">There were errors submitting the form:</div>
+        <ul class="error">
+            <li data-ng-repeat="error in errors">
+                {{error.defaultUserMessage}}
+            </li>
+        </ul>
+    </div>
+    <div>
+        <label for="username">{{'label.input.username' | translate}}</label>
+        <input data-ng-model="userFormData.username" id="username" name="username" ng-autofocus="true" placeholder="username"
+               type="text"/>
+    </div>
+    <div>
+        <label for="firstname">{{'label.input.firstname' | translate}}</label>
+        <input data-ng-model="userFormData.firstname" id="firstname" name="firstname" placeholder="firstname"
+               type="text"/>
+    </div>
+    <div>
+        <label for="lastname">{{'label.input.lastname' | translate}}</label>
+        <input data-ng-model="userFormData.lastname" id="lastname" name="lastname" placeholder="lastname" type="text"/>
+    </div>
+    <div>
+        <label for="email">{{'label.input.email' | translate}}</label>
+        <input data-ng-model="userFormData.email" id="email" name="email" placeholder="email address" type="email"/>
+    </div>
+    <div>
+        <input data-ng-model="userFormData.sendPasswordToEmail" name="sendPasswordToEmail" type="checkbox"> <b>{{'label.input.generatepasswordandemailit'
+        | translate}}</b>
+    </div>
+    <div>
+        <label for="office">{{'label.input.office' | translate}}</label>
+        <select data-ng-model="userFormData.office" data-ng-options="o.name for o in offices" id="office"
+                name="officeId"/>
+    </div>
+    <div>
+        <label>{{'label.input.roles' | translate}}</label>
+
+        <div data-ng-repeat="role in roles">
+            <div>
+                <input data-ng-model="userFormData.selectedRoles[role.id]" name="role_{{role.id}}" type="checkbox"> <b>{{role.name}}</b>
+            </div>
+        </div>
+    </div>
+    <div class='form-actions'>
+        <input data-ng-click="submitUserForm()" has-permission='CREATE_USER' id="save" type='submit' value='Done' />
+        <input data-ng-click="cancelUserForm()" id="cancel" type='submit' value='Cancel'/>
+    </div>
+</form>
+</div>
+
+

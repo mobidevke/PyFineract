@@ -1,0 +1,35 @@
+<div class="content-container">
+    <form class="card form-horizontal well" data-ng-controller="ViewProductMixController" ng-submit="submit()">
+        <api-validate></api-validate>
+        <div class="">
+            <h3>{{ 'label.heading.editproductmix' | translate }}</h3>
+            <hr>
+            <div class="row">
+                <div class="col-sm-3 col-md-3 col-md-offset-1">
+                    <label class="control-label col-sm-9">{{ 'label.input.allowedproducts' | translate }}</label>
+                    <select class="form-control clear" multiple ng-model="allowed"
+                            ng-options="allowedProduct.id as allowedProduct.name for allowedProduct in allowedProducts">
+                    </select>
+                </div>
+                <div class="paddedtop10 col-sm-1 col-md-1 paddedleft0">
+                    <button class="btn btn-primary" data-ng-click="restrict()" type="button"><i
+                            class="fa fa-angle-double-right"></i></button>
+                    <br/>
+                    <button class="btn btn-primary" data-ng-click="allow()" type="button"><i
+                            class="fa fa-angle-double-left"></i></button>
+                </div>
+                <div class="col-sm-3 col-md-3">
+                    <label class="control-label col-sm-9">{{ 'label.input.restrictedproducts' | translate }}</label>
+                    <select class="form-control clear" multiple ng-model="restricted"
+                            ng-options="restrictedProduct.id as restrictedProduct.name for restrictedProduct in restrictedProducts">
+                    </select>
+                </div>
+            </div>
+            <br/>
+            <div class="col-md-offset-2">
+                <a class="btn btn-default" href="#/viewproductmix/{{productmix.productId}}">{{ 'label.button.cancel' | translate }}</a>
+                <button class="btn btn-primary" has-permission='UPDATE_PRODUCTMIX' id="save" type="submit">{{ 'label.button.save' | translate }}</button>
+            </div>
+        </div>
+    </form>
+</div>
