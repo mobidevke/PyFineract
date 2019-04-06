@@ -4,6 +4,11 @@ Change log
 Stable versions
 ~~~~~~~~~~~~~~~
 
+Version 0.0.24-dev4 (April 06, 2019)
+-----------------------------------
+
+* build: Add wait for endpoint script (a84cbc0)
+
 Version 0.0.24-dev3 (April 06, 2019)
 -----------------------------------
 
