@@ -4,6 +4,11 @@ Change log
 Stable versions
 ~~~~~~~~~~~~~~~
 
+Version 0.0.24-dev9 (April 06, 2019)
+-----------------------------------
+
+* build: Add python wait script (26828d5)
+
 Version 0.0.24-dev8 (April 06, 2019)
 -----------------------------------
 
