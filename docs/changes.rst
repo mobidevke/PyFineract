@@ -4,6 +4,11 @@ Change log
 Stable versions
 ~~~~~~~~~~~~~~~
 
+Version 0.0.24-dev7 (April 06, 2019)
+-----------------------------------
+
+* fix: integration tests (ccf20f2)
+
 Version 0.0.24-dev6 (April 06, 2019)
 -----------------------------------
 
