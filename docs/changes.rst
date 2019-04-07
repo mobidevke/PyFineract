@@ -4,6 +4,14 @@ Change log
 Stable versions
 ~~~~~~~~~~~~~~~
 
+Version 0.0.25 (April 07, 2019)
+-----------------------------------
+
+* test: Add integration tests for Staff object (9c332d7)
+* test: Add integration tests for Office object (81ba0e0)
+* test: Add integration tests for LoanProduct object (bfb7d70)
+* test: Add integration tests for Role object (3f93aab)
+
 Version 0.0.24-dev13 (April 06, 2019)
 -----------------------------------
 
