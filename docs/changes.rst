@@ -4,6 +4,11 @@ Change log
 Stable versions
 ~~~~~~~~~~~~~~~
 
+Version 0.0.29 (April 08, 2019)
+-----------------------------------
+
+* build: Add fineract-instance cleanup (77c7ff9)
+
 Version 0.0.28 (April 08, 2019)
 -----------------------------------
 
