@@ -13,6 +13,7 @@ before_script:
   - python wait.py
 script:
   - python setup.py test
+after_script: cd fineract-instance && docker-compose down && cd ..
 after_success:
   - pip install coveralls
   - coveralls
