@@ -4,6 +4,11 @@ Change log
 Stable versions
 ~~~~~~~~~~~~~~~
 
+Version 0.0.28 (April 08, 2019)
+-----------------------------------
+
+* fix: Correct get_client_by_phone_no (559f9bb)
+
 Version 0.0.27 (April 08, 2019)
 -----------------------------------
 
