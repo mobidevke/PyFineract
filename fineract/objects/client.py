@@ -168,7 +168,7 @@ class Client(DataFineractObject):
             params=params
         )
         if data and data['pageItems']:
-            return cls(None, data['pageItems'][0], False)
+            return cls(request_handler, data['pageItems'][0], False)
 
         return None
 
