@@ -86,6 +86,10 @@ class FineractObject(object):
         )
 
     @property
+    def request_handler(self):
+        return self._request_handler
+
+    @property
     def raw_data(self):
         """
         :type dict
@@ -106,7 +110,7 @@ class DataFineractObject(FineractObject):
     def get_datatable_data(self, datatable):
         _id = getattr(self, 'id', None)
         if _id:
-            return self._request_handler.make_request(
+            return self.request_handler.make_request(
                 'GET',
                 '/datatables/{}/{}'.format(datatable, _id)
             )

@@ -17,3 +17,9 @@ def test_get_datatable_data_returns_data(mocker):
     setattr(o, 'id', 1)
     result = o.get_datatable_data('some_data_table')
     assert result == []
+
+
+def test_request_handler_is_inherited():
+    request_handler = RequestHandler('a', 'b', 'https://localhost/', 'default', per_page=10, timeout=30)
+    o = DataFineractObject(request_handler, {}, False)
+    assert o.request_handler
