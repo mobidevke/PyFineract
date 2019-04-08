@@ -4,6 +4,11 @@ Change log
 Stable versions
 ~~~~~~~~~~~~~~~
 
+Version 0.0.27 (April 08, 2019)
+-----------------------------------
+
+* test: Add integration tests for fetching datatables data (472270c)
+
 Version 0.0.26 (April 08, 2019)
 -----------------------------------
 
