@@ -4,6 +4,11 @@ Change log
 Stable versions
 ~~~~~~~~~~~~~~~
 
+Version 0.0.26 (April 08, 2019)
+-----------------------------------
+
+* fix: Modify request_handle access in DataFineractObject (944fdc7)
+
 Version 0.0.25 (April 07, 2019)
 -----------------------------------
 
