@@ -4,6 +4,11 @@ Change log
 Stable versions
 ~~~~~~~~~~~~~~~
 
+Version 0.0.30 (April 09, 2019)
+-----------------------------------
+
+* feat: Add debugging for response (14bb0f1)
+
 Version 0.0.29 (April 08, 2019)
 -----------------------------------
 
