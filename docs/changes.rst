@@ -4,6 +4,11 @@ Change log
 Stable versions
 ~~~~~~~~~~~~~~~
 
+Version 0.0.31 (April 09, 2019)
+-----------------------------------
+
+* fix: This commit adds textwrap indent compatibility for  python2.7 (c13cfce)
+
 Version 0.0.30 (April 09, 2019)
 -----------------------------------
 
