@@ -1,5 +1,8 @@
 import datetime
+import functools
+import json
 import sys
+import textwrap
 
 import requests
 from requests.auth import HTTPBasicAuth
@@ -29,6 +32,8 @@ class RequestHandler:
         self.per_page = per_page
         self._debug = debug
         self.__ssl_check = ssl_check
+        self.__format_json = functools.partial(json.dumps, indent=2, sort_keys=True)
+        self.__indent = functools.partial(textwrap.indent, prefix='  ')
 
     def make_request(self, method, url, **kwargs):
         url = self.__base_url + url
@@ -41,14 +46,71 @@ class RequestHandler:
         except Exception as e:
             raise self.__create_exception(500, str(e))
 
+        if self._debug:
+            print(self.format_response(res))
+
         if not res.ok:
             err_data = res.json()
-            if self._debug:
-                print(err_data)
             message = self.__create_err_message(err_data)
             raise self.__create_exception(res.status_code, message)
         else:
             return res.json()
+
+    def format_request(self, req):
+        headers = '\n'.join('{}: {}'.format(k, v) for k, v in req.headers.items())
+        content_type = req.headers.get('Content-Type', '')
+        if 'application/json' in content_type:
+            try:
+                body = self.__format_json(json.loads(req.body))
+            except json.JSONDecodeError:
+                body = req.body
+        else:
+            body = req.body
+        s = textwrap.dedent("""
+            REQUEST
+            =======
+            endpoint: {method} {url}
+            headers:
+            {headers}
+            body:
+            {body}
+            =======
+            """).strip()
+        s = s.format(
+            method=req.method,
+            url=req.url,
+            headers=self.__indent(headers),
+            body=self.__indent(body),
+        )
+        return s
+
+    def format_response(self, resp):
+        headers = '\n'.join('{}: {}'.format(k, v) for k, v in resp.headers.items())
+        content_type = resp.headers.get('Content-Type', '')
+        if 'application/json' in content_type:
+            try:
+                body = self.__format_json(resp.json())
+            except json.JSONDecodeError:
+                body = resp.text
+        else:
+            body = resp.text
+        s = textwrap.dedent("""
+            RESPONSE
+            ========
+            status_code: {status_code}
+            headers:
+            {headers}
+            body:
+            {body}
+            ========
+            """).strip()
+
+        s = s.format(
+            status_code=resp.status_code,
+            headers=self.__indent(headers),
+            body=self.__indent(body),
+        )
+        return s
 
     def __inject_extras(self, kwargs):
         payload = None
