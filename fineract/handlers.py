@@ -42,7 +42,7 @@ class RequestHandler:
         self._debug = debug
         self.__ssl_check = ssl_check
         self.__format_json = functools.partial(json.dumps, indent=2, sort_keys=True)
-        self.__indent = functools.partial(indent, prefix='  ')
+        self.__indent = functools.partial(indent, amount='  ')
 
     def make_request(self, method, url, **kwargs):
         url = self.__base_url + url
