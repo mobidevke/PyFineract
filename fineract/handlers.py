@@ -6,12 +6,19 @@ try:
     import textwrap
     textwrap.indent
 except AttributeError:  # undefined function (wasn't added until Python 3.3)
-    def indent(text, amount, ch=' '):
-        padding = amount * ch
-        return ''.join(padding+line for line in text.splitlines(True))
+    def indent(text, prefix, predicate=None):
+        if predicate is None:
+            def predicate(line):
+                return line.strip()
+
+        def prefixed_lines():
+            for line in text.splitlines(True):
+                yield (prefix + line if predicate(line) else line)
+
+        return ''.join(prefixed_lines())
 else:
-    def indent(text, amount, ch=' '):
-        return textwrap.indent(text, amount * ch)
+    def indent(text, prefix):
+        return textwrap.indent(text, prefix)
 
 import requests
 from requests.auth import HTTPBasicAuth
@@ -42,7 +49,7 @@ class RequestHandler:
         self._debug = debug
         self.__ssl_check = ssl_check
         self.__format_json = functools.partial(json.dumps, indent=2, sort_keys=True)
-        self.__indent = functools.partial(indent, amount='  ')
+        self.__indent = functools.partial(indent, prefix='  ')
 
     def make_request(self, method, url, **kwargs):
         url = self.__base_url + url
