@@ -2,7 +2,16 @@ import datetime
 import functools
 import json
 import sys
-import textwrap
+try:
+    import textwrap
+    textwrap.indent
+except AttributeError:  # undefined function (wasn't added until Python 3.3)
+    def indent(text, amount, ch=' '):
+        padding = amount * ch
+        return ''.join(padding+line for line in text.splitlines(True))
+else:
+    def indent(text, amount, ch=' '):
+        return textwrap.indent(text, amount * ch)
 
 import requests
 from requests.auth import HTTPBasicAuth
@@ -33,7 +42,7 @@ class RequestHandler:
         self._debug = debug
         self.__ssl_check = ssl_check
         self.__format_json = functools.partial(json.dumps, indent=2, sort_keys=True)
-        self.__indent = functools.partial(textwrap.indent, prefix='  ')
+        self.__indent = functools.partial(indent, prefix='  ')
 
     def make_request(self, method, url, **kwargs):
         url = self.__base_url + url
