@@ -4,7 +4,7 @@
 [![Build Status](https://travis-ci.org/mobidevke/PyFineract.svg?branch=master)](https://travis-ci.org/mobidevke/PyFineract)
 [![Coverage Status](https://coveralls.io/repos/github/mobidevke/PyFineract/badge.svg?branch=master)](https://coveralls.io/github/mobidevke/PyFineract?branch=master)
 
-PyFineract is Python (2 and 3) library to access an 
+PyFineract is a Python (2 and 3) library to access an 
 [Apache Fineract Api](https://demo.openmf.org/api-docs/apiLive.htm#top). This library enables you to manage resources 
 such as clients, loans, loan products etc in your python applications.
 
