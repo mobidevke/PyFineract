@@ -4,6 +4,11 @@ Change log
 Stable versions
 ~~~~~~~~~~~~~~~
 
+Version 0.0.32-dev0 (April 17, 2019)
+-----------------------------------
+
+* refactor: Use PreparedRequests to enable debug mode (a8e83c4)
+
 Version 0.0.32 (April 09, 2019)
 -----------------------------------
 
