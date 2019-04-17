@@ -1,5 +1,6 @@
 import json
 
+import requests
 from requests import Response
 
 from fineract.handlers import RequestHandler
@@ -37,10 +38,10 @@ def fake_handler1(method, url, **kwargs):
 
 
 def test_get_loan_roles(mocker):
-    mocker.patch('requests.request', new=fake_handler1)
+    mocker.patch.object(requests.Session, 'send', new=fake_handler1)
     request_handler = RequestHandler('a', 'b', 'https://localhost', 'default', 10, 30)
 
-    mocker.patch('requests.request', new=fake_handler1)
+    mocker.patch.object(requests.Session, 'send', new=fake_handler1)
     paginated_list = PaginatedList(Role, request_handler, '/', {})
     count = 0
     for item in paginated_list:

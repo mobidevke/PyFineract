@@ -1,5 +1,6 @@
 import json
 
+import requests
 from requests import Response
 
 from fineract.handlers import RequestHandler
@@ -31,10 +32,10 @@ def test_loan_object_creation__interest_recalculation_data():
 
 
 def test_get_loans(mocker):
-    mocker.patch('requests.request', new=fake_handler1)
+    mocker.patch.object(requests.Session, 'send', new=fake_handler1)
     request_handler = RequestHandler('a', 'b', 'https://localhost', 'default', 10, 30)
 
-    mocker.patch('requests.request', new=fake_handler1)
+    mocker.patch.object(requests.Session, 'send', new=fake_handler1)
     paginated_list = PaginatedList(Loan, request_handler, '/', {})
     count = 0
     for item in paginated_list:

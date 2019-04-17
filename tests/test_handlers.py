@@ -60,7 +60,7 @@ def test_request_handler__base_url_ending_slash_removed():
 def test_request_handler__make_request_BadArgsException_raised(mocker):
     with pytest.raises(BadArgsException):
         request_handler = RequestHandler('a', 'b', 'https://localhost', 'default', 10, 30)
-        mocker.patch('requests.request', return_value=ExampleResponse(400))
+        mocker.patch.object(requests.Session, 'send', return_value=ExampleResponse(400))
         mocker.patch.object(request_handler, '_RequestHandler__create_err_message', return_value='Failed')
         request_handler.make_request('get', '')
 
@@ -68,7 +68,7 @@ def test_request_handler__make_request_BadArgsException_raised(mocker):
 def test_request_handler__make_request_ResourceNotFoundException_raised(mocker):
     with pytest.raises(ResourceNotFoundException):
         request_handler = RequestHandler('a', 'b', 'https://localhost', 'default', 10, 30)
-        mocker.patch('requests.request', return_value=ExampleResponse(404))
+        mocker.patch.object(requests.Session, 'send', return_value=ExampleResponse(404))
         mocker.patch.object(request_handler, '_RequestHandler__create_err_message', return_value='Failed')
         request_handler.make_request('get', '')
 
@@ -76,7 +76,7 @@ def test_request_handler__make_request_ResourceNotFoundException_raised(mocker):
 def test_request_handler__make_request_BadCredentialsException_raised_403(mocker):
     with pytest.raises(BadCredentialsException):
         request_handler = RequestHandler('a', 'b', 'https://localhost', 'default', 10, 30)
-        mocker.patch('requests.request', return_value=ExampleResponse(403))
+        mocker.patch.object(requests.Session, 'send', return_value=ExampleResponse(403))
         mocker.patch.object(request_handler, '_RequestHandler__create_err_message', return_value='Failed')
         request_handler.make_request('get', '')
 
@@ -84,7 +84,7 @@ def test_request_handler__make_request_BadCredentialsException_raised_403(mocker
 def test_request_handler__make_request_BadCredentialsException_raised_401(mocker):
     with pytest.raises(BadCredentialsException):
         request_handler = RequestHandler('a', 'b', 'https://localhost', 'default', 10, 30)
-        mocker.patch('requests.request', return_value=ExampleResponse(401))
+        mocker.patch.object(requests.Session, 'send', return_value=ExampleResponse(401))
         mocker.patch.object(request_handler, '_RequestHandler__create_err_message', return_value='Failed')
         request_handler.make_request('get', '')
 
@@ -92,7 +92,7 @@ def test_request_handler__make_request_BadCredentialsException_raised_401(mocker
 def test_request_handler__make_request_FineractException_raised(mocker):
     with pytest.raises(FineractException):
         request_handler = RequestHandler('a', 'b', 'https://localhost', 'default', 10, 30)
-        mocker.patch('requests.request', return_value=ExampleResponse(500))
+        mocker.patch.object(requests.Session, 'send', return_value=ExampleResponse(500))
         mocker.patch.object(request_handler, '_RequestHandler__create_err_message', return_value='Failed')
         request_handler.make_request('get', '')
 
@@ -103,7 +103,7 @@ def test_request_handler__make_request_FineractException_raised(mocker):
     AttributeError
 ])
 def test_request_handler__make_request_FineractException_raised__when_other_exceptions_thrown(mocker, error_class):
-    mocker.patch('requests.request', side_effect=error_class)
+    mocker.patch.object(requests.Session, 'send', side_effect=error_class)
     request_handler = RequestHandler('a', 'b', 'https://localhost', 'default', 10, 30)
     with pytest.raises(FineractException):
         request_handler.make_request('get', '')
@@ -111,7 +111,7 @@ def test_request_handler__make_request_FineractException_raised__when_other_exce
 
 def test_request_handler__successful_response(mocker):
     request_handler = RequestHandler('a', 'b', 'https://localhost', 'default', 10, 30)
-    mocker.patch('requests.request', return_value=ExampleResponse(200))
+    mocker.patch.object(requests.Session, 'send', return_value=ExampleResponse(200))
     assert request_handler.make_request('get', '') == {}
 
 

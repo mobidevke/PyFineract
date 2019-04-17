@@ -55,12 +55,21 @@ class RequestHandler:
         url = self.__base_url + url
         kwargs['auth'] = self.__auth
         kwargs['headers'] = self.__headers
-        kwargs['verify'] = self.__ssl_check
+        # kwargs['verify'] = self.__ssl_check
         kwargs = self.__inject_extras(kwargs)
-        try:
-            res = requests.request(method, url, **kwargs)
-        except Exception as e:
-            raise self.__create_exception(500, str(e))
+        kwargs['method'] = method
+        kwargs['url'] = url
+        req = requests.Request(**kwargs)
+        with requests.Session() as sess:
+            prep_req = sess.prepare_request(req)
+            if self._debug:
+                self.format_request(prep_req)
+
+            try:
+                # res = requests.request(method, url, **kwargs)
+                res = sess.send(prep_req, verify=self.__ssl_check)
+            except Exception as e:
+                raise self.__create_exception(500, str(e))
 
         if self._debug:
             print(self.format_response(res))
