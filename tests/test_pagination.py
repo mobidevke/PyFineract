@@ -2,6 +2,7 @@ import json
 
 import requests
 from requests import Response
+from six.moves.urllib_parse import urlparse, parse_qs
 
 from fineract.handlers import RequestHandler
 from fineract.objects.fineract_object import FineractObject
@@ -25,7 +26,12 @@ def fake_handler1(self, req, **kwargs):
 
 
 def fake_handler2(self, req, **kwargs):
+    parsed = urlparse(req.url)
+    params = parse_qs(parsed.query)
+    params = {key: val[0] for key, val in params.items()}
+
     class FakeResponse(Response):
+
         @property
         def ok(self):
             return True
@@ -33,9 +39,9 @@ def fake_handler2(self, req, **kwargs):
         def json(self, **kwargs1):
             with open('tests/clients.json', 'r') as in_file:
                 data = json.load(in_file)
-            params = kwargs.get('params', {})
-            offset = params.get('offset', 0)
-            limit = params.get('limit', 30)
+
+            offset = int(params.get('offset', 0))
+            limit = int(params.get('limit', 30))
 
             return {
                 'totalFilteredRecords': len(data),

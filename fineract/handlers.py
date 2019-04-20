@@ -84,13 +84,13 @@ class RequestHandler:
     def format_request(self, req):
         headers = '\n'.join('{}: {}'.format(k, v) for k, v in req.headers.items())
         content_type = req.headers.get('Content-Type', '')
-        if 'application/json' in content_type:
+        if 'application/json' in content_type and req.body is not None:
             try:
                 body = self.__format_json(json.loads(req.body))
             except json.JSONDecodeError:
                 body = req.body
         else:
-            body = req.body
+            body = req.body or ''
         s = textwrap.dedent("""
             REQUEST
             =======
