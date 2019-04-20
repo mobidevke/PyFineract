@@ -4,6 +4,12 @@ Change log
 Stable versions
 ~~~~~~~~~~~~~~~
 
+Version 0.0.33 (April 20, 2019)
+-----------------------------------
+
+* fix: Correct issue in debug mode for PreparedRequest (8eca075)
+* Update README.md (db503b8)
+
 Version 0.0.32-dev1 (April 17, 2019)
 -----------------------------------
 
