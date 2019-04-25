@@ -157,6 +157,9 @@ class Client(DataFineractObject):
             )
         raise AttributeError('id not set')
 
+    def get_outstanding_loans(self):
+        return [loan for loan in self.get_loans() if loan.status.active]
+
     @classmethod
     def get_client_by_phone_no(cls, request_handler, phone_no):
         params = {
