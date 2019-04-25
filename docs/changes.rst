@@ -4,6 +4,11 @@ Change log
 Stable versions
 ~~~~~~~~~~~~~~~
 
+Version 0.0.34 (April 25, 2019)
+-----------------------------------
+
+* feat: Add method for getting outstanding loans (685dc80)
+
 Version 0.0.33 (April 20, 2019)
 -----------------------------------
 
