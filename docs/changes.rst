@@ -4,6 +4,11 @@ Change log
 Stable versions
 ~~~~~~~~~~~~~~~
 
+Version 0.0.34-dev0 (April 27, 2019)
+-----------------------------------
+
+* doc: Update README (9d6018e)
+
 Version 0.0.34 (April 25, 2019)
 -----------------------------------
 
