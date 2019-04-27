@@ -38,4 +38,5 @@ to make raw requests.
 clients = f.raw_request('GET', '/clients', params={'limit': 10})
 print(clients)
 ```
-### Documentation (Coming Soon)
+### Documentation (WIP)
+Full documentation can be found [here](https://pyfineract.readthedocs.io).
