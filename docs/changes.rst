@@ -4,6 +4,11 @@ Change log
 Stable versions
 ~~~~~~~~~~~~~~~
 
+Version 0.0.35 (May 06, 2019)
+-------------------------------------
+
+* doc: Add documentation for Fineract object (487a407)
+
 Version 0.0.34-dev0 (April 27, 2019)
 -------------------------------------
 
