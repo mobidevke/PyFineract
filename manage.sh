@@ -19,7 +19,7 @@ function readme {
     changelog=$(tail -n +6 docs/changes.rst)
     gitlog=$(git log v$previousVersion.. --oneline --pretty=format:'* %s (%h)' | grep -v "Merge")
     today=$(date "+(%B %d, %Y)")
-    echo -e "Change log\n==========\n\nStable versions\n~~~~~~~~~~~~~~~\n\nVersion $version $today\n-----------------------------------\n\n$gitlog\n$changelog" > docs/changes.rst
+    echo -e "Change log\n==========\n\nStable versions\n~~~~~~~~~~~~~~~\n\nVersion $version $today\n-------------------------------------\n\n$gitlog\n$changelog" > docs/changes.rst
 }
 
 function push {

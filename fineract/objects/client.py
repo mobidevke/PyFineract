@@ -51,6 +51,11 @@ class Client(DataFineractObject):
         self.timeline = self._make_fineract_object(ClientTimeline, attributes.get('timeline', None))
 
     def activate(self, date=None):
+        """
+        Activates a client
+        :param date: Date of client activation
+        :return: bool
+        """
         if date is None:
             date = self._get_current_date()
 

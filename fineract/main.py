@@ -14,16 +14,21 @@ DEFAULT_PER_PAGE = 30
 
 
 class Fineract(object):
+    """Provide a Fineract object
 
+
+    :param per_page: int Number of items per page
+    :param debug: bool Enable debug mode
+    :param ssl_check: bool Verify ssl certs
+    :param username: str Fineract Username
+    :param password: str Fineract Password
+    :param tenant:  str Fineract Tenant
+    :param base_url: string Fineract base url
+    :param timeout: int Request timeout
+    """
     def __init__(self, username=None, password=None, tenant=DEFAULT_TENANT, base_url=DEFAULT_BASE_URL,
                  timeout=DEFAULT_TIMEOUT, per_page=DEFAULT_PER_PAGE, debug=False, ssl_check=True):
-        """
-        :param username: string
-        :param password: string
-        :param tenant:  string
-        :param base_url: string
-        :param timeout: int
-        """
+
         assert username is None or isinstance(username, str), username
         assert password is None or isinstance(password, str), password
         assert tenant is None or isinstance(tenant, str), tenant
@@ -33,11 +38,14 @@ class Fineract(object):
 
     @property
     def request_handler(self):
+        """:class:`fineract.handlers.RequestHandler`"""
         return self.__request_handler
 
     def get_roles(self):
-        """
+        """Returns all roles
+
         :calls `GET /roles <https://demo.openmf.org/api-docs/apiLive.htm#roles>`_
+
         :rtype: :class:`fineract.pagination.PaginatedList` of :class:`fineract.objects.role.Role`
         """
         return PaginatedList(
@@ -48,8 +56,10 @@ class Fineract(object):
         )
 
     def get_clients(self, **kwargs):
-        """
+        """Returns all clients
+
         :calls `GET /clients <https://demo.openmf.org/api-docs/apiLive.htm#clients>`_
+
         :rtype: :class:`fineract.pagination.PaginatedList` of :class:`fineract.objects.client.Client`
         """
         return PaginatedList(
@@ -60,8 +70,11 @@ class Fineract(object):
         )
 
     def get_client(self, id):
-        """
+        """Returns a client with id
+
         :calls `GET /clients/<id> <https://demo.openmf.org/api-docs/apiLive.htm#clients_retrieve>`_
+
+        :param id: int Client id
         :rtype: :class:`fineract.objects.client.Client`
         """
         return Client(self.__request_handler,
@@ -71,8 +84,10 @@ class Fineract(object):
                       ), False)
 
     def get_loan_products(self, **kwargs):
-        """
+        """Returns all loan products
+
         :calls `GET /loanproducts <https://demo.openmf.org/api-docs/apiLive.htm#loanproducts>`_
+
         :rtype: :class:`fineract.pagination.PaginatedList` of :class:`fineract.objects.loan_product.LoanProduct`
         """
         return PaginatedList(
@@ -83,8 +98,11 @@ class Fineract(object):
         )
 
     def get_loan_product(self, id):
-        """
+        """Return a loan product with matching id
+
         :calls `GET /loanproducts/<id> <https://demo.openmf.org/api-docs/apiLive.htm#loanproducts_retrieve>`_
+
+        :param id: int Loan Product id
         :rtype: :class:`fineract.objects.loan_product.LoanProduct`
         """
         return LoanProduct(self.__request_handler,
@@ -94,8 +112,10 @@ class Fineract(object):
                            ), False)
 
     def get_loans(self, **kwargs):
-        """
+        """Return all loans
+
         :calls `GET /loans <https://demo.openmf.org/api-docs/apiLive.htm#loans>`_
+
         :rtype: :class:`fineract.pagination.PaginatedList` of :class:`fineract.objects.loan.Loan`
         """
         return PaginatedList(
@@ -106,8 +126,11 @@ class Fineract(object):
         )
 
     def get_loan(self, id):
-        """
+        """Returns a loan with matching id
+
         :calls `GET /loans/<id> <https://demo.openmf.org/api-docs/apiLive.htm#loans_retrieve>`_
+
+        :param id: int Loan id
         :rtype: :class:`fineract.objects.loan.Loan`
         """
         return Loan(self.__request_handler,
@@ -117,10 +140,13 @@ class Fineract(object):
                     ), False)
 
     def get_staff(self, id=None):
-        """
+        """Returns a stuff with a matching id or all staff
+
         :calls `GET /staff/<id> <https://demo.openmf.org/api-docs/apiLive.htm#staff_retrieve>`_
+
+        :param id: Staff id
         :rtype: :class:`fineract.objects.staff.Staff` or  :class:`fineract.pagination.PaginatedList` of
-        :class:`fineract.objects.org.Staff`
+            :class:`fineract.objects.org.Staff`
         """
         if id:
             return Staff(self.__request_handler,
@@ -137,10 +163,13 @@ class Fineract(object):
             )
 
     def get_funds(self, id=None):
-        """
+        """"Returns a fund with a matching id or all funds
+
         :calls `GET /funds/<id> <https://demo.openmf.org/api-docs/apiLive.htm#funds_retrieve>`_
+
+        :param id: Charge id
         :rtype: :class:`fineract.objects.org.Fund` or  :class:`fineract.pagination.PaginatedList` of
-        :class:`fineract.objects.org.Fund`
+            :class:`fineract.objects.org.Fund`
         """
         if id:
             return Fund(self.__request_handler,
@@ -157,10 +186,13 @@ class Fineract(object):
             )
 
     def get_charges(self, id=None):
-        """
+        """Returns a charge with a matching id or all charges
+
         :calls `GET /charges/<id> <https://demo.openmf.org/api-docs/apiLive.htm#charges_retrieve>`_
+
+        :param id: Charge id
         :rtype: :class:`fineract.objects.org.Charge` or  :class:`fineract.pagination.PaginatedList` of
-        :class:`fineract.objects.org.Charge`
+            :class:`fineract.objects.org.Charge`
         """
         if id:
             return Charge(self.__request_handler,
@@ -177,10 +209,13 @@ class Fineract(object):
             )
 
     def get_offices(self, id=None):
-        """
+        """Returns an office with a matching id or all offices
+
         :calls `GET /offices/<id> <https://demo.openmf.org/api-docs/apiLive.htm#offices_retrieve>`_
+
+        :param id: Office id
         :rtype: :class:`fineract.objects.org.Office` or  :class:`fineract.pagination.PaginatedList` of
-        :class:`fineract.objects.org.Office`
+            :class:`fineract.objects.org.Office`
         """
         if id:
             return Office(self.__request_handler,
@@ -197,10 +232,10 @@ class Fineract(object):
             )
 
     def raw_request(self, method, url, **kwargs):
-        """
-        Make a raw request to the Fineract API
-        :param method:
-        :param url:
+        """Make a raw request to the Fineract API
+
+        :param method: request method
+        :param url: endpoint
         :param kwargs:
         :return: Returns dict/list object
         """
