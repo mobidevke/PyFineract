@@ -4,6 +4,11 @@ Change log
 Stable versions
 ~~~~~~~~~~~~~~~
 
+Version 0.0.36 (May 08, 2019)
+-------------------------------------
+
+* doc: Add documentation for utilities (3c31af4)
+
 Version 0.0.35 (May 06, 2019)
 -------------------------------------
 
