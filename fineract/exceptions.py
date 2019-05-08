@@ -1,6 +1,6 @@
 class FineractException(Exception):
     """
-    Error handling in PyGithub is done with exceptions. This class is the base of all exceptions raised by PyFineract
+    Error handling in PyFineract is done with exceptions. This class is the base of all exceptions raised by PyFineract
     (but :class:`fineract.exceptions.BadAttributeException`).
     Some other types of exceptions might be raised by underlying libraries, for example for network-related issues.
     """

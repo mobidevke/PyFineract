@@ -61,7 +61,15 @@ class Slice:
 
 
 class PaginatedList(PaginatedListBase):
+    """This class represents a paginated list of items fetched from a Fineract API
 
+
+    :param klass: Child class of a :class:`fineract.objects.fineract_object.FineractObject`
+    :param request_handler: :class:`fineract.handlers.RequestHandler`
+    :param url: Endpoint to be called
+    :param params: dict Extra payload to pass during the call
+    :param list_item: Response field holding the items
+    """
     def __init__(self, klass, request_handler, url, params, list_item='pageItems'):
         PaginatedListBase.__init__(self)
         self.__request_handler = request_handler
@@ -78,6 +86,7 @@ class PaginatedList(PaginatedListBase):
 
     @property
     def total_count(self):
+        """Returns total count of items"""
         if not self.__total_count:
             data = self.__request_handler.make_request(
                 'GET',
@@ -125,6 +134,11 @@ class PaginatedList(PaginatedListBase):
         return content
 
     def get_page(self, page):
+        """Get items from a specific page
+
+        :param page: int Page number
+        :return: list of :class:`fineract.objects.fineract_object.FineractObject`
+        """
         params = dict(self.__params)
         if page != 0:
             params['offset'] = page - 1
