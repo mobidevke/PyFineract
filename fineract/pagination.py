@@ -60,7 +60,7 @@ class Slice:
         return self.__stop is not None and index >= self.__stop
 
 
-class PaginatedList(PaginatedListBase):
+class PaginatedListLegacy(PaginatedListBase):
     """This class represents a paginated list of items fetched from a Fineract API
 
 
@@ -162,7 +162,7 @@ class PaginatedList(PaginatedListBase):
         ]
 
 
-class PaginatedList2:
+class PaginatedList:
     """This class represents a paginated list of items fetched from a Fineract API
 
 
