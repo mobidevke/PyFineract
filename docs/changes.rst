@@ -4,6 +4,12 @@ Change log
 Stable versions
 ~~~~~~~~~~~~~~~
 
+Version 0.0.37 (May 09, 2019)
+-------------------------------------
+
+* refactor: Replace PaginatedList implementation with new version (72d8c4a)
+* feat: New pagination implementation (4b6422b)
+
 Version 0.0.36 (May 08, 2019)
 -------------------------------------
 
