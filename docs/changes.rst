@@ -4,6 +4,11 @@ Change log
 Stable versions
 ~~~~~~~~~~~~~~~
 
+Version 0.0.38 (May 11, 2019)
+-------------------------------------
+
+* doc: Add documentation for Client object (61e4843)
+
 Version 0.0.37 (May 09, 2019)
 -------------------------------------
 
