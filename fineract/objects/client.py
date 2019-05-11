@@ -51,8 +51,8 @@ class Client(DataFineractObject):
         self.timeline = self._make_fineract_object(ClientTimeline, attributes.get('timeline', None))
 
     def activate(self, date=None):
-        """
-        Activates a client
+        """Activates a client
+
         :param date: Date of client activation
         :return: bool
         """
@@ -68,6 +68,12 @@ class Client(DataFineractObject):
         return res.get('clientId', None) == _id
 
     def close(self, closure_reason_id, date=None):
+        """Close a client
+
+        :param closure_reason_id: Closure reason id
+        :param date: Date of client close
+        :return: bool
+        """
         if date is None:
             date = self._get_current_date()
 
@@ -83,6 +89,12 @@ class Client(DataFineractObject):
         return res.get('clientId', None) == _id
 
     def reject(self, rejection_reason_id, date=None):
+        """Reject a client
+
+        :param rejection_reason_id: Rejection reason id
+        :param date: Date of client rejection
+        :return: bool
+        """
         if date is None:
             date = self._get_current_date()
 
@@ -98,6 +110,12 @@ class Client(DataFineractObject):
         return res.get('clientId', None) == _id
 
     def withdraw(self, withdrawal_reason_id, date=None):
+        """Withdraw a client
+
+        :param withdrawal_reason_id: Withdrawal reason id
+        :param date: Date of client rejection
+        :return: bool
+        """
         if date is None:
             date = self._get_current_date()
 
@@ -113,6 +131,11 @@ class Client(DataFineractObject):
         return res.get('clientId', None) == _id
 
     def reactivate(self, date=None):
+        """Reactivate a client
+
+        :param date: Date of client reactivation
+        :return: bool
+        """
         if date is None:
             date = self._get_current_date()
 
@@ -125,6 +148,11 @@ class Client(DataFineractObject):
         return res.get('clientId', None) == _id
 
     def undo_reject(self, date=None):
+        """Undo client rejection
+
+        :param date: Date of client rejection undoing
+        :return: bool
+        """
         if date is None:
             date = self._get_current_date()
 
@@ -137,6 +165,11 @@ class Client(DataFineractObject):
         return res.get('clientId', None) == _id
 
     def undo_withdrawal(self, date=None):
+        """Undo client withdrawal
+
+        :param date: Date of client withdrawal undoing
+        :return: bool
+        """
         if date is None:
             date = self._get_current_date()
 
@@ -149,8 +182,8 @@ class Client(DataFineractObject):
         return res.get('clientId', None) == _id
 
     def get_loans(self):
-        """
-        Get the loans of a client
+        """Get the loans of a client
+
         """
         _id = getattr(self, 'id', None)
         if _id:
@@ -163,6 +196,9 @@ class Client(DataFineractObject):
         raise AttributeError('id not set')
 
     def get_outstanding_loans(self):
+        """Get the outstanding loans of a client
+
+        """
         return [loan for loan in self.get_loans() if loan.status.active]
 
     @classmethod

@@ -6,4 +6,5 @@ Reference
 
 .. toctree::
    fineract
+   objects
    utilities
