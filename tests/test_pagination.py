@@ -5,6 +5,7 @@ from requests import Response
 from six.moves.urllib_parse import urlparse, parse_qs
 
 from fineract.handlers import RequestHandler
+from fineract.objects import Client
 from fineract.objects.fineract_object import FineractObject
 from fineract.pagination import PaginatedListLegacy, PaginatedList
 
@@ -203,6 +204,15 @@ def test_partial_iteration__with_pagination2(mocker):
         count += 1
 
     assert count == 3
+
+
+def test_partial_iteration__with_pagination2__with_page(mocker):
+    request_handler = RequestHandler('a', 'b', 'https://localhost', 'default', 10, 3)
+
+    mocker.patch.object(requests.Session, 'send', new=fake_handler2)
+    paginated_list = PaginatedList(Client, request_handler, '/', {}, page=2)
+
+    assert paginated_list[0].id == 5
 
 
 def test_full_iteration__with_pagination__all_pages(mocker):

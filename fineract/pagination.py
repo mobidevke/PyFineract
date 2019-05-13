@@ -171,16 +171,15 @@ class PaginatedList:
     :param url: Endpoint to be called
     :param params: dict Extra payload to pass during the call
     :param list_item: Response field holding the items
+    :param page: int Page to return
     """
-    def __init__(self, klass, request_handler, url, params, list_item='pageItems'):
+    def __init__(self, klass, request_handler, url, params, list_item='pageItems', page=1):
         self._request_handler = request_handler
         self._klass = klass
         self._url = url
-        self._params = params or {'offset': 0}
         self._params = params or {}
-        if 'offset' not in self._params:
-            self._params['offset'] = 0
         self._params['limit'] = self._request_handler.per_page
+        self._params['offset'] = (page - 1) * self._params['limit']
         self._list_item = list_item
         self._total_count = None
         self._no_pagination = None
