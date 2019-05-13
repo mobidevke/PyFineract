@@ -7,6 +7,11 @@ Stable versions
 Version 0.0.39 (May 13, 2019)
 -------------------------------------
 
+
+
+Version 0.0.39 (May 13, 2019)
+-------------------------------------
+
 * feat: Add page selection to PaginatedList (0f77563)
 
 Version 0.0.38 (May 11, 2019)
