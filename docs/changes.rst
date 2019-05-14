@@ -4,6 +4,12 @@ Change log
 Stable versions
 ~~~~~~~~~~~~~~~
 
+Version 0.0.40 (May 14, 2019)
+-------------------------------------
+
+* feat: Add convenience method for getting loans in arrears. (4b1c35d)
+* Publish version 0.0.39 (59f1133)
+
 Version 0.0.39 (May 13, 2019)
 -------------------------------------
 
