@@ -201,6 +201,12 @@ class Client(DataFineractObject):
         """
         return [loan for loan in self.get_loans() if loan.status.active]
 
+    def get_loans_in_arrears(self):
+        """Get loans in arrears
+        """
+        return [loan for loan in self.get_loans() if loan.in_arrears or
+                (loan.status.closed and loan.timeline.closed_on_date > loan.timeline.expected_maturity_date)]
+
     @classmethod
     def get_client_by_phone_no(cls, request_handler, phone_no):
         params = {
