@@ -4,6 +4,11 @@ Change log
 Stable versions
 ~~~~~~~~~~~~~~~
 
+Version 0.0.41 (May 15, 2019)
+-------------------------------------
+
+* fix: Correct issue in make_request (181f1c0)
+
 Version 0.0.40 (May 14, 2019)
 -------------------------------------
 
