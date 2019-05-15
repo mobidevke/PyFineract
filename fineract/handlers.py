@@ -86,7 +86,8 @@ class RequestHandler:
         content_type = req.headers.get('Content-Type', '')
         if 'application/json' in content_type and req.body is not None:
             try:
-                body = self.__format_json(json.loads(req.body))
+                temp = req.body.decode('utf-8') if isinstance(req.body, bytes) else req.body
+                body = self.__format_json(json.loads(temp))
             except json.JSONDecodeError:
                 body = req.body
         else:
