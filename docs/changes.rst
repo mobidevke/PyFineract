@@ -4,6 +4,11 @@ Change log
 Stable versions
 ~~~~~~~~~~~~~~~
 
+Version 0.0.42 (May 15, 2019)
+-------------------------------------
+
+* test: Fix broken test for test_handlers (466c729)
+
 Version 0.0.41 (May 15, 2019)
 -------------------------------------
 
