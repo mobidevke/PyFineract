@@ -63,7 +63,7 @@ class RequestHandler:
         with requests.Session() as sess:
             prep_req = sess.prepare_request(req)
             if self._debug:
-                self.format_request(prep_req)
+                print(self.format_request(prep_req))
 
             try:
                 # res = requests.request(method, url, **kwargs)

@@ -1,6 +1,6 @@
 import pytest
 import requests
-from requests import Response
+from requests import Response, Request
 
 from fineract import BadArgsException, ResourceNotFoundException, BadCredentialsException, FineractException
 from fineract.handlers import RequestHandler
@@ -120,3 +120,30 @@ def test_request_handler__create_err_message():
     msg = request_handler._RequestHandler__create_err_message(ERROR_MSG)
     assert msg == "Validation errors exist. ['The parameter name cannot be blank.', " \
                   "'The parameter openingDate cannot be blank.', 'The parameter parentId cannot be blank.']"
+
+
+def test_request_handler__format_request__params():
+    request_handler = RequestHandler('a', 'b', 'https://localhost', 'default', 10, 30)
+    req = Request(method='GET', url='https://example.url', headers={}, params={'a': 'b'})
+    with requests.Session() as sess:
+        prep_req = sess.prepare_request(req)
+        result = request_handler.format_request(prep_req)
+        assert 'https://example.url/?a=b' in result
+
+
+def test_request_handler__format_request__data():
+    request_handler = RequestHandler('a', 'b', 'https://localhost', 'default', 10, 30)
+    req = Request(method='GET', url='https://example.url', headers={}, data={'a': 'b'})
+    with requests.Session() as sess:
+        prep_req = sess.prepare_request(req)
+        result = request_handler.format_request(prep_req)
+        assert 'body:\n  a=b' in result
+
+
+def test_request_handler__format_request__json():
+    request_handler = RequestHandler('a', 'b', 'https://localhost', 'default', 10, 30)
+    req = Request(method='GET', url='https://example.url', headers={}, json={'a': 'b'})
+    with requests.Session() as sess:
+        prep_req = sess.prepare_request(req)
+        result = request_handler.format_request(prep_req)
+        assert 'body:\n  {\n    "a": "b"\n  }' in result
