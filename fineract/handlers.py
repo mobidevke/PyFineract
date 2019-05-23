@@ -147,11 +147,14 @@ class RequestHandler:
             payload = kwargs['json']
 
         if payload:
+            extras = {}
             for key in payload.keys():
                 if 'date' in key.lower() and isinstance(payload[key], datetime.datetime):
-                    payload['locale'] = self.__locale
-                    payload['dateFormat'] = self.__date_format
-                    payload[key] = self.__date_string(payload[key])
+                    extras['locale'] = self.__locale
+                    extras['dateFormat'] = self.__date_format
+                    extras[key] = self.__date_string(payload[key])
+
+            payload.update(extras)
 
         if 'data' in kwargs:
             kwargs['data'] = payload

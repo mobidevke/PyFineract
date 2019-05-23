@@ -1,4 +1,5 @@
 import pytest
+from faker import Faker
 
 from fineract import Fineract
 
@@ -14,3 +15,8 @@ def fineract():
         ssl_check=False
     )
     yield f
+
+
+@pytest.fixture(scope='session')
+def fake():
+    return Faker()

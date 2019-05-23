@@ -222,6 +222,40 @@ class Client(DataFineractObject):
 
         return None
 
+    @classmethod
+    def create(cls, request_handler, firstname, lastname, office_id, active=True, activation_date=None):
+        """Create a client and return a Client object
+
+        :param request_handler:
+        :param firstname:
+        :param lastname:
+        :param office_id:
+        :param active:
+        :param activation_date:
+        :rtype: :class:`fineract.objects.client.Client`
+        """
+        data = {
+            'firstname': firstname,
+            'lastname': lastname,
+            'officeId': office_id,
+            'active': active
+        }
+        if active:
+            data['activationDate'] = activation_date or cls._get_current_date()
+
+        res = request_handler.make_request(
+            'POST',
+            '/clients',
+            json=data
+        )
+
+        client_id = res['clientId']
+        return cls(request_handler,
+                      request_handler.make_request(
+                          'GET',
+                          '/clients/{}'.format(client_id)
+                      ), False)
+
 
 class ClientStatus(Type):
     """

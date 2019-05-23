@@ -32,3 +32,8 @@ def test_get_client_loans(fineract):
     assert client
     loans = [loan for loan in client.get_loans()]
     assert len(loans) == 1
+
+
+def test_client_creation__basic(fineract, fake):
+    client = Client.create(fineract.request_handler, fake.first_name(), fake.last_name(), 1)
+    assert client
