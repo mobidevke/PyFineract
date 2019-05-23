@@ -4,6 +4,12 @@ Change log
 Stable versions
 ~~~~~~~~~~~~~~~
 
+Version 0.0.43 (May 23, 2019)
+-------------------------------------
+
+* test: Correct client tests (8518d22)
+* feat: Add method for creating a basic client (562329b)
+
 Version 0.0.42 (May 15, 2019)
 -------------------------------------
 
