@@ -5,7 +5,7 @@ from fineract.objects.client import Client
 
 def test_get_all_clients(fineract):
     count = len([client for client in fineract.get_clients()])
-    assert count == 7
+    assert count >= 7
 
 
 def test_get_all_clients__with_filter(fineract):
