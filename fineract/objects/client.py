@@ -1,4 +1,5 @@
 from fineract.objects.fineract_object import FineractObject, DataFineractObject
+from fineract.objects.group import Group
 from fineract.objects.loan import Loan
 from fineract.objects.types import Type
 from fineract.pagination import PaginatedList
@@ -30,6 +31,7 @@ class Client(DataFineractObject):
         self.savings_product_id = None
         self.type = None
         self.timeline = None
+        self. groups = None
 
     def _use_attributes(self, attributes):
         self.id = attributes.get('id', None)
@@ -49,6 +51,7 @@ class Client(DataFineractObject):
         self.savings_product_id = attributes.get('savingsAccountId', None)
         self.type = self._make_fineract_object(ClientType, attributes.get('clientType', None))
         self.timeline = self._make_fineract_object(ClientTimeline, attributes.get('timeline', None))
+        self.groups = self._make_fineract_objects_list(Group, attributes.get('groups', None))
 
     def activate(self, date=None):
         """Activates a client
