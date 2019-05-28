@@ -4,6 +4,12 @@ Change log
 Stable versions
 ~~~~~~~~~~~~~~~
 
+Version 0.0.44 (May 28, 2019)
+-------------------------------------
+
+* feat: Integrate groups with client (6252f37)
+* feat: Add group object (fe43877)
+
 Version 0.0.43 (May 23, 2019)
 -------------------------------------
 
