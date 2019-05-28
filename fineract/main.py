@@ -1,6 +1,7 @@
 # fineract APIs run on https by default
 from fineract.handlers import RequestHandler
 from fineract.objects.client import Client
+from fineract.objects.group import Group
 from fineract.objects.loan import Loan
 from fineract.objects.loan_product import LoanProduct
 from fineract.objects.org import Staff, Fund, Charge, Office
@@ -230,6 +231,34 @@ class Fineract(object):
                 '/offices',
                 dict()
             )
+
+    def get_groups(self, **kwargs):
+        """Returns all groups
+
+        :calls `GET /groups <https://demo.openmf.org/api-docs/apiLive.htm#groups>`_
+
+        :rtype: :class:`fineract.pagination.PaginatedList` of :class:`fineract.objects.group.Group`
+        """
+        return PaginatedList(
+            Group,
+            self.__request_handler,
+            '/groups',
+            kwargs
+        )
+
+    def get_group(self, id):
+        """Returns a group with id
+
+        :calls `GET /groups/<id> <https://demo.openmf.org/api-docs/apiLive.htm#groups_retrieve>`_
+
+        :param id: int Group id
+        :rtype: :class:`fineract.objects.group.Group`
+        """
+        return Group(self.__request_handler,
+                      self.__request_handler.make_request(
+                          'GET',
+                          '/groups/{}'.format(id)
+                      ), False)
 
     def raw_request(self, method, url, **kwargs):
         """Make a raw request to the Fineract API
