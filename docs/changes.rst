@@ -4,6 +4,11 @@ Change log
 Stable versions
 ~~~~~~~~~~~~~~~
 
+Version 0.0.45 (May 29, 2019)
+-------------------------------------
+
+* fix: Add name attribute to Group object (e859437)
+
 Version 0.0.44 (May 28, 2019)
 -------------------------------------
 
