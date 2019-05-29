@@ -13,6 +13,7 @@ class Group(DataFineractObject):
         self.id = None
         self.account_no = None
         self.external_id = None
+        self.name = None
         self.status = None
         self.active = None
         self.activation_date = None
@@ -24,6 +25,7 @@ class Group(DataFineractObject):
         self.id = attributes.get('id', None)
         self.account_no = attributes.get('accountNo', None)
         self.external_id = attributes.get('externalId', None)
+        self.name = attributes.get('name', None)
         self.status = self._make_fineract_object(GroupStatus, attributes.get('status', None))
         self.active = attributes.get('active', None)
         self.activation_date = self._make_date_object(attributes.get('activationDate', None))
