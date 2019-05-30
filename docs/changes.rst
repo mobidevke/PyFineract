@@ -4,6 +4,12 @@ Change log
 Stable versions
 ~~~~~~~~~~~~~~~
 
+Version 0.0.46 (May 30, 2019)
+-------------------------------------
+
+* feat: Add documentation fo `as_dict` method (683d559)
+* feat: Add 'as_dict' method to convert fineract method to dictionary (d3172ae)
+
 Version 0.0.45 (May 29, 2019)
 -------------------------------------
 
