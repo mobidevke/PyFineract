@@ -104,6 +104,10 @@ class FineractObject(object):
         return datetime.datetime.today()
 
     def as_dict(self):
+        """Return dictionary representation of a :class:`fineract.objects.fineract_object.FineractObject`
+
+        :rtype: dict
+        """
         data = self.__dict__
         for key in list(data.keys()):
             if key[0] == '_':
