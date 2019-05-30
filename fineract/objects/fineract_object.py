@@ -9,6 +9,7 @@ class FineractObject(object):
     """
     Base class for all classes representing objects returned by the API
     """
+    __fineract__ = True
 
     def __init__(self, request_handler, attributes, completed):
         self._request_handler = request_handler
@@ -16,6 +17,7 @@ class FineractObject(object):
         self.__url = None
         self._init_attributes()
         self._store_and_use_attributes(attributes)
+
 
     def _store_and_use_attributes(self, attributes):
         self._raw_data = attributes
@@ -100,6 +102,21 @@ class FineractObject(object):
     @staticmethod
     def _get_current_date():
         return datetime.datetime.today()
+
+    def as_dict(self):
+        data = self.__dict__
+        for key in list(data.keys()):
+            if key[0] == '_':
+                del data[key]
+            elif data[key] and hasattr(data[key], '__fineract__') and data[key].__fineract__:
+                data[key] = data[key].as_dict()
+            elif isinstance(data[key], datetime.datetime):
+                data[key] = data[key].strftime('%Y-%m-%d')
+
+        if '_raw_data' in data:
+            del data['_raw_data']
+
+        return data
 
 
 class DataFineractObject(FineractObject):
