@@ -4,6 +4,11 @@ Change log
 Stable versions
 ~~~~~~~~~~~~~~~
 
+Version 0.0.47 (June 04, 2019)
+-------------------------------------
+
+* feat: Add LoanTransaction object (d0776a8)
+
 Version 0.0.46 (May 30, 2019)
 -------------------------------------
 
