@@ -1,30 +1,32 @@
 {
-  "id": 556,
-  "accountNo": "FDAB000000556",
-  "externalId": "1349879354",
+  "id": 907,
+  "accountNo": "FABC000000907",
+  "externalId": "agv-dcc43319-5795-4cda-a0a9-fd3c3d8fbec3",
   "status": {
-    "id": 600,
-    "code": "loanStatusType.closed.obligations.met",
-    "value": "Closed (obligations met)",
+    "id": 602,
+    "code": "loanStatusType.closed.reschedule.outstanding.amount",
+    "value": "Closed (rescheduled)",
     "pendingApproval": false,
     "waitingForDisbursal": false,
     "active": false,
-    "closedObligationsMet": true,
+    "closedObligationsMet": false,
     "closedWrittenOff": false,
-    "closedRescheduled": false,
+    "closedRescheduled": true,
     "closed": true,
     "overpaid": false
   },
   "clientId": 30,
   "clientAccountNo": "000000030",
-  "clientName": "Nathan Mkaya",
+  "clientName": "Nathanael Mkaya Mwawasi",
   "clientOfficeId": 1,
   "loanProductId": 9,
   "loanProductName": "FarmDrive Agro Loan - Bronze",
   "loanProductDescription": "This product targets agro dealers who for some reason are unable to stock their shops.",
   "isLoanProductLinkedToFloatingRate": false,
-  "fundId": 1,
-  "fundName": "DigiFarm",
+  "fundId": 3,
+  "fundName": "FarmDrive",
+  "loanOfficerId": 3,
+  "loanOfficerName": "App, USSD",
   "loanType": {
     "id": 1,
     "code": "accountType.individual",
@@ -39,29 +41,29 @@
     "nameCode": "currency.KES",
     "displayLabel": "Kenyan Shilling (KSh)"
   },
-  "principal": 500,
-  "approvedPrincipal": 500,
-  "proposedPrincipal": 500,
-  "termFrequency": 6,
+  "principal": 195.000000,
+  "approvedPrincipal": 195.000000,
+  "proposedPrincipal": 195.000000,
+  "termFrequency": 7,
   "termPeriodFrequencyType": {
     "id": 0,
     "code": "termFrequency.periodFrequencyType.days",
     "value": "Days"
   },
   "numberOfRepayments": 1,
-  "repaymentEvery": 6,
+  "repaymentEvery": 7,
   "repaymentFrequencyType": {
     "id": 0,
     "code": "repaymentFrequency.periodFrequencyType.days",
     "value": "Days"
   },
-  "interestRatePerPeriod": 0,
+  "interestRatePerPeriod": 10.714286,
   "interestRateFrequencyType": {
     "id": 2,
     "code": "interestRateFrequency.periodFrequencyType.months",
     "value": "Per month"
   },
-  "annualInterestRate": 0,
+  "annualInterestRate": 128.571432,
   "isFloatingInterestRate": false,
   "amortizationType": {
     "id": 1,
@@ -79,48 +81,48 @@
     "value": "Same as repayment period"
   },
   "allowPartialPeriodInterestCalcualtion": true,
-  "transactionProcessingStrategyId": 1,
-  "transactionProcessingStrategyName": "Penalties, Fees, Interest, Principal order",
+  "transactionProcessingStrategyId": 6,
+  "transactionProcessingStrategyName": "Interest, Principal, Penalties, Fees Order",
   "syncDisbursementWithMeeting": false,
   "timeline": {
     "submittedOnDate": [
       2019,
-      3,
-      14
+      5,
+      7
     ],
-    "submittedByUsername": "nathan",
-    "submittedByFirstname": "Nathan",
-    "submittedByLastname": "Mkaya",
+    "submittedByUsername": "API",
+    "submittedByFirstname": "API",
+    "submittedByLastname": "User",
     "approvedOnDate": [
       2019,
-      3,
-      14
+      5,
+      7
     ],
-    "approvedByUsername": "nathan",
-    "approvedByFirstname": "Nathan",
-    "approvedByLastname": "Mkaya",
+    "approvedByUsername": "API",
+    "approvedByFirstname": "API",
+    "approvedByLastname": "User",
     "expectedDisbursementDate": [
       2019,
-      3,
-      14
+      5,
+      7
     ],
     "actualDisbursementDate": [
       2019,
-      3,
-      14
+      5,
+      7
     ],
-    "disbursedByUsername": "nathan",
-    "disbursedByFirstname": "Nathan",
-    "disbursedByLastname": "Mkaya",
+    "disbursedByUsername": "API",
+    "disbursedByFirstname": "API",
+    "disbursedByLastname": "User",
     "closedOnDate": [
       2019,
-      3,
-      14
+      5,
+      7
     ],
     "expectedMaturityDate": [
       2019,
-      3,
-      20
+      5,
+      14
     ]
   },
   "summary": {
@@ -133,45 +135,470 @@
       "nameCode": "currency.KES",
       "displayLabel": "Kenyan Shilling (KSh)"
     },
-    "principalDisbursed": 500,
-    "principalPaid": 500,
-    "principalWrittenOff": 0,
-    "principalOutstanding": 0,
+    "principalDisbursed": 195.000000,
+    "principalPaid": 5.000000,
+    "principalWrittenOff": 0.000000,
+    "principalOutstanding": 190.000000,
     "principalOverdue": 0,
-    "interestCharged": 0,
-    "interestPaid": 0,
-    "interestWaived": 0,
-    "interestWrittenOff": 0,
-    "interestOutstanding": 0,
+    "interestCharged": 5.000000,
+    "interestPaid": 5.000000,
+    "interestWaived": 0.000000,
+    "interestWrittenOff": 0.000000,
+    "interestOutstanding": 0.000000,
     "interestOverdue": 0,
-    "feeChargesCharged": 23,
-    "feeChargesDueAtDisbursementCharged": 10,
-    "feeChargesPaid": 23,
-    "feeChargesWaived": 0,
-    "feeChargesWrittenOff": 0,
-    "feeChargesOutstanding": 0,
+    "feeChargesCharged": 10.000000,
+    "feeChargesDueAtDisbursementCharged": 10.000000,
+    "feeChargesPaid": 10.000000,
+    "feeChargesWaived": 0.000000,
+    "feeChargesWrittenOff": 0.000000,
+    "feeChargesOutstanding": 0.000000,
     "feeChargesOverdue": 0,
-    "penaltyChargesCharged": 0,
-    "penaltyChargesPaid": 0,
-    "penaltyChargesWaived": 0,
-    "penaltyChargesWrittenOff": 0,
-    "penaltyChargesOutstanding": 0,
+    "penaltyChargesCharged": 0.000000,
+    "penaltyChargesPaid": 0.000000,
+    "penaltyChargesWaived": 0.000000,
+    "penaltyChargesWrittenOff": 0.000000,
+    "penaltyChargesOutstanding": 0.000000,
     "penaltyChargesOverdue": 0,
-    "totalExpectedRepayment": 523,
-    "totalRepayment": 523,
-    "totalExpectedCostOfLoan": 23,
-    "totalCostOfLoan": 23,
-    "totalWaived": 0,
-    "totalWrittenOff": 0,
-    "totalOutstanding": 0,
+    "totalExpectedRepayment": 210.000000,
+    "totalRepayment": 20.000000,
+    "totalExpectedCostOfLoan": 15.000000,
+    "totalCostOfLoan": 15.000000,
+    "totalWaived": 0.000000,
+    "totalWrittenOff": 0.000000,
+    "totalOutstanding": 190.000000,
     "totalOverdue": 0
   },
-  "feeChargesAtDisbursementCharged": 10,
-  "loanCounter": 17,
-  "loanProductCounter": 12,
+  "repaymentSchedule": {
+    "currency": {
+      "code": "KES",
+      "name": "Kenyan Shilling",
+      "decimalPlaces": 0,
+      "inMultiplesOf": 1,
+      "displaySymbol": "KSh",
+      "nameCode": "currency.KES",
+      "displayLabel": "Kenyan Shilling (KSh)"
+    },
+    "loanTermInDays": 7,
+    "totalPrincipalDisbursed": 195,
+    "totalPrincipalExpected": 195,
+    "totalPrincipalPaid": 5,
+    "totalInterestCharged": 5,
+    "totalFeeChargesCharged": 10,
+    "totalPenaltyChargesCharged": 0,
+    "totalWaived": 0,
+    "totalWrittenOff": 0,
+    "totalRepaymentExpected": 210,
+    "totalRepayment": 20,
+    "totalPaidInAdvance": 10,
+    "totalPaidLate": 0,
+    "totalOutstanding": 190,
+    "periods": [
+      {
+        "dueDate": [
+          2019,
+          5,
+          7
+        ],
+        "principalDisbursed": 195.000000,
+        "principalLoanBalanceOutstanding": 195.000000,
+        "feeChargesDue": 10.000000,
+        "feeChargesPaid": 10.000000,
+        "totalOriginalDueForPeriod": 10.000000,
+        "totalDueForPeriod": 10.000000,
+        "totalPaidForPeriod": 10.000000,
+        "totalActualCostOfLoanForPeriod": 10.000000
+      },
+      {
+        "period": 1,
+        "fromDate": [
+          2019,
+          5,
+          7
+        ],
+        "dueDate": [
+          2019,
+          5,
+          14
+        ],
+        "complete": false,
+        "daysInPeriod": 7,
+        "principalOriginalDue": 195.000000,
+        "principalDue": 195.000000,
+        "principalPaid": 5.000000,
+        "principalWrittenOff": 0,
+        "principalOutstanding": 190.000000,
+        "principalLoanBalanceOutstanding": 0.000000,
+        "interestOriginalDue": 5.000000,
+        "interestDue": 5.000000,
+        "interestPaid": 5.000000,
+        "interestWaived": 0,
+        "interestWrittenOff": 0,
+        "interestOutstanding": 0.000000,
+        "feeChargesDue": 0,
+        "feeChargesPaid": 0,
+        "feeChargesWaived": 0,
+        "feeChargesWrittenOff": 0,
+        "feeChargesOutstanding": 0,
+        "penaltyChargesDue": 0,
+        "penaltyChargesPaid": 0,
+        "penaltyChargesWaived": 0,
+        "penaltyChargesWrittenOff": 0,
+        "penaltyChargesOutstanding": 0,
+        "totalOriginalDueForPeriod": 200.000000,
+        "totalDueForPeriod": 200.000000,
+        "totalPaidForPeriod": 10.000000,
+        "totalPaidInAdvanceForPeriod": 10.000000,
+        "totalPaidLateForPeriod": 0,
+        "totalWaivedForPeriod": 0,
+        "totalWrittenOffForPeriod": 0,
+        "totalOutstandingForPeriod": 190.000000,
+        "totalOverdue": 190.000000,
+        "totalActualCostOfLoanForPeriod": 5.000000,
+        "totalInstallmentAmountForPeriod": 200
+      }
+    ]
+  },
+  "transactions": [
+    {
+      "id": 2598,
+      "officeId": 1,
+      "officeName": "FarmDrive",
+      "type": {
+        "id": 1,
+        "code": "loanTransactionType.disbursement",
+        "value": "Disbursement",
+        "disbursement": true,
+        "repaymentAtDisbursement": false,
+        "repayment": false,
+        "contra": false,
+        "waiveInterest": false,
+        "waiveCharges": false,
+        "accrual": false,
+        "writeOff": false,
+        "recoveryRepayment": false,
+        "initiateTransfer": false,
+        "approveTransfer": false,
+        "withdrawTransfer": false,
+        "rejectTransfer": false,
+        "chargePayment": false,
+        "refund": false,
+        "refundForActiveLoans": false
+      },
+      "date": [
+        2019,
+        5,
+        7
+      ],
+      "currency": {
+        "code": "KES",
+        "name": "Kenyan Shilling",
+        "decimalPlaces": 0,
+        "inMultiplesOf": 1,
+        "displaySymbol": "KSh",
+        "nameCode": "currency.KES",
+        "displayLabel": "Kenyan Shilling (KSh)"
+      },
+      "paymentDetailData": {
+        "id": 2598,
+        "paymentType": {
+          "id": 1,
+          "name": "MPESA B2C"
+        },
+        "accountNumber": "",
+        "checkNumber": "",
+        "routingCode": "",
+        "receiptNumber": "",
+        "bankNumber": ""
+      },
+      "amount": 195.000000,
+      "principalPortion": 0,
+      "interestPortion": 0,
+      "feeChargesPortion": 0,
+      "penaltyChargesPortion": 0,
+      "overpaymentPortion": 0,
+      "unrecognizedIncomePortion": 0,
+      "outstandingLoanBalance": 195.000000,
+      "submittedOnDate": [
+        2019,
+        5,
+        7
+      ],
+      "manuallyReversed": false
+    },
+    {
+      "id": 2599,
+      "officeId": 1,
+      "officeName": "FarmDrive",
+      "type": {
+        "id": 10,
+        "code": "loanTransactionType.accrual",
+        "value": "Accrual",
+        "disbursement": false,
+        "repaymentAtDisbursement": false,
+        "repayment": false,
+        "contra": false,
+        "waiveInterest": false,
+        "waiveCharges": false,
+        "accrual": true,
+        "writeOff": false,
+        "recoveryRepayment": false,
+        "initiateTransfer": false,
+        "approveTransfer": false,
+        "withdrawTransfer": false,
+        "rejectTransfer": false,
+        "chargePayment": false,
+        "refund": false,
+        "refundForActiveLoans": false
+      },
+      "date": [
+        2019,
+        5,
+        7
+      ],
+      "currency": {
+        "code": "KES",
+        "name": "Kenyan Shilling",
+        "decimalPlaces": 0,
+        "inMultiplesOf": 1,
+        "displaySymbol": "KSh",
+        "nameCode": "currency.KES",
+        "displayLabel": "Kenyan Shilling (KSh)"
+      },
+      "amount": 5.000000,
+      "principalPortion": 0,
+      "interestPortion": 5.000000,
+      "feeChargesPortion": 0,
+      "penaltyChargesPortion": 0,
+      "overpaymentPortion": 0,
+      "unrecognizedIncomePortion": 0,
+      "outstandingLoanBalance": 0,
+      "submittedOnDate": [
+        2019,
+        5,
+        7
+      ],
+      "manuallyReversed": false
+    },
+    {
+      "id": 2600,
+      "officeId": 1,
+      "officeName": "FarmDrive",
+      "type": {
+        "id": 5,
+        "code": "loanTransactionType.repaymentAtDisbursement",
+        "value": "Repayment (at time of disbursement)",
+        "disbursement": false,
+        "repaymentAtDisbursement": true,
+        "repayment": false,
+        "contra": false,
+        "waiveInterest": false,
+        "waiveCharges": false,
+        "accrual": false,
+        "writeOff": false,
+        "recoveryRepayment": false,
+        "initiateTransfer": false,
+        "approveTransfer": false,
+        "withdrawTransfer": false,
+        "rejectTransfer": false,
+        "chargePayment": false,
+        "refund": false,
+        "refundForActiveLoans": false
+      },
+      "date": [
+        2019,
+        5,
+        7
+      ],
+      "currency": {
+        "code": "KES",
+        "name": "Kenyan Shilling",
+        "decimalPlaces": 0,
+        "inMultiplesOf": 1,
+        "displaySymbol": "KSh",
+        "nameCode": "currency.KES",
+        "displayLabel": "Kenyan Shilling (KSh)"
+      },
+      "amount": 10.000000,
+      "principalPortion": 0,
+      "interestPortion": 0,
+      "feeChargesPortion": 10.000000,
+      "penaltyChargesPortion": 0,
+      "overpaymentPortion": 0,
+      "unrecognizedIncomePortion": 0,
+      "transfer": {
+        "id": 664,
+        "reversed": false,
+        "currency": {
+          "code": "KES",
+          "name": "Kenyan Shilling",
+          "decimalPlaces": 0,
+          "inMultiplesOf": 1,
+          "displaySymbol": "KSh",
+          "nameCode": "currency.KES",
+          "displayLabel": "Kenyan Shilling (KSh)"
+        },
+        "transferAmount": 10.000000,
+        "transferDate": [
+          2019,
+          5,
+          7
+        ],
+        "transferDescription": "Loan Charge Payment"
+      },
+      "outstandingLoanBalance": 195.000000,
+      "submittedOnDate": [
+        2019,
+        5,
+        7
+      ],
+      "manuallyReversed": false
+    },
+    {
+      "id": 2601,
+      "officeId": 1,
+      "officeName": "FarmDrive",
+      "type": {
+        "id": 2,
+        "code": "loanTransactionType.repayment",
+        "value": "Repayment",
+        "disbursement": false,
+        "repaymentAtDisbursement": false,
+        "repayment": true,
+        "contra": false,
+        "waiveInterest": false,
+        "waiveCharges": false,
+        "accrual": false,
+        "writeOff": false,
+        "recoveryRepayment": false,
+        "initiateTransfer": false,
+        "approveTransfer": false,
+        "withdrawTransfer": false,
+        "rejectTransfer": false,
+        "chargePayment": false,
+        "refund": false,
+        "refundForActiveLoans": false
+      },
+      "date": [
+        2019,
+        5,
+        7
+      ],
+      "currency": {
+        "code": "KES",
+        "name": "Kenyan Shilling",
+        "decimalPlaces": 0,
+        "inMultiplesOf": 1,
+        "displaySymbol": "KSh",
+        "nameCode": "currency.KES",
+        "displayLabel": "Kenyan Shilling (KSh)"
+      },
+      "amount": 10.000000,
+      "principalPortion": 5.000000,
+      "interestPortion": 5.000000,
+      "feeChargesPortion": 0,
+      "penaltyChargesPortion": 0,
+      "overpaymentPortion": 0,
+      "unrecognizedIncomePortion": 0,
+      "transfer": {
+        "id": 665,
+        "reversed": false,
+        "currency": {
+          "code": "KES",
+          "name": "Kenyan Shilling",
+          "decimalPlaces": 0,
+          "inMultiplesOf": 1,
+          "displaySymbol": "KSh",
+          "nameCode": "currency.KES",
+          "displayLabel": "Kenyan Shilling (KSh)"
+        },
+        "transferAmount": 10.000000,
+        "transferDate": [
+          2019,
+          5,
+          7
+        ],
+        "transferDescription": "Funds Transfer from Savings Account for Loan ID:907"
+      },
+      "outstandingLoanBalance": 190.000000,
+      "submittedOnDate": [
+        2019,
+        5,
+        7
+      ],
+      "manuallyReversed": false
+    }
+  ],
+  "charges": [
+    {
+      "id": 1523,
+      "chargeId": 16,
+      "name": "Upfront Fees - FASC",
+      "chargeTimeType": {
+        "id": 1,
+        "code": "chargeTimeType.disbursement",
+        "value": "Disbursement"
+      },
+      "chargeCalculationType": {
+        "id": 1,
+        "code": "chargeCalculationType.flat",
+        "value": "Flat"
+      },
+      "percentage": 0,
+      "amountPercentageAppliedTo": 0,
+      "currency": {
+        "code": "KES",
+        "name": "Kenyan Shilling",
+        "decimalPlaces": 2,
+        "displaySymbol": "KSh",
+        "nameCode": "currency.KES",
+        "displayLabel": "Kenyan Shilling (KSh)"
+      },
+      "amount": 10.000000,
+      "amountPaid": 10.000000,
+      "amountWaived": 0,
+      "amountWrittenOff": 0,
+      "amountOutstanding": 0.000000,
+      "amountOrPercentage": 10.000000,
+      "penalty": false,
+      "chargePaymentMode": {
+        "id": 1,
+        "code": "chargepaymentmode.accounttransfer",
+        "value": "Account transfer"
+      },
+      "paid": true,
+      "waived": false,
+      "chargePayable": false
+    }
+  ],
+  "notes": [
+    {
+      "id": 65,
+      "clientId": 30,
+      "loanId": 907,
+      "noteType": {
+        "id": 200,
+        "code": "noteType.loan",
+        "value": "Loan note"
+      },
+      "note": "rescheduled",
+      "createdById": 9,
+      "createdByUsername": "API",
+      "createdOn": 1557216979000,
+      "updatedById": 9,
+      "updatedByUsername": "API",
+      "updatedOn": 1557216979000
+    }
+  ],
+  "disbursementDetails": [],
+  "feeChargesAtDisbursementCharged": 10.000000,
+  "linkedAccount": {
+    "id": 12,
+    "accountNo": "FDS000000012"
+  },
   "multiDisburseLoan": false,
   "canDefineInstallmentAmount": false,
   "canDisburse": false,
+  "emiAmountVariations": [],
   "canUseForTopup": false,
   "isTopup": false,
   "closureLoanId": 0,
@@ -191,7 +618,7 @@
         "nameCode": "currency.KES",
         "displayLabel": "Kenyan Shilling (KSh)"
       },
-      "amount": 2.5,
+      "amount": 2.500000,
       "chargeTimeType": {
         "id": 9,
         "code": "chargeTimeType.overdueInstallment",
@@ -227,7 +654,7 @@
   "isInterestRecalculationEnabled": false,
   "createStandingInstructionAtDisbursement": false,
   "paidInAdvance": {
-    "paidInAdvance": 513
+    "paidInAdvance": 0
   },
   "isVariableInstallmentsAllowed": false,
   "minimumGap": 0,

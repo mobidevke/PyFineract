@@ -1,11 +1,11 @@
 from fineract.objects.currency import Currency
 from fineract.objects.fineract_object import DataFineractObject, FineractObject
-from fineract.objects.types import LoanType, TermPeriodFrequencyType
+from fineract.objects.types import LoanType, TermPeriodFrequencyType, Type
 
 
 class Loan(DataFineractObject):
     """
-    This class represents a Client.
+    This class represents a Loan.
     """
 
     def __repr__(self):
@@ -25,6 +25,7 @@ class Loan(DataFineractObject):
         self.term_frequency = None
         self.term_frequency_type = None
         self.timeline = None
+        self.transactions = None
         self.summary = None
         self.multi_disburse_loan = None
         self.can_define_installment_amount = None
@@ -49,6 +50,7 @@ class Loan(DataFineractObject):
         self.term_frequency_type = self._make_fineract_object(TermPeriodFrequencyType,
                                                               attributes.get('termPeriodFrequencyType', None))
         self.timeline = self._make_fineract_object(LoanTimeline, attributes.get('timeline', None))
+        self.transactions = self._make_fineract_objects_list(LoanTransaction, attributes.get('transactions', None))
         self.summary = self._make_fineract_object(LoanSummary, attributes.get('summary', None))
         self.multi_disburse_loan = attributes.get('multiDisburseLoan', None)
         self.can_define_installment_amount = attributes.get('canDefineInstallmentAmount', None)
@@ -282,3 +284,85 @@ class LoanRepaymentPeriod(FineractObject):
         self.total_outstanding_for_period = attributes.get('totalOutstandingForPeriod', None)
         self.total_overdue = attributes.get('totalOverdue', None)
         self.total_actual_cost_of_loan_for_period = attributes.get('totalActualCostOfLoanForPeriod', None)
+
+
+class LoanTransaction(FineractObject):
+    """
+    This class represents a Loan transaction.
+    """
+
+    def _init_attributes(self):
+        self.id = None
+        self.office_id = None
+        self.office_name = None
+        self.type = None
+        self.date = None
+        self.currency = None
+        self.amount = None
+        self.principal_portion = None
+        self.interest_portion = None
+        self.fee_charges_portion = None
+        self.penalty_charges_portion = None
+        self.overpayment_portion = None
+        self.unrecognized_income_portion = None
+        self.outstanding_loan_balance = None
+        self.submitted_on_date = None
+        self.manually_reversed = None
+
+    def _use_attributes(self, attributes):
+        self.id = attributes.get('id', None)
+        self.office_id = attributes.get('officeId', None)
+        self.office_name = attributes.get('officeName', None)
+        self.type = self._make_fineract_object(LoanTransactionType, attributes.get('type', None))
+        self.date = self._make_date_object(attributes.get('date', None))
+        self.currency = self._make_fineract_object(Currency, attributes.get('currency', None))
+        self.amount = attributes.get('amount', None)
+        self.principal_portion = attributes.get('principalPortion', None)
+        self.interest_portion = attributes.get('interestPortion', None)
+        self.fee_charges_portion = attributes.get('feeChargesPortion', None)
+        self.penalty_charges_portion = attributes.get('penaltyChargesPortion', None)
+        self.overpayment_portion = attributes.get('overpaymentPortion', None)
+        self.unrecognized_income_portion = attributes.get('unrecognizedIncomePortion', None)
+        self.outstanding_loan_balance = attributes.get('outstandingLoanBalance', None)
+        self.submitted_on_date = self._make_date_object(attributes.get('submittedOnDate', None))
+        self.manually_reversed = attributes.get('manuallyReversed', None)
+
+
+class LoanTransactionType(Type):
+
+    def _init_attributes(self):
+        super(LoanTransactionType, self)._init_attributes()
+        self.disbursement = None
+        self.repayment_at_disbursement = None
+        self.repayment = None
+        self.contra = None
+        self.waive_interest = None
+        self.waive_charges = None
+        self.accrual = None
+        self.write_off = None
+        self.recovery_payment = None
+        self.initiate_transfer = None
+        self.approve_transfer = None
+        self.withdraw_transfer = None
+        self.reject_transfer = None
+        self.charge_payment = None
+        self.refund = None
+        self.refund_for_active_loans = None
+
+    def _use_attributes(self, attributes):
+        super(LoanTransactionType, self)._use_attributes(attributes)
+        self.disbursement = attributes.get('disbursement', None)
+        self.repayment_at_disbursement = attributes.get('repaymentAtDisbursement', None)
+        self.repayment = attributes.get('repayment', None)
+        self.contra = attributes.get('contra', None)
+        self.waive_interest = attributes.get('waiveInterest', None)
+        self.waive_charges = attributes.get('waiveCharges', None)
+        self.write_off = attributes.get('writeOff', None)
+        self.recovery_payment = attributes.get('recoveryPayment', None)
+        self.initiate_transfer = attributes.get('initiateTransfer', None)
+        self.approve_transfer = attributes.get('approveTransfer', None)
+        self.withdraw_transfer = attributes.get('withdrawTransfer', None)
+        self.reject_transfer = attributes.get('rejectTransfer', None)
+        self.charge_payment = attributes.get('chargePayment', None)
+        self.refund = attributes.get('refund', None)
+        self.refund_for_active_loans = attributes.get('refundForActiveLoans', None)
