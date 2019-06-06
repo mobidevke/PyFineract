@@ -4,6 +4,11 @@ Change log
 Stable versions
 ~~~~~~~~~~~~~~~
 
+Version 0.0.48 (June 06, 2019)
+-------------------------------------
+
+* feat: Add optional params for specific objects (Group, Client, Loan, LoanProduct) (e2b7628)
+
 Version 0.0.47 (June 04, 2019)
 -------------------------------------
 
