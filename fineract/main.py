@@ -70,7 +70,7 @@ class Fineract(object):
             kwargs
         )
 
-    def get_client(self, id):
+    def get_client(self, id, **kwargs):
         """Returns a client with id
 
         :calls `GET /clients/<id> <https://demo.openmf.org/api-docs/apiLive.htm#clients_retrieve>`_
@@ -81,7 +81,8 @@ class Fineract(object):
         return Client(self.__request_handler,
                       self.__request_handler.make_request(
                           'GET',
-                          '/clients/{}'.format(id)
+                          '/clients/{}'.format(id),
+                          params=kwargs
                       ), False)
 
     def get_loan_products(self, **kwargs):
@@ -98,7 +99,7 @@ class Fineract(object):
             kwargs
         )
 
-    def get_loan_product(self, id):
+    def get_loan_product(self, id, **kwargs):
         """Return a loan product with matching id
 
         :calls `GET /loanproducts/<id> <https://demo.openmf.org/api-docs/apiLive.htm#loanproducts_retrieve>`_
@@ -109,7 +110,8 @@ class Fineract(object):
         return LoanProduct(self.__request_handler,
                            self.__request_handler.make_request(
                                'GET',
-                               '/loanproducts/{}'.format(id)
+                               '/loanproducts/{}'.format(id),
+                               params=kwargs
                            ), False)
 
     def get_loans(self, **kwargs):
@@ -126,7 +128,7 @@ class Fineract(object):
             kwargs
         )
 
-    def get_loan(self, id):
+    def get_loan(self, id, **kwargs):
         """Returns a loan with matching id
 
         :calls `GET /loans/<id> <https://demo.openmf.org/api-docs/apiLive.htm#loans_retrieve>`_
@@ -137,7 +139,8 @@ class Fineract(object):
         return Loan(self.__request_handler,
                     self.__request_handler.make_request(
                         'GET',
-                        '/loans/{}'.format(id)
+                        '/loans/{}'.format(id),
+                        params=kwargs
                     ), False)
 
     def get_staff(self, id=None):
@@ -246,7 +249,7 @@ class Fineract(object):
             kwargs
         )
 
-    def get_group(self, id):
+    def get_group(self, id, **kwargs):
         """Returns a group with id
 
         :calls `GET /groups/<id> <https://demo.openmf.org/api-docs/apiLive.htm#groups_retrieve>`_
@@ -257,7 +260,8 @@ class Fineract(object):
         return Group(self.__request_handler,
                       self.__request_handler.make_request(
                           'GET',
-                          '/groups/{}'.format(id)
+                          '/groups/{}'.format(id),
+                          params=kwargs
                       ), False)
 
     def raw_request(self, method, url, **kwargs):
