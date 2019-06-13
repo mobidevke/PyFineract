@@ -4,6 +4,11 @@ Change log
 Stable versions
 ~~~~~~~~~~~~~~~
 
+Version 0.0.49 (June 13, 2019)
+-------------------------------------
+
+* feat: Add convenience (days_in_arrears) function to Loan object (c406f41)
+
 Version 0.0.48 (June 06, 2019)
 -------------------------------------
 
