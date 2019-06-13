@@ -1,3 +1,5 @@
+from datetime import datetime
+
 from fineract.objects.currency import Currency
 from fineract.objects.fineract_object import DataFineractObject, FineractObject
 from fineract.objects.types import LoanType, TermPeriodFrequencyType, Type
@@ -59,6 +61,18 @@ class Loan(DataFineractObject):
         self.is_topup = attributes.get('isTopup', None)
         self.in_arrears = attributes.get('inArrears', None)
         self.is_npa = attributes.get('isNPA', None)
+
+    def days_in_arrears(self):
+        """Return the number of days in arrears
+
+        :return: -1
+        """
+        in_arrears = -1
+        if self.in_arrears:
+            delta = datetime.today() - self.timeline.expected_maturity_date
+            in_arrears = delta.days
+
+        return in_arrears
 
 
 class LoanStatus(FineractObject):
