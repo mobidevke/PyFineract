@@ -4,6 +4,11 @@ Change log
 Stable versions
 ~~~~~~~~~~~~~~~
 
+Version 0.0.51 (June 18, 2019)
+-------------------------------------
+
+* fix: Correct bug in Loan object (f08d6f7)
+
 Version 0.0.50 (June 18, 2019)
 -------------------------------------
 
