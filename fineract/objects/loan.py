@@ -169,7 +169,8 @@ class LoanSummary(FineractObject):
         self.total_cost_of_loan = None
         self.total_waived = None
         self.total_written_off = None
-        self.outstanding = None
+        self.total_overdue = None
+        self.total_outstanding = None
         self.overdue_since_date = None
         self.in_arrears = None
         self.is_npa = None
@@ -199,15 +200,15 @@ class LoanSummary(FineractObject):
         self.penalty_charges_written_off = attributes.get('penaltyChargesWrittenOff', None)
         self.penalty_charges_outstanding = attributes.get('penaltyChargesOutstanding', None)
         self.penalty_charges_overdue = attributes.get('penaltyChargesOverdue', None)
-        self.principal_disbursed = attributes.get('totalExpectedRepayment', None)
-        self.principal_disbursed = attributes.get('totalRepayment', None)
-        self.principal_disbursed = attributes.get('totalExpectedCostOfLoan', None)
-        self.principal_disbursed = attributes.get('totalCostOfLoan', None)
-        self.principal_disbursed = attributes.get('totalWaived', None)
-        self.principal_disbursed = attributes.get('totalWrittenOff', None)
-        self.principal_disbursed = attributes.get('totalOutstanding', None)
-        self.principal_disbursed = attributes.get('totalOverdue', None)
-        self.principal_disbursed = self._make_date_object(attributes.get('overdueSinceDate', None))
+        self.total_expected_repayment = attributes.get('totalExpectedRepayment', None)
+        self.total_repayment = attributes.get('totalRepayment', None)
+        self.total_expected_cost_of_loan = attributes.get('totalExpectedCostOfLoan', None)
+        self.total_cost_of_loan = attributes.get('totalCostOfLoan', None)
+        self.total_waived = attributes.get('totalWaived', None)
+        self.total_written_off = attributes.get('totalWrittenOff', None)
+        self.total_outstanding = attributes.get('totalOutstanding', None)
+        self.total_overdue = attributes.get('totalOverdue', None)
+        self.overdue_since_date = self._make_date_object(attributes.get('overdueSinceDate', None))
         self.in_arrears = attributes.get('inArrears', None)
         self.is_npa = attributes.get('isNPA', None)
 
