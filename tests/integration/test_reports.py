@@ -1,0 +1,20 @@
+import random
+
+from fineract.objects.report import Report
+
+number = random.randint(0, 10000)
+
+
+def test_get_all_reports(fineract):
+    reports = [report for report in fineract.get_reports()]
+    assert len(reports) > 1
+
+
+def test_create_report(fineract):
+    report = Report.create(fineract.request_handler, 'Test Report ' + str(number), 'Table', 'Client',
+                           'SELECT * FROM m_client')
+    assert isinstance(report, Report)
+
+
+def test_report_exists(fineract):
+    assert Report.exists(fineract.request_handler, 'Test Report ' + str(number))
