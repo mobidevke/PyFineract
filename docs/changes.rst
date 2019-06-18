@@ -4,6 +4,13 @@ Change log
 Stable versions
 ~~~~~~~~~~~~~~~
 
+Version 0.0.50 (June 18, 2019)
+-------------------------------------
+
+* feat: Add convenience methods for Report object (eb1b4ef)
+* feat: Add convenience methods for Report object (d0c4e7b)
+* feat: Add Report object (20c782b)
+
 Version 0.0.49 (June 13, 2019)
 -------------------------------------
 
