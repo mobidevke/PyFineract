@@ -18,3 +18,13 @@ def test_create_report(fineract):
 
 def test_report_exists(fineract):
     assert Report.exists(fineract.request_handler, 'Test Report ' + str(number))
+
+
+def test_get_by_name(fineract):
+    assert Report.get_by_name(fineract.request_handler, 'Test Report ' + str(number))
+
+
+def test_update_sql(fineract):
+    report = Report.get_by_name(fineract.request_handler, 'Test Report ' + str(number))
+    report.update_sql('SELECT id FROM m_client')
+    assert report.report_sql == 'SELECT id FROM m_client'
