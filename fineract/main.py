@@ -5,6 +5,7 @@ from fineract.objects.group import Group
 from fineract.objects.loan import Loan
 from fineract.objects.loan_product import LoanProduct
 from fineract.objects.org import Staff, Fund, Charge, Office
+from fineract.objects.report import Report
 from fineract.objects.role import Role
 from fineract.pagination import PaginatedList
 
@@ -263,6 +264,29 @@ class Fineract(object):
                           '/groups/{}'.format(id),
                           params=kwargs
                       ), False)
+
+    def get_reports(self, id=None):
+        """Returns an office with a matching id or all offices
+
+        :calls `GET /reports/<id> <https://demo.openmf.org/api-docs/apiLive.htm#reports_retrieve>`_
+
+        :param id: Office id
+        :rtype: :class:`fineract.objects.report.Report` or  :class:`fineract.pagination.PaginatedList` of
+            :class:`fineract.objects.report.Report`
+        """
+        if id:
+            return Report(self.__request_handler,
+                          self.__request_handler.make_request(
+                              'GET',
+                              '/reports/{}'.format(id),
+                          ), False)
+        else:
+            return PaginatedList(
+                Report,
+                self.__request_handler,
+                '/reports',
+                dict()
+            )
 
     def raw_request(self, method, url, **kwargs):
         """Make a raw request to the Fineract API
