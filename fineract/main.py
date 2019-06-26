@@ -2,6 +2,7 @@
 from fineract.handlers import RequestHandler
 from fineract.objects.client import Client
 from fineract.objects.group import Group
+from fineract.objects.hook import Hook
 from fineract.objects.loan import Loan
 from fineract.objects.loan_product import LoanProduct
 from fineract.objects.org import Staff, Fund, Charge, Office
@@ -285,6 +286,29 @@ class Fineract(object):
                 Report,
                 self.__request_handler,
                 '/reports',
+                dict()
+            )
+
+    def get_hooks(self, id=None):
+        """Returns an office with a matching id or all offices
+
+        :calls `GET /hooks/<id> <https://demo.openmf.org/api-docs/apiLive.htm#hooks_retrieve>`_
+
+        :param id: Office id
+        :rtype: :class:`fineract.objects.hook.Hook` or  :class:`fineract.pagination.PaginatedList` of
+            :class:`fineract.objects.hook.Hook`
+        """
+        if id:
+            return Hook(self.__request_handler,
+                          self.__request_handler.make_request(
+                              'GET',
+                              '/hooks/{}'.format(id),
+                          ), False)
+        else:
+            return PaginatedList(
+                Hook,
+                self.__request_handler,
+                '/hooks',
                 dict()
             )
 
