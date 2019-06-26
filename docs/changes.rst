@@ -4,6 +4,11 @@ Change log
 Stable versions
 ~~~~~~~~~~~~~~~
 
+Version 0.0.53 (June 26, 2019)
+-------------------------------------
+
+* feat: Add convenience methods for Hook (23a0a67)
+
 Version 0.0.52 (June 26, 2019)
 -------------------------------------
 
