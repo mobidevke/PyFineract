@@ -37,3 +37,24 @@ def test_hook_templates(fineract):
 
 def test_hook_exists(fineract):
     assert Hook.exists(fineract.request_handler, 'Test ' + str(number))
+
+
+def test_get_hook_by_name(fineract):
+    assert Hook.get_by_name(fineract.request_handler, 'Test ' + str(number))
+
+
+def test_get_hook_by_id(fineract):
+    hook = Hook.get_by_name(fineract.request_handler, 'Test ' + str(number))
+    assert Hook.get(fineract.request_handler, hook.id)
+
+
+def test_hook_update(fineract):
+    events = [
+        {
+            'actionName': 'DISBURSE',
+            'entityName': 'LOAN'
+        }
+    ]
+    hook = Hook.get_by_name(fineract.request_handler, 'Test ' + str(number))
+    hook = hook.update('https://localhost:8443', events)
+    assert len(hook.events) == 1

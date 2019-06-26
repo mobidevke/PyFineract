@@ -25,12 +25,24 @@ class Hook(FineractObject):
         self.events = attributes.get('events', [])
         self.config = attributes.get('config', [])
 
-    @staticmethod
-    def templates(request_handler):
-        return request_handler.make_request(
-            'GET',
-            '/hooks/template'
+    def update(self, payload_url, events):
+        params = {
+            'name': 'Web',
+            'displayName': self.display_name,
+            'events': events,
+            'isActive': self.is_active,
+            'config': {
+                'Payload URL': payload_url,
+                'Content Type': 'json'
+            }
+        }
+
+        self.request_handler.make_request(
+            'PUT',
+            '/hooks/{}'.format(self.id),
+            json=params
         )
+        return self.get(self.request_handler, self.id)
 
     @classmethod
     def create_web_hook(cls, request_handler, display_name, payload_url, events, content_type='json', is_active=False,
@@ -63,12 +75,31 @@ class Hook(FineractObject):
                        '/hooks/{}'.format(data['resourceId']),
                    ), False)
 
+    @classmethod
+    def get(cls, request_handler, id):
+        return Hook(request_handler,
+                    request_handler.make_request(
+                        'GET',
+                        '/hooks/{}'.format(id),
+                    ), False)
+
+    @classmethod
+    def get_by_name(cls, request_handler, name):
+        data = request_handler.make_request(
+            'GET',
+            '/hooks'
+        )
+        for item in data:
+            if item['displayName'] == name:
+                return cls(request_handler, item, False)
+        return None
+
     @staticmethod
     def exists(request_handler, name):
         """Check whether a hook with the name (case sensitive) exists
 
         :param request_handler:
-        :param name: Report name
+        :param name: Hook name
         :return: bool
         """
         data = request_handler.make_request(
@@ -79,3 +110,10 @@ class Hook(FineractObject):
             if item['displayName'] == name:
                 return True
         return False
+
+    @staticmethod
+    def templates(request_handler):
+        return request_handler.make_request(
+            'GET',
+            '/hooks/template'
+        )
