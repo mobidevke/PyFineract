@@ -204,11 +204,21 @@ class Client(DataFineractObject):
         """
         return [loan for loan in self.get_loans() if loan.status.active]
 
-    def get_loans_in_arrears(self):
+    def get_loans_in_arrears(self, active=True, all_loans=False):
         """Get loans in arrears
+        :param active: boolean flag to choose between closed/open loans
+        :param all_loans: flag to choose between returning all loans in arrears or specific loans based on active
+        parameter
         """
-        return [loan for loan in self.get_loans() if loan.in_arrears or
-                (loan.status.closed and loan.timeline.closed_on_date > loan.timeline.expected_maturity_date)]
+        if all_loans:
+            return [loan for loan in self.get_loans() if loan.in_arrears or
+                    (loan.status.closed and loan.timeline.closed_on_date > loan.timeline.expected_maturity_date)]
+
+        if active:
+            return [loan for loan in self.get_loans() if loan.in_arrears and loan.status.active]
+        else:
+            return [loan for loan in self.get_loans() if loan.status.closed and loan.timeline.closed_on_date >
+                    loan.timeline.expected_maturity_date]
 
     @classmethod
     def get_client_by_phone_no(cls, request_handler, phone_no):
