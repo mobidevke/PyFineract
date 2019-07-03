@@ -4,6 +4,11 @@ Change log
 Stable versions
 ~~~~~~~~~~~~~~~
 
+Version 0.0.54 (July 03, 2019)
+-------------------------------------
+
+* feat: Add flag to 'get_loan_in_arrears' method (bc81f12)
+
 Version 0.0.53 (June 26, 2019)
 -------------------------------------
 
