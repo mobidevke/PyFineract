@@ -28,3 +28,8 @@ def test_update_sql(fineract):
     report = Report.get_by_name(fineract.request_handler, 'Test Report ' + str(number))
     report.update_sql('SELECT id FROM m_client')
     assert report.report_sql == 'SELECT id FROM m_client'
+
+
+def test_run_report(fineract):
+    data = Report.run(fineract.request_handler, 'Test Report ' + str(number), False)
+    assert data

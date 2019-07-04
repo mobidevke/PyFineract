@@ -78,7 +78,7 @@ class Report(FineractObject):
     def exists(request_handler, name):
         """Check whether a report with the name (case sensitive) exists
 
-        :param request_handler:
+        :param request_handler: :class:`fineract.handlers.RequestHandler`
         :param name: Report name
         :return: bool
         """
@@ -90,3 +90,23 @@ class Report(FineractObject):
             if item['reportName'] == name:
                 return True
         return False
+
+    @staticmethod
+    def run(request_handler, name, generic_result_set=True, **kwargs):
+        """
+
+        :param request_handler: :class:`fineract.handlers.RequestHandler`
+        :param name: Report name
+        :param generic_result_set: if 'True' an optimised JSON forma is returned. If 'False' a simple JSON format is
+        returned
+        :param kwargs: Report parameters
+        :return: list
+        """
+        params = {
+            'genericResultSet': generic_result_set,
+            'pretty': False
+        }
+        for param in kwargs.keys():
+            params['R_{}'.format(param)] = kwargs[param]
+
+        return request_handler.make_request('GET', '/runreports/{}'.format(name), params=params)
