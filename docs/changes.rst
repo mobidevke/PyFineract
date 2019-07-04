@@ -4,6 +4,11 @@ Change log
 Stable versions
 ~~~~~~~~~~~~~~~
 
+Version 0.0.55 (July 04, 2019)
+-------------------------------------
+
+* feat: Add 'run' method to Report object (c740c22)
+
 Version 0.0.54 (July 03, 2019)
 -------------------------------------
 
