@@ -4,6 +4,11 @@ Change log
 Stable versions
 ~~~~~~~~~~~~~~~
 
+Version 0.0.56 (July 15, 2019)
+-------------------------------------
+
+* feat: add 'User' object (8d85d8c)
+
 Version 0.0.55 (July 04, 2019)
 -------------------------------------
 
