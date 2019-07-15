@@ -1,0 +1,28 @@
+{
+  "id": 1,
+  "username": "mifos",
+  "officeId": 1,
+  "officeName": "Head Office",
+  "firstname": "App",
+  "lastname": "Administrator",
+  "email": "demomfi@mifos.org",
+  "passwordNeverExpires": false,
+  "staff": {
+    "id": 1,
+    "firstname": "Test",
+    "lastname": "123",
+    "displayName": "123, Test",
+    "mobileNo": "12312312",
+    "officeId": 1,
+    "officeName": "Head Office",
+    "isLoanOfficer": true,
+    "isActive": true
+  },
+  "selectedRoles": [
+    {
+      "id": 1,
+      "name": "Super user",
+      "description": "This role provides all application permissions."
+    }
+  ]
+}

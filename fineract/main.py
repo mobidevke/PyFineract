@@ -8,6 +8,7 @@ from fineract.objects.loan_product import LoanProduct
 from fineract.objects.org import Staff, Fund, Charge, Office
 from fineract.objects.report import Report
 from fineract.objects.role import Role
+from fineract.objects.user import User
 from fineract.pagination import PaginatedList
 
 DEFAULT_BASE_URL = 'https://localhost/fineract-provider/api/v1'
@@ -309,6 +310,29 @@ class Fineract(object):
                 Hook,
                 self.__request_handler,
                 '/hooks',
+                dict()
+            )
+
+    def get_users(self, id=None):
+        """Returns an user with a matching id or all users
+
+        :calls `GET /users/<id> <https://demo.openmf.org/api-docs/apiLive.htm#users_retrieve>`_
+
+        :param id: User id
+        :rtype: :class:`fineract.objects.user.User` or  :class:`fineract.pagination.PaginatedList` of
+            :class:`fineract.objects.user.User`
+        """
+        if id:
+            return User(self.__request_handler,
+                          self.__request_handler.make_request(
+                              'GET',
+                              '/users/{}'.format(id),
+                          ), False)
+        else:
+            return PaginatedList(
+                User,
+                self.__request_handler,
+                '/users',
                 dict()
             )
 
