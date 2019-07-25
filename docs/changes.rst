@@ -4,6 +4,11 @@ Change log
 Stable versions
 ~~~~~~~~~~~~~~~
 
+Version 0.0.57 (July 25, 2019)
+-------------------------------------
+
+* refactor: Update function for getting loans in arrears (40f6e6f)
+
 Version 0.0.56 (July 15, 2019)
 -------------------------------------
 
