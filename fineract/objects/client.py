@@ -1,3 +1,5 @@
+import datetime
+
 from fineract.objects.fineract_object import FineractObject, DataFineractObject
 from fineract.objects.group import Group
 from fineract.objects.loan import Loan
@@ -31,7 +33,7 @@ class Client(DataFineractObject):
         self.savings_product_id = None
         self.type = None
         self.timeline = None
-        self. groups = None
+        self.groups = None
 
     def _use_attributes(self, attributes):
         self.id = attributes.get('id', None)
@@ -210,12 +212,15 @@ class Client(DataFineractObject):
         :param all_loans: flag to choose between returning all loans in arrears or specific loans based on active
         parameter
         """
+        now = datetime.datetime.now()
         if all_loans:
-            return [loan for loan in self.get_loans() if loan.in_arrears or
+            return [loan for loan in self.get_loans() if
+                    (loan.in_arrears or (now.date() > loan.timeline.expected_maturity_date)) or
                     (loan.status.closed and loan.timeline.closed_on_date > loan.timeline.expected_maturity_date)]
 
         if active:
-            return [loan for loan in self.get_loans() if loan.in_arrears and loan.status.active]
+            return [loan for loan in self.get_loans() if
+                    (loan.in_arrears or (now.date() > loan.timeline.expected_maturity_date)) and loan.status.active]
         else:
             return [loan for loan in self.get_loans() if loan.status.closed and loan.timeline.closed_on_date >
                     loan.timeline.expected_maturity_date]
@@ -264,10 +269,10 @@ class Client(DataFineractObject):
 
         client_id = res['clientId']
         return cls(request_handler,
-                      request_handler.make_request(
-                          'GET',
-                          '/clients/{}'.format(client_id)
-                      ), False)
+                   request_handler.make_request(
+                       'GET',
+                       '/clients/{}'.format(client_id)
+                   ), False)
 
 
 class ClientStatus(Type):
