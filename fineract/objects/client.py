@@ -215,12 +215,12 @@ class Client(DataFineractObject):
         now = datetime.datetime.now()
         if all_loans:
             return [loan for loan in self.get_loans() if
-                    (loan.in_arrears or (now.date() > loan.timeline.expected_maturity_date)) or
+                    (loan.in_arrears or (now > loan.timeline.expected_maturity_date)) or
                     (loan.status.closed and loan.timeline.closed_on_date > loan.timeline.expected_maturity_date)]
 
         if active:
             return [loan for loan in self.get_loans() if
-                    (loan.in_arrears or (now.date() > loan.timeline.expected_maturity_date)) and loan.status.active]
+                    (loan.in_arrears or (now > loan.timeline.expected_maturity_date)) and loan.status.active]
         else:
             return [loan for loan in self.get_loans() if loan.status.closed and loan.timeline.closed_on_date >
                     loan.timeline.expected_maturity_date]
