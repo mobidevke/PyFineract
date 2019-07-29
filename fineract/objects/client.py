@@ -212,15 +212,15 @@ class Client(DataFineractObject):
         :param all_loans: flag to choose between returning all loans in arrears or specific loans based on active
         parameter
         """
-        now = datetime.datetime.now()
+        now = datetime.datetime.now().date()
         if all_loans:
             return [loan for loan in self.get_loans() if
-                    (loan.in_arrears or (now > loan.timeline.expected_maturity_date)) or
+                    (loan.in_arrears or (now > loan.timeline.expected_maturity_date.date())) or
                     (loan.status.closed and loan.timeline.closed_on_date > loan.timeline.expected_maturity_date)]
 
         if active:
             return [loan for loan in self.get_loans() if
-                    (loan.in_arrears or (now > loan.timeline.expected_maturity_date)) and loan.status.active]
+                    (loan.in_arrears or (now > loan.timeline.expected_maturity_date.date())) and loan.status.active]
         else:
             return [loan for loan in self.get_loans() if loan.status.closed and loan.timeline.closed_on_date >
                     loan.timeline.expected_maturity_date]
