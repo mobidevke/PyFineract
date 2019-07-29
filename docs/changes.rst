@@ -4,6 +4,11 @@ Change log
 Stable versions
 ~~~~~~~~~~~~~~~
 
+Version 0.0.59 (July 29, 2019)
+-------------------------------------
+
+* fix: Correct bug in `get_loans_in_arrears` (7300c85)
+
 Version 0.0.58 (July 27, 2019)
 -------------------------------------
 
