@@ -4,6 +4,11 @@ Change log
 Stable versions
 ~~~~~~~~~~~~~~~
 
+Version 0.0.60 (September 11, 2019)
+-------------------------------------
+
+* feat: Add external id to loan object (10b7282)
+
 Version 0.0.59 (July 29, 2019)
 -------------------------------------
 
