@@ -17,6 +17,7 @@ class Loan(DataFineractObject):
         self.id = None
         self.account_no = None
         self.status = None
+        self.external_id = None
         self.client_id = None
         self.loan_product_id = None
         self.loan_purpose_id = None
@@ -41,6 +42,7 @@ class Loan(DataFineractObject):
         self.id = attributes.get('id', None)
         self.account_no = attributes.get('accountNo', None)
         self.status = self._make_fineract_object(LoanStatus, attributes.get('status', None))
+        self.external_id = attributes.get('externalId', None)
         self.client_id = attributes.get('clientId', None)
         self.loan_product_id = attributes.get('loanProductId', None)
         self.loan_purpose_id = attributes.get('loanPurposeId', None)
