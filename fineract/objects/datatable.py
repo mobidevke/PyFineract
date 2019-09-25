@@ -104,6 +104,48 @@ class DataTable(FineractObject):
         )
         return data['resourceIdentifier'] == name
 
+    def insert(self, app_table_id, data):
+        data = self._request_handler.make_request(
+            'POST',
+            '/datatables/{}/{}'.format(self.registered_table_name, app_table_id),
+            json=data
+        )
+        return data['resourceId'] == app_table_id
+
+    def get_data(self, app_table_id, order=None, desc=False):
+        params = {
+            'genericResultSet': False
+        }
+        if order:
+            params['order'] = '`{}`'.format(order) if not desc else '`{}` desc'.format(order)
+        return self._request_handler.make_request(
+            'GET',
+            '/datatables/{}/{}'.format(self.registered_table_name, app_table_id),
+            params=params
+        )
+
+    def update_data(self, app_table_id, data, datatable_id=None):
+        endpoint = '/datatables/{}/{}'.format(self.registered_table_name, app_table_id)
+        if datatable_id:
+            endpoint = '/datatables/{}/{}/{}'.format(self.registered_table_name, app_table_id, datatable_id)
+        data = self._request_handler.make_request(
+            'PUT',
+            endpoint,
+            json=data
+        )
+        return data['resourceId'] == app_table_id
+
+    def delete_data(self, app_table_id, datatable_id=None):
+        endpoint = '/datatables/{}/{}'.format(self.registered_table_name, app_table_id)
+        if datatable_id:
+            endpoint = '/datatables/{}/{}/{}'.format(self.registered_table_name, app_table_id, datatable_id)
+
+        data = self._request_handler.make_request(
+            'delete',
+            endpoint,
+        )
+        return data['resourceId'] == app_table_id
+
 
 class DataTableColumn(FineractObject):
     """
