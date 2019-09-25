@@ -5,6 +5,13 @@ class DataTable(FineractObject):
     """
     This class represents a datatable
     """
+    CLIENT = 'm_client'
+    GROUP = 'm_group'
+    LOAN = 'm_loan'
+    OFFICE = 'm_office'
+    SAVING_ACCOUNT = 'm_saving_account'
+    PRODUCT_LOAN = 'm_product_loan'
+    SAVINGS_PRODUCT = 'm_savings_product'
 
     def _init_attributes(self):
         self.application_table_name = None
@@ -16,6 +23,86 @@ class DataTable(FineractObject):
         self.registered_table_name = attributes.get('registeredTableName', None)
         self.column_header_data = self._make_fineract_objects_list(DataTableColumn,
                                                                    attributes.get('columnHeaderData', None))
+
+    @classmethod
+    def create(cls, request_handler, name, apptable_name, columns, is_multirow=False):
+        params = {
+            'datatableName': name,
+            'apptableName': apptable_name,
+            'multiRow': is_multirow,
+            'columns': columns,
+        }
+
+        data = request_handler.make_request(
+            'POST',
+            '/datatables',
+            json=params
+        )
+
+        return cls(request_handler,
+                   request_handler.make_request(
+                       'GET',
+                       '/datatables/{}'.format(data['resourceIdentifier']),
+                   ), False)
+
+    @classmethod
+    def get(cls, request_handler, name):
+        data = request_handler.make_request(
+            'GET',
+            '/datatables/{}'.format(name),
+        )
+        if not data:
+            return None
+        return cls(request_handler, data, False)
+
+    def update(self, apptable_name=None, drop_columns=None, add_columns=None, change_columns=None):
+        params = {}
+        if apptable_name:
+            params['apptableName'] = apptable_name
+
+        if drop_columns:
+            params['dropColumns'] = drop_columns
+
+        if add_columns:
+            params['addColumns'] = add_columns
+
+        if change_columns:
+            params['changeColumns'] = change_columns
+
+        data = self._request_handler.make_request(
+            'PUT',
+            '/datatables/{}'.format(self.registered_table_name),
+            json=params
+        )
+
+        if 'resourceIdentifier' in data:
+            data = self._request_handler.make_request(
+                'GET',
+                '/datatables/{}'.format(self.registered_table_name))
+            self._use_attributes(data)
+
+    def delete(self):
+        data = self._request_handler.make_request(
+            'DELETE',
+            '/datatables/{}'.format(self.registered_table_name)
+        )
+        return data['resourceIdentifier'] == self.registered_table_name
+
+    @classmethod
+    def register(cls, request_handler, name, apptable_name):
+        data = request_handler.make_request(
+            'POST',
+            '/datatables/register/{}/{}'.format(name, apptable_name)
+        )
+        return data['resourceIdentifier'] == name
+
+    @classmethod
+    def deregister(cls, request_handler, name):
+        data = request_handler.make_request(
+            'POST',
+            '/datatables/deregister/{}'.format(name)
+        )
+        return data['resourceIdentifier'] == name
 
 
 class DataTableColumn(FineractObject):
