@@ -4,6 +4,13 @@ Change log
 Stable versions
 ~~~~~~~~~~~~~~~
 
+Version 0.0.61 (September 25, 2019)
+-------------------------------------
+
+* feat: Add CRUD methods for datatable data (ce7c043)
+* feat: Add CRUD methods for datatable (455e23b)
+* feat: Add a datatable object (c1524ef)
+
 Version 0.0.60 (September 11, 2019)
 -------------------------------------
 
