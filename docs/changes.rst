@@ -4,6 +4,11 @@ Change log
 Stable versions
 ~~~~~~~~~~~~~~~
 
+Version 0.0.63 (September 27, 2019)
+-------------------------------------
+
+* test: Correct python2 incompatibility (626270c)
+
 Version 0.0.62 (September 26, 2019)
 -------------------------------------
 
