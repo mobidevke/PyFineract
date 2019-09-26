@@ -4,6 +4,11 @@ Change log
 Stable versions
 ~~~~~~~~~~~~~~~
 
+Version 0.0.62 (September 26, 2019)
+-------------------------------------
+
+* feat: Add optional fields during client creation (a982d77)
+
 Version 0.0.61 (September 25, 2019)
 -------------------------------------
 
