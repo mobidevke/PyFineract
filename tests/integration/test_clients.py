@@ -1,3 +1,5 @@
+import random
+
 import pytest
 
 from fineract.objects.client import Client
@@ -36,4 +38,10 @@ def test_get_client_loans(fineract):
 
 def test_client_creation__basic(fineract, fake):
     client = Client.create(fineract.request_handler, fake.first_name(), fake.last_name(), 1)
+    assert client
+
+
+def test_client_creation__with_optional(fineract, fake):
+    number = random.randint(0, 10000)
+    client = Client.create(fineract.request_handler, fake.first_name(), fake.last_name(), 1, mobile_no='{}'.format(number))
     assert client

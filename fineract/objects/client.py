@@ -241,9 +241,20 @@ class Client(DataFineractObject):
         return None
 
     @classmethod
-    def create(cls, request_handler, firstname, lastname, office_id, active=True, activation_date=None):
+    def create(cls, request_handler, firstname, lastname, office_id, active=True, activation_date=None, mobile_no=None,
+               external_id=None, group_id=None, staff_id=None, savings_product_id=None, gender_id=None,
+               client_type_id=None, client_classification_id=None, account_no=None):
         """Create a client and return a Client object
 
+        :param account_no:
+        :param client_classification_id:
+        :param external_id:
+        :param group_id:
+        :param staff_id:
+        :param savings_product_id:
+        :param gender_id:
+        :param client_type_id:
+        :param mobile_no:
         :param request_handler:
         :param firstname:
         :param lastname:
@@ -260,6 +271,33 @@ class Client(DataFineractObject):
         }
         if active:
             data['activationDate'] = activation_date or cls._get_current_date()
+
+        if group_id:
+            data['groupId'] = group_id
+
+        if external_id:
+            data['externalId'] = external_id
+
+        if account_no:
+            data['accountNo'] = account_no
+
+        if staff_id:
+            data['staffId'] = staff_id
+
+        if mobile_no:
+            data['mobileNo'] = mobile_no
+
+        if savings_product_id:
+            data['savingsProductId'] = savings_product_id
+
+        if gender_id:
+            data['genderId'] = gender_id
+
+        if client_type_id:
+            data['clientTypeId'] = client_type_id
+
+        if client_classification_id:
+            data['clientClassifcationId'] = client_classification_id
 
         res = request_handler.make_request(
             'POST',
