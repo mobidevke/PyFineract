@@ -4,6 +4,11 @@ Change log
 Stable versions
 ~~~~~~~~~~~~~~~
 
+Version 0.0.64 (September 27, 2019)
+-------------------------------------
+
+* refactor: change column names for datatable column object (76b8e66)
+
 Version 0.0.63 (September 27, 2019)
 -------------------------------------
 
