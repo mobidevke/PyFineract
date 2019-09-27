@@ -55,6 +55,15 @@ class Client(DataFineractObject):
         self.timeline = self._make_fineract_object(ClientTimeline, attributes.get('timeline', None))
         self.groups = self._make_fineract_objects_list(Group, attributes.get('groups', None))
 
+    def update(self, data):
+        _id = getattr(self, 'id', None)
+        res = self._request_handler.make_request(
+            'PUT',
+            '/clients/{}'.format(_id),
+            json=data
+        )
+        assert res.get('clientId', None) == _id
+
     def activate(self, date=None):
         """Activates a client
 

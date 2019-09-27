@@ -143,23 +143,3 @@ class DataFineractObject(FineractObject):
             )
 
         raise AttributeError('id not set')
-
-
-class AttributeTracker:
-
-    def __init__(self):
-        self._history = set()
-        self._changed = set()
-
-    def __setattr__(self, key, value):
-        if key not in {'_history', '_changed'}:
-            if key in self._history:
-                self._changed.add(key)
-
-            self._history.add(key)
-
-        super(AttributeTracker, self).__setattr__(key, value)
-
-    @property
-    def changed(self):
-        return self._changed

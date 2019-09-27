@@ -45,3 +45,10 @@ def test_client_creation__with_optional(fineract, fake):
     number = random.randint(0, 10000)
     client = Client.create(fineract.request_handler, fake.first_name(), fake.last_name(), 1, mobile_no='{}'.format(number))
     assert client
+
+
+def test_updating_client_details(fineract):
+    client = Client.get_client_by_phone_no(fineract.request_handler, '233717890222')
+    client.update({'mobileNo': '235717890222'})
+    client = Client.get_client_by_phone_no(fineract.request_handler, '235717890222')
+    assert client
