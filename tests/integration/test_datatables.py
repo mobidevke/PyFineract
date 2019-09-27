@@ -1,5 +1,8 @@
 import random
 
+import pytest
+
+from fineract import FineractException
 from fineract.objects.datatable import DataTable
 
 number = random.randint(0, 10000)
@@ -26,6 +29,17 @@ def test_update_datatable(fineract):
     datatable = DataTable.get(fineract.request_handler, 'datatable {}'.format(number))
     datatable.update(apptable_name=DataTable.LOAN)
     assert datatable.application_table_name == DataTable.LOAN
+
+
+def test_update_datatable_columns(fineract):
+    datatable = DataTable.get(fineract.request_handler, 'datatable {}'.format(number))
+    with pytest.raises(FineractException):
+        datatable.update(add_columns=[
+            {
+                'name': 'Test',
+                'type': 'Text'
+            }
+        ])
 
 
 def test_datatable_deletion(fineract):

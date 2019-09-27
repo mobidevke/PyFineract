@@ -153,17 +153,17 @@ class DataTableColumn(FineractObject):
    """
 
     def _init_attributes(self):
-        self.name = None
-        self.type = None
-        self.length = None
-        self.display_type = None
-        self.is_nullable = None
-        self.is_primary_key = None
+        self.column_name = None
+        self.column_type = None
+        self.column_length = None
+        self.column_display_type = None
+        self.is_column_nullable = None
+        self.is_column_primary_key = None
 
     def _use_attributes(self, attributes):
-        self.name = attributes.get('columnName', None)
-        self.type = attributes.get('columnType', None)
-        self.length = attributes.get('columnLength', 0)
-        self.display_type = attributes.get('columnDisplayType', None)
-        self.is_nullable = attributes.get('isColumnNullable', True)
-        self.is_primary_key = attributes.get('isColumnPrimaryKey', False)
+        self.column_name = attributes.get('columnName', None)
+        self.column_type = attributes.get('columnType', None)
+        self.column_length = attributes.get('columnLength', 0)
+        self.column_display_type = attributes.get('columnDisplayType', None)
+        self.is_column_nullable = attributes.get('isColumnNullable', True)
+        self.is_column_primary_key = attributes.get('isColumnPrimaryKey', False)
