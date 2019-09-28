@@ -11,7 +11,7 @@ def test_get_all_clients(fineract):
 
 
 def test_get_all_clients__with_filter(fineract):
-    count = len([client for client in fineract.get_clients(sqlSearch='c.external_id=11111111')])
+    count = len([client for client in fineract.get_clients(sqlSearch='c.mobile_no=233717890222')])
     assert count == 1
 
 
@@ -48,7 +48,17 @@ def test_client_creation__with_optional(fineract, fake):
 
 
 def test_updating_client_details(fineract):
-    client = Client.get_client_by_phone_no(fineract.request_handler, '233717890222')
-    client.update({'mobileNo': '235717890222'})
-    client = Client.get_client_by_phone_no(fineract.request_handler, '235717890222')
-    assert client
+    client = fineract.get_client(2)
+    client.update({'externalId': 'some-external-id'})
+    client = fineract.get_client(2)
+    assert client.external_id == 'some-external-id'
+
+
+def test_client_template_retrieval(fineract):
+    template = fineract.templates('clients')
+    assert template
+
+
+def test_client_loans_template_retrieval(fineract):
+    template = fineract.templates('loans', 1, 'templateType=individual')
+    assert template

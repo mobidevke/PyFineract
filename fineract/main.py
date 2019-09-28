@@ -1,4 +1,5 @@
 # fineract APIs run on https by default
+from fineract import ResourceNotFoundException
 from fineract.handlers import RequestHandler
 from fineract.objects.client import Client
 from fineract.objects.group import Group
@@ -10,6 +11,7 @@ from fineract.objects.report import Report
 from fineract.objects.role import Role
 from fineract.objects.user import User
 from fineract.pagination import PaginatedList
+from fineract.templates import TEMPLATES
 
 DEFAULT_BASE_URL = 'https://localhost/fineract-provider/api/v1'
 DEFAULT_TENANT = 'default'
@@ -345,3 +347,20 @@ class Fineract(object):
         :return: Returns dict/list object
         """
         return self.__request_handler.make_request(method, url, **kwargs)
+
+    def templates(self, template, extra=None, params=None):
+        """Retrieve a template
+        :param template: template name
+        :param extra:
+        :return:
+        """
+        template_url = TEMPLATES.get(template, '')
+        if not template_url:
+            raise ResourceNotFoundException(404, 'Template not found')
+        if extra:
+            template_url = template_url.format(extra)
+
+        if params:
+            template_url += '&' + params
+
+        return self.__request_handler.make_request('GET', '/' + template_url)
