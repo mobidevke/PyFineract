@@ -4,6 +4,11 @@ Change log
 Stable versions
 ~~~~~~~~~~~~~~~
 
+Version 0.0.66 (September 28, 2019)
+-------------------------------------
+
+* feat: Add logic for retrieving templates (affa1dc)
+
 Version 0.0.65 (September 28, 2019)
 -------------------------------------
 
