@@ -4,6 +4,11 @@ Change log
 Stable versions
 ~~~~~~~~~~~~~~~
 
+Version 0.0.67 (September 30, 2019)
+-------------------------------------
+
+* feat: Complete templates map (d5e8033)
+
 Version 0.0.66 (September 28, 2019)
 -------------------------------------
 
