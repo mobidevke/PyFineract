@@ -252,7 +252,7 @@ class Client(DataFineractObject):
     @classmethod
     def create(cls, request_handler, firstname, lastname, office_id, active=True, activation_date=None, mobile_no=None,
                external_id=None, group_id=None, staff_id=None, savings_product_id=None, gender_id=None,
-               client_type_id=None, client_classification_id=None, account_no=None, middlename=None):
+               client_type_id=None, client_classification_id=None, account_no=None, middlename=None, submittedon_date=None):
         """Create a client and return a Client object
 
         :param account_no:
@@ -277,7 +277,8 @@ class Client(DataFineractObject):
             'firstname': firstname,
             'lastname': lastname,
             'officeId': office_id,
-            'active': active
+            'active': active,
+            'submittedOnDate': submittedon_date or cls._get_current_date()
         }
         if middlename:
             data['middlename'] = middlename
