@@ -4,6 +4,12 @@ Change log
 Stable versions
 ~~~~~~~~~~~~~~~
 
+Version 0.0.68 (October 01, 2019)
+-------------------------------------
+
+* tests: Modify client creation test (91a1603)
+* feat: Add middlename to client creation params (23ca1c8)
+
 Version 0.0.67 (September 30, 2019)
 -------------------------------------
 
