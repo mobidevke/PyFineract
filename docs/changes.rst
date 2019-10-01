@@ -4,6 +4,11 @@ Change log
 Stable versions
 ~~~~~~~~~~~~~~~
 
+Version 0.0.70 (October 01, 2019)
+-------------------------------------
+
+* feat: Add submitted on date field during client creation (8e9c678)
+
 Version 0.0.69 (October 01, 2019)
 -------------------------------------
 
