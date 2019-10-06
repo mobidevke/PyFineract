@@ -54,11 +54,19 @@ class RequestHandler:
     def make_request(self, method, url, **kwargs):
         url = self.__base_url + url
         kwargs['auth'] = self.__auth
-        kwargs['headers'] = self.__headers
+        kwargs['headers'] = {x: self.__headers[x] for x in self.__headers.keys()}
+        if 'content_type' in kwargs:
+            del kwargs['headers']['Content-Type']
+            del kwargs['content_type']
+
         # kwargs['verify'] = self.__ssl_check
         kwargs = self.__inject_extras(kwargs)
         kwargs['method'] = method
         kwargs['url'] = url
+        is_file = False
+        if 'is_file' in kwargs:
+            is_file = True
+            del kwargs['is_file']
         req = requests.Request(**kwargs)
         with requests.Session() as sess:
             prep_req = sess.prepare_request(req)
@@ -79,7 +87,7 @@ class RequestHandler:
             message = self.__create_err_message(err_data)
             raise self.__create_exception(res.status_code, message)
         else:
-            return res.json()
+            return res.json() if not is_file else res.content
 
     def format_request(self, req):
         headers = '\n'.join('{}: {}'.format(k, v) for k, v in req.headers.items())
@@ -91,7 +99,10 @@ class RequestHandler:
             except json.JSONDecodeError:
                 body = req.body
         else:
-            body = req.body or ''
+            if 'multipart/form-data' in content_type:
+                body = ''
+            else:
+                body = req.body or ''
         s = textwrap.dedent("""
             REQUEST
             =======
@@ -119,7 +130,10 @@ class RequestHandler:
             except json.JSONDecodeError:
                 body = resp.text
         else:
-            body = resp.text
+            if 'Content-Disposition' not in resp.headers:
+                body = resp.text
+            else:
+                body = ''
         s = textwrap.dedent("""
             RESPONSE
             ========

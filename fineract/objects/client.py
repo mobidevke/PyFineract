@@ -1,5 +1,6 @@
 import datetime
 
+from fineract.objects.document import Document
 from fineract.objects.fineract_object import FineractObject, DataFineractObject
 from fineract.objects.group import Group
 from fineract.objects.loan import Loan
@@ -195,6 +196,15 @@ class Client(DataFineractObject):
         )
         return res.get('clientId', None) == _id
 
+    def add_document(self, name, description, file):
+        return Document.create(self._request_handler, Document.CLIENTS, self.id, name, description, file)
+
+    def documents(self):
+        return Document.get_all(self._request_handler, Document.CLIENTS, self.id)
+
+    def document(self, document_id):
+        return Document.get(self._request_handler, Document.CLIENTS, self.id, document_id)
+
     def get_loans(self):
         """Get the loans of a client
 
@@ -252,7 +262,8 @@ class Client(DataFineractObject):
     @classmethod
     def create(cls, request_handler, firstname, lastname, office_id, active=True, activation_date=None, mobile_no=None,
                external_id=None, group_id=None, staff_id=None, savings_product_id=None, gender_id=None,
-               client_type_id=None, client_classification_id=None, account_no=None, middlename=None, submittedon_date=None):
+               client_type_id=None, client_classification_id=None, account_no=None, middlename=None,
+               submittedon_date=None):
         """Create a client and return a Client object
 
         :param account_no:

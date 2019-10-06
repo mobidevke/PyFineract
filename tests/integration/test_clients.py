@@ -3,6 +3,7 @@ import random
 import pytest
 
 from fineract.objects.client import Client
+from fineract.objects.document import Document
 
 
 def test_get_all_clients(fineract):
@@ -63,3 +64,15 @@ def test_client_template_retrieval(fineract):
 def test_client_loans_template_retrieval(fineract):
     template = fineract.templates('loans', 1, 'templateType=individual')
     assert template
+
+
+def test_add_document(fineract):
+    with open('tests/files/image.png', 'rb') as in_file:
+        client = fineract.get_client(1)
+        doc = client.add_document('Test image', 'Some test description', in_file)
+        assert isinstance(doc, Document)
+
+
+def test_retrieve_all_documents(fineract):
+    client = fineract.get_client(1)
+    assert client.documents().total_count > 0

@@ -1,4 +1,5 @@
 from fineract.objects.fineract_object import FineractObject
+from fineract.pagination import PaginatedList
 
 
 class Document(FineractObject):
@@ -30,3 +31,55 @@ class Document(FineractObject):
         self.file_name = attributes.get('file_name', None)
         self.size = attributes.get('size', None)
         self.type = attributes.get('description', None)
+
+    @classmethod
+    def create(cls, request_handler, entity_type, entity_id, name, description, file):
+        params = {
+            'name': name,
+            'description': description,
+            'file': file,
+        }
+
+        data = request_handler.make_request(
+            'POST',
+            '/{}/{}/documents'.format(entity_type, entity_id),
+            files=params,
+            content_type='multipart/form-data'
+        )
+
+        return cls(request_handler,
+                   request_handler.make_request(
+                       'GET',
+                       '/{}/{}/documents/{}'.format(entity_type, entity_id, data['resourceIdentifier'],),
+                   ), False)
+
+    @classmethod
+    def get_all(cls, request_handler, entity_type, entity_id):
+        return PaginatedList(
+            Document,
+            request_handler,
+            '/{}/{}/documents'.format(entity_type, entity_id),
+            dict()
+        )
+
+    @classmethod
+    def get(cls, request_handler, entity_type, entity_id, document_id):
+        return Document(request_handler,
+                    request_handler.make_request(
+                        'GET',
+                        '/{}/{}/documents/{}'.format(entity_type, entity_id, document_id),
+                    ), False)
+
+    def delete(self):
+        data = self._request_handler.make_request(
+            'DELETE',
+            '/{}/{}/documents/{}'.format(self.parent_entity_type, self.parent_entity_id, self.id)
+        )
+        return data['resourceIdentifier'] == self.id
+
+    def download(self):
+        return self._request_handler.make_request(
+            'GET',
+            '/{}/{}/documents/{}/attachment'.format(self.parent_entity_type, self.parent_entity_id, self.id),
+            is_file=True
+        )
