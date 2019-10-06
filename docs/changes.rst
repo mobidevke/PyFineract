@@ -4,6 +4,12 @@ Change log
 Stable versions
 ~~~~~~~~~~~~~~~
 
+Version 0.0.71 (October 06, 2019)
+-------------------------------------
+
+* feat: Add convenience methods for Document and Client objects (888b742)
+* feat: Add document object (a2ebedc)
+
 Version 0.0.70 (October 01, 2019)
 -------------------------------------
 
