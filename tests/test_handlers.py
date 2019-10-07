@@ -97,6 +97,14 @@ def test_request_handler__make_request_FineractException_raised(mocker):
         request_handler.make_request('get', '')
 
 
+def test_request_handler__make_request_FineractException_raised__no_content(mocker):
+    with pytest.raises(FineractException):
+        request_handler = RequestHandler('a', 'b', 'https://localhost', 'default', 10, 30)
+        mocker.patch.object(requests.Session, 'send', return_value=ExampleResponse(204))
+        mocker.patch.object(request_handler, '_RequestHandler__create_err_message', return_value='Failed')
+        request_handler.make_request('get', '')
+
+
 @pytest.mark.parametrize('error_class', [
     requests.ConnectionError,
     requests.ConnectTimeout,

@@ -2,6 +2,9 @@ import datetime
 import functools
 import json
 import sys
+
+from requests import HTTPError
+
 try:
     import textwrap
     textwrap.indent
@@ -78,6 +81,10 @@ class RequestHandler:
                 res = sess.send(prep_req, verify=self.__ssl_check)
             except Exception as e:
                 raise self.__create_exception(500, str(e))
+
+        if res.status_code == 204:
+            e = HTTPError('No content for the requested ur', response=res)
+            raise self.__create_exception(500, str(e))
 
         if self._debug:
             print(self.format_response(res))
