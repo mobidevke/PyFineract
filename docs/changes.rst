@@ -4,6 +4,11 @@ Change log
 Stable versions
 ~~~~~~~~~~~~~~~
 
+Version 0.0.73 (October 07, 2019)
+-------------------------------------
+
+* feat: Handle `204` responses (d4ef8b3)
+
 Version 0.0.72 (October 07, 2019)
 -------------------------------------
 
