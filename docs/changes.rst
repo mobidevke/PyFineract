@@ -4,6 +4,11 @@ Change log
 Stable versions
 ~~~~~~~~~~~~~~~
 
+Version 0.0.72 (October 07, 2019)
+-------------------------------------
+
+* feat: Add method for deleting a client in pending state (2508928)
+
 Version 0.0.71 (October 06, 2019)
 -------------------------------------
 

@@ -2,7 +2,7 @@ import textwrap
 
 import setuptools
 
-version = "0.0.71"
+version = "0.0.72"
 
 if __name__ == '__main__':
     setuptools.setup(
