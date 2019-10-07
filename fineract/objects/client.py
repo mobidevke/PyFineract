@@ -65,6 +65,14 @@ class Client(DataFineractObject):
         )
         assert res.get('clientId', None) == _id
 
+    def delete(self):
+        """Deletes a client (Must be in pending state)"""
+        res = self._request_handler.make_request(
+            'DELETE',
+            '/clients/{}'.format(self.id),
+        )
+        assert res.get('clientId', None) == self.id
+
     def activate(self, date=None):
         """Activates a client
 
