@@ -30,7 +30,8 @@ class Document(FineractObject):
         self.name = attributes.get('name', None)
         self.file_name = attributes.get('file_name', None)
         self.size = attributes.get('size', None)
-        self.type = attributes.get('description', None)
+        self.type = attributes.get('type', None)
+        self.description = attributes.get('description', None)
 
     @classmethod
     def create(cls, request_handler, entity_type, entity_id, name, description, file):
