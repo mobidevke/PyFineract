@@ -4,6 +4,11 @@ Change log
 Stable versions
 ~~~~~~~~~~~~~~~
 
+Version 0.0.74 (October 08, 2019)
+-------------------------------------
+
+* fix: Correct setting of Document object attributes (b915a2b)
+
 Version 0.0.73 (October 07, 2019)
 -------------------------------------
 
