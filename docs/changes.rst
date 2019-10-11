@@ -4,6 +4,12 @@ Change log
 Stable versions
 ~~~~~~~~~~~~~~~
 
+Version 0.0.76 (October 11, 2019)
+-------------------------------------
+
+* feat: Improve document upload metadata (b72284d)
+* feat: Improve document upload metadata (f8afc7f)
+
 Version 0.0.75 (October 11, 2019)
 -------------------------------------
 
