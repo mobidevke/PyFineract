@@ -1,3 +1,5 @@
+import mimetypes
+
 from fineract.objects.fineract_object import FineractObject
 from fineract.pagination import PaginatedList
 
@@ -28,10 +30,19 @@ class Document(FineractObject):
         self.parent_entity_type = attributes.get('parentEntityType', None)
         self.parent_entity_id = attributes.get('parentEntityId', None)
         self.name = attributes.get('name', None)
-        self.file_name = attributes.get('file_name', None)
+        self.file_name = attributes.get('fileName', None)
         self.size = attributes.get('size', None)
-        self.type = attributes.get('type', None)
+        self.type = self._get_type(self.file_name)
         self.description = attributes.get('description', None)
+
+    @staticmethod
+    def _get_type(filename):
+        if filename is not None:
+            guessed = mimetypes.guess_type(filename, False)
+            if guessed:
+                return guessed[0]
+
+        return None
 
     @classmethod
     def create(cls, request_handler, entity_type, entity_id, name, description, file):
