@@ -69,7 +69,7 @@ def test_client_loans_template_retrieval(fineract):
 def test_add_document(fineract):
     with open('tests/files/image.png', 'rb') as in_file:
         client = fineract.get_client(1)
-        doc = client.add_document('Test image', 'Some test description', in_file)
+        doc = client.add_document('Test image', 'Some test description', in_file, 'image.png')
         assert isinstance(doc, Document)
 
 

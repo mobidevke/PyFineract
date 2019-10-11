@@ -204,8 +204,8 @@ class Client(DataFineractObject):
         )
         return res.get('clientId', None) == _id
 
-    def add_document(self, name, description, file):
-        return Document.create(self._request_handler, Document.CLIENTS, self.id, name, description, file)
+    def add_document(self, name, description, file, filename):
+        return Document.create(self._request_handler, Document.CLIENTS, self.id, name, description, file, filename)
 
     def documents(self):
         return Document.get_all(self._request_handler, Document.CLIENTS, self.id)
