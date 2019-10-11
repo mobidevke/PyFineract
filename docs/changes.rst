@@ -4,6 +4,11 @@ Change log
 Stable versions
 ~~~~~~~~~~~~~~~
 
+Version 0.0.75 (October 11, 2019)
+-------------------------------------
+
+* feat: Add document type detection to document object (81a877e)
+
 Version 0.0.74 (October 08, 2019)
 -------------------------------------
 
