@@ -45,11 +45,14 @@ class Document(FineractObject):
         return None
 
     @classmethod
-    def create(cls, request_handler, entity_type, entity_id, name, description, file):
+    def create(cls, request_handler, entity_type, entity_id, name, description, file, filename, content_type=None):
+        if content_type is None:
+            content_type = cls._get_type(filename)
+        file_descr = (filename, file, content_type)
         params = {
             'name': name,
             'description': description,
-            'file': file,
+            'file': file_descr,
         }
 
         data = request_handler.make_request(
