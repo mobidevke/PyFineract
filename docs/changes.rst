@@ -4,6 +4,11 @@ Change log
 Stable versions
 ~~~~~~~~~~~~~~~
 
+Version 0.0.77 (October 17, 2019)
+-------------------------------------
+
+* feat: Add documentation for DataTable object (b9936ee)
+
 Version 0.0.76 (October 11, 2019)
 -------------------------------------
 
