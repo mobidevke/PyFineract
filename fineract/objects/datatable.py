@@ -26,6 +26,15 @@ class DataTable(FineractObject):
 
     @classmethod
     def create(cls, request_handler, name, apptable_name, columns, is_multirow=False):
+        """Create a datatable and return a DataTable object
+
+        :param request_handler:
+        :param name:
+        :param apptable_name:
+        :param columns:
+        :param is_multirow:
+        :rtype: :class:`fineract.objects.datatable.DataTable`
+        """
         params = {
             'datatableName': name,
             'apptableName': apptable_name,
@@ -47,6 +56,12 @@ class DataTable(FineractObject):
 
     @classmethod
     def get(cls, request_handler, name):
+        """Get a DataTable object based ``name``
+
+        :param request_handler:
+        :param name:
+        :rtype: :class:`fineract.objects.datatable.DataTable`
+        """
         data = request_handler.make_request(
             'GET',
             '/datatables/{}'.format(name),
@@ -56,6 +71,15 @@ class DataTable(FineractObject):
         return cls(request_handler, data, False)
 
     def update(self, apptable_name=None, drop_columns=None, add_columns=None, change_columns=None):
+        """Update the columns of datatable
+
+        See: https://demo.openmf.org/api-docs/apiLive.htm#datatables_updateTable
+
+        :param apptable_name:
+        :param drop_columns:
+        :param add_columns:
+        :param change_columns:
+        """
         params = {}
         if apptable_name:
             params['apptableName'] = apptable_name
@@ -82,6 +106,10 @@ class DataTable(FineractObject):
             self._use_attributes(data)
 
     def delete(self):
+        """Delete the datatable
+
+        :return: bool
+        """
         data = self._request_handler.make_request(
             'DELETE',
             '/datatables/{}'.format(self.registered_table_name)
@@ -105,6 +133,12 @@ class DataTable(FineractObject):
         return data['resourceIdentifier'] == name
 
     def insert(self, app_table_id, data):
+        """Insert data into a datatable
+
+        :param app_table_id:
+        :param data: dict
+        :return: bool
+        """
         data = self._request_handler.make_request(
             'POST',
             '/datatables/{}/{}'.format(self.registered_table_name, app_table_id),
@@ -113,6 +147,13 @@ class DataTable(FineractObject):
         return data['resourceId'] == app_table_id
 
     def get_data(self, app_table_id, order=None, desc=False):
+        """Get all the data for for a specific app_table id
+
+        :param app_table_id:
+        :param order:
+        :param desc:
+        :return: list of dict
+        """
         params = {
             'genericResultSet': False
         }
@@ -125,6 +166,15 @@ class DataTable(FineractObject):
         )
 
     def update_data(self, app_table_id, data, datatable_id=None):
+        """Update the data of a specific app_table_id.
+
+        In multirow datatables ``datatable_id`` references the row id
+
+        :param app_table_id:
+        :param data:
+        :param datatable_id:
+        :return: bool
+        """
         endpoint = '/datatables/{}/{}'.format(self.registered_table_name, app_table_id)
         if datatable_id:
             endpoint = '/datatables/{}/{}/{}'.format(self.registered_table_name, app_table_id, datatable_id)
@@ -136,6 +186,14 @@ class DataTable(FineractObject):
         return data['resourceId'] == app_table_id
 
     def delete_data(self, app_table_id, datatable_id=None):
+        """Delete the data of a specific app_table_id.
+
+        In multirow datatables ``datatable_id`` references the row id
+
+        :param app_table_id:
+        :param datatable_id:
+        :return: bool
+        """
         endpoint = '/datatables/{}/{}'.format(self.registered_table_name, app_table_id)
         if datatable_id:
             endpoint = '/datatables/{}/{}/{}'.format(self.registered_table_name, app_table_id, datatable_id)
