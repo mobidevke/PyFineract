@@ -46,6 +46,18 @@ class Document(FineractObject):
 
     @classmethod
     def create(cls, request_handler, entity_type, entity_id, name, description, file, filename, content_type=None):
+        """Add a document to an entity of type ``entity_type`` with id ``entity_id``
+
+        :param request_handler:
+        :param entity_type:
+        :param entity_id:
+        :param name:
+        :param description:
+        :param file:
+        :param filename:
+        :param content_type:
+        :rtype: :class:`fineract.objects.document.Document`
+        """
         if content_type is None:
             content_type = cls._get_type(filename)
         file_descr = (filename, file, content_type)
@@ -70,6 +82,13 @@ class Document(FineractObject):
 
     @classmethod
     def get_all(cls, request_handler, entity_type, entity_id):
+        """Get all documents for an entity of type ``entity_type`` with id ``entity_id``
+
+        :param request_handler:
+        :param entity_type:
+        :param entity_id:
+        :rtype: :class:`fineract.pagination.PaginatedList` of :class:`fineract.objects.document.Document`
+        """
         return PaginatedList(
             Document,
             request_handler,
@@ -79,6 +98,14 @@ class Document(FineractObject):
 
     @classmethod
     def get(cls, request_handler, entity_type, entity_id, document_id):
+        """Get a document for an entity of type ``entity_type`` with id ``entity_id`` if it matches ``document_id``
+
+        :param request_handler:
+        :param entity_type:
+        :param entity_id:
+        :param document_id:
+        :rtype: :class:`fineract.objects.document.Document`
+        """
         return Document(request_handler,
                     request_handler.make_request(
                         'GET',
@@ -86,6 +113,10 @@ class Document(FineractObject):
                     ), False)
 
     def delete(self):
+        """Delete a document
+
+        :return: bool
+        """
         data = self._request_handler.make_request(
             'DELETE',
             '/{}/{}/documents/{}'.format(self.parent_entity_type, self.parent_entity_id, self.id)
@@ -93,6 +124,10 @@ class Document(FineractObject):
         return data['resourceIdentifier'] == self.id
 
     def download(self):
+        """Download a document
+
+        :return: file content
+        """
         return self._request_handler.make_request(
             'GET',
             '/{}/{}/documents/{}/attachment'.format(self.parent_entity_type, self.parent_entity_id, self.id),

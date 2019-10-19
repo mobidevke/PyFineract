@@ -261,7 +261,7 @@ class Client(DataFineractObject):
 
         :param active: boolean flag to choose between closed/open loans
         :param all_loans: flag to choose between returning all loans in arrears or specific loans based on active
-        parameter
+               parameter
         :rtype: list of :class:`fineract.objects.loan.Loan`
         """
         now = datetime.datetime.now().date()
