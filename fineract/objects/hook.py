@@ -26,6 +26,12 @@ class Hook(FineractObject):
         self.config = attributes.get('config', [])
 
     def update(self, payload_url, events):
+        """Update a web hook
+
+        :param payload_url:
+        :param events:
+        :return:
+        """
         params = {
             'name': 'Web',
             'displayName': self.display_name,
@@ -47,6 +53,17 @@ class Hook(FineractObject):
     @classmethod
     def create_web_hook(cls, request_handler, display_name, payload_url, events, content_type='json', is_active=False,
                         template_id=None):
+        """Create a web hook
+
+        :param request_handler:
+        :param display_name:
+        :param payload_url:
+        :param events:
+        :param content_type:
+        :param is_active:
+        :param template_id:
+        :rtype: :class:`fineract.objects.hook.Hook`
+        """
         params = {
             'name': 'Web',
             'displayName': display_name,
@@ -77,6 +94,12 @@ class Hook(FineractObject):
 
     @classmethod
     def get(cls, request_handler, id):
+        """Get a hook with id ``id``
+
+        :param request_handler:
+        :param id:
+        :rtype: :class:`fineract.objects.hook.Hook`
+        """
         return Hook(request_handler,
                     request_handler.make_request(
                         'GET',
@@ -85,6 +108,12 @@ class Hook(FineractObject):
 
     @classmethod
     def get_by_name(cls, request_handler, name):
+        """Get a hook that matches ``name``
+
+        :param request_handler:
+        :param name:
+        :rtype: :class:`fineract.objects.hook.Hook`
+        """
         data = request_handler.make_request(
             'GET',
             '/hooks'
@@ -113,6 +142,11 @@ class Hook(FineractObject):
 
     @staticmethod
     def templates(request_handler):
+        """Get a hook template
+
+        :param request_handler:
+        :return: dict
+        """
         return request_handler.make_request(
             'GET',
             '/hooks/template'
