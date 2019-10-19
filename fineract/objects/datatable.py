@@ -118,6 +118,13 @@ class DataTable(FineractObject):
 
     @classmethod
     def register(cls, request_handler, name, apptable_name):
+        """Register a datatable with an app table
+
+        :param request_handler:
+        :param name:
+        :param apptable_name:
+        :return: bool
+        """
         data = request_handler.make_request(
             'POST',
             '/datatables/register/{}/{}'.format(name, apptable_name)
@@ -126,6 +133,13 @@ class DataTable(FineractObject):
 
     @classmethod
     def deregister(cls, request_handler, name):
+        """Deregister a datatable. After this action, the datatable won't be visible
+        from the API
+
+        :param request_handler:
+        :param name:
+        :return: bool
+        """
         data = request_handler.make_request(
             'POST',
             '/datatables/deregister/{}'.format(name)
