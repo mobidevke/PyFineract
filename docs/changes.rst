@@ -4,6 +4,15 @@ Change log
 Stable versions
 ~~~~~~~~~~~~~~~
 
+Version 0.0.78 (October 19, 2019)
+-------------------------------------
+
+* doc: Add documentation for Hook object (5524ce0)
+* doc: Add documentation for Report object (44197ac)
+* doc: Add document for the Document object (8079ac5)
+* doc: Finish up client documentation (cf2e29e)
+* doc: Finish documentation for datatable (2b653f0)
+
 Version 0.0.77 (October 17, 2019)
 -------------------------------------
 
