@@ -37,6 +37,19 @@ class Report(FineractObject):
     @classmethod
     def create(cls, request_handler, report_name, report_type, report_category, report_sql, report_subtype='',
                description='', use_report=False, report_parameters=None):
+        """Create a report
+
+        :param request_handler:
+        :param report_name:
+        :param report_type:
+        :param report_category:
+        :param report_sql:
+        :param report_subtype:
+        :param description:
+        :param use_report:
+        :param report_parameters:
+        :rtype: :class:`fineract.objects.report.Report`
+        """
         if report_parameters is None:
             report_parameters = []
 
@@ -65,6 +78,12 @@ class Report(FineractObject):
 
     @classmethod
     def get_by_name(cls, request_handler, name):
+        """Return a report that matches ``name``
+
+        :param request_handler:
+        :param name:
+        :rtype: :class:`fineract.objects.report.Report`
+        """
         data = request_handler.make_request(
             'GET',
             '/reports'
@@ -93,14 +112,14 @@ class Report(FineractObject):
 
     @staticmethod
     def run(request_handler, name, generic_result_set=True, **kwargs):
-        """
+        """Run the report ``name`` if it exists
 
         :param request_handler: :class:`fineract.handlers.RequestHandler`
         :param name: Report name
         :param generic_result_set: if 'True' an optimised JSON forma is returned. If 'False' a simple JSON format is
-        returned
+               returned
         :param kwargs: Report parameters
-        :return: list
+        :return: list of dict
         """
         params = {
             'genericResultSet': generic_result_set,
