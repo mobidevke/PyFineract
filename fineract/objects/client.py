@@ -57,6 +57,10 @@ class Client(DataFineractObject):
         self.groups = self._make_fineract_objects_list(Group, attributes.get('groups', None))
 
     def update(self, data):
+        """Update the core fields of a client
+
+        :param data: dict
+        """
         _id = getattr(self, 'id', None)
         res = self._request_handler.make_request(
             'PUT',
@@ -205,17 +209,35 @@ class Client(DataFineractObject):
         return res.get('clientId', None) == _id
 
     def add_document(self, name, description, file, filename):
+        """Add  a document to client
+
+        :param name:
+        :param description:
+        :param file:
+        :param filename:
+        :rtype: :class:`fineract.objects.document.Document`
+        """
         return Document.create(self._request_handler, Document.CLIENTS, self.id, name, description, file, filename)
 
     def documents(self):
+        """Get all documents for a client
+
+        :rtype: list of :class:`fineract.objects.document.Document`
+        """
         return Document.get_all(self._request_handler, Document.CLIENTS, self.id)
 
     def document(self, document_id):
+        """Get a document that matches ``document_id``
+
+        :param document_id:
+        :rtype: :class:`fineract.objects.document.Document`
+        """
         return Document.get(self._request_handler, Document.CLIENTS, self.id, document_id)
 
     def get_loans(self):
         """Get the loans of a client
 
+        :rtype: list of :class:`fineract.objects.loan.Loan`
         """
         _id = getattr(self, 'id', None)
         if _id:
@@ -230,14 +252,17 @@ class Client(DataFineractObject):
     def get_outstanding_loans(self):
         """Get the outstanding loans of a client
 
+        :rtype: list of :class:`fineract.objects.loan.Loan`
         """
         return [loan for loan in self.get_loans() if loan.status.active]
 
     def get_loans_in_arrears(self, active=True, all_loans=False):
         """Get loans in arrears
+
         :param active: boolean flag to choose between closed/open loans
         :param all_loans: flag to choose between returning all loans in arrears or specific loans based on active
         parameter
+        :rtype: list of :class:`fineract.objects.loan.Loan`
         """
         now = datetime.datetime.now().date()
         if all_loans:
@@ -254,6 +279,12 @@ class Client(DataFineractObject):
 
     @classmethod
     def get_client_by_phone_no(cls, request_handler, phone_no):
+        """Get a client by phone no
+
+        :param request_handler:
+        :param phone_no:
+        :rtype: :class:`fineract.objects.client.Client`
+        """
         params = {
             'sqlSearch': 'c.mobile_no={}'.format(phone_no)
         }
