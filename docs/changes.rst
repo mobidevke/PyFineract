@@ -4,6 +4,12 @@ Change log
 Stable versions
 ~~~~~~~~~~~~~~~
 
+Version 0.0.79 (October 21, 2019)
+-------------------------------------
+
+* doc: Add documentation for Loan object (ec8a65a)
+* refactor: Cleanup legacy pagination logic (7cae30d)
+
 Version 0.0.78 (October 19, 2019)
 -------------------------------------
 
