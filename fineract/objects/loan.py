@@ -67,7 +67,7 @@ class Loan(DataFineractObject):
     def days_in_arrears(self):
         """Return the number of days in arrears
 
-        :return: -1
+        :return: int
         """
         in_arrears = -1
         if self.in_arrears:
