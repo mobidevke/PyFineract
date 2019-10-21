@@ -7,7 +7,7 @@ from six.moves.urllib_parse import urlparse, parse_qs
 from fineract.handlers import RequestHandler
 from fineract.objects import Client
 from fineract.objects.fineract_object import FineractObject
-from fineract.pagination import PaginatedListLegacy, PaginatedList
+from fineract.pagination import PaginatedList
 
 
 def fake_handler1(self, req, **kwargs):
@@ -66,7 +66,7 @@ def test_total_count__no_pagination(mocker):
     request_handler = RequestHandler('a', 'b', 'https://localhost', 'default', 10, 30)
 
     mocker.patch.object(requests.Session, 'send', new=fake_handler1)
-    paginated_list = PaginatedListLegacy(FineractObject, request_handler, '/', {})
+    paginated_list = PaginatedList(FineractObject, request_handler, '/', {})
     assert paginated_list.total_count == 10
 
 
@@ -74,7 +74,7 @@ def test_total_count__with_pagination(mocker):
     request_handler = RequestHandler('a', 'b', 'https://localhost', 'default', 10, 30)
 
     mocker.patch.object(requests.Session, 'send', new=fake_handler2)
-    paginated_list = PaginatedListLegacy(FineractObject, request_handler, '/', {})
+    paginated_list = PaginatedList(FineractObject, request_handler, '/', {})
     assert paginated_list.total_count == 10
 
 
@@ -82,7 +82,7 @@ def test_full_iteration__no_pagination(mocker):
     request_handler = RequestHandler('a', 'b', 'https://localhost', 'default', 10, 30)
 
     mocker.patch.object(requests.Session, 'send', new=fake_handler1)
-    paginated_list = PaginatedListLegacy(FineractObject, request_handler, '/', {})
+    paginated_list = PaginatedList(FineractObject, request_handler, '/', {})
     count = 0
     for _ in paginated_list:
         count += 1
@@ -94,7 +94,7 @@ def test_partial_iteration__no_pagination(mocker):
     request_handler = RequestHandler('a', 'b', 'https://localhost', 'default', 10, 30)
 
     mocker.patch.object(requests.Session, 'send', new=fake_handler1)
-    paginated_list = PaginatedListLegacy(FineractObject, request_handler, '/', {})
+    paginated_list = PaginatedList(FineractObject, request_handler, '/', {})
     count = 0
     for _ in paginated_list[:5]:
         count += 1
@@ -106,7 +106,7 @@ def test_full_iteration__with_pagination(mocker):
     request_handler = RequestHandler('a', 'b', 'https://localhost', 'default', 10, 5)
 
     mocker.patch.object(requests.Session, 'send', new=fake_handler2)
-    paginated_list = PaginatedListLegacy(FineractObject, request_handler, '/', {})
+    paginated_list = PaginatedList(FineractObject, request_handler, '/', {})
     count = 0
     for _ in paginated_list:
         count += 1
@@ -118,20 +118,12 @@ def test_partial_iteration__with_pagination(mocker):
     request_handler = RequestHandler('a', 'b', 'https://localhost', 'default', 10, 3)
 
     mocker.patch.object(requests.Session, 'send', new=fake_handler2)
-    paginated_list = PaginatedListLegacy(FineractObject, request_handler, '/', {})
+    paginated_list = PaginatedList(FineractObject, request_handler, '/', {})
     count = 0
     for item in paginated_list[:5]:
         count += 1
 
     assert count == 3
-
-
-def test_get_page(mocker):
-    request_handler = RequestHandler('a', 'b', 'https://localhost', 'default', 10, 2)
-    mocker.patch.object(requests.Session, 'send', new=fake_handler2)
-    paginated_list = PaginatedListLegacy(FineractObject, request_handler, '/', {})
-    items = paginated_list.get_page(1)
-    assert len(items) == 2
 
 
 def test_total_count__no_pagination2(mocker):
