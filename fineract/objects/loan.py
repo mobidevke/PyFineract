@@ -76,6 +76,13 @@ class Loan(DataFineractObject):
 
         return in_arrears
 
+    def is_closed(self):
+        """Check whether a loan is closed or not
+
+        :return: bool
+        """
+        return self.status is not None and self.status.closed
+
 
 class LoanStatus(FineractObject):
 
