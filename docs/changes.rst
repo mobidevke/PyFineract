@@ -4,6 +4,11 @@ Change log
 Stable versions
 ~~~~~~~~~~~~~~~
 
+Version 0.0.80 (October 30, 2019)
+-------------------------------------
+
+* feat: Add convenience method for checking if a loan is closed or not to Loan object (a63b0b6)
+
 Version 0.0.79 (October 21, 2019)
 -------------------------------------
 
