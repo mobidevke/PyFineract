@@ -376,6 +376,13 @@ class Client(DataFineractObject):
                        '/clients/{}'.format(client_id)
                    ), False)
 
+    def is_activated(self):
+        """
+        Check if client has been activated
+        :return: bool
+        """
+        return self.active == True
+
 
 class ClientStatus(Type):
     """
