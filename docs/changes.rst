@@ -4,6 +4,11 @@ Change log
 Stable versions
 ~~~~~~~~~~~~~~~
 
+Version 0.0.81 (October 31, 2019)
+-------------------------------------
+
+* feat: Add convenience method to check if client is activated. (e7823fb)
+
 Version 0.0.80 (October 30, 2019)
 -------------------------------------
 
