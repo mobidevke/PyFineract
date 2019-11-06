@@ -141,7 +141,7 @@ class Hook(FineractObject):
         return False
 
     @staticmethod
-    def templates(request_handler):
+    def template(request_handler):
         """Get a hook template
 
         :param request_handler:

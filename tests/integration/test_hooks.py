@@ -32,7 +32,7 @@ def test_get_single_hook(fineract):
 
 
 def test_hook_templates(fineract):
-    assert Hook.templates(fineract.request_handler)
+    assert Hook.template(fineract.request_handler)
 
 
 def test_hook_exists(fineract):

@@ -83,6 +83,17 @@ class Loan(DataFineractObject):
         """
         return self.status is not None and self.status.closed
 
+    @staticmethod
+    def template(request_handler):
+        """Get a loan template
+
+        :param request_handler:
+        :return: dict
+        """
+        return request_handler.make_request(
+            'GET',
+            '/loans/template'
+        )
 
 class LoanStatus(FineractObject):
 
