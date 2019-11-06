@@ -4,6 +4,11 @@ Change log
 Stable versions
 ~~~~~~~~~~~~~~~
 
+Version 0.0.82 (November 06, 2019)
+-------------------------------------
+
+* feat: Add method for fetching template to Loan object (f3e8454)
+
 Version 0.0.81 (October 31, 2019)
 -------------------------------------
 
