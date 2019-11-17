@@ -148,6 +148,16 @@ class Loan(DataFineractObject):
                        '/loans/{}'.format(loan_id)
                    ), False)
 
+    def delete(self):
+        """Delete a loan application
+
+        """
+        res = self.request_handler.make_request(
+            'DELETE',
+            '/loans/{}'.format(self.id)
+        )
+        return res['loanId'] == self.id
+
 
 class LoanStatus(FineractObject):
 
