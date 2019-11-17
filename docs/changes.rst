@@ -4,6 +4,15 @@ Change log
 Stable versions
 ~~~~~~~~~~~~~~~
 
+Version 0.0.83 (November 17, 2019)
+-------------------------------------
+
+* feat: Add methods for disbursing a loan application and undoing a loan disbursal (5181e8f)
+* feat: Add methods for approving a loan application and undoing a loan application (592e85d)
+* feat: Add method for deleting a loan application (1d55b2a)
+* feat: Add loan application method to Loan object (5ee2bc5)
+* feat: Add Note object (168cd79)
+
 Version 0.0.82 (November 06, 2019)
 -------------------------------------
 
