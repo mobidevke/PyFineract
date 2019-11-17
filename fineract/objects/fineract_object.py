@@ -53,6 +53,10 @@ class FineractObject(object):
             date_list[2]
         ) if date_list else date_list
 
+    @staticmethod
+    def _make_date_object_from_timestamp(dt):
+        return datetime.datetime.fromtimestamp(dt / 1000) if dt else dt
+
     def _make_fineract_object(self, klass, attributes):
         return klass(self._request_handler, attributes, False) if attributes else attributes
 

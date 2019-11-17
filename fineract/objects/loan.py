@@ -95,6 +95,7 @@ class Loan(DataFineractObject):
             '/loans/template'
         )
 
+
 class LoanStatus(FineractObject):
 
     def _init_attributes(self):
