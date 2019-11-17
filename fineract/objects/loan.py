@@ -84,16 +84,69 @@ class Loan(DataFineractObject):
         return self.status is not None and self.status.closed
 
     @staticmethod
-    def template(request_handler):
+    def template(request_handler, client_id=None, template_type='individual', product_id=None):
         """Get a loan template
 
+        :param template_type:
+        :param product_id:
+        :param client_id:
         :param request_handler:
         :return: dict
         """
+        if client_id and product_id:
+            return request_handler.make_request(
+                'GET',
+                '/loans/template?templateType={}&clientId={}&productId={}'.format(template_type, client_id, product_id)
+            )
+
         return request_handler.make_request(
             'GET',
-            '/loans/template'
+            '/loans/template?templateType={}&clientId={}'.format(template_type, client_id)
         )
+
+    @classmethod
+    def apply(cls, request_handler, client_id, product_id, principal, expected_disbursement_date=datetime.now()):
+        """Submit a new loan application
+
+        :param request_handler:
+        :param client_id:
+        :param product_id:
+        :param principal:
+        :param expected_disbursement_date:
+        :return:
+        """
+        template = cls.template(request_handler, client_id, product_id=product_id)
+        payload = {
+            'clientId': client_id,
+            'productId': product_id,
+            'principal': principal,
+            'loanTermFrequency': template['termFrequency'],
+            'loanTermFrequencyType': template['termPeriodFrequencyType']['id'],
+            'loanType': 'individual',
+            'numberOfRepayments': template['numberOfRepayments'],
+            'repaymentEvery': template['repaymentEvery'],
+            'repaymentFrequencyType': template['repaymentFrequencyType']['id'],
+            'interestRatePerPeriod': template['interestRatePerPeriod'],
+            'amortizationType': template['amortizationType']['id'],
+            'interestType': template['interestType']['id'],
+            'interestCalculationPeriodType': template['interestCalculationPeriodType']['id'],
+            'transactionProcessingStrategyId': template['transactionProcessingStrategyId'],
+            'expectedDisbursementDate': expected_disbursement_date,
+            'submittedOnDate': datetime.now(),
+        }
+
+        res = request_handler.make_request(
+            'POST',
+            '/loans',
+            json=payload
+        )
+
+        loan_id = res['loanId']
+        return cls(request_handler,
+                   request_handler.make_request(
+                       'GET',
+                       '/loans/{}'.format(loan_id)
+                   ), False)
 
 
 class LoanStatus(FineractObject):
