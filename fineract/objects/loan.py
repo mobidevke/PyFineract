@@ -192,6 +192,64 @@ class Loan(DataFineractObject):
         )
         return res['loanId'] == self.id
 
+    def disburse(self, actual_disbursement_date=datetime.now(), transaction_amount=None, fixed_emi_amount=None):
+        """Disburse an approved loan application
+
+        :param actual_disbursement_date:
+        :param transaction_amount:
+        :param fixed_emi_amount:
+        :return: bool
+        """
+        payload = {
+            'actualDisbursementDate': actual_disbursement_date
+        }
+
+        if transaction_amount:
+            payload['transactionAmount'] = transaction_amount
+
+        if fixed_emi_amount:
+            payload['fixedEmiAmount'] = fixed_emi_amount
+
+        res = self.request_handler.make_request(
+            'POST',
+            '/loans/{}?command=disburse'.format(self.id),
+            json=payload
+        )
+        return res['loanId'] == self.id
+
+    # def disburse_to_savings(self, actual_disbursement_date=datetime.now(), transaction_amount=None, fixed_emi_amount=None):
+    #     """Disburse an approved loan application to savings
+    #
+    #     :param actual_disbursement_date:
+    #     :param transaction_amount:
+    #     :param fixed_emi_amount:
+    #     :return: bool
+    #     """
+    #     payload = {
+    #         'actualDisbursementDate': actual_disbursement_date
+    #     }
+    #
+    #     if transaction_amount:
+    #         payload['transactionAmount'] = transaction_amount
+    #
+    #     if fixed_emi_amount:
+    #         payload['fixedEmiAmount'] = fixed_emi_amount
+    #
+    #     res = self.request_handler.make_request(
+    #         'POST',
+    #         '/loans/{}?command=disburseToSavings'.format(self.id),
+    #         json=payload
+    #     )
+    #     return res['loanId'] == self.id
+
+    def undo_disbursal(self, note):
+        res = self.request_handler.make_request(
+            'POST',
+            '/loans/{}?command=undoDisbursal'.format(self.id),
+            json={'note': note}
+        )
+        return res['loanId'] == self.id
+
 
 class LoanStatus(FineractObject):
 
