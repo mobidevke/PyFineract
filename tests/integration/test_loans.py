@@ -6,6 +6,18 @@ def test_loan_application(fineract):
     assert isinstance(loan, Loan)
 
 
+def test_loan_approval(fineract):
+    client = fineract.get_client(1)
+    loans = client.get_loans()
+    assert loans[0].approve()
+
+
+def test_undo_loan_approval(fineract):
+    client = fineract.get_client(1)
+    loans = client.get_loans()
+    assert loans[0].undo_approval('No reason')
+
+
 def test_loan_deletion(fineract):
     client = fineract.get_client(1)
     loans = client.get_loans()

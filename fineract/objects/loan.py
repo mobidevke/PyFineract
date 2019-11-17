@@ -149,12 +149,46 @@ class Loan(DataFineractObject):
                    ), False)
 
     def delete(self):
-        """Delete a loan application
+        """Delete a loan application. Only loans with status of "Submitted and awaiting approval"
 
+        :return: bool
         """
         res = self.request_handler.make_request(
             'DELETE',
             '/loans/{}'.format(self.id)
+        )
+        return res['loanId'] == self.id
+
+    def approve(self, approved_on_date=datetime.now(), approved_loan_amount=None, expected_disbursement_date=None):
+        """Approve a loan application
+
+        :param approved_on_date:
+        :param approved_loan_amount:
+        :param expected_disbursement_date:
+        :return: bool
+        """
+        payload = {
+            'approvedOnDate': approved_on_date
+        }
+
+        if approved_loan_amount:
+            payload['approvedLoanAmount'] = approved_loan_amount
+
+        if expected_disbursement_date:
+            payload['expectedDisbursementDate'] = expected_disbursement_date
+
+        res = self.request_handler.make_request(
+            'POST',
+            '/loans/{}?command=approve'.format(self.id),
+            json=payload
+        )
+        return res['loanId'] == self.id
+
+    def undo_approval(self, note):
+        res = self.request_handler.make_request(
+            'POST',
+            '/loans/{}?command=undoApproval'.format(self.id),
+            json={'note': note}
         )
         return res['loanId'] == self.id
 
