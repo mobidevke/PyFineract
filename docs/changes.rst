@@ -4,6 +4,13 @@ Change log
 Stable versions
 ~~~~~~~~~~~~~~~
 
+Version 0.0.84 (November 18, 2019)
+-------------------------------------
+
+* feat: Add convenience methods to savings object (8bf3e3b)
+* feat: Add savings object (273c9e9)
+* build: Add util python file to simplify objects creation for API (0b8800a)
+
 Version 0.0.83 (November 17, 2019)
 -------------------------------------
 
