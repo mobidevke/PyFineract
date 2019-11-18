@@ -113,7 +113,7 @@ class Loan(DataFineractObject):
         :param product_id:
         :param principal:
         :param expected_disbursement_date:
-        :return:
+        :return: :class:`fineract.objects.loan.Loan`
         """
         template = cls.template(request_handler, client_id, product_id=product_id)
         payload = {

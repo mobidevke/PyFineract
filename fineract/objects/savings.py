@@ -1,3 +1,5 @@
+from datetime import datetime
+
 from fineract.objects.currency import Currency
 from fineract.objects.fineract_object import FineractObject
 from fineract.objects.types import Type
@@ -74,6 +76,98 @@ class Savings(FineractObject):
         self.savings_amount_on_hold = attributes.get('savingsAmountOnHold', None)
         self.summary = self._make_fineract_object(SavingsSummary, attributes.get('summary', None))
         self.transactions = self._make_date_object(attributes.get('transactions', None))
+
+    @classmethod
+    def apply(cls, request_handler, client_id, product_id, submitted_on_date=datetime.now()):
+        """
+
+        :param request_handler:
+        :param client_id:
+        :param product_id:
+        :param submitted_on_date:
+        :return: :class:`fineract.objects.savings.Savings`
+        """
+        payload = {
+            'clientId': client_id,
+            'productId': product_id,
+            'submittedOnDate': submitted_on_date
+        }
+        res = request_handler.make_request(
+            'POST',
+            '/savingsaccounts',
+            json=payload
+        )
+
+        savings_id = res['savingsId']
+        return cls(request_handler,
+                   request_handler.make_request(
+                       'GET',
+                       '/savingsaccounts/{}'.format(savings_id)
+                   ), False)
+
+    def approve(self, approved_on_date=datetime.now()):
+        """Approve a savings application
+
+        :param approved_on_date:
+        :return: bool
+        """
+        payload = {
+            'approvedOnDate': approved_on_date
+        }
+
+        res = self.request_handler.make_request(
+            'POST',
+            '/savingsaccounts/{}?command=approve'.format(self.id),
+            json=payload
+        )
+        return res['savingsId'] == self.id
+
+    def undo_approve(self):
+        """Undo savings application approval
+
+        :return: bool
+        """
+        res = self.request_handler.make_request(
+            'POST',
+            '/savingsaccounts/{}?command=undoApproval'.format(self.id),
+            json={}
+        )
+        return res['savingsId'] == self.id
+
+    def activate(self, activated_on_date=datetime.now()):
+        """Activate a savings account
+
+        :param activated_on_date:
+        :return: bool
+        """
+        payload = {
+            'activatedOnDate': activated_on_date
+        }
+
+        res = self.request_handler.make_request(
+            'POST',
+            '/savingsaccounts/{}?command=activate'.format(self.id),
+            json=payload
+        )
+        return res['savingsId'] == self.id
+
+    # def close(self, closed_on_date=datetime.now(), withdraw_balance=False):
+    #     """Close a savings account
+    #
+    #     :param closed_on_date:
+    #     :return: bool
+    #     """
+    #     payload = {
+    #         'closedOnDate': closed_on_date,
+    #         'withdrawBalance': withdraw_balance
+    #     }
+    #
+    #     res = self.request_handler.make_request(
+    #         'POST',
+    #         '/savingsaccounts/{}?command=close'.format(self.id),
+    #         json=payload
+    #     )
+    #     return res['savingsId'] == self.id
 
 
 class SavingsStatus(FineractObject):

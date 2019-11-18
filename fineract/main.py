@@ -1,6 +1,7 @@
 # fineract APIs run on https by default
 from fineract import ResourceNotFoundException
 from fineract.handlers import RequestHandler
+from fineract.objects import Savings
 from fineract.objects.client import Client
 from fineract.objects.group import Group
 from fineract.objects.hook import Hook
@@ -32,6 +33,7 @@ class Fineract(object):
     :param base_url: string Fineract base url
     :param timeout: int Request timeout
     """
+
     def __init__(self, username=None, password=None, tenant=DEFAULT_TENANT, base_url=DEFAULT_BASE_URL,
                  timeout=DEFAULT_TIMEOUT, per_page=DEFAULT_PER_PAGE, debug=False, ssl_check=True):
 
@@ -148,6 +150,35 @@ class Fineract(object):
                         params=kwargs
                     ), False)
 
+    def get_savings_accounts(self, **kwargs):
+        """Return all savings accounts
+
+        :calls `GET /loans <https://demo.openmf.org/api-docs/apiLive.htm#savingsaccounts>`_
+
+        :rtype: :class:`fineract.pagination.PaginatedList` of :class:`fineract.objects.savings.Savings`
+        """
+        return PaginatedList(
+            Savings,
+            self.__request_handler,
+            '/savingsaccounts',
+            kwargs
+        )
+
+    def get_savings_account(self, id, **kwargs):
+        """Returns a savings account with matching id
+
+        :calls `GET /savingsaccounts/<id> <https://demo.openmf.org/api-docs/apiLive.htm#savingsaccounts_retrieve>`_
+
+        :param id: int Savings account id
+        :rtype: :class:`fineract.objects.savings.Savings`
+        """
+        return Savings(self.__request_handler,
+                       self.__request_handler.make_request(
+                           'GET',
+                           '/savingsaccounts/{}'.format(id),
+                           params=kwargs
+                       ), False)
+
     def get_staff(self, id=None):
         """Returns a stuff with a matching id or all staff
 
@@ -263,11 +294,11 @@ class Fineract(object):
         :rtype: :class:`fineract.objects.group.Group`
         """
         return Group(self.__request_handler,
-                      self.__request_handler.make_request(
-                          'GET',
-                          '/groups/{}'.format(id),
-                          params=kwargs
-                      ), False)
+                     self.__request_handler.make_request(
+                         'GET',
+                         '/groups/{}'.format(id),
+                         params=kwargs
+                     ), False)
 
     def get_reports(self, id=None):
         """Returns an office with a matching id or all offices
@@ -303,10 +334,10 @@ class Fineract(object):
         """
         if id:
             return Hook(self.__request_handler,
-                          self.__request_handler.make_request(
-                              'GET',
-                              '/hooks/{}'.format(id),
-                          ), False)
+                        self.__request_handler.make_request(
+                            'GET',
+                            '/hooks/{}'.format(id),
+                        ), False)
         else:
             return PaginatedList(
                 Hook,
@@ -326,10 +357,10 @@ class Fineract(object):
         """
         if id:
             return User(self.__request_handler,
-                          self.__request_handler.make_request(
-                              'GET',
-                              '/users/{}'.format(id),
-                          ), False)
+                        self.__request_handler.make_request(
+                            'GET',
+                            '/users/{}'.format(id),
+                        ), False)
         else:
             return PaginatedList(
                 User,
