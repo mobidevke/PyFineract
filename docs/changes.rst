@@ -4,6 +4,11 @@ Change log
 Stable versions
 ~~~~~~~~~~~~~~~
 
+Version 0.0.85 (November 26, 2019)
+-------------------------------------
+
+* test: Fix broken savings test (8f225b1)
+
 Version 0.0.84 (November 18, 2019)
 -------------------------------------
 
