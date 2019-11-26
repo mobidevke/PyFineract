@@ -8,7 +8,7 @@ def test_submit_savings_application(fineract):
 
 def test_get_all_savings_accounts(fineract):
     savings_accounts = fineract.get_savings_accounts()
-    assert savings_accounts.total_count > 1
+    assert savings_accounts.total_count >= 1
 
 
 def test_get_single_savings_account(fineract):
