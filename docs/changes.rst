@@ -4,6 +4,12 @@ Change log
 Stable versions
 ~~~~~~~~~~~~~~~
 
+Version 0.0.86 (December 07, 2019)
+-------------------------------------
+
+* build: Disable restarting of dockerr container (3c2e787)
+* refactor: Add (hour,minute,second) to datetime conversions (fd43721)
+
 Version 0.0.85 (November 26, 2019)
 -------------------------------------
 
