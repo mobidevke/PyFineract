@@ -5,7 +5,6 @@ services:
       context: ./mifos
       dockerfile: Dockerfile
     container_name: mifosx
-    restart: no
     ports:
       - '8443:8443'
     networks:
@@ -22,7 +21,6 @@ services:
       context: ./mysql
       dockerfile: Dockerfile
     container_name: mifos-db
-    restart: no
     ports:
       - '3307:3306'
     environment:
