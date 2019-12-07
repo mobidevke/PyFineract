@@ -17,7 +17,6 @@ def test_create_datatable(fineract):
         }
     ]
     datatable = DataTable.create(fineract.request_handler, 'datatable {}'.format(number), DataTable.CLIENT, columns)
-    print(datatable.raw_data)
     assert isinstance(datatable, DataTable)
 
 

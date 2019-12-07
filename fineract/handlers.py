@@ -40,7 +40,7 @@ class RequestHandler:
             'Fineract-Platform-TenantId': tenant
         }
         self.__locale = 'en'
-        self.__date_format = 'yyyy-MM-dd'
+        self.__date_format = 'yyyy-MM-dd HH:mm:ss'
         self.__auth = HTTPBasicAuth(username, password)
         self.__timeout = timeout
         o = urlparse(base_url)
@@ -170,7 +170,7 @@ class RequestHandler:
         if payload:
             extras = {}
             for key in payload.keys():
-                if 'date' in key.lower() and isinstance(payload[key], datetime.datetime):
+                if isinstance(payload[key], datetime.datetime):
                     extras['locale'] = self.__locale
                     extras['dateFormat'] = self.__date_format
                     extras[key] = self.__date_string(payload[key])
@@ -187,9 +187,10 @@ class RequestHandler:
 
     @staticmethod
     def __date_string(date):
-        return date.strftime('%Y-%m-%d')
+        return date.strftime('%Y-%m-%d %H:%M:%S')
 
-    def __create_err_message(self, data):
+    @staticmethod
+    def __create_err_message(data):
         if 'defaultUserMessage' in data:
             message = data['defaultUserMessage']
             if 'errors' in message:
@@ -201,7 +202,8 @@ class RequestHandler:
 
         return message
 
-    def __create_exception(self, status, output):
+    @staticmethod
+    def __create_exception(status, output):
         mappings = {
             '400': BadArgsException,
             '401': BadCredentialsException,
