@@ -4,6 +4,11 @@ Change log
 Stable versions
 ~~~~~~~~~~~~~~~
 
+Version 0.0.87 (December 08, 2019)
+-------------------------------------
+
+* build: Fix broken docker compose configuration (ed8b9ac)
+
 Version 0.0.86 (December 07, 2019)
 -------------------------------------
 
