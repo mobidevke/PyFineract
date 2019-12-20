@@ -277,6 +277,42 @@ class Client(DataFineractObject):
             return [loan for loan in self.get_loans() if loan.status.closed and loan.timeline.closed_on_date >
                     loan.timeline.expected_maturity_date]
 
+    def set_image(self, file, filename, content_type='image/png'):
+        """Set the image for a client. Pass `None` to delete an image.
+
+        :param file:
+        """
+        if file is None:
+            data = self.request_handler.make_request(
+                'DELETE',
+                '/clients/{}/images'.format(self.id),
+            )
+            return data['resourceId'] == self.id
+        else:
+            file_descr = (filename, file, content_type)
+            params = {
+                'file': file_descr
+            }
+            data = self.request_handler.make_request(
+                'POST',
+                '/clients/{}/images'.format(self.id),
+                files=params,
+                content_type='multipart/form-data'
+            )
+            return data['resourceId'] == self.id
+
+    def download_image(self):
+        """Download a document
+
+        :return: file content
+        """
+        return self._request_handler.make_request(
+            'GET',
+            '/clients/{}/images'.format(self.id),
+            accept='application/octet-stream',
+            is_file=True
+        )
+
     @classmethod
     def get_client_by_phone_no(cls, request_handler, phone_no):
         """Get a client by phone no

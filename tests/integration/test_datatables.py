@@ -13,7 +13,13 @@ def test_create_datatable(fineract):
         {
             'name': 'Test',
             'length': 100,
-            'type': 'String'
+            'type': 'String',
+            'mandatory': False
+        },
+        {
+            'name': 'Time',
+            'type': 'DateTime',
+            'mandatory': False
         }
     ]
     datatable = DataTable.create(fineract.request_handler, 'datatable {}'.format(number), DataTable.CLIENT, columns)

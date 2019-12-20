@@ -62,6 +62,10 @@ class RequestHandler:
             del kwargs['headers']['Content-Type']
             del kwargs['content_type']
 
+        if 'accept' in kwargs:
+            kwargs['headers']['accept'] = kwargs['accept']
+            del kwargs['accept']
+
         # kwargs['verify'] = self.__ssl_check
         kwargs = self.__inject_extras(kwargs)
         kwargs['method'] = method

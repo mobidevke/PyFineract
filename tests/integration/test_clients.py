@@ -1,3 +1,4 @@
+import filecmp
 import random
 
 import pytest
@@ -76,3 +77,23 @@ def test_add_document(fineract):
 def test_retrieve_all_documents(fineract):
     client = fineract.get_client(1)
     assert client.documents().total_count > 0
+
+
+def test_set_image(fineract):
+    with open('tests/files/image.png', 'rb') as in_file:
+        client = fineract.get_client(1)
+        assert client.set_image(in_file, 'image.png')
+
+
+def test_get_image(fineract, tmpdir):
+    in_path = 'tests/files/image.png'
+    client = fineract.get_client(1)
+    out_file = tmpdir.join('out.png')
+    out_path = str(out_file)
+    out_file.write_binary(client.download_image())
+    assert filecmp.cmp(in_path, out_path)
+
+
+def test_delete_image(fineract):
+    client = fineract.get_client(1)
+    assert client.set_image(None, None)
