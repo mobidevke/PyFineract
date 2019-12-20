@@ -4,6 +4,11 @@ Change log
 Stable versions
 ~~~~~~~~~~~~~~~
 
+Version 0.0.88 (December 20, 2019)
+-------------------------------------
+
+* feat: Add methods for managing Client images (4040c0b)
+
 Version 0.0.87 (December 08, 2019)
 -------------------------------------
 
