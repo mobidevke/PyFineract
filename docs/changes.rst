@@ -4,6 +4,11 @@ Change log
 Stable versions
 ~~~~~~~~~~~~~~~
 
+Version 0.0.89 (December 22, 2019)
+-------------------------------------
+
+* build: Update six dependency (8ce1d3f)
+
 Version 0.0.88 (December 20, 2019)
 -------------------------------------
 
