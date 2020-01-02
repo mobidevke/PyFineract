@@ -40,3 +40,7 @@ print(clients)
 ```
 ### Documentation (WIP)
 Full documentation can be found [here](https://pyfineract.readthedocs.io).
+
+### Disclaimer
+
+Python 2 support ends at version **0.0.89**
