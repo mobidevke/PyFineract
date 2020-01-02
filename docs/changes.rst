@@ -4,6 +4,11 @@ Change log
 Stable versions
 ~~~~~~~~~~~~~~~
 
+Version 0.0.89 (January 02, 2020)
+-------------------------------------
+
+* doc: Update Readme (ed33146)
+
 Version 0.0.89 (December 22, 2019)
 -------------------------------------
 
