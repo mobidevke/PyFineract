@@ -4,6 +4,13 @@ Change log
 Stable versions
 ~~~~~~~~~~~~~~~
 
+Version 0.0.89 (January 03, 2020)
+-------------------------------------
+
+* refactor: Change args type in exception from list to tuple (a1cfb5e)
+* Publish version 0.0.89 (137c2a3)
+* doc: Update Readme (ed33146)
+
 Version 0.0.89 (January 02, 2020)
 -------------------------------------
 
