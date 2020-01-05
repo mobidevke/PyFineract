@@ -4,6 +4,16 @@ Change log
 Stable versions
 ~~~~~~~~~~~~~~~
 
+Version 0.0.90 (January 05, 2020)
+-------------------------------------
+
+* build: Add python3 restriction to build (9be0af0)
+* refactor: Remove python2 specific code in handlers module (30a54a8)
+* Publish version 0.0.89 (0e1f2d7)
+* refactor: Change args type in exception from list to tuple (a1cfb5e)
+* Publish version 0.0.89 (137c2a3)
+* doc: Update Readme (ed33146)
+
 Version 0.0.89 (January 03, 2020)
 -------------------------------------
 
