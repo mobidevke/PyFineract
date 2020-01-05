@@ -1,35 +1,19 @@
 import datetime
 import functools
 import json
-import sys
-
-from requests import HTTPError
-
-try:
-    import textwrap
-    textwrap.indent
-except AttributeError:  # undefined function (wasn't added until Python 3.3)
-    def indent(text, prefix, predicate=None):
-        if predicate is None:
-            def predicate(line):
-                return line.strip()
-
-        def prefixed_lines():
-            for line in text.splitlines(True):
-                yield (prefix + line if predicate(line) else line)
-
-        return ''.join(prefixed_lines())
-else:
-    def indent(text, prefix):
-        return textwrap.indent(text, prefix)
+import textwrap
+from typing import Dict, Union
 
 import requests
+from requests import HTTPError
 from requests.auth import HTTPBasicAuth
 from six.moves.urllib.parse import urlparse
 
 from fineract.exceptions import BadCredentialsException, ResourceNotFoundException, BadArgsException, FineractException
 
-at_least_python3 = sys.hexversion >= 0x03000000
+
+def indent(text, prefix):
+    return textwrap.indent(text, prefix)
 
 
 class RequestHandler:
@@ -54,7 +38,7 @@ class RequestHandler:
         self.__format_json = functools.partial(json.dumps, indent=2, sort_keys=True)
         self.__indent = functools.partial(indent, prefix='  ')
 
-    def make_request(self, method, url, **kwargs):
+    def make_request(self, method, url, **kwargs) -> Union[Dict, bytes]:
         url = self.__base_url + url
         kwargs['auth'] = self.__auth
         kwargs['headers'] = {x: self.__headers[x] for x in self.__headers.keys()}
@@ -100,7 +84,7 @@ class RequestHandler:
         else:
             return res.json() if not is_file else res.content
 
-    def format_request(self, req):
+    def format_request(self, req) -> str:
         headers = '\n'.join('{}: {}'.format(k, v) for k, v in req.headers.items())
         content_type = req.headers.get('Content-Type', '')
         if 'application/json' in content_type and req.body is not None:
@@ -132,7 +116,7 @@ class RequestHandler:
         )
         return s
 
-    def format_response(self, resp):
+    def format_response(self, resp) -> str:
         headers = '\n'.join('{}: {}'.format(k, v) for k, v in resp.headers.items())
         content_type = resp.headers.get('Content-Type', '')
         if 'application/json' in content_type:
@@ -163,7 +147,7 @@ class RequestHandler:
         )
         return s
 
-    def __inject_extras(self, kwargs):
+    def __inject_extras(self, kwargs) -> dict:
         payload = None
         if 'data' in kwargs:
             payload = kwargs['data']
@@ -194,7 +178,7 @@ class RequestHandler:
         return date.strftime('%Y-%m-%d %H:%M:%S')
 
     @staticmethod
-    def __create_err_message(data):
+    def __create_err_message(data) -> str:
         if 'defaultUserMessage' in data:
             message = data['defaultUserMessage']
             if 'errors' in message:
@@ -207,7 +191,7 @@ class RequestHandler:
         return message
 
     @staticmethod
-    def __create_exception(status, output):
+    def __create_exception(status, output) -> Union[FineractException]:
         mappings = {
             '400': BadArgsException,
             '401': BadCredentialsException,
