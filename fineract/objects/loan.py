@@ -64,7 +64,7 @@ class Loan(DataFineractObject):
         self.in_arrears = attributes.get('inArrears', None)
         self.is_npa = attributes.get('isNPA', None)
 
-    def days_in_arrears(self):
+    def days_in_arrears(self) -> int:
         """Return the number of days in arrears
 
         :return: int
@@ -76,7 +76,7 @@ class Loan(DataFineractObject):
 
         return in_arrears
 
-    def is_closed(self):
+    def is_closed(self) -> bool:
         """Check whether a loan is closed or not
 
         :return: bool
@@ -84,7 +84,7 @@ class Loan(DataFineractObject):
         return self.status is not None and self.status.closed
 
     @staticmethod
-    def template(request_handler, client_id=None, template_type='individual', product_id=None):
+    def template(request_handler, client_id=None, template_type='individual', product_id=None) -> bool:
         """Get a loan template
 
         :param template_type:
@@ -105,7 +105,8 @@ class Loan(DataFineractObject):
         )
 
     @classmethod
-    def apply(cls, request_handler, client_id, product_id, principal, expected_disbursement_date=datetime.now()):
+    def apply(cls, request_handler, client_id, product_id, principal, expected_disbursement_date=datetime.now()) \
+            -> 'Loan':
         """Submit a new loan application
 
         :param request_handler:
@@ -148,7 +149,7 @@ class Loan(DataFineractObject):
                        '/loans/{}'.format(loan_id)
                    ), False)
 
-    def delete(self):
+    def delete(self) -> bool:
         """Delete a loan application. Only loans with status of "Submitted and awaiting approval"
 
         :return: bool
@@ -159,7 +160,8 @@ class Loan(DataFineractObject):
         )
         return res['loanId'] == self.id
 
-    def approve(self, approved_on_date=datetime.now(), approved_loan_amount=None, expected_disbursement_date=None):
+    def approve(self, approved_on_date=datetime.now(), approved_loan_amount=None, expected_disbursement_date=None) \
+            -> bool:
         """Approve a loan application
 
         :param approved_on_date:
@@ -184,7 +186,7 @@ class Loan(DataFineractObject):
         )
         return res['loanId'] == self.id
 
-    def undo_approval(self, note):
+    def undo_approval(self, note) -> bool:
         res = self.request_handler.make_request(
             'POST',
             '/loans/{}?command=undoApproval'.format(self.id),
@@ -192,7 +194,7 @@ class Loan(DataFineractObject):
         )
         return res['loanId'] == self.id
 
-    def disburse(self, actual_disbursement_date=datetime.now(), transaction_amount=None, fixed_emi_amount=None):
+    def disburse(self, actual_disbursement_date=datetime.now(), transaction_amount=None, fixed_emi_amount=None) -> bool:
         """Disburse an approved loan application
 
         :param actual_disbursement_date:
@@ -242,7 +244,7 @@ class Loan(DataFineractObject):
     #     )
     #     return res['loanId'] == self.id
 
-    def undo_disbursal(self, note):
+    def undo_disbursal(self, note) -> bool:
         res = self.request_handler.make_request(
             'POST',
             '/loans/{}?command=undoDisbursal'.format(self.id),

@@ -174,7 +174,7 @@ class RequestHandler:
         return kwargs
 
     @staticmethod
-    def __date_string(date):
+    def __date_string(date) -> str:
         return date.strftime('%Y-%m-%d %H:%M:%S')
 
     @staticmethod
