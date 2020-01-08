@@ -4,6 +4,11 @@ Change log
 Stable versions
 ~~~~~~~~~~~~~~~
 
+Version 0.0.91 (January 08, 2020)
+-------------------------------------
+
+* refactor: Add typing to Loan object (e7e6af5)
+
 Version 0.0.90 (January 05, 2020)
 -------------------------------------
 
