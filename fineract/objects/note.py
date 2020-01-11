@@ -40,7 +40,7 @@ class Note(FineractObject):
         self.updated_on = self._make_date_object_from_timestamp(attributes.get('updatedOn', None))
 
     @classmethod
-    def create(cls, request_handler, entity_type, entity_id, note):
+    def create(cls, request_handler, entity_type, entity_id, note) -> 'Note':
         """Add a note to an entity of type ``entity_type`` with id ``entity_id``
 
         :param request_handler:
@@ -104,7 +104,7 @@ class Note(FineractObject):
         )
 
     @classmethod
-    def get(cls, request_handler, entity_type, entity_id, note_id):
+    def get(cls, request_handler, entity_type, entity_id, note_id) -> 'Note':
         """Get a note for an entity of type ``entity_type`` with id ``entity_id`` if it matches ``note_id``
 
         :param request_handler:
@@ -119,7 +119,7 @@ class Note(FineractObject):
                         '/{}/{}/notes/{}'.format(entity_type, entity_id, note_id),
                     ), False)
 
-    def delete(self):
+    def delete(self) -> bool:
         """Delete a note
 
         :return: bool
