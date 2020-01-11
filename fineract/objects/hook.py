@@ -1,3 +1,5 @@
+from typing import Optional
+
 from fineract.objects.fineract_object import FineractObject
 
 
@@ -25,7 +27,7 @@ class Hook(FineractObject):
         self.events = attributes.get('events', [])
         self.config = attributes.get('config', [])
 
-    def update(self, payload_url, events):
+    def update(self, payload_url, events) -> 'Hook':
         """Update a web hook
 
         :param payload_url:
@@ -52,7 +54,7 @@ class Hook(FineractObject):
 
     @classmethod
     def create_web_hook(cls, request_handler, display_name, payload_url, events, content_type='json', is_active=False,
-                        template_id=None):
+                        template_id=None) -> 'Hook':
         """Create a web hook
 
         :param request_handler:
@@ -93,7 +95,7 @@ class Hook(FineractObject):
                    ), False)
 
     @classmethod
-    def get(cls, request_handler, id):
+    def get(cls, request_handler, id) -> 'Hook':
         """Get a hook with id ``id``
 
         :param request_handler:
@@ -107,7 +109,7 @@ class Hook(FineractObject):
                     ), False)
 
     @classmethod
-    def get_by_name(cls, request_handler, name):
+    def get_by_name(cls, request_handler, name) -> Optional['Hook']:
         """Get a hook that matches ``name``
 
         :param request_handler:
@@ -124,7 +126,7 @@ class Hook(FineractObject):
         return None
 
     @staticmethod
-    def exists(request_handler, name):
+    def exists(request_handler, name) -> bool:
         """Check whether a hook with the name (case sensitive) exists
 
         :param request_handler:
@@ -141,7 +143,7 @@ class Hook(FineractObject):
         return False
 
     @staticmethod
-    def template(request_handler):
+    def template(request_handler) -> dict:
         """Get a hook template
 
         :param request_handler:
