@@ -78,7 +78,7 @@ class Savings(FineractObject):
         self.transactions = self._make_date_object(attributes.get('transactions', None))
 
     @classmethod
-    def apply(cls, request_handler, client_id, product_id, submitted_on_date=datetime.now()):
+    def apply(cls, request_handler, client_id, product_id, submitted_on_date=datetime.now()) -> 'Savings':
         """
 
         :param request_handler:
@@ -105,7 +105,7 @@ class Savings(FineractObject):
                        '/savingsaccounts/{}'.format(savings_id)
                    ), False)
 
-    def approve(self, approved_on_date=datetime.now()):
+    def approve(self, approved_on_date=datetime.now()) -> bool:
         """Approve a savings application
 
         :param approved_on_date:
@@ -122,7 +122,7 @@ class Savings(FineractObject):
         )
         return res['savingsId'] == self.id
 
-    def undo_approve(self):
+    def undo_approve(self) -> bool:
         """Undo savings application approval
 
         :return: bool
@@ -134,7 +134,7 @@ class Savings(FineractObject):
         )
         return res['savingsId'] == self.id
 
-    def activate(self, activated_on_date=datetime.now()):
+    def activate(self, activated_on_date=datetime.now()) -> bool:
         """Activate a savings account
 
         :param activated_on_date:
