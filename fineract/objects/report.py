@@ -1,3 +1,5 @@
+from typing import Union, List, Dict, Optional
+
 from fineract.objects.fineract_object import FineractObject
 
 
@@ -36,7 +38,7 @@ class Report(FineractObject):
 
     @classmethod
     def create(cls, request_handler, report_name, report_type, report_category, report_sql, report_subtype='',
-               description='', use_report=False, report_parameters=None):
+               description='', use_report=False, report_parameters=None) -> 'Report':
         """Create a report
 
         :param request_handler:
@@ -77,7 +79,7 @@ class Report(FineractObject):
                    ), False)
 
     @classmethod
-    def get_by_name(cls, request_handler, name):
+    def get_by_name(cls, request_handler, name) -> Optional['Report']:
         """Return a report that matches ``name``
 
         :param request_handler:
@@ -94,7 +96,7 @@ class Report(FineractObject):
         return None
 
     @staticmethod
-    def exists(request_handler, name):
+    def exists(request_handler, name) -> bool:
         """Check whether a report with the name (case sensitive) exists
 
         :param request_handler: :class:`fineract.handlers.RequestHandler`
@@ -111,7 +113,7 @@ class Report(FineractObject):
         return False
 
     @staticmethod
-    def run(request_handler, name, generic_result_set=True, **kwargs):
+    def run(request_handler, name, generic_result_set=True, **kwargs) -> Union[List, Dict]:
         """Run the report ``name`` if it exists
 
         :param request_handler: :class:`fineract.handlers.RequestHandler`
