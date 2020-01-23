@@ -4,6 +4,11 @@ Change log
 Stable versions
 ~~~~~~~~~~~~~~~
 
+Version 0.0.93 (January 23, 2020)
+-------------------------------------
+
+* refactor: Remove python3.4 support (7a8e7ef)
+
 Version 0.0.92 (January 23, 2020)
 -------------------------------------
 
