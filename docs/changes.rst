@@ -4,6 +4,15 @@ Change log
 Stable versions
 ~~~~~~~~~~~~~~~
 
+Version 0.0.92 (January 23, 2020)
+-------------------------------------
+
+* refactor: Remove six (e6000ec)
+* refactor: Add typing to Hook object (1a9f339)
+* refactor: Add typing to Note object (2b0ba08)
+* refactor: Add typing to Report object (8b349a6)
+* refactor: Add typing to Savings object (3492224)
+
 Version 0.0.91 (January 08, 2020)
 -------------------------------------
 
