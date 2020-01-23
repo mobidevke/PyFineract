@@ -48,7 +48,6 @@ if __name__ == '__main__':
         ],
         install_requires=[
             'requests>=2.21.0',
-            'six==1.12.0'
         ],
         setup_requires=['pytest-runner'],
         tests_require=['pytest', 'pytest-cov', 'pytest-mock', 'Faker>=1.0.7'],

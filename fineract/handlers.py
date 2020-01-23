@@ -3,11 +3,11 @@ import functools
 import json
 import textwrap
 from typing import Dict, Union
+from urllib.parse import urlparse
 
 import requests
 from requests import HTTPError
 from requests.auth import HTTPBasicAuth
-from six.moves.urllib.parse import urlparse
 
 from fineract.exceptions import BadCredentialsException, ResourceNotFoundException, BadArgsException, FineractException
 
