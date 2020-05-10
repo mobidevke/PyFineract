@@ -4,6 +4,11 @@ Change log
 Stable versions
 ~~~~~~~~~~~~~~~
 
+Version 0.0.94 (May 10, 2020)
+-------------------------------------
+
+* feat: Add loan method for making repayment (ede3447)
+
 Version 0.0.93 (January 23, 2020)
 -------------------------------------
 
