@@ -252,6 +252,27 @@ class Loan(DataFineractObject):
         )
         return res['loanId'] == self.id
 
+    def make_repayment(self, amount, transaction_date, **kwargs):
+        """Make a repayment on a loan
+
+        :param amount:
+        :param transaction_date:
+        :param kwargs: Extra args see https://demo.mifos.io/api-docs/apiLive.htm#loans_transactions
+        :return: bool
+        """
+        payload = {
+            'transactionDate': transaction_date,
+            'transactionAmount': amount
+        }
+        payload.update(kwargs)
+        # print(payload)
+        res = self.request_handler.make_request(
+            'POST',
+            '/loans/{}/transactions?command=repayment'.format(self.id),
+            json=payload
+        )
+        return res['loanId'] == self.id
+
 
 class LoanStatus(FineractObject):
 
