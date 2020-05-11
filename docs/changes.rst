@@ -4,6 +4,11 @@ Change log
 Stable versions
 ~~~~~~~~~~~~~~~
 
+Version 0.0.95 (May 11, 2020)
+-------------------------------------
+
+* feat: Add convenience methods to Group (18532d9)
+
 Version 0.0.94 (May 10, 2020)
 -------------------------------------
 
