@@ -105,10 +105,12 @@ class Loan(DataFineractObject):
         )
 
     @classmethod
-    def apply(cls, request_handler, client_id, product_id, principal, expected_disbursement_date=datetime.now()) \
+    def apply(cls, request_handler, client_id, product_id, principal, expected_disbursement_date=datetime.now(),
+              submitted_date=datetime.now()) \
             -> 'Loan':
         """Submit a new loan application
 
+        :param submitted_date:
         :param request_handler:
         :param client_id:
         :param product_id:
@@ -133,7 +135,7 @@ class Loan(DataFineractObject):
             'interestCalculationPeriodType': template['interestCalculationPeriodType']['id'],
             'transactionProcessingStrategyId': template['transactionProcessingStrategyId'],
             'expectedDisbursementDate': expected_disbursement_date,
-            'submittedOnDate': datetime.now(),
+            'submittedOnDate': submitted_date,
         }
 
         res = request_handler.make_request(
