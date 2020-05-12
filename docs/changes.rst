@@ -4,6 +4,11 @@ Change log
 Stable versions
 ~~~~~~~~~~~~~~~
 
+Version 0.0.96 (May 12, 2020)
+-------------------------------------
+
+* feat: Add param to set submitted date of loan (6f32279)
+
 Version 0.0.95 (May 11, 2020)
 -------------------------------------
 
