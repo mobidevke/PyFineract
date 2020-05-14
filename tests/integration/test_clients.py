@@ -97,3 +97,14 @@ def test_get_image(fineract, tmpdir):
 def test_delete_image(fineract):
     client = fineract.get_client(1)
     assert client.set_image(None, None)
+
+
+number = random.randint(0, 10000)
+
+
+def test_client_closure(fineract, fake):
+    data = fineract.raw_request('GET', '/clients/template?commandParam=close')
+    _id = data['narrations'][-1]['id']
+    client = Client.create(fineract.request_handler, fake.first_name(), fake.last_name(), 1,
+                           mobile_no='{}'.format(number), middlename=fake.last_name())
+    assert client.close(_id)

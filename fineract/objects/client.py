@@ -4,6 +4,7 @@ from fineract.objects.document import Document
 from fineract.objects.fineract_object import FineractObject, DataFineractObject
 from fineract.objects.group import Group
 from fineract.objects.loan import Loan
+from fineract.objects.savings import Savings
 from fineract.objects.types import Type
 from fineract.pagination import PaginatedList
 
@@ -90,7 +91,7 @@ class Client(DataFineractObject):
         res = self._request_handler.make_request(
             'POST',
             '/clients/{}?command=activate'.format(_id),
-            {'activationDate': date}
+            json={'activationDate': date}
         )
         return res.get('clientId', None) == _id
 
@@ -108,7 +109,7 @@ class Client(DataFineractObject):
         res = self._request_handler.make_request(
             'POST',
             '/clients/{}?command=close'.format(_id),
-            {
+            json={
                 'closureDate': date,
                 'closureReasonId': closure_reason_id
             }
@@ -129,7 +130,7 @@ class Client(DataFineractObject):
         res = self._request_handler.make_request(
             'POST',
             '/clients/{}?command=reject'.format(_id),
-            {
+            json={
                 'rejectionDate': date,
                 'rejectionReasonId': rejection_reason_id
             }
@@ -150,7 +151,7 @@ class Client(DataFineractObject):
         res = self._request_handler.make_request(
             'POST',
             '/clients/{}?command=withdraw'.format(_id),
-            {
+            json={
                 'withdrawalDate': date,
                 'withdrawalReasonId': withdrawal_reason_id
             }
@@ -170,7 +171,7 @@ class Client(DataFineractObject):
         res = self._request_handler.make_request(
             'POST',
             '/clients/{}?command=reactivate'.format(_id),
-            {'reactivationDate': date}
+            json={'reactivationDate': date}
         )
         return res.get('clientId', None) == _id
 
@@ -187,7 +188,7 @@ class Client(DataFineractObject):
         res = self._request_handler.make_request(
             'POST',
             '/clients/{}?command=UndoRejection'.format(_id),
-            {'reopenedDate': date}
+            json={'reopenedDate': date}
         )
         return res.get('clientId', None) == _id
 
@@ -204,7 +205,7 @@ class Client(DataFineractObject):
         res = self._request_handler.make_request(
             'POST',
             '/clients/{}?command=UndoWithdrawal'.format(_id),
-            {'reopenedDate': date}
+            json={'reopenedDate': date}
         )
         return res.get('clientId', None) == _id
 
@@ -418,6 +419,22 @@ class Client(DataFineractObject):
         :return: bool
         """
         return self.active == True
+
+    def get_accounts(self):
+        data = self.request_handler.make_request(
+            'GET',
+            '/clients/{}/accounts'.format(self.id)
+        )
+        if data:
+            if 'loanAccounts' in data:
+                data['loanAccounts'] = [Loan(self.request_handler, account, False) for account in data['loanAccounts']]
+
+            if 'savingsAccounts' in data:
+                data['savingsAccounts'] = [Savings(self.request_handler, account, False) for account in
+                                           data['savingsAccounts']]
+
+            self.accounts = data
+        return data
 
 
 class ClientStatus(Type):
