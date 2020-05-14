@@ -4,6 +4,11 @@ Change log
 Stable versions
 ~~~~~~~~~~~~~~~
 
+Version 0.0.97 (May 14, 2020)
+-------------------------------------
+
+* fix: Correct client closure logic (3d8283b)
+
 Version 0.0.96 (May 12, 2020)
 -------------------------------------
 
