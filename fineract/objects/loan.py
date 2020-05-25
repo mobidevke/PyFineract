@@ -283,6 +283,14 @@ class Loan(DataFineractObject):
         )
         return res['loanId'] == self.id
 
+    def apply_charge(self, charge_id, amount):
+        res = self.request_handler.make_request(
+            'POST',
+            '/loans/{}/charges'.format(self.id),
+            json={'chargeId': charge_id, 'amount': amount}
+        )
+        return res['loanId'] == self.id
+
 
 class LoanStatus(FineractObject):
 
