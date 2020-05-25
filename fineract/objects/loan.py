@@ -162,6 +162,14 @@ class Loan(DataFineractObject):
         )
         return res['loanId'] == self.id
 
+    def reject(self, note, rejected_on_date=datetime.now()):
+        res = self.request_handler.make_request(
+            'POST',
+            '/loans/{}?command=reject'.format(self.id),
+            json={'note': note, 'rejectedOnDate': rejected_on_date}
+        )
+        return res['loanId'] == self.id
+
     def approve(self, approved_on_date=datetime.now(), approved_loan_amount=None, expected_disbursement_date=None) \
             -> bool:
         """Approve a loan application
