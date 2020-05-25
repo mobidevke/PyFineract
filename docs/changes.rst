@@ -4,6 +4,11 @@ Change log
 Stable versions
 ~~~~~~~~~~~~~~~
 
+Version 0.0.98 (May 25, 2020)
+-------------------------------------
+
+* feat: Add loan rejection method (639c2df)
+
 Version 0.0.97 (May 14, 2020)
 -------------------------------------
 
