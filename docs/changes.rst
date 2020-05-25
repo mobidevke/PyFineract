@@ -4,6 +4,11 @@ Change log
 Stable versions
 ~~~~~~~~~~~~~~~
 
+Version 0.0.99 (May 25, 2020)
+-------------------------------------
+
+* feat: Add loan method for adding charge (c26ece0)
+
 Version 0.0.98 (May 25, 2020)
 -------------------------------------
 
