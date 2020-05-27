@@ -4,6 +4,11 @@ Change log
 Stable versions
 ~~~~~~~~~~~~~~~
 
+Version 0.1.1 (May 27, 2020)
+-------------------------------------
+
+* feat: Add support for extra args when creating a loan application (2ec682a)
+
 Version 0.1.0 (May 26, 2020)
 -------------------------------------
 
