@@ -106,7 +106,7 @@ class Loan(DataFineractObject):
 
     @classmethod
     def apply(cls, request_handler, client_id, product_id, principal, expected_disbursement_date=datetime.now(),
-              submitted_date=datetime.now()) \
+              submitted_date=datetime.now(), **kwargs) \
             -> 'Loan':
         """Submit a new loan application
 
@@ -137,6 +137,7 @@ class Loan(DataFineractObject):
             'expectedDisbursementDate': expected_disbursement_date,
             'submittedOnDate': submitted_date,
         }
+        payload.update(kwargs)
 
         res = request_handler.make_request(
             'POST',
