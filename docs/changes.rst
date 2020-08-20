@@ -4,6 +4,11 @@ Change log
 Stable versions
 ~~~~~~~~~~~~~~~
 
+Version 0.1.3 (August 20, 2020)
+-------------------------------------
+
+* tests: Correct broken tests (f006dbf)
+
 Version 0.1.2 (August 20, 2020)
 -------------------------------------
 
