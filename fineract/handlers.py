@@ -54,6 +54,7 @@ class RequestHandler:
         kwargs = self.__inject_extras(kwargs)
         kwargs['method'] = method
         kwargs['url'] = url
+        kwargs['timeout'] = self.__timeout
         is_file = False
         if 'is_file' in kwargs:
             is_file = True
