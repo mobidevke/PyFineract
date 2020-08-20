@@ -54,7 +54,6 @@ class RequestHandler:
         kwargs = self.__inject_extras(kwargs)
         kwargs['method'] = method
         kwargs['url'] = url
-        kwargs['timeout'] = self.__timeout
         is_file = False
         if 'is_file' in kwargs:
             is_file = True
@@ -67,7 +66,7 @@ class RequestHandler:
 
             try:
                 # res = requests.request(method, url, **kwargs)
-                res = sess.send(prep_req, verify=self.__ssl_check)
+                res = sess.send(prep_req, verify=self.__ssl_check, timeout=self.__timeout)
             except Exception as e:
                 raise self.__create_exception(500, str(e))
 
