@@ -4,6 +4,11 @@ Change log
 Stable versions
 ~~~~~~~~~~~~~~~
 
+Version 0.1.2 (August 20, 2020)
+-------------------------------------
+
+* feat: Add timeout to requests (785f918)
+
 Version 0.1.1 (May 27, 2020)
 -------------------------------------
 
