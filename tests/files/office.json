@@ -1,0 +1,12 @@
+{
+  "id": 1,
+  "name": "Head Office",
+  "nameDecorated": "Head Office",
+  "externalId": "1",
+  "openingDate": [
+    2009,
+    1,
+    1
+  ],
+  "hierarchy": "."
+}

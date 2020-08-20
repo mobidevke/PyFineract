@@ -1,0 +1,180 @@
+<div class="content-container">
+    <ul class="breadcrumb">
+        <li><a href="#/users">{{'label.anchor.users' | translate}}</a></li>
+        <li class="active">{{'label.anchor.createuser' | translate}}</li>
+    </ul>
+	<form class="card form-horizontal well" name="createuserform" ng-controller="CreateUserController" novalidate=""
+	      rc-submit="submit()">
+	    <api-validate></api-validate>
+	    <fieldset>
+	        <legend>{{'label.heading.createuser' | translate}}</legend>
+	        <div class="form-group">
+	            <label class="control-label col-sm-2" for="username">{{'label.input.username' | translate}}<span
+	                    class="required">*</span></label>
+
+	            <div class="col-sm-3">
+	                <input class="form-control" id="username" late-Validate name="username" ng-model="formData.username" required type="text"/>
+	            </div>
+	            <div class="col-sm-3">
+	                <form-validate valattribute="username" valattributeform="createuserform"/>
+	            </div>
+	        </div>
+	        <div class="form-group">
+	            <label class="control-label col-sm-2" for="firstname">{{'label.input.firstname' | translate}}<span
+	                    class="required">*</span></label>
+
+	            <div class="col-sm-3">
+	                <input class="form-control" id="firstname" late-Validate name="firstname" ng-model="formData.firstname" ng-pattern="/(^[A-z])[A-z.'-]*/"
+	                       required type="text"/>
+	            </div>
+	            <div class="col-sm-3">
+                  <span ng-show="createuserform.firstname.$invalid && createuserform.firstname.$dirty">
+                    <small class="error required" ng-show="createuserform.firstname.$error.pattern">
+                        {{'validation.msg.client.name.cannot.start.specialchar.ornumber' | translate}}
+                    </small>
+                  </span>
+	                <form-validate valattribute="firstname" valattributeform="createuserform"/>
+	            </div>
+	        </div>
+	        <div class="form-group">
+	            <label class="control-label col-sm-2" for="lastname">{{'label.input.lastname' | translate}}<span
+	                    class="required">*</span></label>
+
+	            <div class="col-sm-3">
+	                <input class="form-control" id="lastname" late-Validate name="lastname" ng-model="formData.lastname" ng-pattern="/(^[A-z])[A-z.'-]*/"
+                  required type="text"/>
+	            </div>
+	            <div class="col-sm-3">
+                  <span ng-show="createuserform.lastname.$invalid && createuserform.lastname.$dirty">
+                      <small class="error required" ng-show="createuserform.lastname.$error.pattern">
+                          {{'validation.msg.client.name.cannot.start.specialchar.ornumber' | translate}}
+                      </small>
+                  </span>
+	                <form-validate valattribute="lastname" valattributeform="createuserform"/>
+	            </div>
+	        </div>
+	        <div data-ng-switch on="formData.sendPasswordToEmail">
+	            <div data-ng-switch-when="true">
+	                <div class="form-group">
+	                    <label class="control-label col-sm-2" for="email">{{'label.input.email' | translate}}<span
+	                            class="required">*</span></label>
+
+	                    <div class="col-sm-3">
+	                        <input class="form-control" id="email" late-Validate name="email" ng-model="formData.email" required type="email"/>
+	                    </div>
+	                    <div class="col-sm-3">
+	                        <form-validate valattribute="email" valattributeform="createuserform"/>
+	                    </div>
+	                </div>
+	            </div>
+	            <div data-ng-switch-when="false">
+	                <div class="form-group" data-ng-show="!formData.sendPasswordToEmail">
+	                    <label class="control-label col-sm-2" for="email1">{{'label.input.email' | translate}}</label>
+
+	                    <div class="col-sm-3">
+	                        <input class="form-control" id="email1" name="email1" ng-model="formData.email" type="email"/>
+	                    </div>
+	                </div>
+	            </div>
+	        </div>
+	        <div class="form-group">
+	            <label class="control-label col-sm-2">{{'label.input.autogeneratepassword' | translate}}</label>
+
+	            <div class="col-sm-3">
+	                <label class="checkbox">
+	                    <input ng-model="formData.sendPasswordToEmail" type="checkbox">
+	                </label>
+	            </div>
+
+				<label class="control-label col-sm-3">{{'label.input.overridepasswordexpiry' | translate}}
+				<i class="fa fa-question-circle control-label fa fa-align-left"
+				   uib-tooltip="{{'label.tooltip.overridepasswordexpiry' | translate}}"></i></label>
+				<div class="col-sm-3">
+				<label class="checkbox">
+						<input ng-model="formData.passwordNeverExpires" type="checkbox">
+					</label>
+				</div>
+
+	        </div>
+	        <div data-ng-switch on="formData.sendPasswordToEmail">
+	            <div data-ng-switch-when="false">
+	                <div class="form-group">
+	                    <label class="control-label col-sm-2" for="password">{{'label.input.password' | translate}}<span
+	                            class="required">*</span></label>
+
+	                    <div class="col-sm-3">
+	                        <input class="form-control" id="password" late-Validate name="password" ng-model="formData.password" required
+	                               type="password">
+	                    </div>
+	                    <div class="col-sm-3">
+	                        <form-validate valattribute="password" valattributeform="createuserform"/>
+	                    </div>
+	                </div>
+	                <div class="form-group">
+	                    <label class="control-label col-sm-2" for="repeatPassword">{{'label.input.repeatpassword' | translate}}<span
+	                            class="required">*</span></label>
+
+	                    <div class="col-sm-3">
+	                        <input class="form-control" id="repeatPassword" late-Validate name="repeatPassword"
+	                               ng-model="formData.repeatPassword" required type="password">
+	                    </div>
+	                    <div class="col-sm-3">
+	                        <form-validate valattribute="repeatPassword" valattributeform="createuserform"/>
+	                    </div>
+	                </div>
+	            </div>
+	        </div>
+	        <div class="form-group">
+	            <label class="control-label col-sm-2">{{'label.input.office' | translate}}<span class="required">*</span></label>
+
+	            <div class="col-sm-3">
+	                <select chosen="offices" class="form-control" data-ng-change="getOfficeStaff()" id="officeId" ng-model="formData.officeId"
+	                        ng-options="office.id as office.name for office in offices" value="{{office.id}}">
+	                    <option value="">--{{'label.menu.selectoffice' | translate}}--</option>
+	                </select>
+	            </div>
+	        </div>
+	        <div class="form-group">
+	            <label class="control-label col-sm-2">{{'label.input.staff' | translate}}</label>
+
+	            <div class="col-sm-3">
+	                <select chosen="staffs" class="form-control" id="staffId"  ng-model="formData.staffId"
+	                        ng-options="staff.id as staff.displayName for staff in staffs" value="{{staff.id}}">
+	                    <option value="">--{{'label.menu.selectstaff' | translate}}--</option>
+	                </select>
+	            </div>
+	        </div>
+			<div class="form-group">
+				<div class="col-sm-3 col-md-3 col-md-offset-1">
+					<label class="control-label col-sm-9">{{ 'label.input.availableroles' | translate }}</label>
+					<select class="form-control multiselectmin" id="availableroles" multiple name="availableroles" ng-model="available">
+						<option ng-repeat="availablerole in availableRoles" value="{{availablerole.id}}">
+							{{availablerole.name}}
+						</option>
+					</select>
+				</div>
+				<div class="col-sm-1 col-md-1 paddedtop25px">
+					<button class="btn btn-primary" data-ng-click="addRole()" type="button"><i
+							class="fa fa-angle-double-right"></i></button>
+					<br/>
+					<button class="btn btn-primary" data-ng-click="removeRole()" type="button"><i
+							class="fa fa-angle-double-left"></i></button>
+				</div>
+				<div class="col-sm-3 col-md-3">
+					<label class="control-label col-sm-9">{{ 'label.input.selectedroles' | translate}}<span
+	                    class="required">*</span></label>
+					<select class="form-control multiselectmin" id="roles" multiple name="roles" name="role" ng-model="selected">
+						<option ng-repeat="availablerole in selectedRoles" value="{{availablerole.id}}">
+							{{availablerole.name}}
+						</option>
+					</select>
+				</div>
+			</div>
+
+	        <div class="col-md-offset-3">
+	            <a class="btn btn-default" href="#/users" id="cancel">{{'label.button.cancel' | translate}}</a>
+	            <button class="btn btn-primary" has-permission='CREATE_USER' id="save" type="submit">{{'label.button.save' | translate}}</button>
+	        </div>
+	    </fieldset>
+	</form>
+</div>

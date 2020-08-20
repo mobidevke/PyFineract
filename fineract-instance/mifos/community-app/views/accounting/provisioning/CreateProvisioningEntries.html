@@ -1,0 +1,36 @@
+<div class="content-container" ng-controller="CreateProvisoningEntriesController">
+    <ul class="breadcrumb">
+        <li><a href="#/accounting">{{'label.anchor.accounting' | translate}}</a></li>
+        <li><a href="#/viewprovisioningentries">{{'label.anchor.viewprovisioningeentries' | translate}}</a></li>
+        <li class="active">{{'label.anchor.createprovisioningeentries' | translate}}</li>
+    </ul>
+    <div class="card">
+        <div class="content">
+            <div class="toolbar"></div>
+            <br>
+            <form class="form-horizontal" name="createprovisioningentryform" novalidate="" rc-submit="submit()">
+                <api-validate></api-validate>
+                <fieldset style="padding-top: 50px; padding-bottom: 20px;">
+                    <div class="form-group">
+                        <label class="control-label col-sm-2" for="submittedOnDate">{{'label.input.provisioningcriteria' |
+                            translate}}<span class="required">*</span></label>
+
+                        <div class="col-sm-3">
+                            <input class="form-control" datepicker-pop="dd MMMM yyyy" id="submittedOnDate" is-open="opened"
+                                   max="restrictDate" min="'2000-01-01'" name="submittedon" ng-model="submitteddate"
+                                   type="text"/>
+                        </div>
+
+                        <div class="col-sm-3">
+                            <input name="name1" ng-model="formData.createjournalentries" type="checkbox"/> {{'Create Journal Entries'}}
+                        </div>
+
+                        <button class="btn btn-primary" has-permission='CREATE_PROVISIONING_ENTRIES' id="save" type="submit">
+                            {{'label.button.save' | translate}}
+                        </button>
+                    </div>
+                </fieldset>
+            </form>
+        </div>
+    </div>
+</div>

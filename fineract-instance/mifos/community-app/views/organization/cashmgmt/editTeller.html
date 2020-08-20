@@ -1,0 +1,91 @@
+<div class="col-md-12">
+    <ul class="breadcrumb">
+        <li><a href="#/organization">{{'label.anchor.organization' | translate}}</a></li>
+        <li><a href="#/tellers">{{'label.anchor.tellers' | translate}}</a></li>
+        <li class="active">{{'label.anchor.editteller' | translate}}</li>
+    </ul>
+    <div class="card">
+        <div class="content">
+            <form class="form-horizontal" name="edittellerform" ng-controller="EditTellerController"
+                novalidate="" rc-submit="submit()">
+                <api-validate></api-validate>
+                <fieldset>
+                    <div class="form-group">
+                        <label class="control-label col-sm-2">{{ 'label.input.teller.name' | translate }}<span
+                                class="required">*</span></label>
+
+                        <div class="col-sm-3">
+                            <input class="form-control" id="name" name="name" ng-autofocus="true" ng-model="formData.name" required
+                                   type="text" />
+                        </div>
+                        <div class="col-sm-3">
+                            <form-validate valattribute="name" valattributeform="edittellerform"/>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="control-label col-sm-2">{{ 'label.input.teller.office' | translate }}<span class="required">*</span></label>
+                        <div class="col-sm-3">
+                            {{officeName}}
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="control-label col-sm-2">{{ 'label.input.teller.description' | translate }}<span
+                                class="required">*</span></label>
+
+                        <div class="col-sm-3">
+                            <input class="form-control" id="description" name="description" ng-autofocus="true" ng-model="formData.description" required
+                                   type="text" />
+                        </div>
+                        <div class="col-sm-3">
+                            <form-validate valattribute="description" valattributeform="edittellerform"/>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="control-label col-sm-2">{{ 'label.input.teller.startDate' | translate }}<span
+                                class="required">*</span></label>
+
+                        <div class="col-sm-3">
+                            <input class="form-control" datepicker-pop="dd MMMM yyyy" id="startDate" is-open="opened" max="restrictDate" min="minDate"
+                                   name="startDate" ng-model="formData.startDate" required sort type="text" />
+                        </div>
+                        <div class="col-sm-3">
+                            <form-validate valattribute="startDate" valattributeform="edittellerform"/>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="control-label col-sm-2">{{ 'label.input.teller.endDate' | translate }}</label>
+
+                        <div class="col-sm-3">
+                            <input class="form-control" datepicker-pop="dd MMMM yyyy" id="endDate" is-open="opened" min="minDate"
+                                   ng-model="formData.endDate" sort type="text" />
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="control-label col-sm-2">{{ 'label.input.teller.status' | translate }}<span
+                                class="required">*</span></label>
+                        <div class="col-sm-3">
+                            <select class="form-control" id="usage" name="usage"
+                                    ng-model="formData.status"
+                                    ng-options="tellerStatus.id as tellerStatus.value for tellerStatus in tellerStatuses" value="{{tellerStatus.id}}"></select>
+                        </div>
+                        <div class="col-sm-3">
+                            <form-validate valattribute="usage" valattributeform="edittellerform"/>
+                        </div>
+                    </div>
+
+
+                    <div class="col-md-offset-3">
+                        <a href="#/tellers" id="cancel">
+                            <button class="btn btn-default" type="reset">{{'label.button.cancel' | translate}}</button>
+                        </a>
+                        <button class="btn btn-primary" has-permission='CREATE_TELLER' id="save" type="submit">{{'label.button.save' | translate}}</button>
+                    </div>
+                </fieldset>
+            </form>
+        </div>
+    </div>
+</div>

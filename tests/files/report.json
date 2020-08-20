@@ -1,0 +1,17 @@
+{
+  "id": 1,
+  "reportName": "Client Listing",
+  "reportType": "Table",
+  "reportCategory": "Client",
+  "description": "Individual Client Report\r\n\r\nLists the small number of defined fields on the client table.  Would expect to copy this \n\nreport and add any \u0027one to one\u0027 additional data for specific tenant needs.\r\n\r\nCan be run for any size MFI but you\u0027d expect it only to be run within a branch for \n\nlarger ones.  Depending on how many columns are displayed, there is probably is a limit of about 20/50k clients returned for html display (export to excel doesn\u0027t \n\nhave that client browser/memory impact).",
+  "reportSql": "select \nconcat(repeat(\"..\",   \n   ((LENGTH(ounder.`hierarchy`) - LENGTH(REPLACE(ounder.`hierarchy`, \u0027.\u0027, \u0027\u0027)) - 1))), ounder.`name`) as \"Office/Branch\",\n c.account_no as \"Client Account No.\",  \nc.display_name as \"Name\",  \nr.enum_message_property as \"Status\",\nc.activation_date as \"Activation\", c.external_id as \"External Id\"\nfrom m_office o \njoin m_office ounder on ounder.hierarchy like concat(o.hierarchy, \u0027%\u0027)\nand ounder.hierarchy like concat(\u0027${currentUserHierarchy}\u0027, \u0027%\u0027)\njoin m_client c on c.office_id \u003d ounder.id\nleft join r_enum_value r on r.enum_name \u003d \u0027status_enum\u0027 and r.enum_id \u003d c.status_enum\nwhere o.id \u003d ${officeId}\norder by ounder.hierarchy, c.account_no",
+  "coreReport": true,
+  "useReport": false,
+  "reportParameters": [
+    {
+      "id": 1,
+      "parameterId": 5,
+      "parameterName": "OfficeIdSelectOne"
+    }
+  ]
+}

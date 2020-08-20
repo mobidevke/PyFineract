@@ -1,0 +1,15 @@
+<div data-ng-controller="LoginFormController" data-ng-form="loginForm" id="login-form">
+    <div>
+        <input data-ng-model="loginCredentials.username" id="uid" name="username" placeholder="username" type="text">
+        <input data-ng-model="loginCredentials.password" id="pwd" name="password" placeholder="password"
+               type="password">
+    </div>
+    <div>
+        <button data-ng-click="login()" id="loginButton">{{'label.button.login' | translate}}</button>
+    </div>
+    <div data-ng-show="authenticationFailed">
+        <p>{{authenticationErrorMessage | translate}}</p>
+    </div>
+    
+</div>
+

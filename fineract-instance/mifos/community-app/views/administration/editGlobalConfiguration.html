@@ -1,0 +1,31 @@
+<div class="content-container" ng-controller="EditConfigurationController">
+        <ul class="breadcrumb">
+            <li><a href="#/global">{{'label.anchor.globalconfigurations' | translate}}</a></li>
+            <li class="active">{{'label.anchor.editconfiguration' | translate}}</li>
+        </ul>
+    <form class="card form-horizontal well" name="editconfigurationform" ng-submit="submit()" novalidate="">
+        <api-validate></api-validate>
+        <fieldset>
+            <legend>{{ 'label.anchor.editconfiguration' | translate }}</legend>
+            <div class="form-group">
+                <label class="control-label col-sm-2" for="amount">{{ 'label.input.value' | translate }}<span
+                        class="required">*</span></label>
+
+                <div class="col-sm-3">
+                    <input class="form-control" id="amount" late-Validate name="value" ng-autofocus="true" ng-model="formData.value" required
+                           type="text"/>
+                    <form-validate valattribute="value" valattributeform="editconfigurationform"/>
+                </div>
+            </div>
+
+            <div class="col-md-offset-3">
+                <button class="btn btn-default" id="cancel" ng-click="cancel()" type="reset">{{ 'label.button.cancel' | translate
+                    }}
+                </button>
+                <button class="btn btn-primary" has-permission='UPDATE_CONFIGURATION' id="save" ng-disabled="!editconfigurationform.$valid" type="submit">{{
+                    'label.button.save' | translate }}
+                </button>
+            </div>
+        </fieldset>
+    </form>
+</div>

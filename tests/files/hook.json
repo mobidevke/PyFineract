@@ -1,0 +1,33 @@
+{
+  "id": 12,
+  "name": "Web",
+  "displayName": "Withdrawals",
+  "isActive": false,
+  "createdAt": [
+    2019,
+    6,
+    18
+  ],
+  "updatedAt": [
+    2019,
+    6,
+    20
+  ],
+  "templateId": 0,
+  "events": [
+    {
+      "actionName": "WITHDRAWAL",
+      "entityName": "SAVINGSACCOUNT"
+    }
+  ],
+  "config": [
+    {
+      "fieldName": "Content Type",
+      "fieldValue": "json"
+    },
+    {
+      "fieldName": "Payload URL",
+      "fieldValue": "https://example.com"
+    }
+  ]
+}

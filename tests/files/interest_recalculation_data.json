@@ -1,0 +1,30 @@
+{
+  "id": 3,
+  "productId": 1,
+  "interestRecalculationCompoundingType": {
+    "id": 2,
+    "code": "interestRecalculationCompoundingMethod.fee",
+    "value": "Fee"
+  },
+  "recalculationCompoundingFrequencyType": {
+    "id": 1,
+    "code": "interestRecalculationFrequencyType.same.as.repayment.period",
+    "value": "Same as repayment period"
+  },
+  "rescheduleStrategyType": {
+    "id": 2,
+    "code": "loanRescheduleStrategyMethod.reduce.number.of.installments",
+    "value": "Reduce number of installments"
+  },
+  "recalculationRestFrequencyType": {
+    "id": 1,
+    "code": "interestRecalculationFrequencyType.same.as.repayment.period",
+    "value": "Same as repayment period"
+  },
+  "preClosureInterestCalculationStrategy": {
+    "id": 1,
+    "code": "loanPreClosureInterestCalculationStrategy.tillPreClosureDate",
+    "value": "Till preclose Date"
+  },
+  "isArrearsBasedOnOriginalSchedule": true
+}

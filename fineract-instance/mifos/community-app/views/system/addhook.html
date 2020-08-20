@@ -1,0 +1,118 @@
+<div class="content-container">
+    <ul class="breadcrumb">
+        <li><a href="#/hooks">{{'label.anchor.managehooks' | translate}}</a></li>
+        <li class="active">{{'label.anchor.createhook' | translate}}</li>
+    </ul>
+    <div class="card">
+        <div class="content">
+            <div class="toolbar">
+                <h4>{{'label.heading.createhook' | translate}}</h4>
+            </div>
+            <br/>
+            <form class="form-horizontal" name="createhookform" ng-controller="CreateHookController"
+                novalidate=""
+                  rc-submit="submit()">
+                <api-validate></api-validate>
+                <fieldset>
+                    <div class="form-group">
+                    <label class="control-label col-sm-2">{{'label.input.hooktemplate' | translate}}<span class="required">*</span></label>
+
+                        <div class="col-sm-3">
+                            <select class="form-control width170px" id="templateName"
+                                    ng-change="changeTemplate()" ng-model="template"
+                                    ng-options="template as template.name for template in templates" required="required" value="{{template.name}}">
+                                <option style="display:none" value="">{{'label.selecthooktemplate' | translate}}</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="form-group" ng-show="template">
+                    <label class="control-label col-sm-2" for="displayname">{{'label.input.displayname' | translate}}<span
+                                class="required">*</span></label>
+
+                        <div class="col-sm-3">
+                            <input class="form-control" id="displayname" late-Validate name="displayname" ng-model="formData.displayName" required type="text"/>
+                        </div>
+                        <div class="col-sm-3">
+                            <form-validate valattribute="displayname" valattributeform="createhookform"/>
+                        </div>
+                    </div>
+
+                    <div class="form-group" ng-show="template">
+                    <label class="control-label col-sm-2">{{'label.input.active' | translate}}</label>
+                        <div class="col-sm-3">
+                            <input ng-model="formData.isActive" type="checkbox"/>
+                        </div>
+                    </div>
+
+                    <div class="form-group" ng-repeat="s in template.schema" ng-show="template">
+                    <label class="control-label col-sm-2" ng-if="s.optional">{{s.fieldName}}</label>
+                    <label class="control-label col-sm-2" ng-if="s.optional == false">{{s.fieldName}} <span class="required">*</span></label>
+                        <div class="col-sm-3" ng-switch on="s.fieldType">
+                            <input class="form-control" id="{{s.fieldName}}" name="{{s.fieldName}}" ng-model="schemaInputs[$index]" ng-switch-when="string" placeholder="{{s.placeholder}}" type="text"/>
+                            <input class="form-control" id="{{s.fieldName}}" name="{{s.fieldName}}" ng-model="schemaInputs[$index]" ng-switch-when="password" placeholder="{{s.placeholder}}" type="password"/>
+                            <input class="form-control" id="{{s.fieldName}}" name="{{s.fieldName}}" ng-model="schemaInputs[$index]" ng-switch-when="boolean" placeholder="{{s.placeholder}}" type="checkbox"/>
+                        </div>
+                    </div>
+
+                    <div class="form-group" ng-show="showUgdTemplatesDropdown">
+                        <label class="control-label col-sm-2">{{'label.input.ugdtemplate' | translate}}</label>
+                    <div class="col-sm-3">
+                        <select class="form-control"
+                                ng-model="ugdTemplate"
+                                ng-options="ugdTemplate as ugdTemplate.name for ugdTemplate in ugdTemplates | filter:filterText" value="{{ugdTemplate.name}}">
+                            <option style="display:none" value="">{{'label.selectugdtemplate' | translate}}</option>
+                        </select>
+                    </div>
+                    </div>
+
+                    <hr/>
+                    <div class="form-group" ng-show="template">
+                    <label class="control-label col-sm-2" for="events">{{'label.input.events' | translate}}<span
+                                class="required">*</span></label>
+                        <div class="col-sm-2">
+                            <select class="form-control"
+                            ng-change="resetActions()"
+                            ng-model="grouping" ng-options="grouping as grouping.name for grouping in groupings" value="{{grouping.name}}">
+                                <option style="display:none" value="">{{'label.selectgrouping' | translate}}</option>
+                            </select>
+                        </div>
+                        <div class="col-sm-2">
+                            <select class="form-control"
+                            ng-change="changeEntity(entity.name)"
+                            ng-model="entity" ng-options="entity as entity.name for entity in grouping.entities" value="{{entity.name}}">
+                                <option style="display:none" value="">{{'label.selectentity' | translate}}</option>
+                            </select>
+                        </div>
+                        <div class="col-sm-2">
+                            <select class="form-control"
+                            ng-model="action"
+                            ng-options="action as action for action in entity.actions" value="{{action.name}}">
+                                <option style="display:none" value="">{{'label.selectaction' | translate}}</option>
+                            </select>
+
+                        </div>
+                        <a ng-click="addEvent()"><i class="fa fa-plus "></i></a>
+                    </div>
+
+                    <table class="table" ng-show="events.length>0" width="100%">
+                        <tr class="graybg">
+                            <th>{{'label.heading.entityname' | translate}}</th>
+                            <th>{{'label.heading.actionname' | translate}}</th>
+                        </tr>
+                        <tr ng-repeat="event in events">
+                            <td>{{event.entityName}}</td>
+                            <td>{{event.actionName}}</td>
+                            <td><a ng-click="deleteEvent($index)"><i class="fa fa-times "></i></a></td>
+                        </tr>
+                    </table>
+
+                    <div class="col-md-offset-3">
+                        <a class="btn btn-default" href="#/hooks" id="cancel">{{'label.button.cancel' | translate}}</a>
+                        <button class="btn btn-primary" has-permission='CREATE_HOOK' id="save" type="submit">{{'label.button.save' | translate}}</button>
+                    </div>
+                </fieldset>
+            </form>
+        </div>
+    </div>
+</div>

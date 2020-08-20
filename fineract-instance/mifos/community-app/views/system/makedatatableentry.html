@@ -1,0 +1,78 @@
+<div class="content-container">
+    <ul class="breadcrumb">
+        <li><a href="#/system">{{'label.anchor.system' | translate}}</a></li>
+        <li class="active">{{'label.anchor.makedatatableentry' | translate}}</li>
+    </ul>
+    <div class="card">
+        <div class="content">
+            <div class="toolbar">
+                <h4>{{ 'label.heading.makedatatableentry' | translate }}</h4>
+            </div>
+            <br/>
+            <api-validate></api-validate>
+           <form class="form-horizontal" ng-controller="MakeDataTableEntryController" ng-submit="submit()">
+
+               <fieldset>
+                   <h3>{{ 'label.heading.datatablename' | translate }}-<strong>{{tableName}}</strong></h3>
+                   <hr/>
+                   <div class="form-group" ng-repeat="columnHeader in columnHeaders">
+                       <label class="control-label col-sm-3">{{ columnHeader.columnName | prettifyDataTableColumn }}
+                           <span class="required" ng-show="!columnHeader.isColumnNullable">*</span>
+                       </label>
+
+                       <div class="col-sm-3">
+                           <input class="form-control" ng-model="formData[columnHeader.columnName]"
+                                  ng-show="fieldType(columnHeader.columnDisplayType) == 'TEXT'" type="text"/>
+                           <input class="form-control" datepicker-pop="dd MMMM yyyy"
+                                  is-open="opened{{$index}}" ng-model="formDat[columnHeader.columnName]"
+                                  ng-show="fieldType(columnHeader.columnDisplayType) == 'DATE'" type="text"/>
+                           <div class="form-inline" ng-show="fieldType(columnHeader.columnDisplayType) == 'DATETIME'">
+                               <div class="form-group">
+                                   <input class="form-control" datepicker-pop="dd MMMM yyyy"
+                                          is-open="opened{{$index}}"
+                                          ng-model="formDat[columnHeader.columnName].date" type="text"/>
+                               </div>
+                               <div class="form-group">
+                                   <input class="form-control" ng-model="formDat[columnHeader.columnName].time"
+                                          placeholder="HH:MM:SS" type="time"/>
+                               </div>
+                           </div>
+                           <div ng-show="fieldType(columnHeader.columnDisplayType) == 'BOOLEAN'">
+                               <label class="radio-inline">
+                                   <input ng-model="formData[columnHeader.columnName]" type="radio"
+                                          value="true"/>
+                                   {{'label.input.true' | translate}}
+                               </label>
+                               <label class="radio-inline">
+                                   <input ng-model="formData[columnHeader.columnName]" type="radio"
+                                          value="false"/>
+                                   {{'label.input.false' | translate}}
+                               </label>
+                           </div>
+                           <span data-ng-switch on="columnHeader.columnDisplayType">
+                               <select class="form-control"
+                                       data-ng-switch-when="CODELOOKUP"
+                                       ng-model="formData[columnHeader.columnName]"
+                                       ng-options="columnValue.id as columnValue.value for columnValue in columnHeader.columnValues"
+                                       ng-show="fieldType(columnHeader.columnDisplayType) == 'SELECT'" value="{{columnValue.id}}">
+                                   <option value="">{{'label.selectone' | translate}}</option>
+                               </select>
+                               <select class="form-control"
+                                       data-ng-switch-when="CODEVALUE"
+                                       ng-model="formData[columnHeader.columnName]"
+                                       ng-options="columnValue.value as columnValue.value for columnValue in columnHeader.columnValues"
+                                       ng-show="fieldType(columnHeader.columnDisplayType) == 'SELECT'" value="{{columnValue.id}}">
+                                   <option value="">{{'label.selectone' | translate}}</option>
+                               </select>
+                           </span>
+                       </div>
+                   </div>
+                   <div class="col-md-offset-3">
+                       <a class="btn btn-default" id="cancel" ng-click="cancel()">{{ 'label.button.cancel' | translate }}</a>
+                       <button class="btn btn-primary" has-permission='CREATE_{{tableName}}' id="save" type="submit">{{ 'label.button.save' | translate }}</button>
+                   </div>
+               </fieldset>
+           </form>
+        </div>
+    </div>
+</div>

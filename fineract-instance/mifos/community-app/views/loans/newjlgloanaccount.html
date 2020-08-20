@@ -1,0 +1,134 @@
+<div class="content-container" ng-controller="NewJLGLoanAccAppController">
+    <ul class="breadcrumb">
+        <li><a href="#/viewgroup/{{group.id}}"><strong>{{group.name}}</strong></a></li>
+        <li class="active">{{'label.anchor.bulkjlgloanapplication' | translate}}</li>
+    </ul>
+
+    <div class="card">
+        <div class="content">
+                <form class="form-inline" name="newjlgloanform" novalidate="">
+                    <api-validate></api-validate>
+                    <div class="">
+                        <label>{{ 'label.input.product' | translate }}<span class="required">*</span>:&nbsp;</label>
+                        <i class="fa fa-question-circle" uib-tooltip="{{'label.tooltip.product' | translate}}"></i>
+
+                        <select class="form-control" id="productId"
+                                ng-change="loanProductChange(selectedProduct.id)" ng-model="selectedProduct.id"
+                                ng-options="product.id as product.name for product in products | filter:{multiDisburseLoan:false}" required="required" value="{{product.id}}">
+                            <option style="display:none" value="">{{'label.selectloanproduct' | translate}}</option>
+                        </select>
+                        <p></p>
+                        <div ng-show="caledars">
+                                        <table class="table">
+                                            <tr ng-repeat="calendar in caledars">
+                                                <td>
+                                                    <label><i class="fa fa-calendar "></i>&nbsp;<strong>{{
+                                            'label.heading.meetingdetails' | translate }}</strong></label>
+                                                </td>
+                                                <td class="width14"><label>{{ 'label.heading.repeatson' | translate }}:</label>{{calendar.humanReadable}}</td>
+                                                <td><input ng-model="loanApplicationCommonData.syncDisbursementWithMeeting" type="checkbox" ></td>
+                                                <td><label>{{ 'label.input.syncdisbursementdatewithmeeting' | translate }}</label></td>
+                                            </tr>
+                                        </table>
+                        </div>
+                    </div>
+
+                    <div class="">
+                        <div class="well" data-ng-show="productDetails">
+                            <table class="table">
+                                <tr>
+                                    <td class="width14">
+                                        <label>{{ 'label.input.loanofficer' | translate }}:&nbsp;</label>
+                                    </td>
+                                    <td class="width36 paddedbottom10">
+                                        <select class="form-control width170px" id="loanOfficerId"
+                                                ng-model="loanApplicationCommonData.loanOfficerId"
+                                                ng-options="loanOfficer.id as loanOfficer.displayName for loanOfficer in loanOfficers | orderBy:'displayName':reverse" value="{{loanOfficer.id}}">
+                                            <option value="">{{'label.selectloanofficer' | translate}}</option>
+                                        </select>
+                                    </td>
+                                    <td><label>{{ 'label.input.fund' | translate }}:&nbsp;</label></td>
+                                    <td class="paddedbottom10">
+                                        <select class="form-control width170px" id="fundId" ng-model="loanApplicationCommonData.fundId"
+                                                ng-options="fund.id as fund.name for fund in funds" value="{{fund.id}}">
+                                            <option value="">{{'label.selectfund' | translate}}</option>
+                                        </select>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td><label>{{ 'label.input.submittedon' | translate }}<span class="required">*</span>:&nbsp;</label></td>
+                                    <td class="paddedbottom10">
+                                        <input class="form-control" datepicker-pop="dd MMMM yyyy" id="submittedOnDate" is-open="opened"
+                                               name="submittedon" ng-model="loanApplicationCommonData.submittedOnDate" type="text"/>
+                                    </td>
+                                    <td>
+                                        <label title="{{ 'label.input.expecteddisbursementon' | translate }}">{{ 'label.input.disbursementon' |
+                                            translate }}<span class="required">*</span>:&nbsp;</label>
+                                    </td>
+                                    <td class="paddedbottom10">
+                                        <input class="form-control" datepicker-pop="dd MMMM yyyy" id="expectedDisbursementDate" is-open="opened1"
+                                               name="expecteddisbursementon" ng-model="loanApplicationCommonData.expectedDisbursementDate" sort type="text"/>
+                                    </td>
+                                </tr>
+                            </table>
+                        </div>
+                    </div>
+
+                    <div class="" data-ng-show="productDetails">
+                        <table class="table table-condensed">
+                            <thead>
+                                <tr class="active">
+                                    <th><input ng-checked="checkerInboxAllCheckBoxesMet()"  ng-click="checkerInboxAllCheckBoxesClicked()" type="checkbox"/></th>
+                                    <th>{{'label.heading.clientid' | translate}}</th>
+                                    <th>{{'label.heading.clientname' | translate}}</th>
+                                    <th>{{'label.heading.loanpurpose' | translate}}</th>
+                                    <th>{{'label.heading.loanamount' | translate}}</th>
+                                    <th>{{'label.heading.charges' | translate}}</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr ng-init="outerIndex = $index" ng-repeat="client in group.clients">
+                                    <td>
+                                        <input ng-click="checkerInboxAllCheckBoxesMet()" ng-model="group.clients[outerIndex].isSelected" type="checkbox">
+                                    </td>
+                                    <td>{{client.id}}</td>
+                                    <td>{{client.displayName}}</td>
+                                    <td><select class="loanPurposeId form-control width170px"
+                                                ng-model="group.clients[outerIndex].loanPurposeId"
+                                                ng-options="loanPurpose.id as loanPurpose.name for loanPurpose in loanPurposes | orderBy:'name':reverse"
+                                                value="{{loanPurpose.id}}">
+                                                <option value="">{{'label.selectpurpose' | translate}}</option>
+                                        </select>
+                                    </td>
+                                    <td>
+                                        <input  class="form-control principal"
+                                                late-Validate
+                                                name="principal"
+                                                ng-model="group.clients[outerIndex].principal"
+                                                number-format
+                                                required
+                                                type="text"/>&nbsp;{{productDetails.currency.displaySymbol}}
+                                        <form-validate valattribute="principal" valattributeform="newjlgloanaccountform"/>
+                                    </td>
+                                    <td>
+                                        <span ng-class="{'label':true,'label-primary':charge.isDeleted==false, 'label-default':charge.isDeleted}" ng-init="innerIndex = $index" ng-repeat="charge in client.charges">
+                                            {{charge.name}}
+                                            <i ng-class="{'fa fa-times':charge.isDeleted==false,'fa fa-plus-sign':charge.isDeleted}"
+                                            ng-click="toggleCharge(outerIndex, innerIndex)"
+                                            ></i>
+                                        </span>
+                                    </td>
+                                </tr>
+                            <tbody>
+                        </table>
+                    </div>
+
+                    <div class="col-md-offset-6" data-ng-show="productDetails">
+                        <button class="btn btn-default" id="cancel" ng-click="cancel()" type="reset">{{'label.button.cancel' | translate}}</button>
+                        <button class="btn btn-primary" has-permission='CREATE_LOAN' id="save" ng-click="submit()" type="submit">{{'label.button.save' | translate}}
+                        </button>
+                    </div>
+                </form>
+        </div>
+    </div>
+</div>

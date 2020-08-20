@@ -1,0 +1,163 @@
+<div class="content-container">
+    <ul class="breadcrumb">
+        <li><a href="#/reports/all">{{'label.anchor.reports' | translate}}</a></li>
+        <li class="active">{{'label.anchor.runreport' | translate}}</li>
+    </ul>
+	<div class="card well" ng-controller="RunReportsController">
+    <api-validate></api-validate>
+	    <div class="span gray-head" style="margin-left:0%;height:30px;">
+	          <span style="margin-left: 10px;font-size:20px;">
+	                <strong>{{''+reportName+'' | translate}}</strong>
+	                <button class="btn btn-primary pull-right" ng-click="isCollapsed=!isCollapsed" ng-show="checkStatus()"
+	                        type="button"><i class="fa fa-chevron-down "></i>{{
+	                    'label.button.parameters' | translate }}
+	                </button>
+	                <button class="btn btn-primary pull-right" data-ng-hide="hideChart" ng-click="setTypePie()" type="button">{{
+	                    'label.input.piechart' | translate }}
+	                </button>
+	                <button class="btn btn-primary pull-right" data-ng-hide="hideChart" ng-click="setTypeBar()" type="button">{{
+	                    'label.input.barchart' | translate }}
+	                </button>
+	          </span>
+	    </div>
+	    <div class="alert-block form-horizontal" ng-hide="isCollapsed">
+	        <br>
+
+	        <div class="form-group info" ng-repeat="reportParam in reportParams">
+	            <label class="control-label col-sm-2" for="{{reportParam.variable}}">{{ reportParam.label | translate}}</label>
+
+                <div class="col-sm-3">
+                    <select chosen="reportParam.selectOptions" class="form-control input-xlarge" id="{{reportParam.inputName}}"
+							ng-change="getDependencies(reportParam)"
+							ng-model="formData[reportParam.inputName]"
+							ng-options="selectOption.id as selectOption.name for selectOption in reportParam.selectOptions" required value="{{selectOption.id}}">
+	                    <option value="">--{{"label.menu.selectone" | translate}}--</option>
+	                </select>
+	            </div>
+	        </div>
+	        <div class="form-group info" ng-repeat="reportTextParam in reportTextParams">
+	            <label class="control-label col-sm-2" for="{{reportTextParam.variable}}">{{ reportTextParam.label |
+	                translate}}</label>
+
+	            <div class="col-sm-3">
+	                <input class="form-control" id="{{reportTextParam.inputName}}" late-Validate ng-model="formData[reportTextParam.inputName]"  required style="width: 257px" type="text"/>
+	            </div>
+	        </div>
+	        <div class="form-group info" ng-repeat="reportDateParam in reportDateParams">
+	            <label class="control-label col-sm-2" for="{{reportDateParam.variable}}">{{ reportDateParam.label |
+	                translate}}</label>
+
+	            <div class="col-sm-3">
+	                <input class="form-control" date-disabled="disabled(date, mode)" datepicker-pop="yyyy-MM-dd" id="{{reportDateParam.inputName}}"
+	                       is-open="'opened'+$index" late-Validate max="'2020-06-22'"
+	                       min="minDate" ng-model="formData[reportDateParam.inputName]"  required style="width: 257px" type="text"/>
+	            </div>
+	        </div>
+	        <div class="form-group info" ng-show="reportType == 'Pentaho'">
+	            <label class="control-label col-sm-2" for="outputType">{{ 'label.input.outputtype' | translate }}</label>
+
+	            <div class="col-sm-3">
+	                <select class="form-control input-xlarge" ng-model="formData.outputType">
+	                    <option value="HTML">{{ 'label.input.showreport' | translate }}</option>
+	                    <option value="XLS">{{ 'label.input.exportexcel' | translate }}</option>
+	                    <option value="XLSX">{{ 'label.input.exportexcel2' | translate }}</option>
+	                    <option value="CSV">{{ 'label.input.exportcsv' | translate }}</option>
+	                    <option value="PDF">{{ 'label.input.pdfformat' | translate }}</option>
+	                </select>
+	            </div>
+	        </div>
+	        <div class="form-group info">
+	            <label class="control-label col-sm-2" for="decimalsChoice">{{ 'label.input.decimalplace' | translate }}</label>
+				<div class="col-sm-3">
+					<select class="form-control input-xlarge"  id="decimalsChoice" ng-model="decimalsChoice">
+			            <option value="">{{ 'label.input.no.decimalplaces' | translate }}</option>
+			            <option value="4">4</option>
+			            <option value="3">3</option>
+			            <option value="2">2</option>
+			            <option value="1">1</option>
+			            <option value="0">0</option>
+			        </select>
+				</div>
+	        </div>
+
+	        <span class="col-md-offset-3 paddedleft120"><a class="btn btn-primary control" id="run" ng-click="runReport()"></i>
+	            &nbsp;&nbsp;{{ 'label.button.runreport' | translate }}</a></span>
+	    </div>
+	    <div style="visibility: hidden">
+	        <table>
+	            <tr>
+	                <td width="30%"></td>
+	                <td>
+	                    <input ng-model="type" type="radio" value="pie">{{'label.input.pie' |
+	                    translate}}<br/>
+	                <td>
+	                <td>
+	                    <input ng-model="type" type="radio" value="bar">{{'label.input.bar' |
+	                    translate}}<br/>
+	                </td>
+	            </tr>
+	        </table>
+	    </div>
+	    <div style="margin-left:-45px;overflow:auto">
+	        <div data-ng-hide="hideChart">
+	            <div data-ng-show="type=='pie'">
+	                <nvd3-pie-chart
+	                        data="chartData"
+	                        height="900"
+	                        id="pie"
+	                        labelType="percent"
+	                        showLabels="true"
+	                        showLegend="true"
+	                        tooltips="true"
+	                        width="1100"
+	                        x="xFunction()"
+	                        y="yFunction()">
+	                    <svg height="1300"></svg>
+	                </nvd3-pie-chart>
+	            </div>
+	            <div data-ng-show="type=='bar'" style="margin-left: 100px">
+	                <nvd3-multi-bar-chart
+	                        data="barData"
+	                        height="600"
+	                        id="barchart"
+	                        rotateLabels="90"
+	                        showValues="true"
+	                        tooltips="true"
+	                        width="1000">
+	                    <svg></svg>
+	                </nvd3-multi-bar-chart>
+	            </div>
+	        </div>
+	    </div>
+
+	    <div data-ng-hide="hideTable">
+	        <div class="pull-right" ng-show="reportType == 'Table'">
+	            <button class="btn btn-primary" ng-csv="csvData" type="button"><i class="fa fa-file "></i>{{'label.button.exportcsv'
+	                | translate }}
+	            </button>
+	        </div>
+	        <div scroll>
+	            <table class="table table-bordered" data-anchor style="width: 1200px;white-space:nowrap">
+	                <thead>
+	                <tr class="graybg">
+	                    <th ng-repeat="columnHeader in reportData.columnHeaders">{{columnHeader.columnName}}</th>
+	                </tr>
+	                </thead>
+	                <tbody>
+	                <!-- http://www.anujgakhar.com/2013/06/15/duplicates-in-a-repeater-are-not-allowed-in-angularjs/ -->
+	                <tr data-ng-click="highlight($index)" id="{{$index}}" ng-repeat="row in reportData.data track by $index">
+						<td ng-repeat="col in row.row track by $index">
+							<span ng-show="isDecimal($index)">{{col | FormatNumber:decimalsChoice}}</span>
+							<span ng-hide="isDecimal($index)">{{col}}</span>
+						</td>
+	                </tr>
+	                </tbody>
+	            </table>
+	        </div>
+	    </div>
+	    <div class="row alert-block span tab-content" uib-collapse="hidePentahoReport">
+	        <br>
+	        <iframe frameborder="0" height="600px" id="rptLoadingFrame" ng-src="{{baseURL}}" width="100%"></iframe>
+	    </div>
+	</div>
+</div>

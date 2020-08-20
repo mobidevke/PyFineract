@@ -1,0 +1,32 @@
+version: '2'
+services:
+  mifosx:
+    build:
+      context: ./mifos
+      dockerfile: Dockerfile
+    container_name: mifosx
+    ports:
+      - '8443:8443'
+    networks:
+      - app-tier
+    depends_on:
+      - mifos-db-server
+    environment:
+      WAIT_HOSTS: mifos-db-server:3306
+      WAIT_HOSTS_TIMEOUT: 60
+    volumes:
+      - ./mifos/certs:/certs
+  mifos-db-server:
+    build:
+      context: ./mysql
+      dockerfile: Dockerfile
+    container_name: mifos-db
+    ports:
+      - '3307:3306'
+    environment:
+      MYSQL_ROOT_PASSWORD: mysql
+    networks:
+      - app-tier
+networks:
+  app-tier:
+    driver: bridge

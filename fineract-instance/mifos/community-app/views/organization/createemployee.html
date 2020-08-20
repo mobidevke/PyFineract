@@ -1,0 +1,99 @@
+<div class="content-container">
+    <ul class="breadcrumb">
+        <li><a href="#/organization">{{'label.anchor.organization' | translate}}</a></li>
+        <li><a href="#/employees">{{'label.anchor.manageemployees' | translate}}</a></li>
+        <li class="active">{{'label.anchor.createemployee' | translate}}</li>
+    </ul>
+    <div class="card">
+    	<div class="content">
+    		<div class="toolbar">
+    			<h4>{{'label.heading.createemployee' | translate}}</h4>
+    		</div>
+    		<br>
+    			<form class="form-horizontal" name="createemployeeform" ng-controller="CreateEmployeeController" novalidate=""
+    			      rc-submit="submit()">
+    			    <api-validate></api-validate>
+    			    <fieldset>
+    			        <div class="form-group">
+    			            <label class="control-label col-sm-2" for="officeId">{{ 'label.input.office' | translate }}<span
+    			                    class="required">*</span></label>
+    			
+    			            <div class="col-sm-3">
+    			                <select chosen="offices" class="form-control" id="officeId" ng-model="formData.officeId"
+    			                        ng-options="office.id as office.name for office in offices" value="{{office.id}}">
+    			                </select>
+    			            </div>
+    			        </div>
+    			
+    			        <div class="form-group">
+    			            <label class="control-label col-sm-2" for="firstname">{{ 'label.input.firstname' | translate }}<span
+    			                    class="required">*</span></label>
+    			
+    			            <div class="col-sm-3">
+    			                <input class="form-control" id="firstname" late-Validate name="firstname" ng-model="formData.firstname" ng-pattern="/(^[A-z])[A-z.'-]*/"
+    			                       required type="text"/>
+    			            </div>
+    			            <div class="col-sm-3">
+                          <span ng-show="createemployeeform.firstname.$invalid && createemployeeform.firstname.$dirty">
+                              <small class="error required" ng-show="createemployeeform.firstname.$error.pattern">
+                                  {{'validation.msg.client.name.cannot.start.specialchar.ornumber' | translate}}
+                              </small>
+                          </span>
+    			                <form-validate valattribute="firstname" valattributeform="createemployeeform"/>
+    			            </div>
+    			        </div>
+    			
+    			        <div class="form-group">
+    			            <label class="control-label col-sm-2" for="lastname">{{ 'label.input.lastname' | translate }}<span
+    			                    class="required">*</span></label>
+    			
+    			            <div class="col-sm-3">
+    			                <input class="form-control" id="lastname" late-Validate name="lastname" ng-model="formData.lastname" ng-pattern="/(^[A-z])[A-z.'-]*/" required type="text"/>
+    			            </div>
+    			            <div class="col-sm-3">
+                          <span ng-show="createemployeeform.lastname.$invalid && createemployeeform.lastname.$dirty">
+                              <small class="error required" ng-show="createemployeeform.lastname.$error.pattern">
+                                  {{'validation.msg.client.name.cannot.start.specialchar.ornumber' | translate}}
+                              </small>
+                          </span>
+    			                <form-validate valattribute="lastname" valattributeform="createemployeeform"/>
+    			            </div>
+    			        </div>
+    			
+    			        <div class="form-group">
+    			            <label class="control-label col-sm-2" for="isLoanOfficer">{{ 'label.input.isLoanOfficer' | translate }}</label>
+    			
+    			            <div class="col-sm-3">
+    			                <label class="checkbox">
+    			                    <input id="isLoanOfficer" ng-model="formData.isLoanOfficer" type="checkbox">
+    			                </label>
+    			            </div>
+    			        </div>
+    			
+    			        <div class="form-group">
+    			            <label class="control-label col-sm-2" for="mobileNo">{{ 'label.input.mobileNo' | translate }}</label>
+    			
+    			            <div class="col-sm-3">
+    			                <input class="form-control" id="mobileNo" ng-model="formData.mobileNo" type="text">
+    			            </div>
+    			        </div>
+    		            <div class="form-group">
+    		                <label class="control-label col-sm-2">{{ 'label.input.joinedon' | translate }}</label>
+    		                <div class="col-sm-3">
+    		                    <input class="form-control" datepicker-pop="dd MMMM yyyy" id="joiningDate" is-open="opened" max="restrictDate"
+    		                           min="minDate" ng-model="formData.joiningDate" sort type="text"/>
+    		                </div>
+    		            </div>
+    			
+    			        <div class="col-md-offset-3">
+    			            <a href="#/employees" id="cancel">
+    			                <button class="btn btn-default" type="reset">{{'label.button.cancel'| translate}}</button>
+    			            </a>
+    			            <button class="btn btn-primary" has-permission='CREATE_STAFF' id="save" type="submit">{{'label.button.save'| translate}}</button>
+    			        </div>
+    			    </fieldset>
+    			</form>
+    	</div>
+    </div>
+</div>
+

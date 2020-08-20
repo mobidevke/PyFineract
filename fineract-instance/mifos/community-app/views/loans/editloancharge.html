@@ -1,0 +1,38 @@
+<div class="content-container" ng-controller="EditLoanChargeController">
+    <ul class="breadcrumb">
+        <li><a activehref="#/viewloanaccount/{{loanId{{'label.anchor.viewloanaccount' | translate}}</a></li>
+        <li class="">{{'label.anchor.editloancharge' | translate}}</li>
+    </ul>
+    <div class="card">
+        <div class="content">
+            <div class="toolbar">
+                <h4>{{ 'label.heading.editloancharge' | translate }}</h4>
+            </div>
+            <br/>
+            <form class="form-horizontal" name="loanchargeform" ng-submit="submit()" novalidate="">
+                <api-validate></api-validate>
+                <fieldset>
+                    <div class="form-group">
+                        <label class="control-label col-sm-2" for="amount">{{ 'label.input.amount' | translate }}<span
+                                class="required">*</span></label>
+
+                        <div class="col-sm-3">
+                            <input class="form-control" id="amount" late-Validate name="amount" ng-autofocus="true" ng-model="formData.amount" required
+                                   type="text"/>
+                            <form-validate valattribute="amount" valattributeform="loanchargeform"/>
+                        </div>
+                    </div>
+
+                    <div class="col-md-offset-3">
+                        <button class="btn btn-default" id="cancel" ng-click="cancel()" type="reset">{{ 'label.button.cancel' | translate
+                            }}
+                        </button>
+                        <button class="btn btn-primary" has-permission='UPDATE_LOANCHARGE' id="save" ng-disabled="!loanchargeform.$valid" type="submit">{{
+                            'label.button.save' | translate }}
+                        </button>
+                    </div>
+                </fieldset>
+            </form>
+        </div>
+    </div>
+</div>

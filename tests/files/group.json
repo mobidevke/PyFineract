@@ -1,0 +1,40 @@
+{
+  "id": 1,
+  "accountNo": "000000001",
+  "name": "Santa Cruz",
+  "status": {
+    "id": 300,
+    "code": "clientStatusType.active",
+    "value": "Active"
+  },
+  "active": true,
+  "activationDate": [
+    2010,
+    1,
+    2
+  ],
+  "officeId": 2,
+  "officeName": "p2p institutional",
+  "staffId": 2,
+  "staffName": "M, Mary",
+  "hierarchy": ".1.",
+  "groupLevel": "1",
+  "timeline": {
+    "submittedOnDate": [
+      2010,
+      1,
+      2
+    ],
+    "submittedByUsername": "mifos",
+    "submittedByFirstname": "App",
+    "submittedByLastname": "Administrator",
+    "activatedOnDate": [
+      2010,
+      1,
+      2
+    ],
+    "activatedByUsername": "mifos",
+    "activatedByFirstname": "App",
+    "activatedByLastname": "Administrator"
+  }
+}

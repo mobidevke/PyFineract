@@ -1,0 +1,31 @@
+<div class="content-container" ng-controller="EditExternalServicesConfigurationController">
+        <ul class="breadcrumb">
+            <li><a href="#/system">{{'label.anchor.system' | translate}}</a></li>
+            <li><a href="#/externalservices">{{'label.anchor.externalServices' | translate}}</a></li>
+            <li class="active">{{'label.anchor.editExternalServicesConfiguration' | translate}}</li>
+        </ul>
+    <form class="card form-horizontal well" name="editExternalServicesConfigurationForm"
+    ng-submit="submit()" novalidate="">
+        <api-validate></api-validate>
+        <fieldset>
+            <legend>{{ 'label.anchor.editExternalServicesConfiguration' | translate }}</legend>
+            <div class="form-group" ng-repeat="(names, values) in formData">
+                        <label class="control-label col-sm-2" for="configname">{{names}}</label>
+
+                        <div class="col-sm-3">
+                            <input class="form-control" id="configname" late-Validate name="configname" ng-model="formData[names]" required
+                                   type="text"/>
+                        </div>
+            </div>
+
+            <div class="col-md-offset-3">
+                <button class="btn btn-default" id="cancel" ng-click="cancel()" type="reset">{{ 'label.button.cancel' | translate
+                    }}
+                </button>
+                <button class="btn btn-primary" has-permission='UPDATE_EXTERNALSERVICES' id="save" ng-disabled="!editExternalServicesConfigurationForm.$valid" type="submit">{{
+                    'label.button.save' | translate }}
+                </button>
+            </div>
+        </fieldset>
+    </form>
+</div>

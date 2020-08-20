@@ -1,0 +1,99 @@
+{
+  "currency": {
+    "code": "UGX",
+    "name": "Uganda Shilling",
+    "decimalPlaces": 2,
+    "displaySymbol": "USh",
+    "nameCode": "currency.UGX",
+    "displayLabel": "Uganda Shilling (USh)"
+  },
+  "loanTermInDays": 366,
+  "totalPrincipalDisbursed": 100000,
+  "totalPrincipalExpected": 100000,
+  "totalPrincipalPaid": 0,
+  "totalInterestCharged": 13471.52,
+  "totalFeeChargesCharged": 0,
+  "totalPenaltyChargesCharged": 0,
+  "totalWaived": 0,
+  "totalWrittenOff": 0,
+  "totalRepaymentExpected": 113471.52,
+  "totalRepayment": 0,
+  "totalOutstanding": 0,
+  "periods": [
+    {
+      "period": 0,
+      "dueDate": [
+        2011,
+        9,
+        20
+      ],
+      "principalDisbursed": 100000,
+      "principalLoanBalanceOutstanding": 100000,
+      "feeChargesDue": 0,
+      "feeChargesOutstanding": 0,
+      "totalOriginalDueForPeriod": 0,
+      "totalDueForPeriod": 0,
+      "totalOutstandingForPeriod": 0,
+      "totalOverdue": 0,
+      "totalActualCostOfLoanForPeriod": 0
+    },
+    {
+      "period": 1,
+      "fromDate": [
+        2011,
+        9,
+        20
+      ],
+      "dueDate": [
+        2011,
+        10,
+        20
+      ],
+      "daysInPeriod": 30,
+      "principalOriginalDue": 7455.96,
+      "principalDue": 7455.96,
+      "principalOutstanding": 7455.96,
+      "principalLoanBalanceOutstanding": 92544.04,
+      "interestOriginalDue": 2000,
+      "interestDue": 2000,
+      "interestOutstanding": 2000,
+      "feeChargesDue": 0,
+      "penaltyChargesDue": 0,
+      "totalOriginalDueForPeriod": 9455.96,
+      "totalDueForPeriod": 9455.96,
+      "totalPaidForPeriod": 0,
+      "totalOutstandingForPeriod": 9455.96,
+      "totalOverdue": 9455.96,
+      "totalActualCostOfLoanForPeriod": 2000
+    },
+    {
+      "period": 12,
+      "fromDate": [
+        2012,
+        8,
+        20
+      ],
+      "dueDate": [
+        2012,
+        9,
+        20
+      ],
+      "daysInPeriod": 31,
+      "principalOriginalDue": 9270.56,
+      "principalDue": 9270.56,
+      "principalOutstanding": 9270.56,
+      "principalLoanBalanceOutstanding": 0,
+      "interestOriginalDue": 185.4,
+      "interestDue": 185.4,
+      "interestOutstanding": 185.4,
+      "feeChargesDue": 0,
+      "penaltyChargesDue": 0,
+      "totalOriginalDueForPeriod": 9455.96,
+      "totalDueForPeriod": 9455.96,
+      "totalPaidForPeriod": 0,
+      "totalOutstandingForPeriod": 9455.96,
+      "totalOverdue": 9455.96,
+      "totalActualCostOfLoanForPeriod": 185.4
+    }
+  ]
+}

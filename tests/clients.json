@@ -1,0 +1,789 @@
+[
+  {
+    "id": 1,
+    "accountNo": "000000001",
+    "externalId": "786444UUUYYH7",
+    "status": {
+      "id": 300,
+      "code": "clientStatusType.active",
+      "value": "Active"
+    },
+    "subStatus": {
+      "active": false,
+      "mandatory": false
+    },
+    "active": true,
+    "activationDate": [
+      2014,
+      3,
+      7
+    ],
+    "middlename": "W",
+    "fullname": "Mifos",
+    "displayName": "Mifos",
+    "mobileNo": "48555555555",
+    "dateOfBirth": [
+      2017,
+      10,
+      1
+    ],
+    "gender": {
+      "id": 22,
+      "name": "Hombre",
+      "active": false,
+      "mandatory": false
+    },
+    "clientType": {
+      "id": 31,
+      "name": "Officer",
+      "active": false,
+      "mandatory": false
+    },
+    "clientClassification": {
+      "id": 82,
+      "name": "Student",
+      "active": false,
+      "mandatory": false
+    },
+    "isStaff": false,
+    "officeId": 1,
+    "officeName": "Main Head Office",
+    "timeline": {
+      "submittedOnDate": [
+        2010,
+        1,
+        1
+      ],
+      "submittedByUsername": "mifos",
+      "submittedByFirstname": "App",
+      "submittedByLastname": "Administrator",
+      "activatedOnDate": [
+        2014,
+        3,
+        7
+      ],
+      "activatedByUsername": "mifos",
+      "activatedByFirstname": "App",
+      "activatedByLastname": "Administrator"
+    },
+    "savingsAccountId": 22,
+    "legalForm": {
+      "id": 2,
+      "code": "legalFormType.entity",
+      "value": "ENTITY"
+    },
+    "clientNonPersonDetails": {
+      "constitution": {
+        "active": false,
+        "mandatory": false
+      },
+      "mainBusinessLine": {
+        "active": false,
+        "mandatory": false
+      }
+    }
+  },
+  {
+    "id": 2,
+    "accountNo": "000000002",
+    "status": {
+      "id": 300,
+      "code": "clientStatusType.active",
+      "value": "Active"
+    },
+    "subStatus": {
+      "active": false,
+      "mandatory": false
+    },
+    "active": true,
+    "activationDate": [
+      2017,
+      10,
+      2
+    ],
+    "firstname": "Johnson1",
+    "lastname": "D",
+    "displayName": "Johnson1 D",
+    "dateOfBirth": [
+      2001,
+      1,
+      1
+    ],
+    "gender": {
+      "active": false,
+      "mandatory": false
+    },
+    "clientType": {
+      "id": 31,
+      "name": "Officer",
+      "active": false,
+      "mandatory": false
+    },
+    "clientClassification": {
+      "active": false,
+      "mandatory": false
+    },
+    "isStaff": false,
+    "officeId": 2,
+    "officeName": "p2p institutional",
+    "timeline": {
+      "submittedOnDate": [
+        2010,
+        1,
+        4
+      ],
+      "submittedByUsername": "mifos",
+      "submittedByFirstname": "App",
+      "submittedByLastname": "Administrator",
+      "activatedOnDate": [
+        2017,
+        10,
+        2
+      ],
+      "activatedByUsername": "mifos",
+      "activatedByFirstname": "App",
+      "activatedByLastname": "Administrator"
+    },
+    "savingsAccountId": 344,
+    "clientNonPersonDetails": {
+      "constitution": {
+        "active": false,
+        "mandatory": false
+      },
+      "mainBusinessLine": {
+        "active": false,
+        "mandatory": false
+      }
+    }
+  },
+  {
+    "id": 4,
+    "accountNo": "000000004",
+    "status": {
+      "id": 300,
+      "code": "clientStatusType.active",
+      "value": "Active"
+    },
+    "subStatus": {
+      "active": false,
+      "mandatory": false
+    },
+    "active": true,
+    "activationDate": [
+      2010,
+      1,
+      4
+    ],
+    "firstname": "Williams",
+    "lastname": "G",
+    "displayName": "Williams G",
+    "gender": {
+      "active": false,
+      "mandatory": false
+    },
+    "clientType": {
+      "active": false,
+      "mandatory": false
+    },
+    "clientClassification": {
+      "active": false,
+      "mandatory": false
+    },
+    "isStaff": false,
+    "officeId": 2,
+    "officeName": "p2p institutional",
+    "staffId": 2,
+    "staffName": "M, Mary",
+    "timeline": {
+      "submittedOnDate": [
+        2010,
+        1,
+        4
+      ],
+      "submittedByUsername": "mifos",
+      "submittedByFirstname": "App",
+      "submittedByLastname": "Administrator",
+      "activatedOnDate": [
+        2010,
+        1,
+        4
+      ],
+      "activatedByUsername": "mifos",
+      "activatedByFirstname": "App",
+      "activatedByLastname": "Administrator"
+    },
+    "clientNonPersonDetails": {
+      "constitution": {
+        "active": false,
+        "mandatory": false
+      },
+      "mainBusinessLine": {
+        "active": false,
+        "mandatory": false
+      }
+    }
+  },
+  {
+    "id": 5,
+    "accountNo": "000000005",
+    "status": {
+      "id": 303,
+      "code": "clientStatusType.transfer.in.progress",
+      "value": "Transfer in progress"
+    },
+    "subStatus": {
+      "active": false,
+      "mandatory": false
+    },
+    "active": false,
+    "activationDate": [
+      2017,
+      2,
+      6
+    ],
+    "firstname": "Harris",
+    "lastname": "P",
+    "displayName": "Harris P",
+    "mobileNo": "0716474649",
+    "dateOfBirth": [
+      2002,
+      8,
+      13
+    ],
+    "gender": {
+      "id": 311,
+      "name": "Male",
+      "active": false,
+      "mandatory": false
+    },
+    "clientType": {
+      "id": 31,
+      "name": "Officer",
+      "active": false,
+      "mandatory": false
+    },
+    "clientClassification": {
+      "id": 225,
+      "name": "Seargent",
+      "active": false,
+      "mandatory": false
+    },
+    "isStaff": false,
+    "officeId": 2,
+    "officeName": "p2p institutional",
+    "transferToOfficeId": 517,
+    "transferToOfficeName": "dla",
+    "staffId": 2,
+    "staffName": "M, Mary",
+    "timeline": {
+      "submittedOnDate": [
+        2017,
+        1,
+        1
+      ],
+      "submittedByUsername": "mifos",
+      "submittedByFirstname": "App",
+      "submittedByLastname": "Administrator",
+      "activatedOnDate": [
+        2017,
+        2,
+        6
+      ],
+      "activatedByUsername": "mifos",
+      "activatedByFirstname": "App",
+      "activatedByLastname": "Administrator"
+    },
+    "savingsAccountId": 2453,
+    "legalForm": {
+      "id": 1,
+      "code": "legalFormType.person",
+      "value": "PERSON"
+    },
+    "clientNonPersonDetails": {
+      "constitution": {
+        "active": false,
+        "mandatory": false
+      },
+      "mainBusinessLine": {
+        "active": false,
+        "mandatory": false
+      }
+    }
+  },
+  {
+    "id": 6,
+    "accountNo": "000000006",
+    "status": {
+      "id": 300,
+      "code": "clientStatusType.active",
+      "value": "Active"
+    },
+    "subStatus": {
+      "active": false,
+      "mandatory": false
+    },
+    "active": true,
+    "activationDate": [
+      2017,
+      11,
+      22
+    ],
+    "firstname": "JANE",
+    "lastname": "E",
+    "displayName": "JANE E",
+    "mobileNo": "0712345678",
+    "dateOfBirth": [
+      1990,
+      2,
+      1
+    ],
+    "gender": {
+      "id": 22,
+      "name": "Hombre",
+      "active": false,
+      "mandatory": false
+    },
+    "clientType": {
+      "id": 31,
+      "name": "Officer",
+      "active": false,
+      "mandatory": false
+    },
+    "clientClassification": {
+      "id": 109,
+      "name": "Employee",
+      "active": false,
+      "mandatory": false
+    },
+    "isStaff": false,
+    "officeId": 2,
+    "officeName": "p2p institutional",
+    "timeline": {
+      "submittedOnDate": [
+        2010,
+        1,
+        4
+      ],
+      "submittedByUsername": "mifos",
+      "submittedByFirstname": "App",
+      "submittedByLastname": "Administrator",
+      "activatedOnDate": [
+        2017,
+        11,
+        22
+      ],
+      "activatedByUsername": "mifos",
+      "activatedByFirstname": "App",
+      "activatedByLastname": "Administrator"
+    },
+    "savingsAccountId": 3,
+    "legalForm": {
+      "id": 1,
+      "code": "legalFormType.person",
+      "value": "PERSON"
+    },
+    "clientNonPersonDetails": {
+      "constitution": {
+        "active": false,
+        "mandatory": false
+      },
+      "mainBusinessLine": {
+        "active": false,
+        "mandatory": false
+      }
+    }
+  },
+  {
+    "id": 7,
+    "accountNo": "000000007",
+    "status": {
+      "id": 300,
+      "code": "clientStatusType.active",
+      "value": "Active"
+    },
+    "subStatus": {
+      "active": false,
+      "mandatory": false
+    },
+    "active": true,
+    "activationDate": [
+      2018,
+      10,
+      10
+    ],
+    "firstname": "Kristy",
+    "middlename": "A",
+    "lastname": "Perrotti",
+    "displayName": "Kristy A Perrotti",
+    "dateOfBirth": [
+      2003,
+      8,
+      6
+    ],
+    "gender": {
+      "id": 22,
+      "name": "Hombre",
+      "active": false,
+      "mandatory": false
+    },
+    "clientType": {
+      "id": 31,
+      "name": "Officer",
+      "active": false,
+      "mandatory": false
+    },
+    "clientClassification": {
+      "active": false,
+      "mandatory": false
+    },
+    "isStaff": false,
+    "officeId": 2,
+    "officeName": "p2p institutional",
+    "transferToOfficeId": 464,
+    "transferToOfficeName": "Nikitaben Patel",
+    "imageId": 124,
+    "imagePresent": true,
+    "timeline": {
+      "submittedOnDate": [
+        2010,
+        1,
+        4
+      ],
+      "submittedByUsername": "mifos",
+      "submittedByFirstname": "App",
+      "submittedByLastname": "Administrator",
+      "activatedOnDate": [
+        2018,
+        10,
+        10
+      ],
+      "activatedByUsername": "mifos",
+      "activatedByFirstname": "App",
+      "activatedByLastname": "Administrator"
+    },
+    "legalForm": {
+      "id": 1,
+      "code": "legalFormType.person",
+      "value": "PERSON"
+    },
+    "clientNonPersonDetails": {
+      "constitution": {
+        "active": false,
+        "mandatory": false
+      },
+      "mainBusinessLine": {
+        "active": false,
+        "mandatory": false
+      }
+    }
+  },
+  {
+    "id": 8,
+    "accountNo": "000000008",
+    "status": {
+      "id": 300,
+      "code": "clientStatusType.active",
+      "value": "Active"
+    },
+    "subStatus": {
+      "active": false,
+      "mandatory": false
+    },
+    "active": true,
+    "activationDate": [
+      2017,
+      5,
+      29
+    ],
+    "firstname": "Robinson",
+    "lastname": "R",
+    "displayName": "Robinson R",
+    "mobileNo": "93479",
+    "gender": {
+      "active": false,
+      "mandatory": false
+    },
+    "clientType": {
+      "active": false,
+      "mandatory": false
+    },
+    "clientClassification": {
+      "active": false,
+      "mandatory": false
+    },
+    "isStaff": false,
+    "officeId": 2,
+    "officeName": "p2p institutional",
+    "imageId": 216,
+    "imagePresent": true,
+    "timeline": {
+      "submittedOnDate": [
+        2010,
+        1,
+        4
+      ],
+      "submittedByUsername": "mifos",
+      "submittedByFirstname": "App",
+      "submittedByLastname": "Administrator",
+      "activatedOnDate": [
+        2017,
+        5,
+        29
+      ],
+      "activatedByUsername": "mifos",
+      "activatedByFirstname": "App",
+      "activatedByLastname": "Administrator"
+    },
+    "clientNonPersonDetails": {
+      "constitution": {
+        "active": false,
+        "mandatory": false
+      },
+      "mainBusinessLine": {
+        "active": false,
+        "mandatory": false
+      }
+    }
+  },
+  {
+    "id": 9,
+    "accountNo": "000000009",
+    "externalId": "54321",
+    "status": {
+      "id": 300,
+      "code": "clientStatusType.active",
+      "value": "Active"
+    },
+    "subStatus": {
+      "active": false,
+      "mandatory": false
+    },
+    "active": true,
+    "activationDate": [
+      2019,
+      2,
+      15
+    ],
+    "firstname": "Susan",
+    "lastname": "Wanjiru",
+    "displayName": "Susan Wanjiru",
+    "mobileNo": "54321",
+    "gender": {
+      "id": 22,
+      "name": "Hombre",
+      "active": false,
+      "mandatory": false
+    },
+    "clientType": {
+      "active": false,
+      "mandatory": false
+    },
+    "clientClassification": {
+      "active": false,
+      "mandatory": false
+    },
+    "isStaff": false,
+    "officeId": 1,
+    "officeName": "Main Head Office",
+    "transferToOfficeId": 1,
+    "transferToOfficeName": "Main Head Office",
+    "staffId": 1,
+    "staffName": "Mi-Cbs, Mi Cbs",
+    "timeline": {
+      "submittedOnDate": [
+        2014,
+        7,
+        1
+      ],
+      "submittedByUsername": "mifos",
+      "submittedByFirstname": "App",
+      "submittedByLastname": "Administrator",
+      "activatedOnDate": [
+        2019,
+        2,
+        15
+      ],
+      "activatedByUsername": "mifos",
+      "activatedByFirstname": "App",
+      "activatedByLastname": "Administrator"
+    },
+    "savingsAccountId": 1,
+    "legalForm": {
+      "id": 1,
+      "code": "legalFormType.person",
+      "value": "PERSON"
+    },
+    "clientNonPersonDetails": {
+      "constitution": {
+        "active": false,
+        "mandatory": false
+      },
+      "mainBusinessLine": {
+        "active": false,
+        "mandatory": false
+      }
+    }
+  },
+  {
+    "id": 10,
+    "accountNo": "000000010",
+    "externalId": "extid10",
+    "status": {
+      "id": 300,
+      "code": "clientStatusType.active",
+      "value": "Active"
+    },
+    "subStatus": {
+      "active": false,
+      "mandatory": false
+    },
+    "active": true,
+    "activationDate": [
+      2017,
+      8,
+      1
+    ],
+    "firstname": "Vũ",
+    "middlename": "Bình",
+    "lastname": "An",
+    "displayName": "Vũ Bình An",
+    "mobileNo": "898988889520",
+    "dateOfBirth": [
+      2017,
+      6,
+      6
+    ],
+    "gender": {
+      "id": 22,
+      "name": "Hombre",
+      "active": false,
+      "mandatory": false
+    },
+    "clientType": {
+      "active": false,
+      "mandatory": false
+    },
+    "clientClassification": {
+      "id": 82,
+      "name": "Student",
+      "active": false,
+      "mandatory": false
+    },
+    "isStaff": false,
+    "officeId": 1,
+    "officeName": "Main Head Office",
+    "timeline": {
+      "submittedOnDate": [
+        2017,
+        8,
+        1
+      ],
+      "submittedByUsername": "mifos",
+      "submittedByFirstname": "App",
+      "submittedByLastname": "Administrator",
+      "activatedOnDate": [
+        2017,
+        8,
+        1
+      ],
+      "activatedByUsername": "mifos",
+      "activatedByFirstname": "App",
+      "activatedByLastname": "Administrator"
+    },
+    "savingsAccountId": 465,
+    "legalForm": {
+      "id": 1,
+      "code": "legalFormType.person",
+      "value": "PERSON"
+    },
+    "clientNonPersonDetails": {
+      "constitution": {
+        "active": false,
+        "mandatory": false
+      },
+      "mainBusinessLine": {
+        "active": false,
+        "mandatory": false
+      }
+    }
+  },
+  {
+    "id": 11,
+    "accountNo": "000000011",
+    "status": {
+      "id": 300,
+      "code": "clientStatusType.active",
+      "value": "Active"
+    },
+    "subStatus": {
+      "active": false,
+      "mandatory": false
+    },
+    "active": true,
+    "activationDate": [
+      2018,
+      9,
+      28
+    ],
+    "firstname": "Pierre",
+    "lastname": "Bowrin",
+    "displayName": "Pierre Bowrin",
+    "mobileNo": "8697627050",
+    "dateOfBirth": [
+      1971,
+      4,
+      22
+    ],
+    "gender": {
+      "id": 22,
+      "name": "Hombre",
+      "active": false,
+      "mandatory": false
+    },
+    "clientType": {
+      "active": false,
+      "mandatory": false
+    },
+    "clientClassification": {
+      "active": false,
+      "mandatory": false
+    },
+    "isStaff": false,
+    "officeId": 112,
+    "officeName": "hyderabadind",
+    "timeline": {
+      "submittedOnDate": [
+        2018,
+        9,
+        28
+      ],
+      "submittedByUsername": "mifos",
+      "submittedByFirstname": "App",
+      "submittedByLastname": "Administrator",
+      "activatedOnDate": [
+        2018,
+        9,
+        28
+      ],
+      "activatedByUsername": "mifos",
+      "activatedByFirstname": "App",
+      "activatedByLastname": "Administrator"
+    },
+    "savingsAccountId": 11,
+    "legalForm": {
+      "id": 1,
+      "code": "legalFormType.person",
+      "value": "PERSON"
+    },
+    "clientNonPersonDetails": {
+      "constitution": {
+        "active": false,
+        "mandatory": false
+      },
+      "mainBusinessLine": {
+        "active": false,
+        "mandatory": false
+      }
+    }
+  }
+]

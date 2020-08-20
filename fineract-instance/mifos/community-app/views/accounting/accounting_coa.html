@@ -1,0 +1,86 @@
+<div class="content-container" ng-controller="AccCoaController">
+    <ul class="breadcrumb">
+        <li><a href="#/accounting">{{'label.anchor.accounting' | translate}}</a></li>
+        <li class="active">{{'label.anchor.coa' | translate}}</li>
+    </ul>
+    <div class="card">
+        <div class="content">
+            <api-validate></api-validate>
+            <div class="toolbar">
+                <h4>{{'label.heading.chartofaccounts' | translate}}</h4>
+                <div class="pull-right">
+                    <a class="btn btn-primary btn-sm" ng-click="isTreeView=!isTreeView" ng-show="isTreeView"><i class="fa fa-list "></i>{{'label.button.listview' | translate}}</a>
+                    <a class="btn btn-primary btn-sm" ng-click="isTreeView=!isTreeView" ng-hide="isTreeView"><i class="fa fa-sitemap "></i>{{'label.button.treeview' | translate}}</a>
+                    <a class="btn btn-primary btn-sm" has-permission='CREATE_GLACCOUNT' href="#/createglaccount"><i class="fa fa-plus "></i>{{'label.button.addaccount' | translate}}</a>
+                </div>
+            </div>
+            <div ng-hide="isTreeView">
+                <div class="">
+                    <input class="form-control " ng-keyup="onFilter()" ng-model="filterText"
+                    placeholder="{{'label.input.filterbyAccountGlcodeAccounttype' | translate}}" type="text">
+                </div>
+                <br>
+                <table class="table">
+                    <thead>
+                        <tr class="graybg">
+                        <th>{{'label.heading.account' | translate}}</th>
+                        <th>{{'label.heading.glcode' | translate}}</th>
+                        <th>{{'label.heading.acctype' | translate}}</th>
+                        <th>{{'label.heading.disabled' | translate}}?</th>
+                        <th>{{'label.heading.manualentriesallowed' | translate}}</th>
+                        <th>{{'label.heading.usedas' | translate}}</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                    <tr class="pointer-main" ng-repeat="coadata in coadatas | orderBy:['type.value','glCode']| SearchFilter:filterText">
+                        <td class="pointer" data-ng-click="routeTo(coadata.id)">{{coadata.name}}</td>
+                        <td class="pointer" data-ng-click="routeTo(coadata.id)">{{coadata.glCode}}</td>
+                        <td class="pointer" data-ng-click="routeTo(coadata.id)">{{coadata.type.value}}</td>
+                        <td class="pointer" data-ng-click="routeTo(coadata.id)">{{coadata.disabled}}</td>
+                        <td class="pointer" data-ng-click="routeTo(coadata.id)">{{coadata.manualEntriesAllowed}}</td>
+                        <td class="pointer" data-ng-click="routeTo(coadata.id)">{{coadata.usage.value}}</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div ng-show="isTreeView"  >
+                <div class="col-md-6 divscrollable" ng-show="$root.tempNodeID >= 0" >
+                    <table class="table table-bordered table-striped">
+                            <tr>
+                                <td>{{ 'label.heading.glcode' | translate }}</td>
+                                <td ng-repeat="coadata in coadatas" ng-show="coadata.id == $root.tempNodeID">{{coadata.glCode}}</td>
+                            </tr>
+                            <tr>
+                                <td>{{ 'label.heading.acctype' | translate }}</td>
+                                <td ng-repeat="coadata in coadatas" ng-show="coadata.id ==  $root.tempNodeID">{{coadata.type.value}}</td>
+                            </tr>
+                            <tr>
+                                <td>{{ 'label.heading.accountusage' | translate }}</td>
+                                <td ng-repeat="coadata in coadatas" ng-show="coadata.id ==  $root.tempNodeID">{{coadata.usage.value}}</td>
+                            </tr>
+                            <tr>
+                                <td class="width40">{{ 'label.heading.manualentriesallowed' |   translate }}</td>
+                                <td ng-repeat="coadata in coadatas" ng-show="coadata.id ==  $root.tempNodeID">{{coadata.manualEntriesAllowed}}</td>
+                            </tr>
+                            <tr>
+                                <td>{{ 'label.heading.description' | translate }}</td>
+                                <td ng-repeat="coadata in coadatas" ng-show="coadata.id ==  $root.tempNodeID">{{coadata.description}}</td>
+                            </tr>
+                    </table>
+                </div>
+                <div
+                    data-angular-treeview="true"
+                    data-node-children="children"
+                    data-node-glCode="glCode"
+                    data-node-id="id"
+                    data-node-label="name"
+                    data-tree-id="treeview"
+                    data-tree-model="treedata">
+                </div>
+            </div>
+            <br>
+            <br>
+            <br><br><br><br><br><br>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,34 @@
+language: python
+python:
+  - '3.5'
+  - '3.6'
+  - '3.7'
+  - '3.8'
+sudo: false
+services:
+  - docker
+before_script:
+  - cd fineract-instance && docker-compose up -d && cd ..
+  - pip install requests
+  - python wait.py
+script:
+  - python setup.py test
+after_script: cd fineract-instance && docker-compose down && cd ..
+after_success:
+  - pip install coveralls
+  - coveralls
+notifications:
+  email: false
+  webhooks: https://www.travisbuddy.com/
+  on_success: never
+deploy:
+  #  if: tag !~ /.*dev$/
+  provider: pypi
+  skip_existing: true
+  user: mobidev
+  password:
+    secure: ViazR4y2pt+cThrxVPsGM62LIbsT6iiuEZ8/rZVR3sIKlBUwmqWVcGzFDtFi7wv9SjsGRJbtmRwZf0P5KmRcs+pP4biKNPmYxuTHOyHUrMaoJRzw6y1dTgh8Em4pKSm4gsJGwzSQurG8SXSYDjAC7LSbcOgVwBwQl3NxoNExa8HjtA2uilDrmAl3Y01tngsUGe5DDZA5nKFKJXXVXpO+AamwxUt49xxmYN8R9lzrtcie5q/5N7ZmnWc9FEZzZ1m0Wp3vuO8Z6+s0LSMDpNBb2JW+DeKEhZ14GEyYvo0RKwXzicDo1qLmdUgz4OIcpYzt9fbX4TBLvbhxDe77RzhS52G2jt/8b44C22eB9laW1E6Q8LVgxqh7NfPkvcZwWRS5r4BwxJpbVceXYpQOyHXjcpBAqhLJEStINv0ERLVef8AL3H02ocVQPOWY6s5zlUAo3uDZUkKnV6OUCQuNGlJmh/0udMh1E7ZqJ8AxWeXKtdelzm/RWGrtY8SQ/oyCR/c0cN9TJAZ/jz0OhZSXNcYvEBonKMc9tADadj/ifnmW74d07T5hbD1QB1yQxkw5Sg+wKVkHXnoj2jqbuYSP8+i6UYOdAe1YrXJHdfU1Je0kunKtQjBuU1g80wwpLN2PiXlPUMJP1DCQMH8sLtkFhoh+FmBlwtiL2yIZd0VWkrvjqTU=
+  on:
+    tags: true
+    distributions: sdist bdist_wheel
+    repo: mobidevke/PyFineract

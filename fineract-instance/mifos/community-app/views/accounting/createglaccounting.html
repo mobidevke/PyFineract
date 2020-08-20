@@ -1,0 +1,90 @@
+<div class="col-md-12">
+    <ul class="breadcrumb">
+        <li><a href="#/accounting">{{'label.anchor.accounting' | translate}}</a></li>
+        <li><a href="#/accounting_coa">{{'label.anchor.coa' | translate}}</a></li>
+        <li class="active">{{'label.anchor.createglaccount' | translate}}</li>
+    </ul>
+
+	<form class="form-horizontal well" name="createglaccountingform" ng-controller="AccCreateGLAccountController"
+	      novalidate="" rc-submit="submit()">
+		<api-validate></api-validate>
+	    <fieldset>
+	        <legend>{{'label.heading.createglaccount' | translate}}</legend>
+	        <div class="form-group">
+	            <label class="control-label col-sm-2 " for="type">{{'label.input.accounttype' | translate}}
+	                    </label>
+	            <div class="col-sm-2">
+					<select class="form-control" id="type" ng-change="changeType()"
+							ng-model="formData.type" ng-options="accountType.id as accountType.code | translate for accountType in accountTypes"
+							required="required" value="{{accountType.id}}">
+					</select>
+				</div>
+	            <label class="control-label col-sm-4" for="parentId">{{'label.input.parent' | translate}}</label>
+	            <div class="col-sm-2">
+					<select class="form-control" id="parentId" ng-model="formData.parentId"
+							ng-options="headerType.id as headerType.name for headerType in headerTypes"
+							value="{{headerType.id}}">
+						<option value="">{{'label.selectparent' | translate}}</option>
+					</select>
+	            </div>
+	        </div>
+	        <div class="form-group">
+	            <label class="control-label col-sm-2 ">{{'label.input.glcode' | translate}}<span
+	                    class="required">*</span></label>
+	            <div class="col-sm-2">
+	                <input class="form-control" id="glCode" late-Validate name="glCode" ng-autofocus="true" ng-model="formData.glCode" required
+	                       type="text"/>
+	            </div>
+	            <div class="col-sm-2 ">
+	                <form-validate valattribute="glCode" valattributeform="createglaccountingform"/>
+	            </div>
+	            <label class="control-label col-sm-2" >{{'label.input.accountname' | translate}}<span
+						class="required">*</span></label>
+	            <div class="col-sm-2">
+	                <input class="form-control" id="name"  late-Validate
+							name="name" ng-model="formData.name" required type="text"/>
+	            </div>
+				<div class="col-sm-2">
+					<form-validate valattribute="name" valattributeform="createglaccountingform"/>
+				</div>
+	        </div>
+	        <div class="form-group">
+	            <label class="control-label col-sm-2 " for="usage">{{'label.input.accountusage' | translate}}</label>
+	
+	            <div class="col-sm-2">
+					<select class="form-control" id="usage" ng-model="formData.usage">
+						<option ng-repeat="usageType in usageTypes" value="{{usageType.id}}">{{''+usageType.code+'' | translate}}</option>
+					</select>
+	            </div>
+	            <label class="control-label col-sm-4 " for="tagId">{{'label.input.tag' | translate}}</label>
+	            <div class="col-sm-2">
+					<select class="form-control" id="tagId" ng-model="formData.tagId"
+							ng-options="type.id as type.name for type in types" value="{{type.id}}">
+						<option value="">{{'label.selecttag' | translate}}</option>
+					</select>          </div>
+	        </div>
+	        <div class="form-group">
+	            <label class="control-label col-sm-2" for="manualEntriesAllowed">{{'label.input.manualentriesallowed' |
+	                translate}}</label>
+	
+	            <div class="col-sm-3">
+	                <label class="checkbox">
+	                    <input id="manualEntriesAllowed" ng-model="formData.manualEntriesAllowed" type="checkbox">
+	                </label>
+	            </div>
+	        </div>
+	        <div class="form-group">
+	        	<label class="control-label col-sm-2" for="description">{{'label.input.description' | translate}}</label>
+	
+	            <div class="col-sm-8">
+	                <textarea class="form-control" cols="" id="description" name="description"
+	                          ng-model="formData.description" rows="8"></textarea>
+	            </div>
+	        </div>
+	        <div class="col-md-offset-5">
+	            <a class="btn btn-default" id="cancel" ng-href="{{cancel}}">{{'label.button.cancel' | translate}}</a>
+	            <button class="btn btn-primary" has-permission='CREATE_GLACCOUNT' id="save" type="submit">{{'label.button.save' | translate}}</button>
+	        </div>
+	    </fieldset>
+	</form>
+</div>

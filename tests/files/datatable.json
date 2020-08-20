@@ -1,0 +1,42 @@
+{
+   "applicationTableName": "m_client",
+   "registeredTableName": "extra_client_details",
+   "columnHeaderData": [
+      {
+        "columnName": "client_id",
+        "columnType": "bigint",
+        "columnLength": 0,
+        "columnDisplayType": "INTEGER",
+        "isColumnNullable": false,
+        "isColumnPrimaryKey": true,
+        "columnValues": []
+      },
+      {
+        "columnName": "Gender_cd_Question",
+        "columnType": "int",
+        "columnLength": 0,
+        "columnDisplayType": "INTEGER",
+        "isColumnNullable": true,
+        "isColumnPrimaryKey": false,
+        "columnValues": []
+      },
+      {
+        "columnName": "Some Decimal",
+        "columnType": "decimal",
+        "columnLength": 0,
+        "columnDisplayType": "DECIMAL",
+        "isColumnNullable": true,
+        "isColumnPrimaryKey": false,
+        "columnValues": []
+      },
+      {
+        "columnName": "Birth Date",
+        "columnType": "date",
+        "columnLength": 0,
+        "columnDisplayType": "DATE",
+        "isColumnNullable": true,
+        "isColumnPrimaryKey": false,
+        "columnValues": []
+      }
+   ]
+}

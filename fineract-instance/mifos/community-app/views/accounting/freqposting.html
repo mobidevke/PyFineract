@@ -1,0 +1,160 @@
+<div class="content-container">
+    <ul class="breadcrumb">
+        <li><a href="#/accounting">{{'label.anchor.accounting' | translate}}</a></li>
+        <li class="active">{{'label.anchor.frequentpostings' | translate}}</li>
+    </ul>
+    <div class="card">
+        <div class="content">
+            <div class="toolbar">
+                <h4>{{ 'label.heading.frequentpostings' | translate }}</h4>
+            </div>
+            <br/>
+            <form class="form-horizontal" name="freqpostingform" ng-controller="AccFreqPostingController" novalidate=""
+                  rc-submit="submit()">
+                <api-validate></api-validate>
+                <fieldset>
+                    <div class="form-group">
+                        <label class="control-label col-sm-2">{{ 'label.input.office' | translate }}<span class="required">*</span></label>
+
+                        <div class="col-sm-3">
+                            <select chosen="offices" class="form-control" id="officeId" ng-model="formData.officeId"
+                                    ng-options="office.id as office.name for office in offices" value="{{office.id}}">
+                            </select>
+                        </div>
+                        <label class="control-label col-sm-2">{{ 'label.input.accountingrules' | translate }}<span class="required">*</span></label>
+
+                        <div class="col-sm-3">
+                            <select chosen="rules" class="form-control" id="rule" name="rule" ng-change="resetCrAndDb(formData.rule)"
+                                    ng-model="formData.rule" ng-options="rule.name for rule in rules" required>
+                                <option class="displaynone" value="">{{'label.selectaccountingrule' | translate}}</option>
+                            </select>
+                        </div>
+                        <div class="col-sm-2">
+                            <form-validate valattribute="rule" valattributeform="freqpostingform"/>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="control-label col-sm-2">{{ 'label.input.currency' | translate }}&nbsp;<span
+                                class="required">*</span></label>
+
+                        <div class="col-sm-3">
+                            <select class="form-control" id="currencyCode" name="currency"
+                                    ng-model="formData.currencyCode"
+                                    ng-options="currency.code as (currency.name+' ('+ currency.displaySymbol +')') for currency in currencyOptions" required value="{{currency.code}}">
+                            </select>
+                        </div>
+                        <div class="col-sm-3">
+                            <form-validate valattribute="currency" valattributeform="freqpostingform"/>
+                        </div>
+                    </div>
+                    <div class="form-group" data-ng-show="formData.rule">
+                        <label class="control-label col-sm-2">{{ 'label.input.affectedglentries' | translate }}<span
+                                class="required">*</span></label>
+                        <div class="col-sm-6">
+                            <h4><strong>{{ 'label.input.debit' | translate }}</strong>&nbsp;
+                                <a ng-click="addDebitAccount()" ng-show="allowDebitEntries">&nbsp;<i class="fa fa-plus "></i></a>
+                            </h4>
+                            <div class="form-inline paddedbottom10" ng-repeat="dbAccount in formData.dbAccounts">
+                                <select class="input-sm form-control" ng-init="dbAccount.select = rule.debitAccounts[0]" ng-model="dbAccount.select"
+                                      ng-options="debitAccount.name for debitAccount in rule.debitAccounts">
+                                </select>
+
+                                <input class="input-sm form-control" id="debits[{{$index}}]" ng-model="dbAccount.debitAmount" number-format
+                                       type="text">
+                                <a ng-click="removeDebitAccount($index)">&nbsp;<i
+                                        class="fa fa-times "></i></a>
+                            </div>
+                            <h4><strong>{{ 'label.input.credit' | translate }}</strong>&nbsp;
+                                <a ng-click="addCrAccount()" ng-show="allowCreditEntries">&nbsp;<i class="fa fa-plus "></i></a>
+                            </h4>
+                          <div class="form-inline paddedbottom10" ng-repeat="crAccount in formData.crAccounts">
+                              <select class="input-sm form-control" ng-init="crAccount.select = rule.creditAccounts[0]" ng-model="crAccount.select"
+                                        ng-options="creditAccount.name for creditAccount in formData.rule.creditAccounts">
+                              </select>
+                              <input class="input-sm form-control" id="credits[{{$index}}]" ng-model="crAccount.crAmount" number-format
+                                     type="text">
+                              <a ng-click="removeCrAccount($index)">&nbsp;<i class="fa fa-times "></i></a>
+                          </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="control-label col-sm-2" for="referenceNumber">{{ 'label.input.referencenumber' | translate }}</label>
+
+                        <div class="col-sm-3">
+                            <input class="form-control" id="referenceNumber" ng-model="formData.referenceNumber" type="text">
+                        </div>
+                        <label class="control-label col-sm-2">{{ 'label.input.transactiondate' | translate }}<span class="required">*</span></label>
+
+                        <div class="col-sm-3">
+                            <input class="date-disable form-control" datepicker-pop="dd MMMM yyyy" id="transactionDate" is-open="opened"
+                                   max="restrictDate" min="'2000-01-01'" ng-model="first.date" type="text"/>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="control-label col-sm-2">{{ 'label.anchor.showpaymentdetails' | translate}}</label>
+
+                        <div class="col-sm-3">
+                            <a class="btn btn-primary" id="clickToShow" ng-click="showPaymentDetails=!showPaymentDetails">
+                                <i class="fa fa-minus " ng-show="showPaymentDetails"></i>
+                                <i class="fa fa-plus " ng-show="!showPaymentDetails"></i>
+                            </a>
+                        </div>
+                    </div>
+                    <div class="form-group" uib-collapse="!showPaymentDetails">
+                        <div class="form-group">
+                            <label class="control-label col-sm-2 ng-binding" for="paymentTypeId">
+                                {{'label.input.paymenttype' | translate}}
+                            </label>
+
+                            <div class="col-sm-3">
+                                <select class="form-control ng-pristine ng-valid" id="paymentTypeId" ng-model="formData.paymentTypeId"
+                                        ng-options="paymentType.id as paymentType.name for paymentType in paymentTypes"
+                                        value="">
+                                </select>
+                            </div>
+                            <label class="control-label col-sm-2" for="accountNumber">{{ 'label.input.accnum' | translate}}</label>
+
+                            <div class="col-sm-3">
+                                <input class="form-control" id="accountNumber" ng-model="formData.accountNumber" type="text">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label col-sm-2" for="checkNumber">{{ 'label.input.checknumber' | translate}}</label>
+
+                            <div class="col-sm-3">
+                                <input class="form-control" id="checkNumber" ng-model="formData.checkNumber" type="text">
+                            </div>
+                            <label class="control-label col-sm-2" for="routingCode">{{ 'label.input.routingcode' | translate}}</label>
+
+                            <div class="col-sm-3">
+                                <input class="form-control" id="routingCode" ng-model="formData.routingCode" type="text">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label col-sm-2" for="receiptNumber">{{ 'label.input.receiptnumber' | translate}}</label>
+
+                            <div class="col-sm-3">
+                                <input class="form-control" id="receiptNumber" ng-model="formData.receiptNumber" type="text">
+                            </div>
+                            <label class="control-label col-sm-2" for="bankNumber">{{ 'label.input.banknumber' | translate}}</label>
+
+                            <div class="col-sm-3">
+                                <input class="form-control" id="bankNumber" ng-model="formData.bankNumber" type="text">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="control-label col-sm-2">{{ 'label.input.comments' | translate }}</label>
+                        <div class="col-sm-8">
+                            <textarea class="form-control" name="comments" ng-model="formData.comments" rows="8" type="text"></textarea>
+                        </div>
+                    </div>
+                    <div class="col-md-offset-5">
+                        <a class="btn btn-default" href="#/accounting" id="cancel">{{ 'label.button.cancel' | translate }}</a>
+                        <button class="btn btn-primary" has-permission='CREATE_JOURNALENTRY' id="save" type="submit">{{ 'label.button.save' | translate }}</button>
+                    </div>
+                </fieldset>
+            </form>
+        </div>
+    </div>
+</div>

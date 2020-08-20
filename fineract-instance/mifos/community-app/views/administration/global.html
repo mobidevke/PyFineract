@@ -1,0 +1,61 @@
+<api-validate></api-validate>
+<div class="content-container" ng-controller="GlobalConfigurationController">
+    <ul class="breadcrumb">
+      <li><a href="#/system">{{'label.anchor.system' | translate}}</a></li>
+      <li class="active">{{'label.anchor.globalconfigurations' | translate}}</li>
+    </ul>
+    <div class="card">
+        <div class="toolbar">
+            <h4>Configuration</h4>
+        </div>
+        <br>
+        <div class="content">
+            <div class="row">
+                <div class="col-sm-10 col-md-10">
+                    <input class="form-control" ng-keyup="onFilter()" ng-model="filterText" placeholder="{{'label.input.filterbyname' | translate}}" type="text">
+                </div>
+                <div class="col-sm-2 col-md-2">
+                </div>
+            </div>
+        </div>
+        <hr/>
+
+        <table class="table">
+            <thead>
+                <tr class="graybg">
+                    <th>{{'label.heading.name' | translate}}</th>
+                    <th>{{'label.heading.enabled' | translate}}</th>
+                    <th></th>
+                    <th>{{'label.heading.value' | translate}}</th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr ng-repeat="config in configs | orderBy:'name':reverse | filter: filterText">
+
+                    <td>
+
+                     {{config.name | translate}}
+                     &nbsp; &nbsp; &nbsp;<i class="fa fa-question-circle " uib-tooltip="{{'label.tooltip.global.' + config.name | translate}}"></i>
+                 </td>
+                 <td>
+                    <i ; class="fa fa-check-circle"data-ng-show="config.enabled" style="color:green"></i>
+                    <i ; class="fa fa-times-circle"data-ng-hide="config.enabled" style="color:red"></i>
+                </td>
+                <td>
+                    <button class="btn btn-primary" data-ng-click="enable(config.id, config.name)" data-ng-hide="config.enabled"
+                    has-permission='UPDATE_CONFIGURATION' type="button">{{"label.button.enable" | translate}}</button>
+                    <button class="btn btn-danger" data-ng-click="disable(config.id, config.name)" data-ng-show="config.enabled"
+                    has-permission='UPDATE_CONFIGURATION' type="button">{{"label.button.disable" | translate}}</button>
+                </td>
+                <td>{{config.value}}</td>
+                <td>
+                    <a data-ng-show="config.showEditvalue"  href="#/configurations/{{config.id}}/editconfig"
+                    title="{{'label.edit' | translate}}">
+                    <i class="fa fa-pencil "></i></a>
+                </td>
+            </tr>
+        </tbody>
+        </table>
+    </div>
+</div>

@@ -1,0 +1,60 @@
+<div class="content-container" ng-controller="CreatePaymentTypeController">
+        <ul class="breadcrumb">
+            <li><a href="#/organization">{{'label.anchor.organization' | translate}}</a> </li>
+            <li><a href="#/viewpaymenttype">{{'label.anchor.paymentTypes' | translate}}</a></li>
+            <li class="active">{{'label.anchor.createpaymenttype' | translate}} </li>
+        </ul>
+    <div class="card">
+        <div class="content">
+            <div class="toolbar">
+                <h4>{{'label.anchor.createpaymenttype' | translate}}</h4>
+            </div>
+            <br>
+            <form class="form-horizontal" name="createpaymenttype" novalidate=""
+                rc-submit="submit()">
+                        <api-validate></api-validate>
+                    <fieldset>
+                        <div class="form-group">
+                            <label class="control-label col-sm-2" for="name">{{'label.anchor.paymentTypes' | translate}}<span
+                                    class="required">*</span></label>
+
+                            <div class="col-sm-3">
+                                <input class="form-control" id="name" late-Validate name="name" ng-autofocus="true" ng-model="formData.name" required
+                                       type="text"/>
+                            </div>
+                            <div class="col-sm-3">
+                                <form-validate valattribute="name" valattributeform="createcenterform"/>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label col-sm-2" >{{'label.input.description' | translate}}</label>
+
+                            <div class="col-sm-3">
+                                <textarea class="form-control" name="description"
+                                          ng-model="formData.description" type="text"/>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label col-sm-2">{{'label.input.iscashpayment' | translate}}</label>
+
+                            <div class="col-sm-3">
+                                <input id="iscashpayment" ng-model="formData.isCashPayment"  type="checkbox">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label col-sm-2" >{{'label.input.position' | translate}}</label>
+
+                            <div class="col-sm-3">
+                                <input class="form-control" name="position"
+                                          ng-model="formData.position" type="text"/>
+                            </div>
+                        </div>
+                        <div class="col-md-offset-2 paddedleft">
+                            <a class="btn btn-default" href="#/viewpaymenttype" id="cancel">{{'label.button.cancel' | translate}}</a>
+                            <button class="btn btn-primary" has-permission='CREATE_PAYMENTTYPE' id="save" type="submit">{{'label.button.save' | translate}}</button>
+                        </div>
+                    </fieldset>
+                </form>
+        </div>
+    </div>
+</div>

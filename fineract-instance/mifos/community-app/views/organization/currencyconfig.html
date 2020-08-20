@@ -1,0 +1,70 @@
+<div class="content-container" ng-controller="CurrencyConfigController">
+        <ul class="breadcrumb">
+            <li><a href="#/organization">{{'label.anchor.organization' | translate}}</a></li>
+            <li class="active">{{'label.anchor.currencyconfig' | translate}}</li>
+        </ul>
+    <div class="card">
+        <div class="content">
+            <div ng-show="hideview">
+                <ul class="breadcrumb">
+                    <li><a href="#/organization">{{'label.anchor.organization' | translate}}</a></li>
+                    <li class="active">{{'label.anchor.editcurrencyconfig' | translate}}</li>
+                </ul>
+            </div>
+            <div class="pull-right">
+                <a class="btn btn-primary" has-permission='UPDATE_CURRENCY' id="edit-currency" ng-click="hideview = !hideview"><i
+                        class="fa fa-plus "></i>{{'label.button.addedit' | translate}}</a>
+            </div>
+            <br>
+            <table class="table" ng-hide="hideview">
+                <thead>
+                <tr class="graybg">
+                    <th>{{'label.heading.currencyname' | translate}}</th>
+                    <th>{{'label.heading.currencycode' | translate}}</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr ng-repeat="currency in selectedCurrOptions  | filter:filterText">
+                    <td>{{currency.name}}</td>
+                    <td>{{currency.code}}</td>
+                </tr>
+                </tbody>
+            </table>
+            <div ng-show="hideview">
+                <br>
+                <div class="col-md-12">
+                       <api-validate></api-validate>
+                       <br>
+                       <div class="col-sm-4 col-md-4">
+                        <input autocomplete="off" class="form-control input-xxlarge"
+                               id="new-currency"
+                               ng-autofocus="true"
+                               ng-model="selected"
+                               placeholder="New Currency"
+                               type="text"
+                               uib-typeahead="item as item.displayLabel for item in allCurrOptions | filter:$viewValue | limitTo:8"/>&nbsp;&nbsp;
+                    </div>
+                       <div class="col-sm-2 col-md-2">
+                        <button class="btn btn-primary" has-permission="UPDATE_CURRENCY" id="add-currency" ng-click="addCur()"><i class="fa fa-plus"></i></button>
+                    </div>
+                    <div class="clear"></div>
+                    <div ng-repeat="currency in selectedCurrOptions">
+                        <div class="col-sm-4 col-md-4">
+                            <input class="form-control input-xxlarge" disabled="" placeholder={{currency.displayLabel}}
+                               type="text"/>&nbsp;&nbsp;
+                        </div>
+                        <div class="col-sm-2 col-md-2">
+                            <a has-permission='UPDATE_CURRENCY' ng-click='deleteCur(currency.code)'><i class="fa fa-times"></i></a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-offset-5">
+                    <button class="btn btn-default" id="cancel" ng-click="cancel()" type="reset">{{'label.button.cancel' | translate}}
+                    </button>
+                    <button class="btn btn-primary" has-permission='UPDATE_CURRENCY' id="save" ng-click="submit()" type="submit">{{'label.button.save' | translate}}
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

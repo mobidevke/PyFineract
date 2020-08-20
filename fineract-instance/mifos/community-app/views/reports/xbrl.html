@@ -1,0 +1,98 @@
+<div class="content-container">
+   <div class="card well" ng-controller="XBRLController">
+    <api-validate></api-validate>
+    <h2><strong class="display-save-message" ng-show="XbrlSuccess">{{'label.savesuccessfully' | translate}}</strong>
+    </h2>
+
+    <div ng-hide="XbrlSuccess">
+        <div class="col-sm-12 col-md-12">
+            <hr class="marginbottom"/>
+            <uib-tabset tabset-name="xbrlTabset">
+                <uib-tab heading="{{'label.heading.portfolio' | translate}}">
+                    <div class="span">
+                        <table class="table table-striped">
+                            <tr class="span2"></tr>
+                            <tr ng-repeat="mixtaxonomy in mixtaxonomyArray | filter:isPortfolio">
+                                <td class="col-sm-1"><a tooltip-placement="right" uib-tooltip="{{mixtaxonomy.description}}"><i class="fa fa-question-circle  "></i></a></td>
+                                <td class="col-sm-4">{{mixtaxonomy.name}}</td>
+                                <td class="col-sm-4">{{mixtaxonomy.dimension}}</td>
+                                <td class="col-sm-3"><input autocomplete="off" class="form-control" ng-model="mixtaxonomy.mapping" type="text" uib-typeahead="glaccount.value as glaccount.label for glaccount in glaccounts | filter:$viewValue | limitTo:8"></td>
+                            </tr>
+                        </table>
+                    </div>
+
+                </uib-tab>
+                <uib-tab heading="{{'label.heading.balancesheet' | translate}}">
+                    <div class="span">
+                        <table class="table table-striped">
+                            <tr class="span2"></tr>
+                            <tr ng-repeat="mixtaxonomy in mixtaxonomyArray | filter:isBalanceSheet">
+                                <td class="col-sm-1"><a tooltip-placement="right" uib-tooltip="{{mixtaxonomy.description}}"><i class="fa fa-question-circle  "></i></a></td>
+                                <td class="col-sm-4">{{mixtaxonomy.name}}</td>
+                                <td class="col-sm-4">{{mixtaxonomy.dimension}}</td>
+                                <td class="col-sm-3"><input autocomplete="off" class="form-control" ng-model="mixtaxonomy.mapping" style="margin-left:20px;" type="text" uib-typeahead="glaccount.value as glaccount.label for glaccount in glaccounts | filter:$viewValue | limitTo:8"></td>
+                            </tr>
+                        </table>
+                    </div>
+                </uib-tab>
+                <uib-tab heading="{{'label.heading.incomes' | translate}}">
+                    <div class="span">
+                        <table class="table table-striped">
+                            <tr class="span2"></tr>
+                            <tr ng-repeat="mixtaxonomy in mixtaxonomyArray | filter:isIncome">
+                                <td class="col-sm-1"><a tooltip-placement="right" uib-tooltip="{{mixtaxonomy.description}}"><i class="fa fa-question-circle  "></i></a></td>
+                                <td class="col-sm-4">{{mixtaxonomy.name}}</td>
+                                <td class="col-sm-4">{{mixtaxonomy.dimension}}</td>
+                                <td class="col-sm-3"><input autocomplete="off" class="form-control" ng-model="mixtaxonomy.mapping" style="margin-left:20px;" type="text" uib-typeahead="glaccount.value as glaccount.label for glaccount in glaccounts | filter:$viewValue | limitTo:8"></td>
+                            </tr>
+                        </table>
+                    </div>
+                </uib-tab>
+                <uib-tab heading="{{'label.heading.expenses' | translate}}">
+                    <div class="span">
+                        <table class="table table-striped">
+                            <tr class="span2"></tr>
+                            <tr ng-repeat="mixtaxonomy in mixtaxonomyArray | filter:isExpense">
+                                <td class="col-sm-1"><a tooltip-placement="right" uib-tooltip="{{mixtaxonomy.description}}"><i class="fa fa-question-circle  "></i></a></td>
+                                <td class="col-sm-4">{{mixtaxonomy.name}}</td>
+                                <td class="col-sm-4">{{mixtaxonomy.dimension}}</td>
+                                <td class="col-sm-3"><input autocomplete="off" class="form-control" ng-model="mixtaxonomy.mapping" style="margin-left:20px;" type="text" uib-typeahead="glaccount.value as glaccount.label for glaccount in glaccounts | filter:$viewValue | limitTo:8"></td>
+                            </tr>
+                        </table>
+                    </div>
+                </uib-tab>
+            </uib-tabset>
+        </div>
+        <div class="col-md-offset-9 paddedtop">
+            <button class="btn btn-primary ng-binding" ng-click="submit()">{{'label.button.save' | translate}}</button>
+        </div>
+        <div>
+            <table class="paddedtop width100">
+                <tr>
+                    <th class="col-sm-3 ng-binding">{{'label.input.startdate' | translate}}</th>
+                    <th class="col-sm-3 ng-binding">{{'label.input.enddate' | translate}}</th>
+                    <th class="col-sm-3"></th>
+                </tr>
+                <tr>
+                    <td class="col-sm-3">
+                        <input class="date-disable form-control" datepicker-pop=" yyyy-MM-dd" id="startDate" is-open="opened"
+                               max="restrictDate" min="minDate" ng-model="date.startDate" readonly
+                               type="text"/>
+                    </td>
+                    <td class="col-sm-3">
+                        <input class="date-disable form-control" datepicker-pop=" yyyy-MM-dd" id="startDate" is-open="opened"
+                               max="restrictDate" min="minDate" ng-model="date.endDate" readonly
+                               type="text"/>
+                    </td>
+                    <td class="col-sm-3">
+                        <button class="btn btn-primary ng-binding" ng-click="run()">{{'label.button.runreport' |
+                            translate}}
+                        </button>
+                    </td>
+                </tr>
+            </table>
+        </div>
+    </div>
+</div> 
+</div>
+

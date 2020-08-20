@@ -1,0 +1,37 @@
+<div class="content-container" ng-controller="UnAssignSavingsOfficerController">
+        <ul class="breadcrumb">
+            <li><a href="#/viewsavingaccount/{{accountNo}}">{{'label.anchor.viewsavingsaccount' | translate}}</a></li>
+            <li class="active">{{'label.anchor.unassignsavingsofficer' | translate}}</li>
+        </ul>
+        <div class="card">
+            <div class="content">
+                <div class="toolbar">
+                    <h4>{{ 'label.heading.unassignsavingsofficer' | translate }}</h4>
+                </div>
+                <br/>
+                    <form class="form-horizontal" name="unassignsavingsofficerform" ng-submit="submit()"   novalidate="">
+                        <api-validate></api-validate>
+                        <fieldset>
+                        <div class="form-group">
+                            <label class="control-label col-sm-2" for="unassignedDate">{{ 'label.input.loanofficerunassigneddate' | translate }}<span
+                                    class="required">*</span></label>
+
+                            <div class="col-sm-3">
+                                <input class="form-control" datepicker-pop="dd MMMM yyyy" id="unassignedDate" is-open="opened" max="'2020-06-22'"
+                                       min="minDate" ng-model="formData.unassignedDate" sort type="text"/>
+                            </div>
+                        </div>
+                        <div class="col-md-offset-3">
+                            <button class="btn btn-default" id="cancel" ng-click="cancel()" type="reset">{{ 'label.button.cancel' | translate
+                                }}
+                            </button>
+                            <button class="btn btn-primary" has-permission='REMOVESAVINGSOFFICER_SAVINGSACCOUNT' id="save"
+                                    ng-disabled="!unassignsavingsofficerform.$valid"
+                                    type="submit">{{'label.button.save' | translate }}
+                            </button>
+                        </div>
+                    </fieldset>
+                </form>
+            </div>
+        </div>
+</div>

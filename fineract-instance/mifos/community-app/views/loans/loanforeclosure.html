@@ -1,0 +1,72 @@
+<div class="col-md-12" ng-controller="LoanForeclosureController">
+    <ul class="breadcrumb">
+        <li><a href="#/viewloanaccount/{{accountId}}">{{'label.anchor.viewloanaccount' | translate}}</a></li>
+        <li class="active">Foreclosure</li>
+    </ul>
+    <form class="form-horizontal well" name="foreclosureform" novalidate="" rc-submit="submit()">
+        <api-validate></api-validate>
+        <fieldset>
+            <legend>{{'label.heading.loan.foreclosure' | translate}}</legend>
+            <div class="form-group">
+                <label class="control-label col-sm-2">{{'label.input.transactiondate' | translate}}<span
+                        class="required">*</span></label>
+                <div class="col-sm-3">
+                    <input class="form-control" datepicker-pop="dd MMMM yyyy" id="transactionDate" is-open="opened" max="restrictDate" name="transactionDate"
+                           ng-model="formData.transactionDate" sort type="text"/>
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="control-label col-sm-2">Principle<span class="required"></span></label>
+                <div class="col-sm-3">
+                    <input class="form-control" id="outstandingPrincipalPortion" name="outstandingPrincipalPortion" ng-model="formData.outstandingPrincipalPortion" number-format readonly type="text"/>
+                </div>
+                <div class="col-sm-3">
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="control-label col-sm-2">Interest<span class="required"></span></label>
+                <div class="col-sm-3">
+                    <input class="form-control" id="outstandingInterestPortion" name="outstandingInterestPortion" ng-model="formData.outstandingInterestPortion" number-format readonly type="text"/>
+                </div>
+                <div class="col-sm-3">
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="control-label col-sm-2">Fee Amount<span class="required"></span></label>
+                <div class="col-sm-3">
+                    <input class="form-control" id="outstandingFeeChargesPortion" name="outstandingFeeChargesPortion" ng-model="formData.outstandingFeeChargesPortion" number-format readonly type="text"/>
+                </div>
+                <div class="col-sm-3">
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="control-label col-sm-2">Penalty amount<span class="required"></span></label>
+                <div class="col-sm-3">
+                    <input class="form-control" id="outstandingPenaltyChargesPortion" name="outstandingPenaltyChargesPortion" ng-model="formData.outstandingPenaltyChargesPortion" number-format readonly type="text"/>
+                </div>
+                <div class="col-sm-3">
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="control-label col-sm-2">Transaction Amount<span class="required"></span></label>
+                <div class="col-sm-3">
+                    <input class="form-control" ng-model="formData.transactionAmount" number-format readonly type="text"/>
+                </div>
+                <div class="col-sm-3">
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label class="control-label col-sm-2">Note</label>
+                <div class="col-sm-3">
+                    <textarea class="form-control" id="note" name="note" ng-model="formData.note" rows="2" type="text" ></textarea>
+                </div>
+            </div>
+            <br/>
+            <div class="col-md-offset-3">
+                <button class="btn btn-default" id="cancel" ng-click="cancel()" type="reset">{{ 'label.button.cancel' | translate }}</button>
+                <button class="btn btn-primary" has-permission="FORECLOSURE_LOAN" id="save" type="submit">Foreclosure</button>
+            </div>
+        </fieldset>
+    </form>
+</div>

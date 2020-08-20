@@ -1,0 +1,50 @@
+<div class="content-container" ng-controller="OfficesController">
+    <ul class="breadcrumb">
+        <li><a href="#/organization">{{'label.anchor.organization' | translate}}</a></li>
+        <li class="active">{{'label.anchor.manageoffices' | translate}}</li>
+    </ul>
+    <div class="card">
+        <div class="content">
+            <div class="toolbar">
+                <div class="pull-right">
+                    <a class="btn btn-primary" ng-click="isTreeView=!isTreeView" ng-show="isTreeView"><i class="fa fa-list "></i>{{'label.button.listview' | translate}}</a>
+                    <a class="btn btn-primary" ng-click="isTreeView=!isTreeView" ng-hide="isTreeView"><i class="fa fa-sitemap "></i>{{'label.button.treeview' | translate}}</a>
+                    <a class="btn btn-primary" has-permission='CREATE_OFFICE' href="#/createoffice"><i class="fa fa-plus "></i>{{'label.button.createoffice' | translate}}</a>
+                </div>
+            </div>
+            <br>
+            <div class="clear"></div>
+            <div ng-hide="isTreeView">
+                <input class="form-control span marginbottom0px" ng-autofocus="true" ng-keyup="onFilter()" ng-model="filterText" placeholder="{{'label.input.filterbynameexternalid' | translate}}" type="text">
+                <table class="table">
+                    <thead>
+                    <tr class="graybg">
+                        <th>{{'label.heading.officeName' | translate}}</th>
+                        <th>{{'label.heading.externalid' | translate}}</th>
+                        <th>{{'label.heading.parentoffice' | translate}}</th>
+                        <th>{{'label.heading.openedon' | translate}}</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr class="pointer-main" ng-repeat="office in offices| orderBy:'name':reverse  | filter:filterText">
+                        <td class="pointer" data-ng-click="routeTo(office.id)">{{office.name}}</td>
+                        <td class="pointer" data-ng-click="routeTo(office.id)">{{office.externalId}}</td>
+                        <td class="pointer" data-ng-click="routeTo(office.id)">{{office.parentName}}</td>
+                        <td class="pointer" data-ng-click="routeTo(office.id)">{{office.openingDate | DateFormat}}</td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div ng-show="isTreeView">
+                <div
+                        data-angular-treeview="true"
+                        data-node-children="children"
+                        data-node-id="id"
+                        data-node-label="name"
+                        data-tree-id="treeview"
+                        data-tree-model="treedata">
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

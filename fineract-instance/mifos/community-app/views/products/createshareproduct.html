@@ -1,0 +1,348 @@
+<div class="content-container">
+<ul class="breadcrumb">
+    <li><a href="#/products">{{'label.anchor.products' | translate}}</a></li>
+    <li><a href="#/shareproducts">{{'label.anchor.shareproducts' | translate}}</a></li>
+    <li class="active">{{'label.anchor.createshareproduct' | translate}}</li>
+</ul>
+<form class="card form-horizontal well" name="createshareproductform" ng-controller="CreateShareProductController" novalidate="" rc-submit="submit()">
+<api-validate></api-validate>
+<fieldset>
+<h3>{{ 'label.heading.details' | translate }}</h3>
+<hr>
+<div class="form-group">
+    <label class="control-label col-sm-2">{{ 'label.input.productname' | translate }}<span class="required">*</span></label>
+    <i class="fa fa-question-circle col-sm-1" uib-tooltip="{{'label.tooltip.shareproductname' | translate}}"></i>
+    <div class="col-sm-3">
+        <input class="form-control" id="name" late-validate name="name" ng-autofocus="true" ng-model="formData.name"
+               required type="text"/>
+    </div>
+    <div class="col-sm-3">
+        <form-validate valattribute="name" valattributeform="createshareproductform"/>
+    </div>
+</div>
+<div class="form-group">
+    <label class="control-label col-sm-2">{{ 'label.input.product.shortname' | translate }}<span class="required">*</span></label>
+    <i class="fa fa-question-circle col-sm-1" uib-tooltip="{{'label.tooltip.shareproductshortname' | translate}}"></i>
+    <div class="col-sm-3">
+        <input class="form-control" id="shortName" late-validate maxlength="4" name="shortName"
+               ng-model="formData.shortName" required type="text"/>
+    </div>
+    <div class="col-sm-3">
+        <form-validate valattribute="shortName" valattributeform="createshareproductform"/>
+    </div>
+</div>
+<div class="form-group">
+    <label class="control-label col-sm-2">{{ 'label.input.description' | translate }}<span class="required">*</span></label>
+    <i class="fa fa-question-circle col-sm-1" uib-tooltip="{{'label.tooltip.shareproductdescription' | translate}}"></i>
+    <div class="col-sm-3">
+        <textarea class="form-control" id="description" late-validate name="description" ng-model="formData.description"
+                  required rows="2"/></textarea>
+    </div>
+    <div class="col-sm-3">
+        <form-validate valattribute="description" valattributeform="createshareproductform"/>
+    </div>
+</div>
+<h3>{{ 'label.heading.currency' | translate }}</h3>
+<hr>
+<div class="form-group">
+    <label class="control-label col-sm-2">{{ 'label.input.currency' | translate }}<span class="required">*</span></label>
+    <i class="fa fa-question-circle col-sm-1" uib-tooltip="{{'label.tooltip.currency' | translate}}"></i>
+    <div class="col-sm-2">
+        <select class="form-control" id="currencyCode" ng-model="formData.currencyCode"
+                ng-options="currency.code as currency.name for currency in product.currencyOptions"
+                value="{{currency.code}}"/>
+    </div>
+    <label class="control-label col-sm-2 col-sm-offset-2">{{ 'label.input.decimalplaces' | translate }}<span class="required">*</span></label>
+    <i class="fa fa-question-circle col-sm-1" uib-tooltip="{{'label.tooltip.shareproductdecimalplaces' | translate}}"></i>
+    <div class="col-sm-2">
+        <input class="form-control" id="digitsAfterDecimal" late-validate name="decimalplace"
+               ng-model="formData.digitsAfterDecimal" required type="text"/>
+    </div>
+    <div class="col-sm-2">
+        <form-validate valattribute="decimalplace" valattributeform="createshareproductform"/>
+    </div>
+</div>
+<div class="form-group">
+    <label class="control-label col-sm-2">{{ 'label.input.multiplesof' | translate }}<span class="required">*</span></label>
+    <i class="fa fa-question-circle col-sm-1" uib-tooltip="{{'label.tooltip.multiplesof' | translate}}"></i>
+    <div class="col-sm-2">
+        <input class="form-control" id="inMultiplesOf" late-validate name="multiplesof" ng-model="formData.inMultiplesOf"
+               required type="text"/>
+    </div>
+    <div class="col-sm-2">
+        <form-validate valattribute="multiplesof" valattributeform="createshareproductform"/>
+    </div>
+</div>
+
+<h3>{{ 'label.heading.terms' | translate }}</h3>
+<hr>
+<div class="form-group">
+    <label class="control-label col-sm-2">{{ 'label.input.totalnumberofshares' | translate }}<span class="required">*</span></label>
+    <i class="fa fa-question-circle col-sm-1" uib-tooltip="{{'label.tooltip.totalshares' | translate}}"></i>
+    <div class="col-sm-2">
+        <input class="form-control" id="totalnumberofshares"  late-validate name="totalnumberofshares"
+               ng-model="formData.totalShares" number-format required/>
+    </div>
+    <div class="col-sm-2">
+        <form-validate valattribute="totalnumberofshares" valattributeform="createshareproductform"/>
+    </div>
+
+    <label class="control-label col-sm-2">{{ 'label.input.totalsharestobeissue' | translate }}</label>
+    <i class="fa fa-question-circle col-sm-1" uib-tooltip="{{'label.tooltip.totalsharestobeissued' | translate}}"></i>
+
+    <div class="col-sm-2">
+        <input class="form-control" id="totalsharestobeissued" name="totalsharestobeissued" ng-model="formData.sharesIssued"
+               number-format type="text"/>
+    </div>
+</div>
+
+<div class="form-group">
+    <label class="control-label col-sm-2">{{ 'label.input.nominalprice' | translate }}<span class="required">*</span></label>
+    <i class="fa fa-question-circle col-sm-1" uib-tooltip="{{'label.tooltip.nominalprice' | translate}}"></i>
+    <div class="col-sm-2">
+        <input class="form-control" id="nominalprice"  late-validate name="nominalprice"
+               ng-model="formData.unitPrice" number-format required/>
+    </div>
+    <div class="col-sm-2">
+        <form-validate valattribute="nominalprice" valattributeform="createshareproductform"/>
+    </div>
+
+    <label class="control-label col-sm-2">{{ 'label.input.capitalvalue' | translate }}</label>
+    <i class="fa fa-question-circle col-sm-1" uib-tooltip="{{'label.tooltip.capitalvalue' | translate}}"></i>
+
+    <div class="col-sm-2">
+        <input class="form-control" disabled id="capitalvalue" maxlength="4"
+               name="capitalvaue" ng-model="formData.shareCapital" type="text"/>
+    </div>
+</div>
+
+<h3>{{ 'label.heading.settings' | translate }}</h3>
+
+<hr>
+
+<div class="form-group">
+    <label class="control-label col-sm-3">{{ 'label.input.sharesperclient' | translate }}</label>
+    <i class="fa fa-question-circle col-sm-1" uib-tooltip="{{'label.tooltip.sharesperclient' | translate}}"></i>
+
+    <div class="col-sm-2">
+        <input class="form-control" id="minimumshares" ng-model="formData.minimumShares"
+               placeholder="{{'label.input.minimum' | translate}}" type="text">
+    </div>
+    <div class="col-sm-2">
+        <input class="form-control" id="nominalsharesperclient" name="interestRatePerPeriod"
+               ng-model="formData.nominalShares" placeholder="{{'label.input.default' | translate}}" required type="text" />
+    </div>
+    <div class="col-sm-2">
+        <input class="form-control" id="maximumshares" ng-model="formData.maximumShares"
+               placeholder="{{'label.input.maximum' | translate}}" type="text">
+    </div>
+    <div class="col-sm-2">
+        <form-validate valattribute="nominalsharesperclient" valattributeform="createshareproductform"/>
+    </div>
+</div>
+
+<div class="form-group">
+    <label class="control-label col-sm-3">{{ 'label.input.minimumactiveperiod' | translate }}</label>
+    <i class="fa fa-question-circle col-sm-1" uib-tooltip="{{'label.tooltip.minimumactiveperiod' | translate}}"></i>
+    <div class="col-sm-2">
+        <input class="form-control" id="minimumactiveperiod" ng-model="formData.minimumActivePeriodForDividends"
+               number-format type="text">
+    </div>
+
+    <div class="col-sm-2">
+        <select class="form-control" id="minimumactiveperiodFrequencyType"
+                ng-model="formData.minimumactiveperiodFrequencyType"
+                ng-options="type.id as type.value for type in product.minimumActivePeriodFrequencyTypeOptions"
+                value="{{type.id}}">
+            <option class="displaynone" value="">{{'label.selectone' | translate}}</option>
+        </select>
+    </div>
+</div>
+
+<div class="form-group">
+    <label class="control-label col-sm-3">{{ 'label.input.lockinPeriodFrequency' | translate }}</label>
+    <i class="fa fa-question-circle col-sm-1" uib-tooltip="{{'label.tooltip.shareproductlockinPeriodFrequency' | translate}}"></i>
+    <div class="col-sm-2">
+        <input class="form-control" id="lockinPeriodFrequency" ng-model="formData.lockinPeriodFrequency"
+               type="text">
+    </div>
+    <div class="col-sm-2">
+        <select class="form-control" id="lockinPeriodFrequencyType"
+                ng-model="formData.lockinPeriodFrequencyType"
+                ng-options="type.id as type.value for type in product.lockinPeriodFrequencyTypeOptions"
+                value="{{type.id}}">
+            <option class="displaynone" value="">{{'label.selectone' | translate}}</option>
+        </select>
+    </div>
+</div>
+
+<div class="form-group">
+    <label class="control-label col-sm-3">{{ 'label.input.allowdividendsforinactiveclients' | translate }}</label>
+    <i class="fa fa-question-circle col-sm-1" uib-tooltip="{{'label.tooltip.shareproductallowdividends' | translate}}"></i>
+    <div class="col-sm-2">
+        <input id="withdrawalFeeForTransfers" ng-false-value="false" ng-model="formData.allowDividendCalculationForInactiveClients"
+               ng-true-value="true" type="checkbox">
+    </div>
+</div>
+
+<h3>{{ 'label.heading.marketprice' | translate }}</h3>
+<hr>
+
+<div class="form-group">
+    <div class="col-sm-2">
+        <label class="bolder" >{{'label.input.marketpriceperiods' | translate}}
+            &nbsp;<i class="fa fa-question-circle" uib-tooltip="{{'label.tooltip.marketpriceaddition' | translate}}"></i>
+        </label>
+    </div>
+    <div class="col-sm-1">
+        <input class="btn btn-primary" data-ng-click="addMarketPricePeriod()" id="add"  name="add" type="button" value="{{'label.button.add' | translate}}" />
+    </div>
+</div>
+
+<BR>
+<table class="table width50">
+    <tr class="graybg" class="width50">
+        <th>{{'label.heading.fromdate' | translate}}
+            &nbsp;<i class="fa fa-question-circle" uib-tooltip="{{'label.tooltip.marketpricestartdate' | translate}}"></i></th>
+        <th>{{'label.heading.sharenominalprice' | translate}}
+            &nbsp;<i class="fa fa-question-circle" uib-tooltip="{{'label.tooltip.marketprice' | translate}}"></i></th>
+        <th> {{'label.heading.actions' | translate}}</th>
+    </tr>
+    <tr ng-repeat="marketpriceperiod in formData.marketPricePeriods">
+        <td>
+            <ng-form name="fromDate{{$index}}">
+                <input class="form-control" datepicker-pop="dd MMMM yyyy" id="fromDate1" is-open="opened"
+                       max="restrictDate" min="'2000-01-01'" name="fromDate1" ng-model="marketpriceperiod.fromDate"
+                       required type="text"/>
+                <span class="error" ng-show="visitValidation&&fromDate{{$index}}.fromDate1.$error.required">{{ 'label.requirefield' | translate }}</span>
+            </ng-form>
+        </td>
+        <td>
+            <ng-form name="shareValue{{$index}}">
+                <input class="form-control" id="shareValue" name="shareValue" ng-model="marketpriceperiod.shareValue"
+                       number-format required type="text"/>
+                <span class="error" ng-show="visitValidation&&shareValue{{$index}}.shareValue.$error.required">{{ 'label.requirefield' | translate }}</span>
+            </ng-form>
+        </td>
+        <td>
+            <a ng-click="deleteMarketPricePeriod($index)"><i class="fa fa-times "></i></a>
+        </td>
+    </tr>
+</table>
+
+<h3>{{ 'label.heading.charges' | translate }}</h3>
+<hr>
+<div class="form-group">
+    <div class="col-sm-3">
+        <select class="form-control" ng-model="chargeId"
+                ng-options="charge.id as ((charge.name+' '+'('+charge.currency.name+')')) for charge in product.chargeOptions|filter:formData.currencyCode:strict"
+                value="{{charge.id}}">
+            <option class="displaynone" value="">{{'label.selectcharge' | translate}}</option>
+        </select>
+    </div>
+    <div class="col-sm-1">
+        <a class="btn btn-primary" ng-click="chargeSelected(chargeId)">{{ 'label.button.add' | translate }}</a>
+    </div>
+</div>
+<div class="form-group col-md-12">
+    <table class="table">
+        <tr class="graybg">
+            <th>{{'label.heading.name' | translate}}</th>
+            <th>{{'label.heading.type' | translate}}</th>
+            <th></th>
+            <th>{{'label.heading.amount' | translate}}</th>
+            <th></th>
+            <th>{{'label.heading.collectedon' | translate}}</th>
+            <th></th>
+            <th>{{'label.heading.actions' | translate}}</th>
+        </tr>
+        <tr ng-repeat="charge in charges">
+            <td>{{charge.name}},{{charge.currency.displaySymbol}}</td>
+            <td>{{charge.chargeCalculationType.value}}</td>
+            <td></td>
+            <td>{{charge.amount|number}}</td>
+            <td></td>
+            <td>{{charge.chargeTimeType.value}}</td>
+            <td></td>
+            <td><a href="" ng-click="deleteCharge($index)"><i class="fa fa-times "></i></a></td>
+        </tr>
+    </table>
+</div>
+
+    <h3>{{ 'label.heading.accounting' | translate }}</h3>
+    <hr>
+    <div class="radio-inline">
+        <label>
+            <input ng-model="formData.accountingRule" type="radio" value="1">{{'label.input.none' |translate}}
+        </label>
+    </div>
+    <div class="radio-inline">
+        <label>
+            <input ng-model="formData.accountingRule" type="radio" value="2">{{'label.input.cash' |translate}}
+        </label>
+    </div>
+    <hr>
+
+    <div class="col-md-12" ng-show="formData.accountingRule==2">
+        <div class="form-group">
+            <h4>{{"label.heading.assets" | translate}}</h4>
+            <label class="control-label col-sm-2">{{ 'label.input.sharereference' | translate }}</label>
+            <i class="fa fa-question-circle col-sm-1 " uib-tooltip="{{'label.tooltip.sharereference' | translate}}"></i>
+            <div class="col-sm-3">
+                <select chosen="assetAccountOptions" id="shareReferenceId"
+                        ng-model="formData.shareReferenceId"
+                        ng-options="assetAccount.id as assetAccount.name for assetAccount in assetAccountOptions"
+                        value="{{assetAccount.id}}">
+                </select>
+            </div>
+        </div>
+        <hr>
+        <div class="form-group">
+            <h4>{{"label.heading.liabilities" | translate}}</h4>
+            <label class="control-label col-sm-2">{{ 'label.input.sharecontrol' | translate }}</label>
+            <i class="fa fa-question-circle col-sm-1 " uib-tooltip="{{'label.tooltip.sharecontrol' | translate}}"></i>
+            <div class="col-sm-3">
+                <select chosen="liabilityAccountOptions" id="shareSuspenseId"
+                        ng-model="formData.shareSuspenseId"
+                        ng-options="liabilityAccount.id as liabilityAccount.name for liabilityAccount in liabilityAccountOptions"
+                        value="{{liabilityAccount.id}}">
+                </select>
+            </div>
+        </div>
+        <hr>
+        <div class="form-group">
+            <h4>{{"label.heading.shareequity" | translate}}</h4>
+            <label class="control-label col-sm-2">{{ 'label.input.equity' | translate }}</label>
+            <i class="fa fa-question-circle col-sm-1 " uib-tooltip="{{'label.tooltip.equityaccount' | translate}}"></i>
+            <div class="col-sm-3">
+                <select chosen="equityAccountOptions" id="shareEquityId"
+                        ng-model="formData.shareEquityId"
+                        ng-options="expenseAccount.id as expenseAccount.name for expenseAccount in equityAccountOptions"
+                        value="{{expenseAccount.id}}">
+                </select>
+            </div>
+        </div>
+        <hr>
+        <div class="form-group">
+            <h4>{{"label.heading.income" | translate}}</h4>
+            <label class="control-label col-sm-2">{{ 'label.input.incomefromfees' | translate }}</label>
+            <i class="fa fa-question-circle col-sm-1 " uib-tooltip="{{'label.tooltip.incomefromfees' | translate}}"></i>
+            <div class="col-sm-3">
+                <select chosen="incomeAccountOptions" id="incomeFromFeeAccountId"
+                        ng-model="formData.incomeFromFeeAccountId"
+                        ng-options="incomeAccount.id as incomeAccount.name for incomeAccount in incomeAccountOptions"
+                        value="{{incomeAccount.id}}">
+                </select>
+            </div>
+        </div>
+    </div>
+
+<div class="col-md-offset-5 paddedtop">
+    <button class="btn btn-warning" id="cancel" ng-click="cancel()" type="reset">{{'label.button.cancel' | translate}}</button>
+    <button class="btn btn-primary" has-permission='CREATE_SAVINGSPRODUCT' id="save" type="submit">{{'label.button.save'
+        | translate}}
+    </button>
+</div>
+</fieldset>
+</form>
+</div>

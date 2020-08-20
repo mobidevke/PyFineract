@@ -1,0 +1,66 @@
+{
+  "id": 2598,
+  "officeId": 1,
+  "officeName": "FarmDrive",
+  "type": {
+    "id": 1,
+    "code": "loanTransactionType.disbursement",
+    "value": "Disbursement",
+    "disbursement": true,
+    "repaymentAtDisbursement": false,
+    "repayment": false,
+    "contra": false,
+    "waiveInterest": false,
+    "waiveCharges": false,
+    "accrual": false,
+    "writeOff": false,
+    "recoveryRepayment": false,
+    "initiateTransfer": false,
+    "approveTransfer": false,
+    "withdrawTransfer": false,
+    "rejectTransfer": false,
+    "chargePayment": false,
+    "refund": false,
+    "refundForActiveLoans": false
+  },
+  "date": [
+    2019,
+    5,
+    7
+  ],
+  "currency": {
+    "code": "KES",
+    "name": "Kenyan Shilling",
+    "decimalPlaces": 0,
+    "inMultiplesOf": 1,
+    "displaySymbol": "KSh",
+    "nameCode": "currency.KES",
+    "displayLabel": "Kenyan Shilling (KSh)"
+  },
+  "paymentDetailData": {
+    "id": 2598,
+    "paymentType": {
+      "id": 1,
+      "name": "MPESA B2C"
+    },
+    "accountNumber": "",
+    "checkNumber": "",
+    "routingCode": "",
+    "receiptNumber": "",
+    "bankNumber": ""
+  },
+  "amount": 195.000000,
+  "principalPortion": 0,
+  "interestPortion": 0,
+  "feeChargesPortion": 0,
+  "penaltyChargesPortion": 0,
+  "overpaymentPortion": 0,
+  "unrecognizedIncomePortion": 0,
+  "outstandingLoanBalance": 195.000000,
+  "submittedOnDate": [
+    2019,
+    5,
+    7
+  ],
+  "manuallyReversed": false
+}
